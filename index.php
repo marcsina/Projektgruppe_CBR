@@ -68,7 +68,7 @@
         <br>
         <br>
 
-        <!-- every content should be nested in a way like the example below  -->
+        <!-- every content should be nested in a way like the example below   -->
 
         <!-- nested columns -->
         <div class="row first-after-navbar">
