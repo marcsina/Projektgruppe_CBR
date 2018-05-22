@@ -17,7 +17,7 @@ class KeywordList {
 function getKeywordsFromDatabase(database)
 {
     if (database === "") {
-        $("#txtHint").html("Verbindung konnte nicht aufgebaut werden");
+        $("#txtHint").html("Verbindung  konnte nicht aufgebaut werden");
         return;
     } else { 
         if (window.XMLHttpRequest) {
