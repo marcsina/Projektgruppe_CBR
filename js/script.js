@@ -177,4 +177,7 @@ $("#berechnen").click(function() {
     $("#output-textarea").html(output);
     //TODO DELETE IN FINAL
     console.timeEnd('test');
+
+
+    // test kacke mist
 });
