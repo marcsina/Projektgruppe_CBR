@@ -179,7 +179,6 @@ $("#berechnen").click(function() {
     console.timeEnd('test');
 
 
-    // test kacke mist
-    //testtttttt
-    // noch ein test
+    // fertig getestet
+
 });
