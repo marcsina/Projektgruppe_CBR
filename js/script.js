@@ -51,7 +51,7 @@ function getKeywordsFromDatabase( database )
                 $( "#txtHint" ).text( this.responseText );
             }
         };
-        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/getKeywords.php", true );
+        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/getKeywords.php", true );
         xmlhttp.send();
     }
 }
