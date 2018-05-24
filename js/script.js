@@ -157,7 +157,7 @@ $( "#berechnen" ).click( function ()
     inputText = inputText.trim();
 
     //Delete abbrevations consist of maximum 1 letters, multiple whitespaces, and new lines starting with a space
-    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[ ]{2,}/gmi, " " ).replace( /\n /gmi, "\n" );
+    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[ ]{2,}/gmi, " " ).replace( /\n /gmi, "\n" ).replace(/[0-9]/," ");
 
     //Remove stopwords
     inputText = inputText.removeStopWords();
@@ -170,7 +170,7 @@ $( "#berechnen" ).click( function ()
     var words_in_sentences_with_weight_array = new Array( sentence_array.length );
     for ( i = 0; i < words_in_sentences_with_weight_array.length; i++ )
     {
-        words_in_sentences_with_weight_array[i] = sentence_array[i].split( " " );
+        words_in_sentences_with_weight_array[i] = sentence_array[i].split( /\s/ );
         for ( j = 0; j < words_in_sentences_with_weight_array[i].length; j++ )
         {
             words_in_sentences_with_weight_array[i][j] = new Weighted_Words( stemm2( words_in_sentences_with_weight_array[i][j] ), 0, 0 );
