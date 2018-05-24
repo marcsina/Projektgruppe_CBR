@@ -8,6 +8,16 @@ class Weighted_Words
     }
 }
 
+//Finale gewichtung für Olli
+class Final_Weight
+{
+    constructor(katID, weight )
+    {
+        this.weight = weight;
+        this.katID = katID;
+    }
+}
+
 class KeywordList
 {
     constructor( word, katID )
@@ -61,7 +71,7 @@ function isNegate( word )
 
 function isReinforcing( word )
 {
-    var array_reinforing_words = new Array( "absolut", "äußerst", "ausgerpsochen", "besonders", "extrem", "heftig", "höchst", "sehr", "total", "überaus", "ungemein", "ungewöhnlich" );
+    var array_reinforing_words = new Array( "absolut", "äußerst", "ausgesprochen", "besonders", "extrem", "heftig", "höchst", "sehr", "total", "überaus", "ungemein", "ungewöhnlich" );
     for ( var i = 0; i < array_reinforing_words.length; i++ )
     {
         if ( word === array_reinforing_words[i] )
@@ -109,6 +119,7 @@ function createFinalKeywordsArray( array )
         array_keywords.push( new KeywordList( array_zweite_Stufe[i][0], array_zweite_Stufe[i][1] ) );
     }
 
+
     var final_array = new Array();
     for ( i = 0; i < array.length; i++ )
     {
@@ -152,7 +163,7 @@ $( "#berechnen" ).click( function ()
     inputText = inputText.removeStopWords();
 
     //Split text in sentences
-    var sentence_array = inputText.replace( /([.!?,;])\s*(?=[a-zA-Z])/gm, "$1|" ).split( "|" );
+    var sentence_array = inputText.replace( /([.!?;])\s*(?=[a-zA-Z])/gm, "$1|" ).split( "|" );
 
     //split sentences in stemmed words add standrad weight 0 ... twodimensional arrays
     //Array [sentence][word, weight, katID]
@@ -185,6 +196,34 @@ $( "#berechnen" ).click( function ()
 
     //delete words from array, if they are not keywords used by CBR
     var final_array = createFinalKeywordsArray( words_in_sentences_with_weight_array );
+
+    //Count duplicates and save into
+    var final_weight_array;
+
+    //Check each word
+    for ( j = 0; j < final_array.length; j++ )
+    {
+        //Check if word was a duplicate of a word before
+        if(final_array[j].word != 'xXx')
+        {
+            //If not compare each kat id and count them
+            var count = 0;
+            for ( i = 0; i < final_array.length; i++ )
+            {
+
+                if(final_array[j].katID === final_array[i].katID )
+                {
+                    count++;
+                    final_array[i].word = 'xXx';
+                }
+
+            }
+
+            final_weight_array.push( new Final_Weight(final_array[j].katID, count));
+        }
+
+
+    }
 
     ////////////////////////////////////////////////////////
     ///////TESTAUSGABE
