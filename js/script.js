@@ -6,7 +6,7 @@ class Weighted_Words
         this.weight = weight;
         this.katID = katID;
     }
-};
+}
 
 class KeywordList
 {
@@ -15,7 +15,7 @@ class KeywordList
         this.word = word;
         this.katID = katID;
     }
-};
+}
 
 function getKeywordsFromDatabase( database )
 {
@@ -36,7 +36,7 @@ function getKeywordsFromDatabase( database )
         }
         xmlhttp.onreadystatechange = function ()
         {
-            if ( this.readyState == 4 && this.status == 200 )
+            if ( this.readyState === 4 && this.status === 200 )
             {
                 $( "#txtHint" ).text( this.responseText );
             }
@@ -89,6 +89,7 @@ function positiveWeightDueToReinforcing( array, sentenceNumber )
 
 function createFinalKeywordsArray( array )
 {
+    var i = 0;
     var string_keywords = $( "#txtHint" ).text();
 
     //String bei jedem ; splitten und in array packen
@@ -96,20 +97,20 @@ function createFinalKeywordsArray( array )
 
     //Erste Stufe jeden eintrag bei , splitten und in neuen array packen
     var array_zweite_Stufe = new Array();
-    for ( var i = 0; i < array_erste_Stufe.length - 1; i++ )
+    for ( i = 0; i < array_erste_Stufe.length - 1; i++ )
     {
         array_zweite_Stufe.push( array_erste_Stufe[i].split( ',' ) );
     }
 
     //Zweite Stufe als Klassen erstellen und in array_keywords speichern
     var array_keywords = new Array();
-    for ( var i = 0; i < array_zweite_Stufe.length; i++ )
+    for ( i = 0; i < array_zweite_Stufe.length; i++ )
     {
         array_keywords.push( new KeywordList( array_zweite_Stufe[i][0], array_zweite_Stufe[i][1] ) );
     }
 
     var final_array = new Array();
-    for ( var i = 0; i < array.length; i++ )
+    for ( i = 0; i < array.length; i++ )
     {
         for ( var j = 0; j < array[i].length; j++ )
         {
@@ -133,6 +134,8 @@ $( document ).ready( function ()
 
 $( "#berechnen" ).click( function ()
 {
+    var i = 0;
+    var j = 0;
     //TODO DELETE IN FINAL
     console.time( 'test' );
 
@@ -143,7 +146,7 @@ $( "#berechnen" ).click( function ()
     inputText = inputText.trim();
 
     //Delete abbrevations consist of maximum 1 letters, multiple whitespaces, and new lines starting with a space
-    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace(/[ ]{2,}/gmi, " ").replace(/\n /gmi,"\n");
+    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[ ]{2,}/gmi, " " ).replace( /\n /gmi, "\n" );
 
     //Remove stopwords
     inputText = inputText.removeStopWords();
@@ -154,20 +157,20 @@ $( "#berechnen" ).click( function ()
     //split sentences in stemmed words add standrad weight 0 ... twodimensional arrays
     //Array [sentence][word, weight, katID]
     var words_in_sentences_with_weight_array = new Array( sentence_array.length );
-    for ( var i = 0; i < words_in_sentences_with_weight_array.length; i++ )
+    for ( i = 0; i < words_in_sentences_with_weight_array.length; i++ )
     {
         words_in_sentences_with_weight_array[i] = sentence_array[i].split( " " );
-        for ( var j = 0; j < words_in_sentences_with_weight_array[i].length; j++ )
+        for ( j = 0; j < words_in_sentences_with_weight_array[i].length; j++ )
         {
             words_in_sentences_with_weight_array[i][j] = new Weighted_Words( stemm2( words_in_sentences_with_weight_array[i][j] ), 0, 0 );
         }
     }
-  
+
     //negate whole sentence if sentence is negated
-    for ( var i = 0; i < words_in_sentences_with_weight_array.length; i++ )
+    for ( i = 0; i < words_in_sentences_with_weight_array.length; i++ )
     {
 
-        for ( var j = 0; j < words_in_sentences_with_weight_array[i].length; j++ )
+        for ( j = 0; j < words_in_sentences_with_weight_array[i].length; j++ )
         {
             if ( isReinforcing( words_in_sentences_with_weight_array[i][j].word ) )
             {
@@ -186,7 +189,7 @@ $( "#berechnen" ).click( function ()
     ////////////////////////////////////////////////////////
     ///////TESTAUSGABE
     var output = "";
-    for ( var i = 0; i < final_array.length; i++ )
+    for ( i = 0; i < final_array.length; i++ )
     {
         output = output + "<br>" + i + " || " + final_array[i].word + "  " + final_array[i].weight + " " + final_array[i].katID;
 
