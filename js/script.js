@@ -93,7 +93,7 @@ function positiveWeightDueToReinforcing( array, sentenceNumber )
 {
     for ( var i = 0; i < array[sentenceNumber].length; i++ )
     {
-        array[sentenceNumber][i].weight = 100;
+        array[sentenceNumber][i].weight += 100;
     }
 }
 
@@ -215,10 +215,10 @@ $( "#berechnen" ).click( function ()
                 {
                     //if weight is 100 which means a super word then count + 2 
                     //
-                    if ( final_array[i].weight === 100 )
+                    if ( final_array[i].weight >= 100 )
                     {
 
-                        count = count + 25;
+                        count = count + 25 * ( final_array[i].weight / 100 );
 
                     }
                     ///every other case, beside -1
@@ -241,7 +241,7 @@ $( "#berechnen" ).click( function ()
 
             }
             //Check if the count ist > 1 or < 0
-            if ( 0 < count  && count < 100 )
+            if ( 0 < count && count < 100 )
             {
                 count = count / 100;
             }

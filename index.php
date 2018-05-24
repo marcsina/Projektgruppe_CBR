@@ -96,7 +96,7 @@ Im HMPAO-SPECT fand sich eine diffus herabgesetzte Aktivitätsbelegung bds., ins
 vereinbar mit einer neurodegenerativen Grunderkrankung, am ehesten im Sinne einer
 Alzheimer-Demenz.
 Der Patient ist sehr sportlich, machte zum Beispiel Krafttraining, fand aber aufgrund der Demenz in der
-letzten Zeit nicht immer das richtige Maß. So kam es kürzlich zu einem heftigen Sturz vom Fahrrad mit einer
+letzten Zeit nicht immer das richtige Maß. So kam es kürzlich zu einem sehr heftigen Sturz vom Fahrrad mit einer
 fraglichen kurzen Bewusstlosigkeit.
 Er wurde daraufhin stationär untersucht, wobei keine fassbare Ursache gefunden wurde.
 Der Sohn verunglückte vor vier Wochen mit dem Motorrad schwer und steht als unmittelbarer
