@@ -62,12 +62,28 @@ function isNegate( word )
 function isReinforcing( word )
 {
     var array_reinforing_words = new Array( "absolut", "äußerst", "ausgerpsochen", "besonders", "extrem", "heftig", "höchst", "sehr", "total", "überaus", "ungemein", "ungewöhnlich" );
+    for ( var i = 0; i < array_reinforing_words.length; i++ )
+    {
+        if ( word === array_reinforing_words[i] )
+            return true;
+
+    }
+    return false;
 }
-function negateSentence( array, sentenceNumber )
+
+function negativeWeightDueToNegation( array, sentenceNumber )
 {
     for ( var i = 0; i < array[sentenceNumber].length; i++ )
     {
-        array[sentenceNumber][i].weight = -1
+        array[sentenceNumber][i].weight = -1;
+    }
+}
+
+function positiveWeightDueToReinforcing( array, sentenceNumber )
+{
+    for ( var i = 0; i < array[sentenceNumber].length; i++ )
+    {
+        array[sentenceNumber][i].weight = 100;
     }
 }
 
@@ -119,13 +135,15 @@ $( "#berechnen" ).click( function ()
 {
     //TODO DELETE IN FINAL
     console.time( 'test' );
+
     //get text from textarea
     var inputText = $( "#input-textarea" ).text();
+
     //remove unnecessary whitespace and write everything in lower case
     inputText = inputText.trim();
-    //Delete abbrevations consist of maximum 3 letters
-    //TODO Error bei words like 'ist' at the end of a sentence
-    //inputText = inputText.replace(/[\s][a-zA-Z]{0,3}[.]/gm, "");
+
+    //Delete abbrevations consist of maximum 1 letters, multiple whitespaces, and new lines starting with a space
+    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace(/[ ]{2,}/gmi, " ").replace(/\n /gmi,"\n");
 
     //Remove stopwords
     inputText = inputText.removeStopWords();
@@ -133,16 +151,7 @@ $( "#berechnen" ).click( function ()
     //Split text in sentences
     var sentence_array = inputText.replace( /([.!?,;])\s*(?=[a-zA-Z])/gm, "$1|" ).split( "|" );
 
-     /*
-    //stemm sentences and remove punctuations
-    var test_array = [];
-    words_in_sentences_with_weight_array.forEach( function ( element )
-    {
-        element = element.replace( /[.!?:;,]/gm, " " );
-        test_array.push( stemm( element ) );
-    } )*/
-
-    //split sentences in words add standrad weight 0 ... twodimensional arrays
+    //split sentences in stemmed words add standrad weight 0 ... twodimensional arrays
     //Array [sentence][word, weight, katID]
     var words_in_sentences_with_weight_array = new Array( sentence_array.length );
     for ( var i = 0; i < words_in_sentences_with_weight_array.length; i++ )
@@ -160,10 +169,13 @@ $( "#berechnen" ).click( function ()
 
         for ( var j = 0; j < words_in_sentences_with_weight_array[i].length; j++ )
         {
+            if ( isReinforcing( words_in_sentences_with_weight_array[i][j].word ) )
+            {
+                positiveWeightDueToReinforcing( words_in_sentences_with_weight_array, i );
+            }
             if ( isNegate( words_in_sentences_with_weight_array[i][j].word ) )
             {
-                negateSentence( words_in_sentences_with_weight_array, i );
-                //words_in_sentences_with_weight_array[i][j].weight = -1;
+                negativeWeightDueToNegation( words_in_sentences_with_weight_array, i );
             }
         }
     }
@@ -171,6 +183,7 @@ $( "#berechnen" ).click( function ()
     //delete words from array, if they are not keywords used by CBR
     var final_array = createFinalKeywordsArray( words_in_sentences_with_weight_array );
 
+    ////////////////////////////////////////////////////////
     ///////TESTAUSGABE
     var output = "";
     for ( var i = 0; i < final_array.length; i++ )
@@ -179,7 +192,9 @@ $( "#berechnen" ).click( function ()
 
     }
 
-    //$( "#output-textarea" ).html( output );
+    //TODO DELETE IN FINAL
+    $( "#output-textarea" ).html( output );
+
     //TODO DELETE IN FINAL
     console.timeEnd( 'test' );
 } );
