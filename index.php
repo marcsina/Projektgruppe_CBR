@@ -105,13 +105,14 @@
                 
                        </form>
         </div>
-        <div id="txtHint" style="display:none"><b>Person info will be listed here...</b></div>
+        <div id="txtHint"><b>Person info will be listed here...</b></div>
 
         <!--____________________________________________________________________________________________________-->
 
 
         <!-- Scripts -->
         <script src="js/german-porter-stemmer.js"></script>
+		<script src="js/snowball-german.js"></script>
         <script src="js/stopWords.js"></script>
         <script src="js/jquery-2.2.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
