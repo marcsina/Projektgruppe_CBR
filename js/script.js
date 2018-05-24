@@ -198,7 +198,7 @@ $( "#berechnen" ).click( function ()
     var final_array = createFinalKeywordsArray( words_in_sentences_with_weight_array );
 
     //Count duplicates and save into
-    var final_weight_array;
+    var final_weight_array = new Array();
 
     //Check each word
     for ( j = 0; j < final_array.length; j++ )
@@ -225,12 +225,14 @@ $( "#berechnen" ).click( function ()
 
     }
 
+    //alert(final_weight_array[1].weight);
+
     ////////////////////////////////////////////////////////
     ///////TESTAUSGABE
     var output = "";
-    for ( i = 0; i < final_array.length; i++ )
+    for ( i = 0; i < final_weight_array.length; i++ )
     {
-        output = output + "<br>" + i + " || " + final_array[i].word + "  " + final_array[i].weight + " " + final_array[i].katID;
+        output = output + "<br>" + i + " || " + "____________Count:   " +  final_weight_array[i].weight + "__________Kategorie:   " + final_weight_array[i].katID;
 
     }
 
