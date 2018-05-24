@@ -11,7 +11,7 @@ class Weighted_Words
 //Finale gewichtung für Olli
 class Final_Weight
 {
-    constructor(katID, weight )
+    constructor( katID, weight )
     {
         this.weight = weight;
         this.katID = katID;
@@ -157,7 +157,7 @@ $( "#berechnen" ).click( function ()
     inputText = inputText.trim();
 
     //Delete abbrevations consist of maximum 1 letters, multiple whitespaces, and new lines starting with a space
-    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[ ]{2,}/gmi, " " ).replace( /\n /gmi, "\n" ).replace(/[0-9]/," ");
+    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[ ]{2,}/gmi, " " ).replace( /\n /gmi, "\n" ).replace( /[0-9]/, " " );
 
     //Remove stopwords
     inputText = inputText.removeStopWords();
@@ -204,22 +204,58 @@ $( "#berechnen" ).click( function ()
     for ( j = 0; j < final_array.length; j++ )
     {
         //Check if word was a duplicate of a word before
-        if(final_array[j].word != 'xXx')
+        if ( final_array[j].word !== 'xXx' )
         {
             //If not compare each kat id and count them
             var count = 0;
             for ( i = 0; i < final_array.length; i++ )
             {
 
-                if(final_array[j].katID === final_array[i].katID )
+                if ( final_array[j].katID === final_array[i].katID )
                 {
-                    count++;
+                    //if weight is 100 which means a super word then count + 2 
+                    //
+                    if ( final_array[i].weight === 100 )
+                    {
+
+                        count = count + 25;
+
+                    }
+                    ///every other case, beside -1
+                    else if ( final_array[i].weight !== -1 )
+                    {
+
+                        count = count + 10;
+
+                    }
+                    //-1 case
+                    else
+                    {
+
+                        count = count - 10;
+
+                    }
+                    //set the word to xxx so that it wont be checked again
                     final_array[i].word = 'xXx';
                 }
 
             }
+            //Check if the count ist > 1 or < 0
+            if ( 0 < count  && count < 100 )
+            {
+                count = count / 100;
+            }
+            else if ( count >= 100 )
+            {
+                count = 1;
+            }
+            else
+            {
+                count = 0;
+            }
 
-            final_weight_array.push( new Final_Weight(final_array[j].katID, count));
+            //put the katID and count in the final weight array
+            final_weight_array.push( new Final_Weight( final_array[j].katID, count ) );
         }
 
 
@@ -232,7 +268,7 @@ $( "#berechnen" ).click( function ()
     var output = "";
     for ( i = 0; i < final_weight_array.length; i++ )
     {
-        output = output + "<br>" + i + " || " + "____________Count:   " +  final_weight_array[i].weight + "__________Kategorie:   " + final_weight_array[i].katID;
+        output = output + "<br>" + i + " || " + "____________Count:   " + final_weight_array[i].weight + "__________Kategorie:   " + final_weight_array[i].katID;
 
     }
 
