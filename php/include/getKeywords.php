@@ -2,7 +2,7 @@
 header('Content-Type: text/html; charset=ISO-8859-1');
 header("Access-Control-Allow-Origin: *");
 //Verbindung aufbauen
-include('conn.php');
+include_once('conn.php');
 
 function getMain($connection)
 {

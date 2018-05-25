@@ -1,3 +1,15 @@
+<?php
+include_once 'php/include/conn.php';
+include_once 'php/include/functions_login.php';
+ 
+sec_session_start();
+ 
+if (login_check($mysqli) == true) {
+    $logged = 'in';
+} else {
+    $logged = 'out';
+}
+?>
 <!doctype html>
 <html lang="de">
 
@@ -22,6 +34,7 @@
     </head>
 
     <body id="home">
+
         <!-- _______________________________________NavBar_____________________________________________________-->
 
         <nav class="navbar-default navbar-fixed-top" role="navigation">
@@ -59,7 +72,10 @@
             </div>
             <!--container-->
         </nav>
-        <!-- ________________________________________________________________________________________________________ -->
+        
+		
+
+		<!-- ________________________________________________________________________________________________________ -->
 
 
         <!-- _________________________Content________________________________-->
@@ -147,7 +163,23 @@ Nebendiagnosen: -Gonarthrose
         <div id="txtHint"><b>Person info will be listed here...</b></div>
 
         <!--____________________________________________________________________________________________________-->
-
+		 <?php
+        if (isset($_GET['error'])) {
+            echo '<p class="error">Error Logging In!</p>';
+        }
+        ?> 
+        <form action="php/include/login_process.php" method="post" name="login_form">                      
+            Email: <input type="text" name="email" />
+            Password: <input type="password" 
+                             name="password" 
+                             id="password"/>
+            <input type="button" 
+                   value="Login" 
+                   onclick="formhash(this.form, this.form.password);" /> 
+        </form>
+        <p>If you don't have a login, please <a href="php/register.php">register</a></p>
+        <p>If you are done, please <a href="php/include/logout.php">log out</a>.</p>
+        <p>You are currently logged <?php echo $logged ?>.</p>
 
         <!-- Scripts -->
         <!--<script src="js/german-porter-stemmer.js"></script>-->
@@ -157,6 +189,8 @@ Nebendiagnosen: -Gonarthrose
         <script src="js/bootstrap.min.js"></script>
         <script src="js/script.js"></script>
 		<scriptsrc="js/CBR.js"></script>
+		<script type="text/JavaScript" src="js/sha512.js"></script> 
+        <script type="text/JavaScript" src="js/forms.js"></script> 
 		
 
     </body>
