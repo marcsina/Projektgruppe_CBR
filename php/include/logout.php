@@ -1,6 +1,6 @@
 <?php
 
-include_once 'include/functions_login.php';
+include_once 'functions_login.php';
 sec_session_start();
  
 // Setze alle Session-Werte zurück 
@@ -19,5 +19,5 @@ setcookie(session_name(),
  
 // Vernichte die Session 
 session_destroy();
-header('Location: ../ index.php');
+header('Location: ../../index.php');
 ?>

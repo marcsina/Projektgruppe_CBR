@@ -5,8 +5,8 @@
 define("HOST", "localhost");     // Der Host mit dem du dich verbinden willst.
 define("USER", "medausbild");    // Der Datenbank-Benutzername. 
 define("PASSWORD", "dpDtTC2AwzzUbFXu");    // Das Datenbank-Passwort.
-define("DATABASE", "CBR");
-//define("DATABASE", "MedAusbildSS18");    // Der Datenbankname.
+//define("DATABASE", "CBR");
+define("DATABASE", "MedAusbildSS18");    // Der Datenbankname.
  
 define("CAN_REGISTER", "any");
 define("DEFAULT_ROLE", "member");
