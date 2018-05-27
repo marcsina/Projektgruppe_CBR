@@ -1,15 +1,12 @@
-<?php
-/**
- * Das sind die Login-Angaben für die Datenbank
- */  
-define("HOST", "localhost");     // Der Host mit dem du dich verbinden willst.
-define("USER", "medausbild");    // Der Datenbank-Benutzername. 
-define("PASSWORD", "dpDtTC2AwzzUbFXu");    // Das Datenbank-Passwort.
-define("DATABASE", "CBR");
-//define("DATABASE", "MedAusbildSS18");    // Der Datenbankname.
- 
-define("CAN_REGISTER", "any");
-define("DEFAULT_ROLE", "member");
-
-define("SECURE", FALSE);    // NUR FÜR DIE ENTWICKLUNG!!!!
-?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Secure Login: Registration Success</title>
+        <link rel="stylesheet" href="styles/main.css" />
+    </head>
+    <body>
+        <h1>Registration successful!</h1>
+        <p>You can now go back to the <a href="../index.php">login page</a> and log in</p>
+    </body>
+</html>
