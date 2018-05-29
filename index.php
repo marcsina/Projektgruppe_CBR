@@ -182,7 +182,7 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
                 <!-- second nested column -->
                 <div class="col-md-12">
                     <!-- column content -->
-                    <button type="button" id="berechnen">TestButton</button>
+                    <button type="button" id="berechnen">GetKeywords</button>
                     <button type="button" id="cbr">CBR Auswertung</button>
 
                 </div>
@@ -202,8 +202,13 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
                 
                        </form>
         </div>
+		<div><b>Keywords from Database:</b></div>
         <div id="txtHint"><b>Person info will be listed here...</b></div>
 
+		<br> <br>
+		<div><b>Keywords found in Text</b></div>
+		<div id="txtKeywords"><b></b></div>
+		<br> <br>
         <!--____________________________________________________________________________________________________-->
 		 <?php
         if (isset($_GET['error'])) {

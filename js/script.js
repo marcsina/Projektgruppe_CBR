@@ -197,8 +197,18 @@ $( "#berechnen" ).click( function ()
     //delete words from array, if they are not keywords used by CBR
     var final_array = createFinalKeywordsArray( words_in_sentences_with_weight_array );
 
+    //---------------DELETE IN FINAL---------------------
+    var outputWords = "";
+    for (i = 0; i < final_array.length; i++) {
+        outputWords = outputWords + "<br>" + final_array[i].word;
+
+    }
+
+
     //Count duplicates and save into
     var final_weight_array = new Array();
+
+   
 
     //Check each word
     for ( j = 0; j < final_array.length; j++ )
@@ -266,14 +276,21 @@ $( "#berechnen" ).click( function ()
     ////////////////////////////////////////////////////////
     ///////TESTAUSGABE
     var output = "";
+    
+
     for ( i = 0; i < final_weight_array.length; i++ )
     {
         output = output + "<br>" + i + " || " + "____________Count:   " + final_weight_array[i].weight + "__________Kategorie:   " + final_weight_array[i].katID;
 
     }
 
+
+    
+
+
     //TODO DELETE IN FINAL
-    $( "#output-textarea" ).html( output );
+    $("#output-textarea").html(output);
+    $("#txtKeywords").html(outputWords);
 
     //TODO DELETE IN FINAL
     console.timeEnd( 'test' );
