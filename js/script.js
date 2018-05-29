@@ -198,9 +198,10 @@ $( "#berechnen" ).click( function ()
     var final_array = createFinalKeywordsArray( words_in_sentences_with_weight_array );
 
     //---------------DELETE IN FINAL---------------------
-    var outputWords = "";
-    for (i = 0; i < final_array.length; i++) {
-        outputWords = outputWords + "<br>" + final_array[i].word;
+    var arrayOutputWords = new Array();
+    for (i = 0; i < final_array.length; i++)
+    {
+        arrayOutputWords.push(final_array[i].word);
 
     }
 
@@ -276,6 +277,7 @@ $( "#berechnen" ).click( function ()
     ////////////////////////////////////////////////////////
     ///////TESTAUSGABE
     var output = "";
+    var txtOutputWords = "";
     
 
     for ( i = 0; i < final_weight_array.length; i++ )
@@ -285,12 +287,59 @@ $( "#berechnen" ).click( function ()
     }
 
 
-    
+    for (i = 0; i < arrayOutputWords.length; i++) {
+        txtOutputWords = txtOutputWords + "<br>" + arrayOutputWords[i];
+
+    }
 
 
     //TODO DELETE IN FINAL
     $("#output-textarea").html(output);
-    $("#txtKeywords").html(outputWords);
+    $("#txtKeywords").html(txtOutputWords);
+
+
+    //-------------------------Show detected Words in HTML------------------------------------------
+    //split the Text
+    var everyWordArray = $("#input-textarea").text().split(' ');
+
+    var showEveryWord = "";
+    var stemmedWord = "";
+    var checked = 0;
+
+    //Check every Word in the Text
+    for (i = 0; i < everyWordArray.length; i++)
+    {
+        //Stemm the word 
+        stemmedWord = stemm2(everyWordArray[i]);
+        //variable so that it wont check twice and wont save the word twice
+        checked = 0;
+
+        //check every found KeyWord
+        for (j = 0; j < arrayOutputWords.length; j++)
+        {
+            //if the stemmed version is like the word than save
+            if (stemmedWord === arrayOutputWords[j] && checked === 0)
+            {
+                //make it bold and red
+                showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
+                checked = 1;
+            }
+            else
+            {
+
+            }
+        }
+        //if the word was not found in the array than display it normal
+        if (checked === 0)
+        {
+            showEveryWord = showEveryWord + " " + everyWordArray[i];
+            
+        }
+        
+    }
+
+    $("#input-textarea").html(showEveryWord);
+    //----------------------------------------------------------------------------------
 
     //TODO DELETE IN FINAL
     console.timeEnd( 'test' );

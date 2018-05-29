@@ -184,6 +184,7 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
                     <!-- column content -->
                     <button type="button" id="berechnen">GetKeywords</button>
                     <button type="button" id="cbr">CBR Auswertung</button>
+					<button type="button" id="highlight">Highlight Keywords</button>
 
                 </div>
 
