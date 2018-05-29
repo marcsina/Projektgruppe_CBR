@@ -27,8 +27,11 @@
 
 	}
 
-	loadIncomingCase(nr) {
-		//this.incomingCase = new Case(-1,"nichtolli","ich habe fieber und fühle mich wie ein olli");
+	loadIncomingCaseFromDB(nr) {
+		this.incomingCase = this.Cases[nr];
+	}
+
+	loadIncomingCase() {
 		this.incomingCase = this.Cases[nr];
 	}
 
@@ -179,7 +182,7 @@ $('#cbr').click(function () {
 
 	var testcbr = new CBR();
 	testcbr.loadAllArrays();
-	testcbr.loadIncomingCase(0);
+	testcbr.loadIncomingCaseFromDB(0);
 	testcbr.calculateSimilarity();
 	// testcbr.GiveCaseSymptom(0, new Symptom(1,"ollisyndrom",5));
 	// alert("was da los");
