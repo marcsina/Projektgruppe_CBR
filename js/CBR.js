@@ -104,11 +104,46 @@
 					numberSymptoms += 1;
 				}
 			}
-
 			var factor = Math.pow(10, 2);
 			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
 			ergebnisse = ergebnisse + "<br>" + "incomingCase: " + this.incomingCase.id + " Case: " + this.Cases[i].id + " Similarity: " + this.Similarities[i];
+		}
+		
+		ergebnisse = ergebnisse + "<br>";
+		this.loadIncomingCaseFromDB(0);
+		i = 0;
+		for (i = 0; i < this.Cases.length; i++) {
+			var percentageValue = 0;
+			var numberSymptoms = 0;
+			var zwischen = 0 ;
+			var k;
+			for (k = 0; k < this.incomingCase.Symptoms.length; k++) {
+				var wij = 1;
 
+				if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert>0)
+				{
+					zwischen = this.incomingCase.Symptoms[k].wert/this.Cases[i].Symptoms[k].wert*1;
+					
+					if(zwischen > 1)
+					{
+						zwischen = 1/zwischen;
+					}
+				}
+				else
+				{
+					zwischen = 0;
+				}
+				
+				percentageValue += zwischen*1;
+				
+
+				if (this.incomingCase.Symptoms[k].wert > 0) {
+					numberSymptoms += 1;
+				}
+			}
+			var factor = Math.pow(10, 2);
+			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
+			ergebnisse = ergebnisse + "<br>" + "incomingCase: " + this.incomingCase.id + " Case: " + this.Cases[i].id + " Similarity: " + this.Similarities[i];
 		}
 
 		$("#CBRtestfeld").html(ergebnisse);
