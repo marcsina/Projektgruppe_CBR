@@ -1,6 +1,7 @@
 // Global Array for Textanalysis
 var final_weight_array;
 
+
 class Weighted_Words
 {
     constructor( word, weight, katID )
