@@ -34,16 +34,46 @@
 
 	// Vergleich zwischen Incoming Case und Case Base
 	calculateSimilarity() {
+//		var ergebnisse = "";
+//		var i;
+//		for (i = 0; i < this.Cases.length; i++) {
+//			var percentageValue = 0;
+//			var numberSymptoms = 0;
+//			var k;
+//			for (k = 0; k < this.incomingCase.Symptoms.length; k++) {
+//				var wij = 1;
+//
+//				percentageValue = percentageValue + (this.incomingCase.Symptoms[k].wert * this.Cases[i].Symptoms[k].wert * wij);
+//
+//				if (this.incomingCase.Symptoms[k].wert > 0) {
+//					numberSymptoms += 1;
+//				}
+//			}
+//
+//			var factor = Math.pow(10, 2);
+//			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
+//			ergebnisse = ergebnisse + "<br>" + "incomingCase: " + this.incomingCase.id + " Case: " + this.Cases[i].id + " Similarity: " + this.Similarities[i];
+//
+//		}
+		
 		var ergebnisse = "";
 		var i;
 		for (i = 0; i < this.Cases.length; i++) {
 			var percentageValue = 0;
 			var numberSymptoms = 0;
+			var zwischen = 0 ;
 			var k;
 			for (k = 0; k < this.incomingCase.Symptoms.length; k++) {
 				var wij = 1;
 
-				percentageValue = percentageValue + (this.incomingCase.Symptoms[k].wert * this.Cases[i].Symptoms[k].wert * wij);
+				zwischen = this.incomingCase.Symptoms[k].wert/this.Cases[i].Symptoms[k].wert*1;
+				
+				if(zwischen > 1)
+				{
+					zwischen = 1/zwischen;
+				}
+				
+				percentageValue += zwischen*1;
 
 				if (this.incomingCase.Symptoms[k].wert > 0) {
 					numberSymptoms += 1;
@@ -57,6 +87,7 @@
 		}
 
 		$("#CBRtestfeld").html(ergebnisse);
+		//$("#CBRtestfeld").html(numberSymptoms);
 	}
 
 	GiveCaseSymptom(nr, S) {
