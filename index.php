@@ -93,7 +93,7 @@ if (login_check($mysqli) == true) {
                 <div class="col-md-12">
                     <p id="input-textarea">
 
-					Meine dementiell erkrankte Tante, eine bislang lebenslustige und mobile alte Dame, wurde
+					Meine dementiell erkrankte Tante, ein wahrer Drache, eine bislang lebenslustige und mobile alte Dame, wurde
 nach einem Sturz aus dem Bett mit Verdacht auf Schlaganfall in die Klinik und Poliklinik für
 Unfallchirurgie eingeliefert. Die Diagnose war schnell gestellt – nur „Gehirnerschütterung“ und
 Beschwerden im Rücken. Dennoch begann ab der Einlieferung in die Klinik eine systematische
