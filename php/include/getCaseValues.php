@@ -41,7 +41,7 @@ function getCaseValues($connection)
             $kategorieid = $d["kategorieid"];
             $value = $d["value"];				
             
-            echo utf8_encode("$caseid(//separatormid//)$kategorieid(//separatormid//)$value");
+            echo utf8_decode("$caseid(//separatormid//)$kategorieid(//separatormid//)$value");
             echo "[||separatorend||]";
         }
 		
