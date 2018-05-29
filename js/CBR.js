@@ -188,4 +188,7 @@ $('#cbr').click(function () {
 	// alert("was da los");
 	//$("#CBRtestfeld").html(testcbr.Cases[0].Symptoms[0].name + " " + testcbr.Cases[1] + " " + testcbr.incomingCase.id);
 
+
+	$("#CBRtestfeld").html(output);
+
 });

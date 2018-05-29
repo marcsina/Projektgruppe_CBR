@@ -1,3 +1,6 @@
+// Global Array for Textanalysis
+var final_weight_array;
+
 class Weighted_Words
 {
     constructor( word, weight, katID )
@@ -207,7 +210,7 @@ $( "#berechnen" ).click( function ()
 
 
     //Count duplicates and save into
-    var final_weight_array = new Array();
+    final_weight_array = new Array();
 
    
 
