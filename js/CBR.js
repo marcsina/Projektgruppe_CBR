@@ -21,7 +21,7 @@
 			if (this.Cases[split_mid[0] - 1] + "" === "undefined") {
 				this.Cases[split_mid[0] - 1] = new Case(split_mid[0] - 1, "fake", "faketext");
 			}
-			var symptom = new Symptom(split_mid[1], "nix", split_mid[2]);
+			var symptom = new Symptom(split_mid[1], "name", split_mid[2]);
 			this.GiveCaseSymptom(split_mid[0] - 1, symptom);
 		}
 
@@ -32,7 +32,21 @@
 	}
 
 	loadIncomingCase() {
-		this.incomingCase = this.Cases[nr];
+		this.incomingCase = new Case(-1, "Incoming Case", $("#input-textarea").text());
+		var i;
+		var k;
+		var value = 0;
+
+		for (i = 0; i < this.Cases[0].Symptoms.length; i++) {
+			for (k = 0; k < final_weight_array.length; k++) {							
+				if (i == final_weight_array[k].katID) {
+					value = final_weight_array[k].weight;	
+				}
+			}
+			this.incomingCase.Symptoms.push(new Symptom(i, "bla", value));
+			value = 0;
+		}
+		
 	}
 
 	// Vergleich zwischen Incoming Case und Case Base
@@ -182,13 +196,10 @@ $('#cbr').click(function () {
 
 	var testcbr = new CBR();
 	testcbr.loadAllArrays();
-	testcbr.loadIncomingCaseFromDB(0);
+	testcbr.loadIncomingCase();
 	testcbr.calculateSimilarity();
 	// testcbr.GiveCaseSymptom(0, new Symptom(1,"ollisyndrom",5));
 	// alert("was da los");
 	//$("#CBRtestfeld").html(testcbr.Cases[0].Symptoms[0].name + " " + testcbr.Cases[1] + " " + testcbr.incomingCase.id);
-
-
-	$("#CBRtestfeld").html(output);
 
 });
