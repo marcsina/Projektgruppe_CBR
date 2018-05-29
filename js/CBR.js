@@ -129,12 +129,12 @@ function getCasesFromDatabase(database) {
 				$("#cbrhint").text(this.responseText);
 			}
 		};
-		xmlhttp.open("GET", "getCaseValues.php", true);
+		xmlhttp.open("GET", "http://141.99.248.92/Projektgruppe/php/include/getCaseValues.php", true);
 		xmlhttp.send();
 	}
 }
 
-$(document).ready(function () { getCasesFromDatabase("cbr"); });
+$(document).ready(function () { getCasesFromDatabase("MedAusbildSS18"); });
 
 $('#cbr').click(function () {
 
