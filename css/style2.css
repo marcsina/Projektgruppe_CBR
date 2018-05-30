@@ -1,0 +1,135 @@
+﻿/*------------------------------------------/
+/----------------Navbar---------------------/
+/------------------------------------------*/
+.navbar-fixed-top {
+    background-color: #615A7F;
+	min-height: 50px;
+	width: 100%;
+	z-index: 999;
+}
+
+.first-after-navbar{
+    margin-top: 50px;
+}
+.navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav > li > a:hover{ 
+    /*hintergrund bei hover
+    schriftfarbe bei focus
+    
+    '>' bezieht sich auf direkten nachfolger (child)*/
+    background-color: #EAE6FC;
+    color: #543B67; /*schrift*/
+}
+
+.menuItem a, .navbar-brand{
+    font-weight: 600;
+    font-size: 20px;
+    color: #E2D8DE;
+}
+
+.navbar-brand{
+    color: #D1CCD5;
+    font-size: 45px;
+}
+
+.navbar-header .navbar-brand:hover, .navbar-header .navbar-brand:focus{ /*schriftfarbe ändern bei hover*/
+    color: #EAE6FC;
+}
+
+.rondedImage{
+    overflow:hidden; 
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius:50px;
+    width:90px;
+    height:90px;
+    
+
+.neurologie {
+float:left;
+}
+
+.demenz {
+float:left;
+}
+
+.innere_medezin {
+float:left;
+}
+
+kardio{
+float:left;
+}
+
+.rectangle {
+  border: 1px solid green ;
+  background: #615A7F;
+
+}
+
+.rectangle_2 {
+  border: 1px solid green ;
+
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+
+body {
+    background: #252525;
+    font-family: 'Open Sans';
+    font-weight: 300;
+}
+.main {
+    background: white url(machine_a_ecrire.jpg) right top no-repeat;
+    background-size: contain;
+    padding: 80px 20px 20px;
+    margin-top: 120px;
+}
+@media only screen and (max-width : 992px) {
+    .main {
+        background: white;
+        margin-top: 30px;
+    }
+}
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: #555;
+    margin-bottom: 0;
+}
+h2 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: #999;
+    font-size: 18px;
+    margin-top: 5px;
+}
+form {
+    margin-top: 60px;
+}
+input.form-control , input[type="submit"] , .btn {
+    border-radius: 0px;
+}
+.btn {
+    transition: all ease-in-out 0.2s;
+}
+.credits {
+    margin-top: 100px;
+    color: #999;
+    font-size: 12px;
+}
+.credits a {
+    color: inherit;
+}
+
+.a {
+  display:inline-block;
+}
+
+.bloc {
+    float:left;
+    text-align:center;
+}
