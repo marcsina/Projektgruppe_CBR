@@ -1,5 +1,6 @@
 // Global Array for Textanalysis
 var final_weight_array;
+var final_weight_array_TEST;
 
 
 class Weighted_Words
@@ -101,6 +102,46 @@ function positiveWeightDueToReinforcing( array, sentenceNumber )
     }
 }
 
+function reinforce_TEST( array, index_of_word, sentenceNumber, lastWord )
+{
+    if ( lastWord && index_of_word !== 0 )
+    {
+        array[sentenceNumber][index_of_word - 1].weight += 100;
+        array[sentenceNumber][index_of_word].weight += 100;
+    }
+    else if ( index_of_word === 0 )
+    {
+        array[sentenceNumber][index_of_word].weight += 100;
+        array[sentenceNumber][index_of_word + 1].weight += 100;
+    }
+    else
+    {
+        array[sentenceNumber][index_of_word - 1].weight += 100;
+        array[sentenceNumber][index_of_word].weight += 100;
+        array[sentenceNumber][index_of_word + 1].weight += 100;
+    }
+}
+
+function negate_TEST( array, index_of_word, sentenceNumber, lastWord )
+{
+    if ( lastWord && index_of_word !== 0 )
+    {
+        array[sentenceNumber][index_of_word - 1].weight = -1;
+        array[sentenceNumber][index_of_word].weight = -1;
+    }
+    else if ( index_of_word === 0 )
+    {
+        array[sentenceNumber][index_of_word].weight = -1;
+        array[sentenceNumber][index_of_word + 1].weight = -1;
+    }
+    else
+    {
+        array[sentenceNumber][index_of_word - 1].weight = -1;
+        array[sentenceNumber][index_of_word].weight = -1;
+        array[sentenceNumber][index_of_word + 1].weight = -1;
+    }
+}
+
 function createFinalKeywordsArray( array )
 {
     var i = 0;
@@ -172,22 +213,52 @@ $( "#berechnen" ).click( function ()
     //split sentences in stemmed words add standrad weight 0 ... twodimensional arrays
     //Array [sentence][word, weight, katID]
     var words_in_sentences_with_weight_array = new Array( sentence_array.length );
-   
+    var words_in_sentences_with_weight_array_TEST = new Array( sentence_array.length );
+
     for ( i = 0; i < words_in_sentences_with_weight_array.length; i++ )
     {
         var isNegated = false;
         var isReinforced = false;
+
+        var isNegated_TEST = 0;
+        var isReinforced_TEST = 0;
+
         words_in_sentences_with_weight_array[i] = sentence_array[i].split( /\s/ );
+        words_in_sentences_with_weight_array_TEST[i] = sentence_array[i].split( /\s/ );
         for ( j = 0; j < words_in_sentences_with_weight_array[i].length; j++ )
         {
             words_in_sentences_with_weight_array[i][j] = new Weighted_Words( stemm2( words_in_sentences_with_weight_array[i][j] ), 0, 0 );
+            words_in_sentences_with_weight_array_TEST[i][j] = new Weighted_Words( words_in_sentences_with_weight_array[i][j].word, 0, 0 );
+
             if ( isReinforcing( words_in_sentences_with_weight_array[i][j].word ) )
             {
                 isReinforced = true;
+                isReinforced_TEST = j;
+                //letztes Wort im Satz verstärkt
+                if ( isReinforced_TEST === words_in_sentences_with_weight_array.length )
+                {
+                    reinforce_TEST( words_in_sentences_with_weight_array_TEST, isReinforced_TEST, i, true );
+                }
+                //vorheriges Wort verstärkt
+                else if ( isReinforced_TEST + 1 === j )
+                {
+                    reinforce_TEST( words_in_sentences_with_weight_array_TEST, isReinforced_TEST, i, false );
+                }
             }
             if ( isNegate( words_in_sentences_with_weight_array[i][j].word ) )
             {
                 isNegated = true;
+                isNegated_TEST = j;
+                //letztes Wort im Satz negiert
+                if ( isNegated_TEST === words_in_sentences_with_weight_array.length )
+                {
+                    negate_TEST( words_in_sentences_with_weight_array_TEST, isNegated_TEST, i, true );
+                }
+                //vorheriges Wort negiert
+                else if ( isNegated_TEST + 1 === j )
+                {
+                    negate_TEST( words_in_sentences_with_weight_array_TEST, isNegated_TEST, i, false );
+                }
             }
         }
         if ( isNegated )
@@ -202,6 +273,7 @@ $( "#berechnen" ).click( function ()
 
     //delete words from array, if they are not keywords used by CBR
     var final_array = createFinalKeywordsArray( words_in_sentences_with_weight_array );
+    var final_array_TEST = createFinalKeywordsArray( words_in_sentences_with_weight_array_TEST );
     
                             //---------------DELETE IN FINAL---------------------
                             var arrayOutputWords = new Array();
@@ -276,7 +348,72 @@ $( "#berechnen" ).click( function ()
 
 
     }
-    
+
+
+    final_weight_array_TEST = new Array();
+
+    ////ADD Final Weight to categories
+    ////
+    //Check each word
+    for ( j = 0; j < final_array_TEST.length; j++ )
+    {
+        //Check if word was a duplicate of a word before
+        if ( final_array_TEST[j].word !== 'xXx' )
+        {
+            //If not compare each kat id and count them
+            var count = 0;
+            for ( i = 0; i < final_array_TEST.length; i++ )
+            {
+
+                if ( final_array_TEST[j].katID === final_array_TEST[i].katID )
+                {
+                    //if weight is 100 which means a super word then count + 2 
+                    //
+                    if ( final_array_TEST[i].weight >= 100 )
+                    {
+
+                        count = count + 25 * ( final_array_TEST[i].weight / 100 );
+
+                    }
+                    ///every other case, beside -1
+                    else if ( final_array_TEST[i].weight !== -1 )
+                    {
+
+                        count = count + 10;
+
+                    }
+                    //-1 case
+                    else
+                    {
+
+                        count = count - 10;
+
+                    }
+                    //set the word to xxx so that it wont be checked again
+                    final_array_TEST[i].word = 'xXx';
+                }
+
+            }
+            //Check if the count ist > 1 or < 0
+            if ( 0 < count && count < 100 )
+            {
+                count = count / 100;
+            }
+            else if ( count >= 100 )
+            {
+                count = 1;
+            }
+            else
+            {
+                count = 0;
+            }
+
+            //put the katID and count in the final weight array
+            final_weight_array_TEST.push( new Final_Weight( final_array_TEST[j].katID, count ) );
+        }
+
+
+    }
 
     ////////////////////////////////////////////////////////
     ///////TESTAUSGABE
@@ -287,6 +424,12 @@ $( "#berechnen" ).click( function ()
     for ( i = 0; i < final_weight_array.length; i++ )
     {
         output = output + "<br>" + i + " || " + "____________Count:   " + final_weight_array[i].weight + "__________Kategorie:   " + final_weight_array[i].katID;
+
+    }
+    output = output + "<br><br><br><br><br>";
+    for ( i = 0; i < final_weight_array_TEST.length; i++ )
+    {
+        output = output + "<br>" + i + " || " + "____________Count:   " + final_weight_array_TEST[i].weight + "__________Kategorie:   " + final_weight_array_TEST[i].katID;
 
     }
 
@@ -329,10 +472,7 @@ $( "#berechnen" ).click( function ()
                                             showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
                                             checked = 1;
                                         }
-                                        else
-                                        {
-
-                                        }
+                                      
                                     }
                                     //if the word was not found in the array than display it normal
                                     if ( checked === 0 )
