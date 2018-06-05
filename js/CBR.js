@@ -150,7 +150,7 @@
 	}
 	
 	calculateSimilaritySimple() {
-		
+		//this.loadIncomingCaseFromDB(0);
 		var ergebnisse = "";
 		var i;
 		for (i = 0; i < this.Cases.length; i++) {
@@ -165,18 +165,20 @@
 				{
 					zwischen = 1;
 					numberSymptoms += 1;
+					percentageValue += zwischen*1;
 				}
 				else if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert==0)
 				{
 					zwischen = 0;
 					numberSymptoms += 1;
+					percentageValue += zwischen*1;
 				}
 				else if(this.incomingCase.Symptoms[k].wert==0&&this.Cases[i].Symptoms[k].wert>0)
 				{
 					zwischen = 0;
 					numberSymptoms += 1;
+					percentageValue += zwischen*1;
 				}
-				percentageValue += zwischen*1;
 			}
 			var factor = Math.pow(10, 2);
 			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
