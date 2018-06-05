@@ -172,7 +172,7 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
         </div>
 		<div><b>Keywords from Database:</b></div>
         <div id="txtHint" style="display:none"><b>Person info will be listed here...</b></div>
-		<div id="pastHint" style="display:none"><b>Person info will be listed here...</b></div>
+		<div id="pastHint" style="display:visible"><b>Person info will be listed here...</b></div>
 		<div id="cbrhint" style="display:none"><b>CaseBase Data will be displayed here</b></div>
 
 		<br> <br>

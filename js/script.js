@@ -217,7 +217,7 @@ $( "#berechnen2" ).click( function ()
     var keyWords = createKeywords();
     var pastWords = createKeywordsArray_Past();
 
-    var negateWords = new Array("nicht", "kein", "keine", "keinem", "keinen", "keiner", "keines", "nichts", "nie");
+    var negateWords = new Array( "nicht", "kein", "keine", "keinem", "keinen", "keiner", "keines", "nichts", "nie" );
 
     console.time( "test2" );
 
@@ -233,7 +233,7 @@ $( "#berechnen2" ).click( function ()
 
     //Remove stopwords
     //inputText = inputText.removeStopWords();
-    
+
     //Split text in sentences
     var sentence_array = inputText.replace( /([.!?;])\s*(?=[a-zA-Z])/gm, "$1|" ).split( "|" );
 
@@ -246,7 +246,7 @@ $( "#berechnen2" ).click( function ()
         words_in_sentences_array[i] = sentence_array[i].split( /\s/ );
     }
 
-    
+
     //All sentences
     for ( i = 0; i < words_in_sentences_array.length; i++ )
     {
@@ -266,12 +266,12 @@ $( "#berechnen2" ).click( function ()
                         if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
                         {
                             //Todo Weight past negate
-                            final_Weight.push( new Final_Weight( keywords[k].katID, -500, keywords[k].katName ) );
+                            final_Weight.push( new Final_Weight( keyWords[k].katID, -500, keyWords[k].katName ) );
                         }
                         else
                         {
                             //Todo weight past NOT negate
-                            final_Weight.push( new Final_Weight( keywords[k].katID, -333, keywords[k].katName ) );
+                            final_Weight.push( new Final_Weight( keyWords[k].katID, -333, keyWords[k].katName ) );
                         }
                     }
                     else
@@ -279,21 +279,100 @@ $( "#berechnen2" ).click( function ()
                         if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
                         {
                             //Todo Weight present negate
-                            final_Weight.push( new Final_Weight( keywords[k].katID, -222, keywords[k].katName ) );
+                            final_Weight.push( new Final_Weight( keywords[k].katID, -222, keyWords[k].katName ) );
                         }
                         else
                         {
                             //Todo weight present NOT negate
-                            final_Weight.push( new Final_Weight( keywords[k].katID, 1, keywords[k].katName ) );
+                            final_Weight.push( new Final_Weight( keyWords[k].katID, 1, keyWords[k].katName ) );
                         }
                     }
                 }
-                words_in_sentences_array[i][j]
+                words_in_sentences_array[i][j];
             }
         }
 
-        console.timeEnd( 'test' );
+
     }
+    //SHOW STUFF
+    var output = "";
+    for (i = 0; i < final_Weight.length; i++ )
+    {
+        output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_Weight[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_Weight[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_Weight[i].katName;
+
+    }
+    $("#output-textarea").html(output);
+
+
+    //-------------------------Show detected Words in HTML------------------------------------------
+    //split the Text
+    var everyWordArray = $( "#input-textarea" ).text().split( /\s/ );
+
+    var showEveryWord = "";
+    var checked = 0;
+
+    //Check every Word in the Text
+    for (i = 0; i < everyWordArray.length; i++ )
+    {
+        //Stemm the word 
+        //variable so that it wont check twice and wont save the word twice
+        checked = 0;
+
+        //check every KeyWord
+        for (j = 0; j < keyWords.length; j++ )
+        {
+            //if word = keyword highlight it
+            if (everyWordArray[i] === keyWords[j].word && checked === 0)
+            {
+                //make it bold and blue
+                showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
+
+                checked = 1;
+            }
+
+        }
+
+        //check every PastWord
+        for (z = 0; z < pastWords.length; z++ )
+        {
+            //if word = keyword highlight it
+            if (everyWordArray[i] === pastWords[z] )
+            {
+                //make it bold and blue
+                showEveryWord = showEveryWord + " " + "<b><font color='green'>" + everyWordArray[i] + "</font></b>";
+
+                checked = 1;
+            }
+
+        }
+
+        //check every Negate Word
+        for (k = 0; k < negateWords.length; k++ )
+        {
+            //if word = keyword highlight it
+            if (everyWordArray[i] === negateWords[k] )
+            {
+                //make it bold and blue
+                showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
+
+                checked = 1;
+            }
+
+        }
+
+        //if the word was not found in the array make it normal
+        if ( checked === 0 )
+        {
+                //make it normal
+                showEveryWord = showEveryWord + " " + everyWordArray[i];
+        }
+
+    }
+
+    $( "#input-textarea" ).html( showEveryWord );
+    //----------------------------------------------------------------------------------
+
+    console.timeEnd( 'test2' );
 } );
 
 //Compare words in two given arrays depending on the start position
