@@ -201,6 +201,15 @@ function getCasesFromDatabase(database) {
 	}
 }
 
+function AddCase_Check(form) {
+
+	// To-Do:
+	// Check variables and Data provided by the User 
+
+	form.submit();
+	return true;
+}
+
 $(document).ready(function () { getCasesFromDatabase("MedAusbildSS18"); });
 
 $('#cbr').click(function () {

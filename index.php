@@ -196,6 +196,21 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
         <p>If you are done, please <a href="php/include/logout.php">log out</a>.</p>
         <p>You are currently logged <?php echo $logged ?>.</p>
 
+		<br>
+		<form action="php/include/AddCase.php"
+				method="post" 
+				name="addCase_form">
+            Name der Krankheit: <input type='text' 
+                name='krankheit' 
+                id='krankheit' /><br>
+			Beschreibung: <input type='text' 
+                name='beschreibung' 
+                id='beschreibung' /><br>	
+            <input type="button" 
+                   value="addCase" 
+                   onclick="return AddCase_Check(addCase_form);" /> 
+        </form>
+
         <!-- Scripts -->
         <!--<script src="js/german-porter-stemmer.js"></script>-->
 		<script src="js/snowball-german.js"></script>

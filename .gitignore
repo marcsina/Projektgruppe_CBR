@@ -329,3 +329,6 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/php/include/DeleteCase.php
+/php/include/EditCase.php
+/php/include/EditCaseData.php
