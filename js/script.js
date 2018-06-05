@@ -255,8 +255,7 @@ $( "#berechnen2" ).click( function ()
         {
 
             words_in_sentences_array[i][j] = words_in_sentences_array[i][j].toLowerCase();
-            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9]/gm, "" );
-            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /\-/gm, " " );
+            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
         }
 
     }
@@ -355,7 +354,7 @@ $( "#berechnen2" ).click( function ()
     for ( i = 0; i < everyWordArray.length; i++ )
     {
 
-        everyWordArray[i] = everyWordArray[i].replace( /[.!?;:,+0-9]/gm, "" );
+        everyWordArray[i] = everyWordArray[i].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
 
         //Stemm the word 
         //variable so that it wont check twice and wont save the word twice
