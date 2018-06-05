@@ -50,7 +50,7 @@
 	}
 
 	// Vergleich zwischen Incoming Case und Case Base
-	calculateSimilarity() {
+	calculateSimilarityComplex() {
 //		var ergebnisse = "";
 //		var i;
 //		for (i = 0; i < this.Cases.length; i++) {
@@ -147,7 +147,43 @@
 		}
 
 		$("#CBRtestfeld").html(ergebnisse);
-		//$("#CBRtestfeld").html(numberSymptoms);
+	}
+	
+	calculateSimilaritySimple() {
+		
+		var ergebnisse = "";
+		var i;
+		for (i = 0; i < this.Cases.length; i++) {
+			var percentageValue = 0;
+			var numberSymptoms = 0;
+			var zwischen = 0 ;
+			var k;
+			for (k = 0; k < this.incomingCase.Symptoms.length; k++) {
+				var wij = 1;
+
+				if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert>0)
+				{
+					zwischen = 1;
+					numberSymptoms += 1;
+				}
+				else if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert==0)
+				{
+					zwischen = 0;
+					numberSymptoms += 1;
+				}
+				else if(this.incomingCase.Symptoms[k].wert==0&&this.Cases[i].Symptoms[k].wert>0)
+				{
+					zwischen = 0;
+					numberSymptoms += 1;
+				}
+				percentageValue += zwischen*1;
+			}
+			var factor = Math.pow(10, 2);
+			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
+			ergebnisse = ergebnisse + "<br>" + "incomingCase: " + this.incomingCase.id + " Case: " + this.Cases[i].id + " Similarity: " + this.Similarities[i] +"%";
+		}
+		ergebnisse = ergebnisse + "<br>";
+		$("#CBRtestfeld").html(ergebnisse);
 	}
 
 	GiveCaseSymptom(nr, S) {
@@ -232,7 +268,7 @@ $('#cbr').click(function () {
 	var testcbr = new CBR();
 	testcbr.loadAllArrays();
 	testcbr.loadIncomingCase();
-	testcbr.calculateSimilarity();
+	testcbr.calculateSimilaritySimple();
 	// testcbr.GiveCaseSymptom(0, new Symptom(1,"ollisyndrom",5));
 	// alert("was da los");
 	//$("#CBRtestfeld").html(testcbr.Cases[0].Symptoms[0].name + " " + testcbr.Cases[1] + " " + testcbr.incomingCase.id);
