@@ -420,7 +420,7 @@ $( "#berechnen" ).click( function ()
 
     ////////////////////////////////////////////////////////
     ///////TESTAUSGABE
-    var output = "Nergierung im kompletten Satz: <br>";
+    var output = "<font color='blue'>Keywords</font> / <font color='red'>Negierung</font> / <font color='green'>Positiv</font> <br> <br> Nergierung im kompletten Satz: <br>";
     var txtOutputWords = "";
 
 
@@ -472,15 +472,31 @@ $( "#berechnen" ).click( function ()
                                         if ( stemmedWord === arrayOutputWords[j] && checked === 0 )
                                         {
                                             //make it bold and red
-                                            showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
+                                            showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
                                             checked = 1;
                                         }
                                       
                                     }
-                                    //if the word was not found in the array than display it normal
+                                    //if the word was not found in the KeyWord array than check for negate refactoring
                                     if ( checked === 0 )
                                     {
-                                        showEveryWord = showEveryWord + " " + everyWordArray[i];
+                                        if (isNegate(stemmedWord)) 
+                                        {
+                                            //make it bold and red
+                                            showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
+                                        }
+                                        else if (isReinforcing(stemmedWord))
+                                        {
+                                            //make it bold and green
+                                            showEveryWord = showEveryWord + " " + "<b><font color='green'>" + everyWordArray[i] + "</font></b>";
+                                        }
+                                        else
+                                        {
+                                            //make it normal
+                                            showEveryWord = showEveryWord + " " + everyWordArray[i];
+                                        }
+
+                                        
 
                                     }
 
