@@ -6,6 +6,7 @@
 		//       this.AllSymptoms = ["Banana", "Orange", "Apple", "Mango"];
 		this.Results = ["Banana", "Orange", "Apple", "Mango"];
 		this.Similarities = ["Banana", "Orange", "Apple", "Mango"];
+		this.ergebnisse = "";
 	}
 
 	loadAllArrays() {
@@ -51,29 +52,6 @@
 
 	// Vergleich zwischen Incoming Case und Case Base
 	calculateSimilarityComplex() {
-//		var ergebnisse = "";
-//		var i;
-//		for (i = 0; i < this.Cases.length; i++) {
-//			var percentageValue = 0;
-//			var numberSymptoms = 0;
-//			var k;
-//			for (k = 0; k < this.incomingCase.Symptoms.length; k++) {
-//				var wij = 1;
-//
-//				percentageValue = percentageValue + (this.incomingCase.Symptoms[k].wert * this.Cases[i].Symptoms[k].wert * wij);
-//
-//				if (this.incomingCase.Symptoms[k].wert > 0) {
-//					numberSymptoms += 1;
-//				}
-//			}
-//
-//			var factor = Math.pow(10, 2);
-//			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
-//			ergebnisse = ergebnisse + "<br>" + "incomingCase: " + this.incomingCase.id + " Case: " + this.Cases[i].id + " Similarity: " + this.Similarities[i];
-//
-//		}
-		
-		var ergebnisse = "";
 		var i;
 		for (i = 0; i < this.Cases.length; i++) {
 			var percentageValue = 0;
@@ -91,67 +69,29 @@
 					{
 						zwischen = 1/zwischen;
 					}
+					numberSymptoms += 1;
+					percentageValue += zwischen*1;
 				}
-				else
+				else if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert==0)
 				{
 					zwischen = 0;
-				}
-				
-				percentageValue += zwischen*1;
-				
-
-				if (this.incomingCase.Symptoms[k].wert > 0) {
 					numberSymptoms += 1;
+					percentageValue += zwischen*1;
+				}
+				else if(this.incomingCase.Symptoms[k].wert==0&&this.Cases[i].Symptoms[k].wert>0)
+				{
+					zwischen = 0;
+					numberSymptoms += 1;
+					percentageValue += zwischen*1;
 				}
 			}
 			var factor = Math.pow(10, 2);
 			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
-			ergebnisse = ergebnisse + "<br>" + "incomingCase: " + this.incomingCase.id + " Case: " + this.Cases[i].id + " Similarity: " + this.Similarities[i];
+			this.ergebnisse = this.ergebnisse + "" + "incomingCase: " + this.incomingCase.id + "          Case: " + this.Cases[i].id + "          Similarity: " + this.Similarities[i] +"%<br>";
 		}
-		
-		ergebnisse = ergebnisse + "<br>";
-		this.loadIncomingCaseFromDB(0);
-		i = 0;
-		for (i = 0; i < this.Cases.length; i++) {
-			var percentageValue = 0;
-			var numberSymptoms = 0;
-			var zwischen = 0 ;
-			var k;
-			for (k = 0; k < this.incomingCase.Symptoms.length; k++) {
-				var wij = 1;
-
-				if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert>0)
-				{
-					zwischen = this.incomingCase.Symptoms[k].wert/this.Cases[i].Symptoms[k].wert*1;
-					
-					if(zwischen > 1)
-					{
-						zwischen = 1/zwischen;
-					}
-				}
-				else
-				{
-					zwischen = 0;
-				}
-				
-				percentageValue += zwischen*1;
-				
-
-				if (this.incomingCase.Symptoms[k].wert > 0) {
-					numberSymptoms += 1;
-				}
-			}
-			var factor = Math.pow(10, 2);
-			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
-			ergebnisse = ergebnisse + "<br>" + "incomingCase: " + this.incomingCase.id + " Case: " + this.Cases[i].id + " Similarity: " + this.Similarities[i];
-		}
-
-		$("#CBRtestfeld").html(ergebnisse);
 	}
 	
 	calculateSimilaritySimple() {
-		//this.loadIncomingCaseFromDB(0);
-		var ergebnisse = "";
 		var i;
 		for (i = 0; i < this.Cases.length; i++) {
 			var percentageValue = 0;
@@ -182,10 +122,8 @@
 			}
 			var factor = Math.pow(10, 2);
 			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
-			ergebnisse = ergebnisse + "<br>" + "incomingCase: " + this.incomingCase.id + " Case: " + this.Cases[i].id + " Similarity: " + this.Similarities[i] +"%";
+			this.ergebnisse = this.ergebnisse + "" + "incomingCase: " + this.incomingCase.id + "          Case: " + this.Cases[i].id + "          Similarity: " + this.Similarities[i] +"%<br>";
 		}
-		ergebnisse = ergebnisse + "<br>";
-		$("#CBRtestfeld").html(ergebnisse);
 	}
 
 	GiveCaseSymptom(nr, S) {
@@ -269,10 +207,29 @@ $('#cbr').click(function () {
 
 	var testcbr = new CBR();
 	testcbr.loadAllArrays();
+	
 	testcbr.loadIncomingCase();
+	testcbr.ergebnisse = testcbr.ergebnisse + "---------------------------------------------------------------------------------------Incoming Case<br>";
+	testcbr.ergebnisse = testcbr.ergebnisse + "<pre style=\"color:#000000;\">"
+	testcbr.ergebnisse = testcbr.ergebnisse + "                          Simple<br><br>";
 	testcbr.calculateSimilaritySimple();
-	// testcbr.GiveCaseSymptom(0, new Symptom(1,"ollisyndrom",5));
-	// alert("was da los");
-	//$("#CBRtestfeld").html(testcbr.Cases[0].Symptoms[0].name + " " + testcbr.Cases[1] + " " + testcbr.incomingCase.id);
-
+	testcbr.ergebnisse = testcbr.ergebnisse + "</pre>"
+	testcbr.ergebnisse = testcbr.ergebnisse + "<pre style=\"color:#000000;\">"
+	testcbr.ergebnisse = testcbr.ergebnisse + "                          Complex<br><br>";
+	testcbr.calculateSimilarityComplex();
+	testcbr.ergebnisse = testcbr.ergebnisse + "</pre>"
+	testcbr.ergebnisse = testcbr.ergebnisse + "<br>";
+	testcbr.loadIncomingCaseFromDB(0);
+	testcbr.ergebnisse = testcbr.ergebnisse + "---------------------------------------------------------------------------------------Case From DB<br>";
+	testcbr.ergebnisse = testcbr.ergebnisse + "<pre style=\"color:#000000;\">"
+	testcbr.ergebnisse = testcbr.ergebnisse + "                          Simple<br><br>";
+	testcbr.calculateSimilaritySimple();
+	testcbr.ergebnisse = testcbr.ergebnisse + "</pre>"
+	testcbr.ergebnisse = testcbr.ergebnisse + "<pre style=\"color:#000000;\">"
+	testcbr.ergebnisse = testcbr.ergebnisse + "                          Complex<br><br>";
+	testcbr.calculateSimilarityComplex();
+	testcbr.ergebnisse = testcbr.ergebnisse + "</pre>"
+	testcbr.ergebnisse = testcbr.ergebnisse + "---------------------------------------------------------------------------------------Ende CBR<br>";
+	$("#CBRtestfeld").html(testcbr.ergebnisse);
+	
 });
