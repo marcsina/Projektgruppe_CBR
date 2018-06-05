@@ -309,7 +309,8 @@ $( "#berechnen2" ).click( function ()
     }
 
     //create array with all weights from one catergory summed up
-    var absolute_final_array = new Array( highest_katID );
+    var absolute_final_array = new Array();
+    absolute_final_array.length = highest_katID;
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
         //create blank class
@@ -593,12 +594,11 @@ function createKeywords()
     for ( i = 0; i < array_zweite_Stufe.length; i++ )
     {
         array_keywords.push( new KeywordList( array_zweite_Stufe[i][0].toLowerCase(), array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
-
-        //save the highest KatID for later calculation
-        if ( array_zweite_Stufe[i][1] > highest_katID )
-            highest_katID = array_zweite_Stufe[i][1];
     }
 
+    //save the highest KatID for later calculation
+  
+    highest_katID = array_zweite_Stufe[array_zweite_Stufe.length-1][1];
     return array_keywords;
 }
 
