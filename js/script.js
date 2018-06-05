@@ -247,6 +247,16 @@ $( "#berechnen2" ).click( function ()
     }
 
 
+    //Make everything Lowercase
+    for ( i = 0; i < words_in_sentences_array.length; i++ )
+    {
+        for ( j = 0; j < words_in_sentences_array[i].length; j++ )
+        {
+            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].toLowerCase();
+        }
+
+    }
+
     //All sentences
     for ( i = 0; i < words_in_sentences_array.length; i++ )
     {
@@ -296,12 +306,12 @@ $( "#berechnen2" ).click( function ()
     }
     //SHOW STUFF
     var output = "";
-    for (i = 0; i < final_Weight.length; i++ )
+    for ( i = 0; i < final_Weight.length; i++ )
     {
         output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_Weight[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_Weight[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_Weight[i].katName;
 
     }
-    $("#output-textarea").html(output);
+    $( "#output-textarea" ).html( output );
 
 
     //-------------------------Show detected Words in HTML------------------------------------------
@@ -312,17 +322,17 @@ $( "#berechnen2" ).click( function ()
     var checked = 0;
 
     //Check every Word in the Text
-    for (i = 0; i < everyWordArray.length; i++ )
+    for ( i = 0; i < everyWordArray.length; i++ )
     {
         //Stemm the word 
         //variable so that it wont check twice and wont save the word twice
         checked = 0;
 
         //check every KeyWord
-        for (j = 0; j < keyWords.length; j++ )
+        for ( j = 0; j < keyWords.length; j++ )
         {
             //if word = keyword highlight it
-            if (everyWordArray[i] === keyWords[j].word && checked === 0)
+            if ( everyWordArray[i].toLowerCase() === keyWords[j].word && checked === 0 )
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
@@ -333,10 +343,10 @@ $( "#berechnen2" ).click( function ()
         }
 
         //check every PastWord
-        for (z = 0; z < pastWords.length; z++ )
+        for ( z = 0; z < pastWords.length; z++ )
         {
             //if word = keyword highlight it
-            if (everyWordArray[i] === pastWords[z] )
+            if ( everyWordArray[i].toLowerCase() === pastWords[z] )
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='green'>" + everyWordArray[i] + "</font></b>";
@@ -347,10 +357,10 @@ $( "#berechnen2" ).click( function ()
         }
 
         //check every Negate Word
-        for (k = 0; k < negateWords.length; k++ )
+        for ( k = 0; k < negateWords.length; k++ )
         {
             //if word = keyword highlight it
-            if (everyWordArray[i] === negateWords[k] )
+            if (everyWordArray[i].toLowerCase() === negateWords[k] )
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
@@ -363,8 +373,8 @@ $( "#berechnen2" ).click( function ()
         //if the word was not found in the array make it normal
         if ( checked === 0 )
         {
-                //make it normal
-                showEveryWord = showEveryWord + " " + everyWordArray[i];
+            //make it normal
+            showEveryWord = showEveryWord + " " + everyWordArray[i];
         }
 
     }
@@ -551,7 +561,7 @@ function createKeywords()
     var array_keywords = new Array();
     for ( i = 0; i < array_zweite_Stufe.length; i++ )
     {
-        array_keywords.push( new KeywordList( array_zweite_Stufe[i][0], array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
+        array_keywords.push( new KeywordList( array_zweite_Stufe[i][0].toLowerCase(), array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
     }
 
     return array_keywords;
