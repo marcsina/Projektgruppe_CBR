@@ -247,12 +247,14 @@ $( "#berechnen2" ).click( function ()
     }
 
 
-    //Make everything Lowercase
+    //Make everything Lowercase and delete signs
     for ( i = 0; i < words_in_sentences_array.length; i++ )
     {
         for ( j = 0; j < words_in_sentences_array[i].length; j++ )
         {
+            
             words_in_sentences_array[i][j] = words_in_sentences_array[i][j].toLowerCase();
+            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9]/gm, "" );
         }
 
     }
@@ -322,8 +324,11 @@ $( "#berechnen2" ).click( function ()
     var checked = 0;
 
     //Check every Word in the Text
-    for ( i = 0; i < everyWordArray.length; i++ )
+    for (i = 0; i < everyWordArray.length; i++)
     {
+
+        everyWordArray[i] = everyWordArray[i].replace(/[.!?;:,+0-9]/gm, "");
+
         //Stemm the word 
         //variable so that it wont check twice and wont save the word twice
         checked = 0;
@@ -332,7 +337,7 @@ $( "#berechnen2" ).click( function ()
         for ( j = 0; j < keyWords.length; j++ )
         {
             //if word = keyword highlight it
-            if ( everyWordArray[i].toLowerCase() === keyWords[j].word && checked === 0 )
+            if (everyWordArray[i].toLowerCase() === keyWords[j].word && checked === 0 )
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
