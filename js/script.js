@@ -2,6 +2,7 @@
 var final_weight_array;
 var final_weight_array_TEST;
 var final_Weight = new Array();
+var absolute_final_array = new Array();
 var highest_katID = 0;
 
 
@@ -309,7 +310,7 @@ $( "#berechnen2" ).click( function ()
     }
 
     //create array with all weights from one catergory summed up
-    var absolute_final_array = new Array();
+    
     absolute_final_array.length = highest_katID;
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
@@ -319,7 +320,7 @@ $( "#berechnen2" ).click( function ()
         {
             //if an katID exisist with a weight, add it up
             //put katName too
-            if ( i === final_Weight[j].katID )
+            if ( i === parseInt(final_Weight[j].katID) )
             {
                 absolute_final_array[i].weight += final_Weight[j].weight;
                 absolute_final_array[i].katName = final_Weight[j].katName;
@@ -327,6 +328,10 @@ $( "#berechnen2" ).click( function ()
         }
         //normalize it
         absolute_final_array[i].weight = absolute_final_array[i].weight / 100;
+        if (absolute_final_array[i].weight  > 1 )
+        {
+            absolute_final_array[i].weight = 1;
+        }
     }
 
     //SHOW STUFF
