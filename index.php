@@ -150,6 +150,7 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
                 <div class="col-md-12">
                     <!-- column content -->
                     <button type="button" id="berechnen">GetKeywords</button>
+					<button type="button" id="berechnen2">GetKeywords_New_Version</button>
                     <button type="button" id="cbr">CBR Auswertung</button>
 
                 </div>
@@ -170,7 +171,8 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
                        </form>
         </div>
 		<div><b>Keywords from Database:</b></div>
-        <div id="txtHint"><b>Person info will be listed here...</b></div>
+        <div id="txtHint" style="display:none"><b>Person info will be listed here...</b></div>
+		<div id="pastHint" style="display:none"><b>Person info will be listed here...</b></div>
 		<div id="cbrhint" style="display:none"><b>CaseBase Data will be displayed here</b></div>
 
 		<br> <br>

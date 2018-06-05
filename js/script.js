@@ -3,6 +3,7 @@ var final_weight_array;
 var final_weight_array_TEST;
 
 
+
 class Weighted_Words
 {
     constructor( word, weight, katID, katName )
@@ -27,7 +28,7 @@ class Final_Weight
 
 class KeywordList
 {
-    constructor( word, katID , katName)
+    constructor( word, katID, katName )
     {
         this.word = word;
         this.katID = katID;
@@ -164,7 +165,7 @@ function createFinalKeywordsArray( array )
     var array_keywords = new Array();
     for ( i = 0; i < array_zweite_Stufe.length; i++ )
     {
-        array_keywords.push(new KeywordList(array_zweite_Stufe[i][0], array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
+        array_keywords.push( new KeywordList( array_zweite_Stufe[i][0], array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
     }
 
 
@@ -178,7 +179,7 @@ function createFinalKeywordsArray( array )
                 if ( array[i][j].word.toLowerCase() === array_keywords[k].word.toLowerCase() )
                 {
 
-                    final_array.push(new Weighted_Words(array[i][j].word, array[i][j].weight, array_keywords[k].katID, array_keywords[k].katName ) );
+                    final_array.push( new Weighted_Words( array[i][j].word, array[i][j].weight, array_keywords[k].katID, array_keywords[k].katName ) );
                 }
             }
         }
@@ -189,7 +190,340 @@ function createFinalKeywordsArray( array )
 $( document ).ready( function ()
 {
     getKeywordsFromDatabase( "cbr" );
+    getKeywordsFromDatabase_Past( "cbr" );
 } );
+
+
+//---------------------------------------------Vergangenheits Zeug----------------------------------------------------------------------------------------
+
+class KeywordsPast
+{
+    constructor( word )
+    {
+        this.word = word;
+    }
+}
+
+$( "#berechnen2" ).click( function ()
+{
+    var i = 0;
+    var j = 0;
+    var k = 0;
+    var z = 0;
+
+    var final_Weight = new Array();
+
+    //get Keywords and Past words
+    var keyWords = createKeywords();
+    var pastWords = createKeywordsArray_Past();
+
+    var negateWords = new Array("nicht", "kein", "keine", "keinem", "keinen", "keiner", "keines", "nichts", "nie");
+
+    console.time( "test2" );
+
+    var inputText = $( "#input-textarea" ).text();
+
+    //WHAT TODO WHAT TODO
+
+    //remove unnecessary whitespace and write everything in lower case
+    inputText = inputText.trim();
+
+    //Delete abbrevations consist of maximum 1 letters, multiple whitespaces, and new lines starting with a space
+    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[\s]{2,}/gmi, "\s" ).replace( /\n /gmi, "\n" ).replace( /[0-9]/, "\s" );
+
+    //Remove stopwords
+    //inputText = inputText.removeStopWords();
+    
+    //Split text in sentences
+    var sentence_array = inputText.replace( /([.!?;])\s*(?=[a-zA-Z])/gm, "$1|" ).split( "|" );
+
+    //array for sentences
+    var words_in_sentences_array = new Array( sentence_array.length );
+
+    //Split sentence at whitespace to get words
+    for ( i = 0; i < sentence_array.length; i++ )
+    {
+        words_in_sentences_array[i] = sentence_array[i].split( /\s/ );
+    }
+
+    
+    //All sentences
+    for ( i = 0; i < words_in_sentences_array.length; i++ )
+    {
+        //All words in the sentence
+        for ( j = 0; j < words_in_sentences_array[i].length; j++ )
+        {
+            //Check all Keywords
+            for ( k = 0; k < keyWords.length; k++ )
+            {
+                //If the Word is one of the Keywords
+                if ( keyWords[k].word === words_in_sentences_array[i][j] )
+                {
+                    //Check Past Words nearby
+                    if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, pastWords ) )
+                    {
+                        // Check Negate words nearby
+                        if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
+                        {
+                            //Todo Weight past negate
+                            final_Weight.push( new Final_Weight( keywords[k].katID, -500, keywords[k].katName ) );
+                        }
+                        else
+                        {
+                            //Todo weight past NOT negate
+                            final_Weight.push( new Final_Weight( keywords[k].katID, -333, keywords[k].katName ) );
+                        }
+                    }
+                    else
+                    {
+                        if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
+                        {
+                            //Todo Weight present negate
+                            final_Weight.push( new Final_Weight( keywords[k].katID, -222, keywords[k].katName ) );
+                        }
+                        else
+                        {
+                            //Todo weight present NOT negate
+                            final_Weight.push( new Final_Weight( keywords[k].katID, 1, keywords[k].katName ) );
+                        }
+                    }
+                }
+                words_in_sentences_array[i][j]
+            }
+        }
+
+        console.timeEnd( 'test' );
+    }
+} );
+
+//Compare words in two given arrays depending on the start position
+function checkWordsAroundGivenWord( arrayWhichContainsGivenWord, wordPosition, arrayWhichContainsWordsToCheck )
+{
+    //-------------First Word------------------------------
+    for ( var z = 0; z < arrayWhichContainsWordsToCheck.length; z++ )
+    {
+        if ( wordPosition === 0 )
+        {
+            if ( arrayWhichContainsGivenWord.length >= wordPosition + 3 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 3] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+            else if ( arrayWhichContainsGivenWord[i].length >= wordPosition + 2 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 2] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+            else if ( words_in_sentences_array[i].length >= wordPosition + 1 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+        }
+        //---------------------------------------------------------------------
+
+        //-------------Second Word------------------------------
+        else if ( wordPosition === 1 )
+        {
+            if ( arrayWhichContainsGivenWord.length >= wordPosition + 3 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 3] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+            else if ( arrayWhichContainsGivenWord.length >= wordPosition + 2 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 2] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+            else if ( arrayWhichContainsGivenWord.length >= wordPosition + 1 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+        }
+        //---------------------------------------------------------------------
+
+        //-------------Third Word------------------------------
+        else if ( wordPosition === 2 )
+        {
+            if ( arrayWhichContainsGivenWord.length >= wordPosition + 3 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 3] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+            else if ( words_in_sentences_array[i].length >= wordPosition + 2 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 2] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+            else if ( arrayWhichContainsGivenWord.length >= wordPosition + 1 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+        }
+        //---------------------------------------------------------------------
+
+
+        //-------------All after third Word------------------------------
+        else
+        {
+            if ( arrayWhichContainsGivenWord.length >= wordPosition + 3 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 3] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 3] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+            else if ( arrayWhichContainsGivenWord.length >= wordPosition + 2 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 3] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 2] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+            else if ( arrayWhichContainsGivenWord.length >= wordPosition + 1 )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 3] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition + 1] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+            else if ( arrayWhichContainsGivenWord.length === wordPosition )
+            {
+                if ( arrayWhichContainsGivenWord[wordPosition - 3] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 2] === arrayWhichContainsWordsToCheck[z]
+                    || arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z] )
+                {
+                    return true;
+                }
+            }
+        }
+        //---------------------------------------------------------------------
+    }
+    return false;
+}
+
+
+function createKeywords()
+{
+    var i = 0;
+    var string_keywords = $( "#txtHint" ).text();
+
+    //String bei jedem ; splitten und in array packen
+    var array_erste_Stufe = string_keywords.split( ';' );
+
+    //Erste Stufe jeden eintrag bei , splitten und in neuen array packen
+    var array_zweite_Stufe = new Array();
+    for ( i = 0; i < array_erste_Stufe.length - 1; i++ )
+    {
+        array_zweite_Stufe.push( array_erste_Stufe[i].split( ',' ) );
+    }
+
+    //Zweite Stufe als Klassen erstellen und in array_keywords speichern
+    var array_keywords = new Array();
+    for ( i = 0; i < array_zweite_Stufe.length; i++ )
+    {
+        array_keywords.push( new KeywordList( array_zweite_Stufe[i][0], array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
+    }
+
+    return array_keywords;
+}
+
+function createKeywordsArray_Past()
+{
+    var i = 0;
+    var string_keywords = $( "#pastHint" ).text();
+
+    //String bei jedem ; splitten und in array packen
+    var array_erste_Stufe = string_keywords.split( ';' );
+
+    array_erste_Stufe.pop();
+
+    return array_erste_Stufe;
+}
+
+
+function getKeywordsFromDatabase_Past( database )
+{
+    if ( database === "" )
+    {
+        $( "#pastHint" ).html( "Verbindung konnte nicht aufgebaut werden" );
+        return;
+    } else
+    {
+        if ( window.XMLHttpRequest )
+        {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else
+        {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject( "Microsoft.XMLHTTP" );
+        }
+        xmlhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                $( "#pastHint" ).text( this.responseText );
+            }
+        };
+        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getKeywordsPast.php", true );
+        xmlhttp.send();
+    }
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 $( "#berechnen" ).click( function ()
 {
@@ -230,7 +564,7 @@ $( "#berechnen" ).click( function ()
         words_in_sentences_with_weight_array_TEST[i] = sentence_array[i].split( /\s/ );
         for ( j = 0; j < words_in_sentences_with_weight_array[i].length; j++ )
         {
-            words_in_sentences_with_weight_array[i][j] = new Weighted_Words( stemm2( words_in_sentences_with_weight_array[i][j] ), 0, 0 ,0 );
+            words_in_sentences_with_weight_array[i][j] = new Weighted_Words( stemm2( words_in_sentences_with_weight_array[i][j] ), 0, 0, 0 );
             words_in_sentences_with_weight_array_TEST[i][j] = new Weighted_Words( words_in_sentences_with_weight_array[i][j].word, 0, 0, 0 );
 
             if ( isReinforcing( words_in_sentences_with_weight_array[i][j].word ) )
@@ -271,20 +605,20 @@ $( "#berechnen" ).click( function ()
         else if ( isReinforced )
         {
             positiveWeightDueToReinforcing( words_in_sentences_with_weight_array, i );
-        }  
+        }
     }
 
     //delete words from array, if they are not keywords used by CBR
     var final_array = createFinalKeywordsArray( words_in_sentences_with_weight_array );
     var final_array_TEST = createFinalKeywordsArray( words_in_sentences_with_weight_array_TEST );
-    
-                            //---------------DELETE IN FINAL---------------------
-                            var arrayOutputWords = new Array();
-                            for ( i = 0; i < final_array.length; i++ )
-                            {
-                                arrayOutputWords.push( final_array[i].word );
 
-                            }
+    //---------------DELETE IN FINAL---------------------
+    var arrayOutputWords = new Array();
+    for ( i = 0; i < final_array.length; i++ )
+    {
+        arrayOutputWords.push( final_array[i].word );
+
+    }
 
     //Count duplicates and save into
     final_weight_array = new Array();
@@ -346,7 +680,7 @@ $( "#berechnen" ).click( function ()
             }
 
             //put the katID and count in the final weight array
-            final_weight_array.push(new Final_Weight(final_array[j].katID, count, final_array[j].katName ) );
+            final_weight_array.push( new Final_Weight( final_array[j].katID, count, final_array[j].katName ) );
         }
 
 
@@ -412,7 +746,7 @@ $( "#berechnen" ).click( function ()
             }
 
             //put the katID and count in the final weight array
-            final_weight_array_TEST.push(new Final_Weight(final_array_TEST[j].katID, count, final_array_TEST[j].katName ) );
+            final_weight_array_TEST.push( new Final_Weight( final_array_TEST[j].katID, count, final_array_TEST[j].katName ) );
         }
 
 
@@ -444,67 +778,67 @@ $( "#berechnen" ).click( function ()
     }
 
 
-                                //TODO DELETE IN FINAL
-                                $( "#output-textarea" ).html( output );
-                                $( "#txtKeywords" ).html( txtOutputWords );
+    //TODO DELETE IN FINAL
+    $( "#output-textarea" ).html( output );
+    $( "#txtKeywords" ).html( txtOutputWords );
 
-    
-                                //-------------------------Show detected Words in Red in HTML------------------------------------------
-                                //split the Text
-                                var everyWordArray = $( "#input-textarea" ).text().split( ' ' );
 
-                                var showEveryWord = "";
-                                var stemmedWord = "";
-                                var checked = 0;
+    //-------------------------Show detected Words in Red in HTML------------------------------------------
+    //split the Text
+    var everyWordArray = $( "#input-textarea" ).text().split( ' ' );
 
-                                //Check every Word in the Text
-                                for ( i = 0; i < everyWordArray.length; i++ )
-                                {
-                                    //Stemm the word 
-                                    stemmedWord = stemm2( everyWordArray[i] );
-                                    //variable so that it wont check twice and wont save the word twice
-                                    checked = 0;
+    var showEveryWord = "";
+    var stemmedWord = "";
+    var checked = 0;
 
-                                    //check every found KeyWord
-                                    for ( j = 0; j < arrayOutputWords.length; j++ )
-                                    {
-                                        //if the stemmed version is like the word than save
-                                        if ( stemmedWord === arrayOutputWords[j] && checked === 0 )
-                                        {
-                                            //make it bold and red
-                                            showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
-                                            checked = 1;
-                                        }
-                                      
-                                    }
-                                    //if the word was not found in the KeyWord array than check for negate refactoring
-                                    if ( checked === 0 )
-                                    {
-                                        if (isNegate(stemmedWord)) 
-                                        {
-                                            //make it bold and red
-                                            showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
-                                        }
-                                        else if (isReinforcing(stemmedWord))
-                                        {
-                                            //make it bold and green
-                                            showEveryWord = showEveryWord + " " + "<b><font color='green'>" + everyWordArray[i] + "</font></b>";
-                                        }
-                                        else
-                                        {
-                                            //make it normal
-                                            showEveryWord = showEveryWord + " " + everyWordArray[i];
-                                        }
+    //Check every Word in the Text
+    for ( i = 0; i < everyWordArray.length; i++ )
+    {
+        //Stemm the word 
+        stemmedWord = stemm2( everyWordArray[i] );
+        //variable so that it wont check twice and wont save the word twice
+        checked = 0;
 
-                                        
+        //check every found KeyWord
+        for ( j = 0; j < arrayOutputWords.length; j++ )
+        {
+            //if the stemmed version is like the word than save
+            if ( stemmedWord === arrayOutputWords[j] && checked === 0 )
+            {
+                //make it bold and red
+                showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
+                checked = 1;
+            }
 
-                                    }
+        }
+        //if the word was not found in the KeyWord array than check for negate refactoring
+        if ( checked === 0 )
+        {
+            if ( isNegate( stemmedWord ) ) 
+            {
+                //make it bold and red
+                showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
+            }
+            else if ( isReinforcing( stemmedWord ) )
+            {
+                //make it bold and green
+                showEveryWord = showEveryWord + " " + "<b><font color='green'>" + everyWordArray[i] + "</font></b>";
+            }
+            else
+            {
+                //make it normal
+                showEveryWord = showEveryWord + " " + everyWordArray[i];
+            }
 
-                                }
 
-                                $( "#input-textarea" ).html( showEveryWord );
+
+        }
+
+    }
+
+    $( "#input-textarea" ).html( showEveryWord );
     //----------------------------------------------------------------------------------
-    
+
     //TODO DELETE IN FINAL
     console.timeEnd( 'test' );
 } );
