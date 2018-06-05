@@ -420,19 +420,19 @@ $( "#berechnen" ).click( function ()
 
     ////////////////////////////////////////////////////////
     ///////TESTAUSGABE
-    var output = "";
+    var output = "Nergierung im kompletten Satz: <br>";
     var txtOutputWords = "";
 
 
     for ( i = 0; i < final_weight_array.length; i++ )
     {
-        output = output + "<br>" + i + " || " + "\u00A0 \u00A0 \u00A0      Count:   " + final_weight_array[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_weight_array[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_weight_array[i].katName;
+        output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_weight_array[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_weight_array[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_weight_array[i].katName;
 
     }
-    output = output + "<br><br><br><br><br>";
+    output = output + "<br><br><br><br><br> Negierung nur 1 Wort entfernt: <br>";
     for ( i = 0; i < final_weight_array_TEST.length; i++ )
     {
-        output = output + "<br>" + i + " || " + "\u00A0 \u00A0 \u00A0      Count:   " + final_weight_array_TEST[i].weight + "\u00A0 \u00A0 \u00A0 KategorieID:   " + final_weight_array_TEST[i].katID + "\u00A0 \u00A0 \u00A0 KategorieName:   " + final_weight_array[i].katName;
+        output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_weight_array_TEST[i].weight + "\u00A0 \u00A0 \u00A0 KategorieID:   " + final_weight_array_TEST[i].katID + "\u00A0 \u00A0 \u00A0 KategorieName:   " + final_weight_array[i].katName;
 
     }
 
