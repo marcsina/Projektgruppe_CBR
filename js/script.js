@@ -279,7 +279,7 @@ $( "#berechnen2" ).click( function ()
                         if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
                         {
                             //Todo Weight present negate
-                            final_Weight.push( new Final_Weight( keywords[k].katID, -222, keyWords[k].katName ) );
+                            final_Weight.push( new Final_Weight( keyWords[k].katID, -222, keyWords[k].katName ) );
                         }
                         else
                         {
