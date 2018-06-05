@@ -2,6 +2,7 @@
 var final_weight_array;
 var final_weight_array_TEST;
 var final_Weight = new Array();
+var highest_katID = 0;
 
 
 class Weighted_Words
@@ -211,7 +212,7 @@ $( "#berechnen2" ).click( function ()
     var k = 0;
     var z = 0;
 
-    
+
 
     //get Keywords and Past words
     var keyWords = createKeywords();
@@ -252,9 +253,10 @@ $( "#berechnen2" ).click( function ()
     {
         for ( j = 0; j < words_in_sentences_array[i].length; j++ )
         {
-            
+
             words_in_sentences_array[i][j] = words_in_sentences_array[i][j].toLowerCase();
             words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9]/gm, "" );
+            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /\-/gm, " " );
         }
 
     }
@@ -269,7 +271,7 @@ $( "#berechnen2" ).click( function ()
             for ( k = 0; k < keyWords.length; k++ )
             {
                 //If the Word is one of the Keywords
-                if ( stemm2(keyWords[k].word) === stemm2(words_in_sentences_array[i][j])) 
+                if ( stemm2( keyWords[k].word ) === stemm2( words_in_sentences_array[i][j] ) ) 
                 {
                     //Check Past Words nearby
                     if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, pastWords ) )
@@ -278,12 +280,12 @@ $( "#berechnen2" ).click( function ()
                         if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
                         {
                             //Todo Weight past negate
-                            final_Weight.push( new Final_Weight( keyWords[k].katID, -500, keyWords[k].katName ) );
+                            final_Weight.push( new Final_Weight( keyWords[k].katID, 5, keyWords[k].katName ) );
                         }
                         else
                         {
                             //Todo weight past NOT negate
-                            final_Weight.push( new Final_Weight( keyWords[k].katID, -333, keyWords[k].katName ) );
+                            final_Weight.push( new Final_Weight( keyWords[k].katID, 10, keyWords[k].katName ) );
                         }
                     }
                     else
@@ -291,12 +293,12 @@ $( "#berechnen2" ).click( function ()
                         if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
                         {
                             //Todo Weight present negate
-                            final_Weight.push( new Final_Weight( keyWords[k].katID, -222, keyWords[k].katName ) );
+                            final_Weight.push( new Final_Weight( keyWords[k].katID, 20, keyWords[k].katName ) );
                         }
                         else
                         {
                             //Todo weight present NOT negate
-                            final_Weight.push( new Final_Weight( keyWords[k].katID, 1, keyWords[k].katName ) );
+                            final_Weight.push( new Final_Weight( keyWords[k].katID, 50, keyWords[k].katName ) );
                         }
                     }
                 }
@@ -306,12 +308,38 @@ $( "#berechnen2" ).click( function ()
 
 
     }
+
+    //create array with all weights from one catergory summed up
+    var absolute_final_array = new Array( highest_katID );
+    for ( i = 0; i < absolute_final_array.length; i++ )
+    {
+        //create blank class
+        absolute_final_array[i] = new Final_Weight( i, 0, "" );
+        for ( j = 0; j < final_Weight.length; j++ )
+        {
+            //if an katID exisist with a weight, add it up
+            //put katName too
+            if ( i === final_Weight[j].katID )
+            {
+                absolute_final_array[i].weight += final_Weight[j].weight;
+                absolute_final_array[i].katName = final_Weight[j].katName;
+            }
+        }
+        //normalize it
+        absolute_final_array[i].weight = absolute_final_array[i].weight / 100;
+    }
+
     //SHOW STUFF
     var output = "";
     for ( i = 0; i < final_Weight.length; i++ )
     {
         output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_Weight[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_Weight[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_Weight[i].katName;
 
+    }
+    output = output + "<br><br><br><br><br>";
+    for ( i = 0; i < absolute_final_array.length; i++ )
+    {
+        output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + absolute_final_array[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + absolute_final_array[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + absolute_final_array[i].katName;
     }
     $( "#output-textarea" ).html( output );
 
@@ -324,10 +352,10 @@ $( "#berechnen2" ).click( function ()
     var checked = 0;
 
     //Check every Word in the Text
-    for (i = 0; i < everyWordArray.length; i++)
+    for ( i = 0; i < everyWordArray.length; i++ )
     {
 
-        everyWordArray[i] = everyWordArray[i].replace(/[.!?;:,+0-9]/gm, "");
+        everyWordArray[i] = everyWordArray[i].replace( /[.!?;:,+0-9]/gm, "" );
 
         //Stemm the word 
         //variable so that it wont check twice and wont save the word twice
@@ -337,7 +365,7 @@ $( "#berechnen2" ).click( function ()
         for ( j = 0; j < keyWords.length; j++ )
         {
             //if word = keyword highlight it
-            if (stemm2(everyWordArray[i].toLowerCase()) === stemm2(keyWords[j].word) && checked === 0 )
+            if ( stemm2( everyWordArray[i].toLowerCase() ) === stemm2( keyWords[j].word ) && checked === 0 )
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
@@ -351,7 +379,7 @@ $( "#berechnen2" ).click( function ()
         for ( z = 0; z < pastWords.length; z++ )
         {
             //if word = keyword highlight it
-            if (everyWordArray[i].toLowerCase() === pastWords[z] && checked === 0)
+            if ( everyWordArray[i].toLowerCase() === pastWords[z] && checked === 0 )
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='green'>" + everyWordArray[i] + "</font></b>";
@@ -365,7 +393,7 @@ $( "#berechnen2" ).click( function ()
         for ( k = 0; k < negateWords.length; k++ )
         {
             //if word = keyword highlight it
-            if (everyWordArray[i].toLowerCase() === negateWords[k] && checked === 0)
+            if ( everyWordArray[i].toLowerCase() === negateWords[k] && checked === 0 )
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
@@ -567,6 +595,10 @@ function createKeywords()
     for ( i = 0; i < array_zweite_Stufe.length; i++ )
     {
         array_keywords.push( new KeywordList( array_zweite_Stufe[i][0].toLowerCase(), array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
+
+        //save the highest KatID for later calculation
+        if ( array_zweite_Stufe[i][1] > highest_katID )
+            highest_katID = array_zweite_Stufe[i][1];
     }
 
     return array_keywords;
