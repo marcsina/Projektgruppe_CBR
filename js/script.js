@@ -344,7 +344,11 @@ $( "#berechnen2" ).click( function ()
     output = output + "<br><br><br><br><br>";
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
-        output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + absolute_final_array[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + absolute_final_array[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + absolute_final_array[i].katName;
+        if (absolute_final_array[i].katName != "")
+        {
+            output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + absolute_final_array[i].weight + "\u00A0 \u00A0 \u00A0   KategorieName:   " + absolute_final_array[i].katName;
+        }
+        
     }
     $( "#output-textarea" ).html( output );
 
