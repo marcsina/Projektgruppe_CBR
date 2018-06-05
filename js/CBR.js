@@ -38,9 +38,9 @@
 		var value = 0;
 
 		for (i = 0; i < this.Cases[0].Symptoms.length; i++) {
-			for (k = 0; k < final_weight_array_TEST.length; k++) {							
-				if (i == final_weight_array_TEST[k].katID) {
-					value = final_weight_array_TEST[k].weight;	
+            for ( k = 0; k < final_Weight.length; k++) {							
+                if ( i == final_Weight[k].katID) {
+                    value = final_Weight[k].weight;	
 				}
 			}
 			this.incomingCase.Symptoms.push(new Symptom(i, "bla", value));

@@ -1,7 +1,7 @@
 // Global Array for Textanalysis
 var final_weight_array;
 var final_weight_array_TEST;
-
+var final_Weight = new Array();
 
 
 class Weighted_Words
@@ -211,7 +211,7 @@ $( "#berechnen2" ).click( function ()
     var k = 0;
     var z = 0;
 
-    var final_Weight = new Array();
+    
 
     //get Keywords and Past words
     var keyWords = createKeywords();
@@ -320,7 +320,7 @@ $( "#berechnen2" ).click( function ()
     //split the Text
     var everyWordArray = $( "#input-textarea" ).text().split( /\s/ );
 
-    var showEveryWord = "";
+    var showEveryWord = "<b><font color='blue'>Keywords</font> / <font color='red'>Negierung</font> / <font color='green'>Vergangenheit</font></b> <br> <br>";
     var checked = 0;
 
     //Check every Word in the Text
