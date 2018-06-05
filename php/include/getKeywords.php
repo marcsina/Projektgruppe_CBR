@@ -24,11 +24,11 @@ function getKeywordsCBR($connection)
                 //$id = $row["id"];
                 $name = $row["name"];
 				$katid = $row["katid"];
-				//$DE = $row["DE"];
+				$DE = $row["DE"];
 
 
-                //array_push($data,array("ID"=> $id,"name"=>$name,"katid"=>$katid,"DE"=>$DE));
-		array_push($data,array("name"=>$name,"katid"=>$katid));
+                array_push($data,array("ID"=> $id,"name"=>$name,"katid"=>$katid,"DE"=>$DE));
+		//array_push($data,array("name"=>$name,"katid"=>$katid));
             }
 
             // Objekt freigeben
@@ -42,9 +42,9 @@ function getKeywordsCBR($connection)
             //$id = $d["ID"];
             $name = $d["name"];
 			$katid = $d["katid"];
-			//$DE = $d["DE"];
+			$DE = $d["DE"];
 
-            echo utf8_decode("$name,$katid");
+            echo utf8_decode("$name,$katid,$DE");
             echo ";";
         }
 

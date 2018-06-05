@@ -5,30 +5,33 @@ var final_weight_array_TEST;
 
 class Weighted_Words
 {
-    constructor( word, weight, katID )
+    constructor( word, weight, katID, katName )
     {
         this.word = word;
         this.weight = weight;
         this.katID = katID;
+        this.katName = katName;
     }
 }
 
 //Finale gewichtung für Olli
 class Final_Weight
 {
-    constructor( katID, weight )
+    constructor( katID, weight, katName )
     {
         this.weight = weight;
         this.katID = katID;
+        this.katName = katName;
     }
 }
 
 class KeywordList
 {
-    constructor( word, katID )
+    constructor( word, katID , katName)
     {
         this.word = word;
         this.katID = katID;
+        this.katName = katName;
     }
 }
 
@@ -161,7 +164,7 @@ function createFinalKeywordsArray( array )
     var array_keywords = new Array();
     for ( i = 0; i < array_zweite_Stufe.length; i++ )
     {
-        array_keywords.push( new KeywordList( array_zweite_Stufe[i][0], array_zweite_Stufe[i][1] ) );
+        array_keywords.push(new KeywordList(array_zweite_Stufe[i][0], array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
     }
 
 
@@ -175,7 +178,7 @@ function createFinalKeywordsArray( array )
                 if ( array[i][j].word.toLowerCase() === array_keywords[k].word.toLowerCase() )
                 {
 
-                    final_array.push( new Weighted_Words( array[i][j].word, array[i][j].weight, array_keywords[k].katID ) );
+                    final_array.push(new Weighted_Words(array[i][j].word, array[i][j].weight, array_keywords[k].katID, array_keywords[k].katName ) );
                 }
             }
         }
@@ -227,8 +230,8 @@ $( "#berechnen" ).click( function ()
         words_in_sentences_with_weight_array_TEST[i] = sentence_array[i].split( /\s/ );
         for ( j = 0; j < words_in_sentences_with_weight_array[i].length; j++ )
         {
-            words_in_sentences_with_weight_array[i][j] = new Weighted_Words( stemm2( words_in_sentences_with_weight_array[i][j] ), 0, 0 );
-            words_in_sentences_with_weight_array_TEST[i][j] = new Weighted_Words( words_in_sentences_with_weight_array[i][j].word, 0, 0 );
+            words_in_sentences_with_weight_array[i][j] = new Weighted_Words( stemm2( words_in_sentences_with_weight_array[i][j] ), 0, 0 ,0 );
+            words_in_sentences_with_weight_array_TEST[i][j] = new Weighted_Words( words_in_sentences_with_weight_array[i][j].word, 0, 0, 0 );
 
             if ( isReinforcing( words_in_sentences_with_weight_array[i][j].word ) )
             {
@@ -343,7 +346,7 @@ $( "#berechnen" ).click( function ()
             }
 
             //put the katID and count in the final weight array
-            final_weight_array.push( new Final_Weight( final_array[j].katID, count ) );
+            final_weight_array.push(new Final_Weight(final_array[j].katID, count, final_array[j].katName ) );
         }
 
 
@@ -409,7 +412,7 @@ $( "#berechnen" ).click( function ()
             }
 
             //put the katID and count in the final weight array
-            final_weight_array_TEST.push( new Final_Weight( final_array_TEST[j].katID, count ) );
+            final_weight_array_TEST.push(new Final_Weight(final_array_TEST[j].katID, count, final_array_TEST[j].katName ) );
         }
 
 
@@ -423,13 +426,13 @@ $( "#berechnen" ).click( function ()
 
     for ( i = 0; i < final_weight_array.length; i++ )
     {
-        output = output + "<br>" + i + " || " + "____________Count:   " + final_weight_array[i].weight + "__________Kategorie:   " + final_weight_array[i].katID;
+        output = output + "<br>" + i + " || " + "\u00A0 \u00A0 \u00A0      Count:   " + final_weight_array[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_weight_array[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_weight_array[i].katName;
 
     }
     output = output + "<br><br><br><br><br>";
     for ( i = 0; i < final_weight_array_TEST.length; i++ )
     {
-        output = output + "<br>" + i + " || " + "____________Count:   " + final_weight_array_TEST[i].weight + "__________Kategorie:   " + final_weight_array_TEST[i].katID;
+        output = output + "<br>" + i + " || " + "\u00A0 \u00A0 \u00A0      Count:   " + final_weight_array_TEST[i].weight + "\u00A0 \u00A0 \u00A0 KategorieID:   " + final_weight_array_TEST[i].katID + "\u00A0 \u00A0 \u00A0 KategorieName:   " + final_weight_array[i].katName;
 
     }
 
@@ -446,7 +449,7 @@ $( "#berechnen" ).click( function ()
                                 $( "#txtKeywords" ).html( txtOutputWords );
 
     
-                                //-------------------------Show detected Words in HTML------------------------------------------
+                                //-------------------------Show detected Words in Red in HTML------------------------------------------
                                 //split the Text
                                 var everyWordArray = $( "#input-textarea" ).text().split( ' ' );
 
