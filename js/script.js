@@ -353,7 +353,6 @@ $( "#berechnen2" ).click( function ()
     //Check every Word in the Text
     for ( i = 0; i < everyWordArray.length; i++ )
     {
-
         everyWordArray[i] = everyWordArray[i].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
 
         //Stemm the word 
