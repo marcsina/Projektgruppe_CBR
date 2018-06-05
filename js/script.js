@@ -269,7 +269,7 @@ $( "#berechnen2" ).click( function ()
             for ( k = 0; k < keyWords.length; k++ )
             {
                 //If the Word is one of the Keywords
-                if ( keyWords[k].word === words_in_sentences_array[i][j] )
+                if ( keyWords[k].word === stemm2(words_in_sentences_array[i][j])) 
                 {
                     //Check Past Words nearby
                     if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, pastWords ) )
@@ -337,7 +337,7 @@ $( "#berechnen2" ).click( function ()
         for ( j = 0; j < keyWords.length; j++ )
         {
             //if word = keyword highlight it
-            if (everyWordArray[i].toLowerCase() === keyWords[j].word && checked === 0 )
+            if (stemm2(everyWordArray[i].toLowerCase()) === stemm2(keyWords[j].word) && checked === 0 )
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
