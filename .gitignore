@@ -329,3 +329,6 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/php/include/updateKeywords.php
+/php/include/getKeywordsForUpdate.php
+/js/stemmKeywords.js

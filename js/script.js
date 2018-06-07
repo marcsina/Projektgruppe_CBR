@@ -271,7 +271,7 @@ $( "#berechnen2" ).click( function ()
             for ( k = 0; k < keyWords.length; k++ )
             {
                 //If the Word is one of the Keywords
-                if ( stemm2( keyWords[k].word ) === stemm2( words_in_sentences_array[i][j] ) ) 
+                if ( keyWords[k].word === stemm2( words_in_sentences_array[i][j] ) ) 
                 {
                     //Check Past Words nearby
                     if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, pastWords ) )
@@ -310,7 +310,7 @@ $( "#berechnen2" ).click( function ()
     }
 
     //create array with all weights from one catergory summed up
-    
+
     absolute_final_array.length = highest_katID;
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
@@ -320,7 +320,7 @@ $( "#berechnen2" ).click( function ()
         {
             //if an katID exisist with a weight, add it up
             //put katName too
-            if ( i === parseInt(final_Weight[j].katID) )
+            if ( i === parseInt( final_Weight[j].katID ) )
             {
                 absolute_final_array[i].weight += final_Weight[j].weight;
                 absolute_final_array[i].katName = final_Weight[j].katName;
@@ -328,7 +328,7 @@ $( "#berechnen2" ).click( function ()
         }
         //normalize it
         absolute_final_array[i].weight = absolute_final_array[i].weight / 100;
-        if (absolute_final_array[i].weight  > 1 )
+        if ( absolute_final_array[i].weight > 1 )
         {
             absolute_final_array[i].weight = 1;
         }
@@ -369,7 +369,7 @@ $( "#berechnen2" ).click( function ()
         for ( j = 0; j < keyWords.length; j++ )
         {
             //if word = keyword highlight it
-            if ( stemm2( everyWordArray[i].toLowerCase() ) === stemm2( keyWords[j].word ) && checked === 0 )
+            if ( stemm2( everyWordArray[i].toLowerCase() ) === keyWords[j].word && checked === 0 )
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
@@ -602,8 +602,8 @@ function createKeywords()
     }
 
     //save the highest KatID for later calculation
-  
-    highest_katID = array_zweite_Stufe[array_zweite_Stufe.length-1][1];
+
+    highest_katID = array_zweite_Stufe[array_zweite_Stufe.length - 1][1];
     return array_keywords;
 }
 
