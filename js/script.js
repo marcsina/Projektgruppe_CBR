@@ -5,6 +5,11 @@ var final_Weight = new Array();
 var absolute_final_array = new Array();
 var highest_katID = 0;
 
+var weight_strong = 100;
+var weight_medstrong = 75;
+var weight_medium = 50;
+var weight_light = 25;
+
 
 class Weighted_Words
 {
@@ -220,6 +225,8 @@ $( "#berechnen2" ).click( function ()
     var pastWords = createKeywordsArray_Past();
 
     var negateWords = new Array( "nicht", "kein", "keine", "keinem", "keinen", "keiner", "keines", "nichts", "nie" );
+    var reinforing_words = new Array( "absolut", "äußerst", "ausgesprochen", "besonders", "extrem", "heftig", "höchst", "sehr", "total", "überaus", "ungemein", "ungewöhnlich" );
+
 
     console.time( "test2" );
 
@@ -273,32 +280,73 @@ $( "#berechnen2" ).click( function ()
                 //If the Word is one of the Keywords
                 if ( keyWords[k].word === stemm2( words_in_sentences_array[i][j] ) ) 
                 {
-                    //Check Past Words nearby
+                    //Check Past Words nearby --> Past
                     if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, pastWords ) )
                     {
                         // Check Negate words nearby
                         if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
                         {
-                            //Todo Weight past negate
-                            final_Weight.push( new Final_Weight( keyWords[k].katID, 5, keyWords[k].katName ) );
+                            // Check Reinforcing words nearby
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight past negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_light * 2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight past negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_light, keyWords[k].katName ) );
+                            }
+
                         }
                         else
                         {
-                            //Todo weight past NOT negate
-                            final_Weight.push( new Final_Weight( keyWords[k].katID, 10, keyWords[k].katName ) );
+                            // Check Reinforcing words nearby
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight past NOT negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_medium * 2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight past NOT negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_medium, keyWords[k].katName ) );
+                            }
+
                         }
                     }
+                    //No Past Word detected --> Present
                     else
                     {
+                        // Check Negate words nearby
                         if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
                         {
-                            //Todo Weight present negate
-                            final_Weight.push( new Final_Weight( keyWords[k].katID, 20, keyWords[k].katName ) );
+                            // Check Reinforcing words nearby
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight present negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_medstrong * 2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight present negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_medstrong, keyWords[k].katName ) );
+                            }
+
                         }
                         else
                         {
-                            //Todo weight present NOT negate
-                            final_Weight.push( new Final_Weight( keyWords[k].katID, 50, keyWords[k].katName ) );
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight present NOT negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_strong *2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight present NOT negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_strong, keyWords[k].katName ) );
+                            }
+
                         }
                     }
                 }
@@ -308,6 +356,17 @@ $( "#berechnen2" ).click( function ()
 
 
     }
+    /*
+    id      name            katID     negate
+    1       besinnung       1           0
+
+
+    keyid   negate
+    1       kein
+
+
+    1 / keywords - length * weight_light
+    */
 
     //create array with all weights from one catergory summed up
 
@@ -315,19 +374,19 @@ $( "#berechnen2" ).click( function ()
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
         //create blank class
-        absolute_final_array[i] = new Final_Weight( i, 0, "" );
+        absolute_final_array[i] = new Final_Weight( i, 0.0, "" );
         for ( j = 0; j < final_Weight.length; j++ )
         {
             //if an katID exisist with a weight, add it up
             //put katName too
             if ( i === parseInt( final_Weight[j].katID ) )
             {
-                absolute_final_array[i].weight += final_Weight[j].weight;
+                absolute_final_array[i].weight += (1 / final_Weight.length) * final_Weight[j].weight;
                 absolute_final_array[i].katName = final_Weight[j].katName;
             }
         }
         //normalize it
-        absolute_final_array[i].weight = absolute_final_array[i].weight / 100;
+        absolute_final_array[i].weight = absolute_final_array[i].weight / 10;
         if ( absolute_final_array[i].weight > 1 )
         {
             absolute_final_array[i].weight = 1;
@@ -344,6 +403,7 @@ $( "#berechnen2" ).click( function ()
     output = output + "<br><br><br><br><br>";
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
+        if ( absolute_final_array[i].katName !="" )
         output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + absolute_final_array[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + absolute_final_array[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + absolute_final_array[i].katName;
     }
     $( "#output-textarea" ).html( output );
