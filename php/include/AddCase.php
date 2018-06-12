@@ -11,33 +11,37 @@ if (isset($_POST['krankheit'], $_POST['beschreibung'], $_POST['hiddenkat'])) {
 	$text = filter_input(INPUT_POST, 'beschreibung');
 	$symptome = filter_input(INPUT_POST, 'hiddenkat'); 
 
-	echo "Hier sind $name";
-	echo "Hier sind $symptome";
-
-
 	$sql = "INSERT INTO Cases (name, text) VALUES ('$name', '$text')";
 
-	/*if ($mysqli->query($sql)) {
+	if ($mysqli->query($sql)) {
 		echo "Case erfolgreich der Datenbank hinzugefügt";
-
-		
 
 		$sql = "SELECT id from Cases WHERE name = '$name' LIMIT 1";
 		$result = $mysqli->query($sql);
-		$caseid = mysqli_fetch_object($result);
+		while($row = $result->fetch_assoc()) {
+			$caseid = (int)$row["id"];
+			echo $caseid;
+		}
 
-		$ersterSplit = explode(';', $symptome);
-		/*for ($x = 0; $x < count ($ersterSplit), $x++) {
+		$ersterSplit = explode(';', $symptome);		
+
+		for ($x = 0; $x < count($ersterSplit); $x++) {			
 			$zweiterSplit = explode('|', $ersterSplit[$x]);
+
 			$katid = $zweiterSplit[0];
 			$wert = $zweiterSplit[1];
-			$sql = "INSERT INTO Cases_Kategorie_Values (caseid,kategorieid,value, wij) VALUES($caseid, $katid, $wert, 0);"
-			$mysqli->query($sql);
+			$sql = "INSERT INTO Cases_Kategorie_Values (caseid,kategorieid,value, wij) VALUES($caseid, $katid, $wert, 0);";
+			if ($mysqli->query($sql)) {			
+				echo "Kein Problem beim Hinzufügen der Werte";
+			}
+			else {
+				echo "Hinzufügen von Werten gab einen Fehler";
+			}
 		}
 	}
 	else {
 		echo "Irgendwie 'n error beim hinzufügen der DB";
-	}*/
+	}
 }
 else {
 	echo "Fehlerhafte Eingabe";

@@ -218,18 +218,8 @@ function AddCase_Check(form,name,beschreibung,hiddenkat) {
 	}
 	
 	//TODO an dieser Stelle die Textanalyse zur festlegung der Symptome einbauen
-	
-	/*var pp = document.createElement( "input" );
-	form.appendChild(pp);
-    pp.name = "pp";
-    p.type = "hidden";
-    pp.value = Categories;*/
 
-	$("#hiddenkat").html("asdasdasd");
-
-	//hiddenkat = "ASDASDADS";
-	
-	//alert("lol das sind die Categorien : " + hiddenkat);
+	hiddenkat.value = Categories;
 
 	form.submit();
 	return true;

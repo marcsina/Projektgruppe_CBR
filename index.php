@@ -206,7 +206,7 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
 			Beschreibung: <input type='text' 
                 name='beschreibung' 
                 id='beschreibung' /><br>	
-			<input type='text' 
+			<input type='hidden' 
                 name='hiddenkat' 
                 id='hiddenkat' />
             <input type="button" 
