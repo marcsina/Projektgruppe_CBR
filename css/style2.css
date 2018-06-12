@@ -135,15 +135,13 @@ input.form-control , input[type="submit"] , .btn {
 }
 
 
+
+
 .holder {
 width: 320px;
 height: 240px;
 }
 
-.zoom: hover img{
-    transform:scale(1.5);
-
-}
 
 .image-lightbox img {
 /* La transition s'applique à la fois sur la largeur et la hauteur, avec une durée d'une seconde. */
@@ -271,3 +269,28 @@ div[id^=image]:target .expand {
  
 div#image-1:target, div#image-2:target, div#image-3:target { left: 200px; } 
 
+
+.zoom {
+width: 320px;
+height: 240px;
+}
+.image {
+width: 100%;
+height: 100%;
+}
+.image img {
+/* La transition s'applique à la fois sur la largeur et la hauteur, avec une durée d'une seconde. */
+-webkit-transition: all 1s ease; /* Safari et Chrome */
+-moz-transition: all 1s ease; /* Firefox */
+-ms-transition: all 1s ease; /* Internet Explorer 9 */
+-o-transition: all 1s ease; /* Opera */
+transition: all 1s ease;
+}
+.image:hover img {
+/* L'image est grossie de 25% */
+-webkit-transform:scale(3); /* Safari et Chrome */
+-moz-transform:scale(3); /* Firefox */
+-ms-transform:scale(3); /* Internet Explorer 9 */
+-o-transform:scale(3); /* Opera */
+transform:scale(3);
+}
