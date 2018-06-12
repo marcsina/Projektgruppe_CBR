@@ -476,7 +476,7 @@ function doStuffWhenClicked()
         for (i = 0; i < absolute_final_array.length; i++)
         {
             //create blank class
-            absolute_final_array[i] = new Final_Weight( i, 0.0, "", 0 );
+            absolute_final_array[i] = new Final_Weight( i, 0.0, "" );
 
             //Check all found Keywords
             for (j = 0; j < final_Weight.length; j++)
@@ -491,9 +491,17 @@ function doStuffWhenClicked()
             }
             for (k = 0; k < final_Weight.length; k++)
             {
-                absolute_final_array[i].weight += (1 / absolute_final_array[i].count) * final_Weight[k].weight;
+                if (i === parseInt(final_Weight[k].katID))
+                {
+                    absolute_final_array[i].weight += (1 / absolute_final_array[i].count) * final_Weight[k].weight;
+                }
+                
             }
             //normalize it
+
+            console.log("Weight:   " + absolute_final_array[i].weight + "  Weight / 10 :   " + absolute_final_array[i].weight / 10); // Delete later--------------------------------------
+
+
             absolute_final_array[i].weight = absolute_final_array[i].weight / 10;
             if ( absolute_final_array[i].weight > 1 )
             {
