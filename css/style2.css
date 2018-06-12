@@ -1,0 +1,273 @@
+﻿/*------------------------------------------/
+/----------------Navbar---------------------/
+/------------------------------------------*/
+.navbar-fixed-top {
+    background-color: #615A7F;
+	min-height: 50px;
+	width: 100%;
+	z-index: 999;
+}
+
+.first-after-navbar{
+    margin-top: 50px;
+}
+.navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav > li > a:hover{ 
+    /*hintergrund bei hover
+    schriftfarbe bei focus
+    
+    '>' bezieht sich auf direkten nachfolger (child)*/
+    background-color: #EAE6FC;
+    color: #543B67; /*schrift*/
+}
+
+.menuItem a, .navbar-brand{
+    font-weight: 600;
+    font-size: 20px;
+    color: #E2D8DE;
+}
+
+.navbar-brand{
+    color: #D1CCD5;
+    font-size: 45px;
+}
+
+.navbar-header .navbar-brand:hover, .navbar-header .navbar-brand:focus{ /*schriftfarbe ändern bei hover*/
+    color: #EAE6FC;
+}
+
+.rondedImage{
+    overflow:hidden; 
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius:50px;
+    width:90px;
+    height:90px;
+  }  
+
+.neurologie {
+float:left;
+}
+
+.demenz {
+float:left;
+}
+
+.innere_medezin {
+float:left;
+}
+
+.kardio{
+float:left;
+}
+
+.rectangle {
+  border: 1px solid green ;
+  background: #615A7F;
+
+}
+
+.rectangle_2 {
+  border: 1px solid green ;
+
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+
+body {
+    /*background: #252525;*/
+    font-family: 'Open Sans';
+    font-weight: 300;
+}
+.main {
+    background: white url(machine_a_ecrire.jpg) right top no-repeat;
+    background-size: contain;
+    padding: 80px 20px 20px;
+    margin-top: 120px;
+}
+@media only screen and (max-width : 992px) {
+    .main {
+        background: white;
+        margin-top: 30px;
+    }
+}
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: #555;
+    margin-bottom: 0;
+}
+h2 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: #999;
+    font-size: 18px;
+    margin-top: 5px;
+}
+form {
+    margin-top: 60px;
+}
+input.form-control , input[type="submit"] , .btn {
+    border-radius: 0px;
+}
+.btn {
+    transition: all ease-in-out 0.2s;
+}
+.credits {
+    margin-top: 100px;
+    color: #999;
+    font-size: 12px;
+}
+.credits a {
+    color: inherit;
+}
+
+.a {
+  display:inline-block;
+}
+
+.bloc {
+    float:left;
+    text-align:center;
+}
+
+
+.holder {
+width: 320px;
+height: 240px;
+}
+
+.zoom: hover img{
+    transform:scale(1.5);
+
+}
+
+.image-lightbox img {
+/* La transition s'applique à la fois sur la largeur et la hauteur, avec une durée d'une seconde. */
+
+transition: all 1s ease;
+}
+
+.image-lightbox:hover img {
+/* L'image est grossie de 25% */
+
+transform:scale(none);
+}
+
+.holder.close a:hover {
+    box-shadow: inset 0px -24px 20px -15px rgba(255, 255, 255, 0.01), 
+        inset 0px 0px 10px rgba(0,0,0,0.4), 
+        0px 0px 20px rgba(255,255,255,0.4);
+        transform:scale(1.25);
+}
+
+
+#images-box {
+    /* La largeur totale du bloc conteneur, essentiellement pour le centrage */
+    width: -50px;
+    margin: 0px auto;
+    position: relative;
+    top: -20px;
+}
+ 
+.image-lightbox img {
+    /* Chaque image hérite ses dimensions de son parent */
+    width: inherit;
+    height: inherit;
+    z-index: 3000;
+}
+ 
+.holder {
+    /* Dimension des images, vous pouvez les modifier */
+    width: 250px;
+    height: 166px;
+    /* Flottement à gauche, donc l'ensemble est aligné à droite */
+    float: left;
+    margin: 0 20px 0 0;
+}
+ 
+.image-lightbox {
+    /* Les dimensions héritent de .holder */
+    width: inherit;
+    height: inherit;
+    padding: 10px;
+    /* Ombrage des blocs */
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    background: #fff;
+    border-radius: 5px;
+    /* Position absolue pour permettre de zoomer ultérieurement */
+    position: absolute;
+    top: 0;
+    font-family: Arial, sans-serif;
+    /* Transitions pour rendre l'ensemble visuellement abouti */
+    -webkit-transition: all ease-in 0.5s;
+    -moz-transition: all ease-in 0.5s;
+    -ms-transition: all ease-in 0.5s;
+    -o-transition: all ease-in 0.5s;
+}
+
+.image-lightbox span {
+    display: none;
+}
+ 
+.image-lightbox .expand {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 4000;
+    background: rgba(0,0,0,0); /* Fixe un bogue d'IE */
+    left: 0;
+}
+ 
+.image-lightbox .close {
+    position: absolute;
+    width: 20px; height: 20px;
+    right: 20px; top: 20px;
+}
+ 
+.image-lightbox .close a {
+    height: auto; width: auto;
+    padding: 5px 10px;
+    color: #fff;
+    text-decoration: none;
+    background: #22272c;
+    box-shadow: inset 0px 24px 20px -15px rgba(255, 255, 255, 0.1), 
+        inset 0px 0px 10px rgba(0,0,0,0.4), 
+        0px 0px 30px rgba(255,255,255,0.4);
+    border-radius: 5px;
+    font-weight: bold;
+    float: right;
+}
+ 
+.image-lightbox .close a:hover {
+    box-shadow: inset 0px -24px 20px -15px rgba(255, 255, 255, 0.01), 
+        inset 0px 0px 10px rgba(0,0,0,0.4), 
+        0px 0px 20px rgba(255,255,255,0.4);
+}
+
+
+div#image-1 { left: 0; }
+div#image-2 { left: 290px; }
+div#image-3 { left: 580px; }
+
+div[id^=image]:target {
+    width: 450px;
+    height: 300px;
+    z-index: 5000;
+    top: 50px;
+    left: 200px;
+}
+div[id^=image]:target .close {
+    display: block;
+}
+ 
+div[id^=image]:target .expand {
+    display: none;
+}
+ 
+div#image-1:target, div#image-2:target, div#image-3:target { left: 200px; } 
+
