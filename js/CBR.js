@@ -206,7 +206,7 @@ function getCasesFromDatabase(database) {
 	}
 }
 
-function AddCase_Check(form,name,beschreibung) {
+function AddCase_Check(form,name,beschreibung,hiddenkat) {
 	
 	var supercase = new Case(0,name.value+"", beschreibung.value+"");
 	supercase.initiateSymptoms();
@@ -219,14 +219,19 @@ function AddCase_Check(form,name,beschreibung) {
 	
 	//TODO an dieser Stelle die Textanalyse zur festlegung der Symptome einbauen
 	
-	var p = document.createElement( "input" );
-	form.appendChild(p);
-    p.name = "p";
-    //p.type = "hidden";
-    p.value = Categories;
+	/*var pp = document.createElement( "input" );
+	form.appendChild(pp);
+    pp.name = "pp";
+    p.type = "hidden";
+    pp.value = Categories;*/
+
+	$("#hiddenkat").html("asdasdasd");
+
+	//hiddenkat = "ASDASDADS";
 	
-	//alert("lol das sind die Categorien : "+Categories);
-	//form.submit();
+	//alert("lol das sind die Categorien : " + hiddenkat);
+
+	form.submit();
 	return true;
 }
 

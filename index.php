@@ -206,9 +206,12 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
 			Beschreibung: <input type='text' 
                 name='beschreibung' 
                 id='beschreibung' /><br>	
+			<input type='text' 
+                name='hiddenkat' 
+                id='hiddenkat' />
             <input type="button" 
                    value="addCase" 
-                   onclick="return AddCase_Check(addCase_form,addCase_form.krankheit,addCase_form.beschreibung);" /> 
+                   onclick="return AddCase_Check(addCase_form,addCase_form.krankheit,addCase_form.beschreibung,addCase_form.hiddenkat);" /> 
         </form>
 
         <!-- Scripts -->
