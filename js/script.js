@@ -202,7 +202,7 @@ function checkWordsAroundGivenWord( arrayWhichContainsGivenWord, wordPosition, a
                     return true;
                 }
             }
-            else if ( words_in_sentences_array[i].length >= wordPosition + 2 )
+            else if ( arrayWhichContainsGivenWord.length >= wordPosition + 2 )
             {
                 if ( arrayWhichContainsGivenWord[wordPosition - 2] === arrayWhichContainsWordsToCheck[z]
                     || arrayWhichContainsGivenWord[wordPosition - 1] === arrayWhichContainsWordsToCheck[z]
