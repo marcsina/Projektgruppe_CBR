@@ -92,7 +92,7 @@
 
             Ihre FAZ.NET-Redaktion</p></div> -->
             <span style="min-width:900px;text-align:center">
-                <div class="col-md-offset-1 col-md-2 text-center">
+                <div class="col-md-offset-1 col-md-2 col-md-offset-1">
 
                     <div class="white">
 
@@ -122,15 +122,15 @@
     <div class="Fallbeschreibung_container">
 
         <div class="Fallbeschreibung">
-            <nav class="col-md-offset-1 col-md-10 col-md-offset-1">
+            <nav class="col-md-6">
 
                 <div class="panel panel-info" style="margin: 1em;">
                     <div class="panel-heading">
                         <h3 class="panel-title"><p><h4 class="text-center"><B>Fall </B></h4></p>
                     </div>
-
-                    <h4 class="text-justify"><B>Fallbeispiel 12: Alzheimer-Demenz</B></h4>
+                    <h4 class="text-justify"><B>Fallbeispiel 12: Alzheimer-Demenz</B></h4></br>
                     <p id="input-textarea">
+
                         66-jähriger Patient, geschieden, lebte bislang alleine in eigener Paterrewohnung in unmittelbarer
                         Nachbarschaft zur Familie des Sohnes, in ländlicher Umgebung. Der Patient versorgte sich alleine,
                         kaufte ein, machte sich sein Essen. Es gibt einen Aldi und einen Bäcker in der Nähe. Es gibt eine
@@ -174,58 +174,36 @@
                     </p>
             </nav>
 
-            <section class="col-md-offset-1 col-md-10 col-md-offset-1">
-
+            <section class="col-md-6">
 
                 <div class="panel panel-info" style="margin: 1em;">
                     <div class="panel-heading">
                         <h3 class="panel-title"><p><h4 class="text-center"><B>Bildgebung </B></h4></p>
                     </div>
-                    
-                        <div id="images-box">
-                            <div class="holder">
-                                <div id="image-1" class="image-lightbox">
-                                    <span class="close"><a href="#">X</a></span>
-                                    <img src="Fotos/alzheimer.jpg" alt="earth!">
-                                    <a class="expand" href="#image-1"></a>
-                                </div>
-                            </div>
-                            <div class="holder">
-                                <div id="image-2" class="image-lightbox">
-                                    <span class="close"><a href="#">X</a></span>
-                                    <img src="Fotos/alzheimer1.jpg" alt="earth!">
-                                    <a class="expand" href="#image-2"></a>
-                                </div>
-                            </div>
-                            <div class="holder">
-                                <div id="image-3" class="image-lightbox">
-                                    <span class="close"><a href="#">X</a></span>
-                                    <img src="Fotos/alzheimer2.jpg" alt="earth!">
-                                    <a class="expand" href="#image-3"></a>
-                                </div>
-                            </div>
+                    <div class="zoom">
+                        <div class="image">
+                            <img src="Fotos/alzheimer.jpg" alt="Photo de innere_medizin" title="Cliquez pour agrandir" align="middle" style="width:200px;height:100px;" />
+
                         </div>
-                   
+
+
+
+                    </div>
             </section>
 
 
-            <div class="col-md-offset-1 col-md-10">
+            <div class="col-md-offset-1 col-md-10 col-md-offset-1">
 
                 <div class="panel panel-info" style="margin: 1em;">
                     <div class="panel-heading">
                         <h3 class="panel-title"><p><h4 class="text-center"><B>Eigene Lösung </B></h4></p>
                     </div>
 
-
-
-
-
-
-                    <p class="form-control" id="output-textarea" name="textarea"> Enter text here...</p>
-
-
-
-
+                    <form class="form-horizontal">
+                        
+                            <p id="output-textarea" name="textarea" onclick="this.value=''"> Enter text here...</p>
+                              
+                    </form>
                 </div>
 
             </div>
@@ -243,7 +221,7 @@
 
                 <button type="button" id="02_btn" class="btn btn-primary  btn-xs">submit</button>
                 <!--<button type="button" id="03_btn" class="btn btn-primary  btn-xs">cancel</button>
-                <button type="button" id="04_btn" class="btn btn-primary  btn-xs">anderer_Fall</button> -->
+        <button type="button" id="04_btn" class="btn btn-primary  btn-xs">anderer_Fall</button> -->
                 <button type="button" id="01_btn" class="btn btn-primary  btn-xs">save</button>
 
                 <button type="button" id="05_btn" class="btn btn-primary  btn-xs">anderer_Fall</button>
@@ -251,7 +229,8 @@
 
         </div>
         <!--____________________________________________________________________________________________________-->
-        <!-- Scripts -->
+
+
         <script src="js/snowball-german.js"></script>
         <script src="js/stopWords.js"></script>
         <script src="js/jquery-2.2.2.min.js"></script>
