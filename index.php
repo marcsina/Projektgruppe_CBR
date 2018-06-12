@@ -208,7 +208,7 @@ und auch willens? – sind, ihre Bedürfnisse zu erkennen und sie menschenwürdi
                 id='beschreibung' /><br>	
             <input type="button" 
                    value="addCase" 
-                   onclick="return AddCase_Check(addCase_form);" /> 
+                   onclick="return AddCase_Check(addCase_form,addCase_form.krankheit,addCase_form.beschreibung);" /> 
         </form>
 
         <!-- Scripts -->

@@ -2,8 +2,6 @@
 	constructor() {
 		this.incomingCase;
 		this.Cases = [];
-		//       this.AllReferences = ["Banana", "Orange", "Apple", "Mango"];
-		//       this.AllSymptoms = ["Banana", "Orange", "Apple", "Mango"];
 		this.Results = ["Banana", "Orange", "Apple", "Mango"];
 		this.Similarities = ["Banana", "Orange", "Apple", "Mango"];
 		this.ergebnisse = "";
@@ -144,6 +142,13 @@ class Case {
 		this.Referenzen = [];
 	}
 
+	initiateSymptoms(){
+		var i;
+		for (i = 0; i < 110; i++) {
+			this.Symptoms[i] = 0;
+		}
+	}
+	
 	loadAllArrays() {
 		//Symptons
 		this.name = "coolerOlli";
@@ -201,12 +206,27 @@ function getCasesFromDatabase(database) {
 	}
 }
 
-function AddCase_Check(form) {
-
-	// To-Do:
-	// Check variables and Data provided by the User 
-
-	form.submit();
+function AddCase_Check(form,name,beschreibung) {
+	
+	var supercase = new Case(0,name.value+"", beschreibung.value+"");
+	supercase.initiateSymptoms();
+	var Categories = "";
+	Categories = Categories+""+1+"|"+supercase.Symptoms[0]
+	var i;
+	for (i = 1; i < supercase.Symptoms.length; i++) {
+		Categories = Categories+";"+(i+1)+"|"+supercase.Symptoms[i]
+	}
+	
+	//TODO an dieser Stelle die Textanalyse zur festlegung der Symptome einbauen
+	
+	var p = document.createElement( "input" );
+	form.appendChild(p);
+    p.name = "p";
+    //p.type = "hidden";
+    p.value = Categories;
+	
+	//alert("lol das sind die Categorien : "+Categories);
+	//form.submit();
 	return true;
 }
 
