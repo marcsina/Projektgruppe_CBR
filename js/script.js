@@ -3,10 +3,7 @@ var final_Weight = new Array(); // all found keywords
 var absolute_final_array = new Array(); // all available categories to which the weight of the individual keywords is added up
 var highest_katID = 0;
 
-var weight_strong = 150;
-var weight_medstrong = 100;
-var weight_medium = 75;
-var weight_light = 50;
+var weight_base = 100;
 
 //Classes
 class KeywordsPast
@@ -327,291 +324,285 @@ function createKeywordsArray_Past()
 function doStuffWhenClicked()
 {
 
-        var i = 0;
-        var j = 0;
-        var k = 0;
-        var z = 0;
+    var i = 0;
+    var j = 0;
+    var k = 0;
+    var z = 0;
 
 
 
-        //get Keywords and Past words
-        var keyWords = createKeywords();
-        var pastWords = createKeywordsArray_Past();
+    //get Keywords and Past words
+    var keyWords = createKeywords();
+    var pastWords = createKeywordsArray_Past();
 
-        var negateWords = new Array( "nicht", "kein", "keine", "keinem", "keinen", "keiner", "keines", "nichts", "nie" );
-        var reinforing_words = new Array( "absolut", "äußerst", "ausgesprochen", "besonders", "extrem", "heftig", "höchst", "sehr", "total", "überaus", "ungemein", "ungewöhnlich" );
+    var negateWords = new Array( "nicht", "kein", "keine", "keinem", "keinen", "keiner", "keines", "nichts", "nie" );
+    var reinforing_words = new Array( "absolut", "äußerst", "ausgesprochen", "besonders", "extrem", "heftig", "höchst", "sehr", "total", "überaus", "ungemein", "ungewöhnlich" );
 
 
-        console.time( "test2" );
+    console.time( "test2" );
 
-        var inputText = $( "#input-textarea" ).text();
+    var inputText = $( "#input-textarea" ).text();
 
-        //WHAT TODO WHAT TODO
+    //WHAT TODO WHAT TODO
 
-        //remove unnecessary whitespace and write everything in lower case
-        inputText = inputText.trim();
+    //remove unnecessary whitespace and write everything in lower case
+    inputText = inputText.trim();
 
-        //Delete abbrevations consist of maximum 1 letters, multiple whitespaces, and new lines starting with a space
-        inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[\s]{2,}/gmi, "\s" ).replace( /\n /gmi, "\n" ).replace( /[0-9]/, "\s" );
+    //Delete abbrevations consist of maximum 1 letters, multiple whitespaces, and new lines starting with a space
+    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[\s]{2,}/gmi, "\s" ).replace( /\n /gmi, "\n" ).replace( /[0-9]/, "\s" );
 
-        //Remove stopwords
-        //inputText = inputText.removeStopWords();
+    //Remove stopwords
+    //inputText = inputText.removeStopWords();
 
-        //Split text in sentences
-        var sentence_array = inputText.replace( /([.!?;])\s*(?=[a-zA-Z])/gm, "$1|" ).split( "|" );
+    //Split text in sentences
+    var sentence_array = inputText.replace( /([.!?;])\s*(?=[a-zA-Z])/gm, "$1|" ).split( "|" );
 
-        //array for sentences
-        var words_in_sentences_array = new Array( sentence_array.length );
+    //array for sentences
+    var words_in_sentences_array = new Array( sentence_array.length );
 
-        //Split sentence at whitespace to get words
-        for ( i = 0; i < sentence_array.length; i++ )
+    //Split sentence at whitespace to get words
+    for ( i = 0; i < sentence_array.length; i++ )
+    {
+        words_in_sentences_array[i] = sentence_array[i].split( /\s/ );
+    }
+
+
+    //Make everything Lowercase and delete signs
+    for ( i = 0; i < words_in_sentences_array.length; i++ )
+    {
+        for ( j = 0; j < words_in_sentences_array[i].length; j++ )
         {
-            words_in_sentences_array[i] = sentence_array[i].split( /\s/ );
+
+            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].toLowerCase();
+            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
         }
 
+    }
 
-        //Make everything Lowercase and delete signs
-        for ( i = 0; i < words_in_sentences_array.length; i++ )
+    //All sentences
+    for ( i = 0; i < words_in_sentences_array.length; i++ )
+    {
+        //All words in the sentence
+        for ( j = 0; j < words_in_sentences_array[i].length; j++ )
         {
-            for ( j = 0; j < words_in_sentences_array[i].length; j++ )
+            //Check all Keywords
+            for ( k = 0; k < keyWords.length; k++ )
             {
-
-                words_in_sentences_array[i][j] = words_in_sentences_array[i][j].toLowerCase();
-                words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
-            }
-
-        }
-
-        //All sentences
-        for ( i = 0; i < words_in_sentences_array.length; i++ )
-        {
-            //All words in the sentence
-            for ( j = 0; j < words_in_sentences_array[i].length; j++ )
-            {
-                //Check all Keywords
-                for ( k = 0; k < keyWords.length; k++ )
+                //If the Word is one of the Keywords
+                if ( keyWords[k].word === stemm2( words_in_sentences_array[i][j] ) ) 
                 {
-                    //If the Word is one of the Keywords
-                    if ( keyWords[k].word === stemm2( words_in_sentences_array[i][j] ) ) 
+                    //Check Past Words nearby --> Past
+                    if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, pastWords ) )
                     {
-                        //Check Past Words nearby --> Past
-                        if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, pastWords ) )
+                        // Check Negate words nearby
+                        if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
                         {
-                            // Check Negate words nearby
-                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
+                            // Check Reinforcing words nearby
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
                             {
-                                // Check Reinforcing words nearby
-                                if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
-                                {
-                                    //Todo Weight past negate reinforced
-                                    final_Weight.push( new Final_Weight( keyWords[k].katID, weight_strong * 2, keyWords[k].katName ) );
-                                }
-                                else
-                                {
-                                    //Todo Weight past negate NOT reinforced
-                                    final_Weight.push( new Final_Weight( keyWords[k].katID, weight_strong, keyWords[k].katName ) );
-                                }
-
+                                //Todo Weight past negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_base * 2 * 2, keyWords[k].katName ) );
                             }
                             else
                             {
-                                // Check Reinforcing words nearby
-                                if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
-                                {
-                                    //Todo Weight past NOT negate reinforced
-                                    final_Weight.push( new Final_Weight( keyWords[k].katID, weight_medstrong * 2, keyWords[k].katName ) );
-                                }
-                                else
-                                {
-                                    //Todo Weight past NOT negate NOT reinforced
-                                    final_Weight.push( new Final_Weight( keyWords[k].katID, weight_medstrong, keyWords[k].katName ) );
-                                }
-
+                                //Todo Weight past negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_base * 2, keyWords[k].katName ) );
                             }
+
                         }
-                        //No Past Word detected --> Present
                         else
                         {
-                            // Check Negate words nearby
-                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
+                            // Check Reinforcing words nearby
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
                             {
-                                // Check Reinforcing words nearby
-                                if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
-                                {
-                                    //Todo Weight present negate reinforced
-                                    final_Weight.push( new Final_Weight( keyWords[k].katID, weight_medium * 2, keyWords[k].katName ) );
-                                }
-                                else
-                                {
-                                    //Todo Weight present negate NOT reinforced
-                                    final_Weight.push( new Final_Weight( keyWords[k].katID, weight_medium, keyWords[k].katName ) );
-                                }
+                                //Todo Weight past NOT negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * 2, keyWords[k].katName ) );
                             }
                             else
                             {
-                                if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
-                                {
-                                    //Todo Weight present NOT negate reinforced
-                                    final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_light * 2, keyWords[k].katName ) );
-                                }
-                                else
-                                {
-                                    //Todo Weight present NOT negate NOT reinforced
-                                    final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_light, keyWords[k].katName ) );
-                                }
-
+                                //Todo Weight past NOT negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base, keyWords[k].katName ) );
                             }
+
                         }
                     }
-                    words_in_sentences_array[i][j];
+                    //No Past Word detected --> Present
+                    else
+                    {
+                        // Check Negate words nearby
+                        if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
+                        {
+                            // Check Reinforcing words nearby
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight present negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * 2 * 2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight present negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * 2, keyWords[k].katName ) );
+                            }
+                        }
+                        else
+                        {
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight present NOT negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_base * 2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight present NOT negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_base, keyWords[k].katName ) );
+                            }
+
+                        }
+                    }
                 }
+                words_in_sentences_array[i][j];
             }
-
-
         }
 
 
-        absolute_final_array.length = highest_katID;
-        //Check all possible categories if Keywords were found in text
-        for (i = 0; i < absolute_final_array.length; i++)
+    }
+
+
+    absolute_final_array.length = highest_katID;
+    //Check all possible categories if Keywords were found in text
+    for ( i = 0; i < absolute_final_array.length; i++ )
+    {
+        //create blank class
+        absolute_final_array[i] = new Final_Weight( i, 0.0, "" );
+
+        //Check all found Keywords
+        for ( j = 0; j < final_Weight.length; j++ )
         {
-            //create blank class
-            absolute_final_array[i] = new Final_Weight( i, 0.0, "" );
-
-            //Check all found Keywords
-            for (j = 0; j < final_Weight.length; j++)
+            //if an katID exisist with a weight, add it up
+            //put katName too
+            if ( i === parseInt( final_Weight[j].katID ) )
             {
-                //if an katID exisist with a weight, add it up
-                //put katName too
-                if ( i === parseInt( final_Weight[j].katID ) )
-                {
-                    absolute_final_array[i].katName = final_Weight[j].katName;
-                    absolute_final_array[i].count++;
-                }
-            }
-            for (k = 0; k < final_Weight.length; k++)
-            {
-                if (i === parseInt(final_Weight[k].katID))
-                {
-                    absolute_final_array[i].weight += (1 / absolute_final_array[i].count) * final_Weight[k].weight;
-                }
-                
-            }
-            //normalize it
-
-            console.log("Weight:   " + absolute_final_array[i].weight + "  Weight / 10 :   " + absolute_final_array[i].weight / 10); // Delete later--------------------------------------
-
-
-            absolute_final_array[i].weight = absolute_final_array[i].weight / 10;
-            if ( absolute_final_array[i].weight > 1 )
-            {
-                absolute_final_array[i].weight = 1;
-            }
-            else if ( absolute_final_array[i].weight < 0 )
-            {
-                absolute_final_array[i].weight = 0;
+                absolute_final_array[i].katName = final_Weight[j].katName;
+                absolute_final_array[i].weight += final_Weight[j].weight;
+                absolute_final_array[i].count++;
             }
         }
+    }
 
-        //SHOW STUFF
-        var output = "";
-        for ( i = 0; i < final_Weight.length; i++ )
+    for ( i = 0; i < absolute_final_array.length; i++ )
+    {
+        //MAGIC FORMULA
+        absolute_final_array[i].weight = absolute_final_array[i].weight / ( absolute_final_array[i].count * 2 * 2 * weight_base );
+
+        //Cut the number
+        if ( absolute_final_array[i].weight > 1 )
         {
-            output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_Weight[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_Weight[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_Weight[i].katName;
-
+            absolute_final_array[i].weight = 1;
         }
-        output = output + "<br><br><br><br><br>";
-        for ( i = 0; i < absolute_final_array.length; i++ )
+        else if ( absolute_final_array[i].weight < 0 )
         {
-            if ( absolute_final_array[i].katName != "" )
-            {
-                output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + absolute_final_array[i].weight + "\u00A0 \u00A0 \u00A0   KategorieName:   " + absolute_final_array[i].katName;
-            }
-
+            absolute_final_array[i].weight = 0;
         }
-        $( "#output-textarea" ).html( output );
+    }
+    //SHOW STUFF
+    var output = "";
+    for ( i = 0; i < final_Weight.length; i++ )
+    {
+        output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_Weight[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_Weight[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_Weight[i].katName;
 
-
-        //-------------------------Show detected Words in HTML------------------------------------------
-        //split the Text
-        var everyWordArray = $( "#input-textarea" ).text().split( /\s/ );
-
-        var showEveryWord = "<b><font color='blue'>Keywords</font> / <font color='red'>Negierung</font> / <font color='green'>Vergangenheit</font></b> <br> <br>";
-        var checked = 0;
-
-        //Check every Word in the Text
-        for ( i = 0; i < everyWordArray.length; i++ )
+    }
+    output = output + "<br><br><br><br><br>";
+    for ( i = 0; i < absolute_final_array.length; i++ )
+    {
+        if ( absolute_final_array[i].katName != "" )
         {
-            everyWordArray[i] = everyWordArray[i].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
+            output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + absolute_final_array[i].weight + "\u00A0 \u00A0 \u00A0   KategorieName:   " + absolute_final_array[i].katName;
+        }
 
-            //Stemm the word 
-            //variable so that it wont check twice and wont save the word twice
-            checked = 0;
+    }
+    $( "#output-textarea" ).html( output );
 
-            //check every KeyWord
-            for ( j = 0; j < keyWords.length; j++ )
+
+    //-------------------------Show detected Words in HTML------------------------------------------
+    //split the Text
+    var everyWordArray = $( "#input-textarea" ).text().split( /\s/ );
+
+    var showEveryWord = "<b><font color='blue'>Keywords</font> / <font color='red'>Negierung</font> / <font color='green'>Vergangenheit</font></b> <br> <br>";
+    var checked = 0;
+
+    //Check every Word in the Text
+    for ( i = 0; i < everyWordArray.length; i++ )
+    {
+        everyWordArray[i] = everyWordArray[i].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
+
+        //Stemm the word 
+        //variable so that it wont check twice and wont save the word twice
+        checked = 0;
+
+        //check every KeyWord
+        for ( j = 0; j < keyWords.length; j++ )
+        {
+            //if word = keyword highlight it
+            if ( stemm2( everyWordArray[i].toLowerCase() ) === keyWords[j].word && checked === 0 )
             {
-                //if word = keyword highlight it
-                if ( stemm2( everyWordArray[i].toLowerCase() ) === keyWords[j].word && checked === 0 )
-                {
-                    //make it bold and blue
-                    showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
+                //make it bold and blue
+                showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
 
-                    checked = 1;
-                }
-
-            }
-
-            //check every PastWord
-            for ( z = 0; z < pastWords.length; z++ )
-            {
-                //if word = keyword highlight it
-                if ( everyWordArray[i].toLowerCase() === pastWords[z] && checked === 0 )
-                {
-                    //make it bold and blue
-                    showEveryWord = showEveryWord + " " + "<b><font color='green'>" + everyWordArray[i] + "</font></b>";
-
-                    checked = 1;
-                }
-
-            }
-
-            //check every Negate Word
-            for ( k = 0; k < negateWords.length; k++ )
-            {
-                //if word = keyword highlight it
-                if ( everyWordArray[i].toLowerCase() === negateWords[k] && checked === 0 )
-                {
-                    //make it bold and blue
-                    showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
-
-                    checked = 1;
-                }
-
-            }
-
-            //if the word was not found in the array make it normal
-            if ( checked === 0 )
-            {
-                //make it normal
-                showEveryWord = showEveryWord + " " + everyWordArray[i];
+                checked = 1;
             }
 
         }
 
-        $( "#input-textarea" ).html( showEveryWord );
-        //----------------------------------------------------------------------------------
+        //check every PastWord
+        for ( z = 0; z < pastWords.length; z++ )
+        {
+            //if word = keyword highlight it
+            if ( everyWordArray[i].toLowerCase() === pastWords[z] && checked === 0 )
+            {
+                //make it bold and blue
+                showEveryWord = showEveryWord + " " + "<b><font color='green'>" + everyWordArray[i] + "</font></b>";
 
-        console.timeEnd( 'test2' );
+                checked = 1;
+            }
+
+        }
+
+        //check every Negate Word
+        for ( k = 0; k < negateWords.length; k++ )
+        {
+            //if word = keyword highlight it
+            if ( everyWordArray[i].toLowerCase() === negateWords[k] && checked === 0 )
+            {
+                //make it bold and blue
+                showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
+
+                checked = 1;
+            }
+
+        }
+
+        //if the word was not found in the array make it normal
+        if ( checked === 0 )
+        {
+            //make it normal
+            showEveryWord = showEveryWord + " " + everyWordArray[i];
+        }
+
+    }
+
+    $( "#input-textarea" ).html( showEveryWord );
+    //----------------------------------------------------------------------------------
+
+    console.timeEnd( 'test2' );
 }
 
 
-$("#02_btn").click(function (event)
+$( "#02_btn" ).click( function ( event )
 {
     doStuffWhenClicked();
 }
 );
-$("#berechnen2").click(function (event)
+$( "#berechnen2" ).click( function ( event )
 {
     doStuffWhenClicked();
 }
