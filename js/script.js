@@ -1,6 +1,6 @@
 // Global Array for Textanalysis
-var final_Weight = new Array();
-var absolute_final_array = new Array();
+var final_Weight = new Array(); // all found keywords
+var absolute_final_array = new Array(); // all available categories to which the weight of the individual keywords is added up
 var highest_katID = 0;
 
 var weight_strong = 150;
@@ -28,7 +28,7 @@ class Weighted_Words
     }
 }
 
-//Finale gewichtung für CBR
+//Final weight for CBR
 class Final_Weight
 {
     constructor( katID, weight, katName )
@@ -326,7 +326,7 @@ function createKeywordsArray_Past()
 //function to call when button is clicked
 function doStuffWhenClicked()
 {
-    {
+
         var i = 0;
         var j = 0;
         var k = 0;
@@ -595,8 +595,16 @@ function doStuffWhenClicked()
         //----------------------------------------------------------------------------------
 
         console.timeEnd( 'test2' );
-    }
 }
 
-$( "#02_btn" ).click( doStuffWhenClicked() );
-$( "#berechnen2" ).click( doStuffWhenClicked() );
+
+$("#02_btn").click(function (event)
+{
+    doStuffWhenClicked();
+}
+);
+$("#berechnen2").click(function (event)
+{
+    doStuffWhenClicked();
+}
+);
