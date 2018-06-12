@@ -13,7 +13,7 @@ function getMain($connection)
 
 function getKeywordsCBR($connection)
 {
-    $sqlStmt = "SELECT CBR_Keyword_DE.id, CBR_Keyword_DE.name, CBR_ICF_Kategorie.id AS katid ,CBR_ICF_Kategorie.DE FROM CBR_Keyword_DE, CBR_ICF_Kategorie WHERE CBR_Keyword_DE.ICFkat = CBR_ICF_Kategorie.id ORDER BY CBR_ICF_Kategorie.id;";
+    $sqlStmt = "SELECT Word FROM Cases_Past;";
 
         $result =  mysqli_query($connection,$sqlStmt);
         $data = array();
@@ -22,12 +22,11 @@ function getKeywordsCBR($connection)
             while ($row = $result->fetch_assoc())
             {
                 //$id = $row["id"];
-                $name = $row["name"];
-				$katid = $row["katid"];
-				$DE = $row["DE"];
+                $word = $row["Word"];
 
 
-                array_push($data,array("ID"=> $id,"name"=>$name,"katid"=>$katid,"DE"=>$DE));
+
+                array_push($data,array("Word"=> $word));
 		//array_push($data,array("name"=>$name,"katid"=>$katid));
             }
 
@@ -40,11 +39,10 @@ function getKeywordsCBR($connection)
         foreach ($data as $d)
         {
             //$id = $d["ID"];
-            $name = $d["name"];
-			$katid = $d["katid"];
-			$DE = $d["DE"];
+            $word = $d["Word"];
 
-            echo utf8_decode("$name,$katid,$DE");
+
+            echo utf8_decode("$word");
             echo ";";
         }
 

@@ -332,3 +332,6 @@ ASALocalRun/
 /php/include/DeleteCase.php
 /php/include/EditCase.php
 /php/include/EditCaseData.php
+/php/include/updateKeywords.php
+/php/include/getKeywordsForUpdate.php
+/js/stemmKeywords.js
