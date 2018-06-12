@@ -508,19 +508,19 @@ function doStuffWhenClicked()
     var output = "";
     for ( i = 0; i < final_Weight.length; i++ )
     {
-        output = output +"\n \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_Weight[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_Weight[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_Weight[i].katName;
+        output = output +"<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_Weight[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_Weight[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_Weight[i].katName;
 
     }
-    output = output + "\n\n\n\n\n";
+    output = output + "<br><br><br><br><br>";
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
         if ( absolute_final_array[i].katName != "" )
         {
-            output = output + "\n \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + absolute_final_array[i].weight + "\u00A0 \u00A0 \u00A0   KategorieName:   " + absolute_final_array[i].katName;
+            output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + absolute_final_array[i].weight + "\u00A0 \u00A0 \u00A0   KategorieName:   " + absolute_final_array[i].katName;
         }
 
     }
-    $( "#output-textarea" ).val( output );
+    $( "#output-textarea" ).html( output );
 
 
     //-------------------------Show detected Words in HTML------------------------------------------
