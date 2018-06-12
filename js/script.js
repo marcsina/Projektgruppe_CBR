@@ -3,7 +3,7 @@ var final_Weight = new Array(); // all found keywords
 var absolute_final_array = new Array(); // all available categories to which the weight of the individual keywords is added up
 var highest_katID = 0;
 
-var weight_base = 100;
+var weight_base = 1;
 
 //Classes
 class KeywordsPast
