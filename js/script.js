@@ -352,7 +352,7 @@ function doStuffWhenClicked()
     inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[\s]{2,}/gmi, "\s" ).replace( /\n /gmi, "\n" ).replace( /[0-9]/, "\s" );
 
     //Remove stopwords
-    //inputText = inputText.removeStopWords();
+    inputText = inputText.removeStopWords();
 
     //Split text in sentences
     var sentence_array = inputText.replace( /([.!?;])\s*(?=[a-zA-Z])/gm, "$1|" ).split( "|" );
@@ -374,7 +374,7 @@ function doStuffWhenClicked()
         {
 
             words_in_sentences_array[i][j] = words_in_sentences_array[i][j].toLowerCase();
-            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
+            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9\-]/gm, "" ).replace( /\-/gm, " " );
         }
 
     }
