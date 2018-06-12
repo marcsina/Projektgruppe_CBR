@@ -1,0 +1,275 @@
+ <!doctype html>
+<html lang="en">
+
+    <!--Muss später am server eine php datei sein damit das geht -->
+    <?php include('conn.php'); ?>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <!-- user-scalable für mobile devices -->
+        <meta name="description" content="...">
+        <meta name="author" content="...">
+        <title>MedAusbild</title>
+
+
+
+
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+        <link href="css/style2.css" rel="stylesheet">
+
+    </head>
+
+    <body style="background-color:#E6E6FA" >
+        <!-- _______________________________________NavBar_____________________________________________________-->
+
+        <nav class="navbar-default navbar-fixed-top" role="navigation">
+            <!-- role für browser zur                                                                            erkennung-->
+            <div class="container">
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                         <span class="sr-only">Toggle navigation</span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                        <!-- erzeugen die 3 striche-->
+                    </button>
+                     <a class="navbar-brand" href="#home">MedAusbild</a> 
+                    <!-- Titel der Navbar-->
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="menuItem"><a href="#...">Diagnose</a>
+                        </li>
+                        <li class="menuItem"><a href="#...">Quiz</a>
+                        </li>
+                        <li class="menuItem"><a href="#...">Checker</a>
+                        </li>
+
+                        <li class="menuItem"><a href="#...">Classroom</a>
+                        </li>
+                        <li class="menuItem"><a href="#...">Forum</a>
+                        </li>
+                        <li class="menuItem"><a href="#contact">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--container-->
+        </nav>
+        <!-- ________________________________________________________________________________________________________ -->
+
+
+        <!-- _________________________Content________________________________-->
+        <br>
+        <br>
+
+        <!-- every content should be nested in a way like the example below  -->
+
+        <!-- nested columns -->
+        <div class="row first-after-navbar">
+            <form>
+                <!-- first nested column -->
+                <!--<div class="col-md-12">
+                    <p id="input-textarea">Liebe Leserin, lieber Leser,
+
+
+jeden Tag versorgen wir Sie rund um die Uhr mit Nachrichten, Analysen, Kommentaren und Reportagen. Das kostet Geld. Um Ihnen diesen Service bieten zu können, sind wir auf Werbeeinnahmen angewiesen. Wir möchten Sie daher bitten, Ihren Adblocker für FAZ.NET zu deaktivieren.
+
+
+Wollen Sie FAZ.NET weiterhin mit einem aktiven Adblocker nutzen, haben wir ein besonderes Angebot für Sie. Sie finden es hier.
+
+Vielen Dank,
+
+
+Ihre FAZ.NET-Redaktion</p></div> -->
+<span style="min-width:900px;text-align:center">
+<div class="col-md-offset-1 col-md-2 col-md-offset-1">
+
+<div class="white">
+	
+    <button type="button" class="btn btn-link"> <div class="bloc"><img src="Fotos/Verhalten.jpg" class="img-circle" alt="Verhalten"  style="width:70px;height:70px;" /><br><B>Verhalten</B></br></div></button></div></div>
+    <div class="col-md-offset-1 col-md-2 col-md-offset-1">
+
+
+<div class="white">
+    <button type="button" class="btn btn-link"><div class="bloc"><img src="Fotos/photo_analyse.jpg" class="img-circle" alt="photo_analyse" style="width:70px;height:70px;"/><br><B>Photo Analyse</B></br></div></button></div></div>
+    
+    <div class="col-md-offset-1 col-md-2 col-md-offset-1">
+<div class="white">
+    <button type="button" class="btn btn-link"><div class="bloc"><img src="Fotos/graph.jpg" class="img-circle" alt="graph"  style="width:70px;height:70px;" /><br><B>Graph</B></br></div></button>
+
+
+</div></div></span>
+</div></span></br>
+<!--
+<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
+    <div class="well">
+<button type="button" class="btn btn-link"><span>Fallbeispiel 1 </span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 2 </span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 3 </span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 4 </span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 5 </span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 6 </span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 8 </span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 9 </span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 10 </span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 11</span></button>
+<button type="button" class="btn btn-link"><span>Fallbeispiel 12 </span></button>
+    </div>
+</div> 
+-->
+
+
+
+<!--
+<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li class="active"> <a href="#">Accueil</a> </li>
+      <li> <a href="#">Liens</a> </li>
+      <li> <a href="#">Témoignages</a> </li>
+      <li> <a href="#">Références</a> </li>
+    </ul>
+    <form class="navbar-form navbar-right inline-form">
+      <div class="form-group">
+        <input type="search" class="input-sm form-control" placeholder="search">
+        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Search</button>
+      </div>
+    </form>
+  </div>
+</nav>
+                </div> -->
+
+                <!-- second nested column -->
+                <div class="col-md-12">
+                    <!-- column content -->
+                    <button type="button" id="berechnen">TestButton</button>
+                </div>
+
+                <!-- third nested column -->
+                <div class="col-md-12">
+                    <label> <output id="output-textarea"></output></label>
+                </div>
+            </form>
+        </div>
+
+        <!--                     -->
+
+<div class="Fallbeschreibung_container">
+
+      <div class="Fallbeschreibung">
+        <nav class="col-md-offset-1 col-md-10 col-md-offset-1">
+          
+          	<div class="panel panel-info" style="margin: 1em;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><p ><h4 class="text-center"><B>Fall </B></h4></p>
+                    </div>
+           <p > <h4 class="text-justify"><B>Fallbeispiel 12: Alzheimer-Demenz</B></h4></br>
+            66-jähriger Patient, geschieden, lebte bislang alleine in eigener Paterrewohnung in unmittelbarer
+Nachbarschaft zur Familie des Sohnes, in ländlicher Umgebung. Der Patient versorgte sich alleine,
+kaufte ein, machte sich sein Essen. Es gibt einen Aldi und einen Bäcker in der Nähe. Es gibt eine
+Arztpraxis mit drei Ärztinnen/Ärzten, die den ländlichen Bereich versorgen. Für größere Erledigungen
+muss er in den nächst größeren Ort, z. B. mit dem Auto oder mit den öffentlichen Verkehrsmitteln,
+fahren.</p>
+        </nav>
+
+        <section class="col-md-offset-1 col-md-10 col-md-offset-1>
+
+
+    <div class="panel panel-info" style="margin: 1em;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><p ><h4 class="text-center"><B>Bildgebung </B></h4></p>
+                    </div>
+                    <head>
+<div id="images-box" >
+    <div class="holder">
+        <div id="image-1" class="image-lightbox">
+            <span class="close"><a href="#">X</a></span>
+            <img src="Fotos/alzheimer.jpg" alt="earth!">
+            <a class="expand" href="#image-1"></a>
+        </div>
+    </div>
+    <div class="holder">
+        <div id="image-2" class="image-lightbox">
+            <span class="close"><a href="#">X</a></span>
+            <img src="Fotos/alzheimer1.jpg" alt="earth!">
+            <a class="expand" href="#image-2"></a>
+        </div>
+    </div>
+    <div class="holder">
+        <div id="image-3" class="image-lightbox">
+            <span class="close"><a href="#">X</a></span>
+            <img src="Fotos/alzheimer2.jpg" alt="earth!" >
+            <a class="expand" href="#image-3"></a>
+        </div>
+    </div>
+</div>
+</head>
+</section>
+        
+        
+        <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+
+                <div class="panel panel-info" style="margin: 1em;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><p ><h4 class="text-center"><B>Eigene Lösung </B></h4></p>
+                    </div>
+                    
+                  
+<fieldset>
+
+
+
+<!-- Textarea -->
+<div class="form-group">
+  
+  <div class="col-md-12">                     
+    <textarea class="form-control" id="textarea" name="textarea" onclick="this.value=''"> Enter text here...</textarea>
+  </div>
+</div>
+
+</fieldset>
+
+                </div>
+
+      </div>
+
+
+       
+
+
+
+                <!-- second nested column -->
+                <div class="col-md-12" align="right" >
+                    <!-- column content -->
+                    
+                    <button type="button" id="02_btn" class="btn btn-primary  btn-xs">submit</button>
+                    <!--<button type="button" id="03_btn" class="btn btn-primary  btn-xs">cancel</button>
+                    <button type="button" id="04_btn" class="btn btn-primary  btn-xs">anderer_Fall</button> -->
+					<button type="button" id="01_btn" class="btn btn-primary  btn-xs">save</button>
+                
+                    <button type="button" id="05_btn" class="btn btn-primary  btn-xs" >anderer_Fall</button>
+                </div>
+
+    </div>
+        <!--____________________________________________________________________________________________________-->
+
+
+        <!-- Scripts -->
+        <script src="js/german-porter-stemmer.js"></script>
+        <script src="js/stopWords.js"></script>
+        <script src="js/jquery-2.2.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/code.js"></script>
+
+    </body>
+
+</html>
