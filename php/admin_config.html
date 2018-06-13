@@ -97,45 +97,87 @@ if (login_check($mysqli) == true) {
         <h2>Adminfunktionen</h2>
 
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#">Neuen Case einpflegen</a></li>
-            <li><a href="#">AdminFunktion 2</a></li>
+            <li class="active"><a href="#addNewCase">Neuen Case einpflegen</a></li>
+            <li><a href="#addNewCategory">Neue Kategorie hinzufügen</a></li>
             <li><a href="#">AdminFunktion 3</a></li>
         </ul>
-        <div class="admin_main">
-            <!--Texteingabe für Filterung-->
-            <div class="col-md-6 col-sm-12">
-                <h4>Text zur automatischen Erfassung eingeben</h4>
-                <textarea id="text_admin"></textarea>
-                <form>
-                    <button class="btn btn-primary" type="submit" id="btn_search_Text">Text nach Keywords durchsuchen</button>
-                </form>
-            </div>
+        <div class="tab-content">
 
-            <!--Liste der Category-->
-            <div class="col-md-6 col-sm-12 auto">
-                <h4>Kategorien verfeinern / gewichten</h4>
-                <form class="myForm">
-                    <div class="form-group">
-                        <label for="add_new_Category">Name der Kategorie</label>
-                        <input type="text" class="form-control" id="add_new_Category" placeholder="Kategoriename">
+
+            <div class="tab-pane fade in active" id="addNewCase">
+                <div class="admin_main">
+                    <h3>Neuen Case hinzufügen</h3>
+                    <!--Texteingabe für Filterung-->
+                    <div class="col-md-6 col-sm-12">
+                        <h4>Text zur automatischen Erfassung eingeben</h4>
+                        <textarea id="text_admin"></textarea>
+                        <form>
+                            <button class="btn btn-primary" type="submit" id="btn_search_Text">Text nach Keywords durchsuchen</button>
+                        </form>
                     </div>
-                    <input type="range" min="0" max="100" value="50" class="slider" id="add_new_Category_Slider" onchange="updateSlider(this.value,'add_new_Category_Slider_Value')">
-                    <p id="add_new_Category_Slider_Value">Gewicht: 50%</p>
-                    <button class="btn btn-primary" type="submit" id="btn_add_new_Category">Hinzufügen</button>
-                </form>
-                <ul id="list_of_Category_admin"></ul>
-            </div>
-        </div>
 
-        <div class="Adding_Case col-md-12 col-sm-12">
-            <hr>
-            <form class="myForm">
-                <div class="form-group">
-                    <label for="add_New_Case_Name">Name des Cases</label>
-                    <input type="text" class="form-control" id="add_New_Case_Name" placeholder="Casename">
+                    <!--Liste der Category-->
+                    <div class="col-md-6 col-sm-12 auto">
+                        <h4>Kategorien verfeinern / gewichten</h4>
+                        <form class="myForm">
+                            <div class="form-group">
+                                <label for="add_new_Category">Name der Kategorie</label>
+                                <input type="text" class="form-control" id="add_new_Category" placeholder="Kategoriename">
+                            </div>
+                            <input type="range" min="0" max="100" value="50" class="slider" id="add_new_Category_Slider" onchange="updateSlider(this.value,'add_new_Category_Slider_Value')">
+                            <p id="add_new_Category_Slider_Value">Gewicht: 50%</p>
+                            <button class="btn btn-primary" type="submit" id="btn_add_new_Category">Hinzufügen</button>
+                        </form>
+                        <ul id="list_of_Category_admin"></ul>
+                    </div>
                 </div>
-                <button class="btn btn-primary" type="submit" id="btn_add_Case_to_DataBase">Neuen Case eintragen</button>
-            </form>
+
+                <div class="Adding_Case col-md-12 col-sm-12">
+                    <hr>
+                    <form class="myForm">
+                        <div class="form-group">
+                            <label for="add_New_Case_Name">Name des Cases</label>
+                            <input type="text" class="form-control" id="add_New_Case_Name" placeholder="Casename">
+                        </div>
+                        <button class="btn btn-primary" type="submit" id="btn_add_Case_to_DataBase">Neuen Case eintragen</button>
+                    </form>
+                </div>
+            </div>
+
+
+
+            <div class="tab-pane fade" id="addNewCategory">
+                <div class="admin_main">
+                    <h3>Neue Kategorie hinzufügen</h3>
+                    <!--Kategorienameneingeben-->
+                    <div class="col-md-6 col-sm-12">
+                        <h4>Kategorienamen eingeben</h4>
+                        <form class="myForm">
+                            <label for="add_new_Category_Category_Name ">Name der Kategorie</label>
+                            <input type="text" class="form-control" id="add_new_Category_Category_Name" placeholder="Kategoriename">
+                        </form>
+                    </div>
+
+                    <!--Liste der Category-->
+                    <div class="col-md-6 col-sm-12 auto">
+                        <h4>Keyword hinzufügen</h4>
+                        <form class="myForm">
+                            <div class="form-group">
+                                <label for="add_new_Keyword">Keyword für Kategorie</label>
+                                <input type="text" class="form-control" id="add_new_Keyword" placeholder="Kategoriename">
+                            </div>
+                            <button class="btn btn-primary" type="submit" id="btn_add_new_Keyword">Keyword Hinzufügen</button>
+                        </form>
+                        <ul id="list_of_Keywords_admin"></ul>
+                    </div>
+                </div>
+                <div class="Adding_Category col-md-12 col-sm-12">
+                    <hr>
+                    <form class="myForm">
+                        <button class="btn btn-primary" type="submit" id="btn_add_Category_to_DataBase">Neue Kategorie eintragen</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

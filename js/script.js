@@ -6,14 +6,6 @@ var highest_katID = 0;
 var weight_base = 1;
 
 //Classes
-class KeywordsPast
-{
-    constructor( word )
-    {
-        this.word = word;
-    }
-}
-
 class Weighted_Words
 {
     constructor( word, weight, katID, katName )

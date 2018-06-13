@@ -4,21 +4,31 @@
     background: #615A7F;
     margin-top: 25px;
     border-color: #615A7F;
-    border-width: 2px;
+    border-width: 5px;
     border-style: solid;
+    border-bottom: none;
 }
+    .nav-tabs > li  {
+        margin: 0px 5px 0px 5px;
+    }
 
     .nav-tabs > li:nth-child(odd) {
-        background: white;
+        background: #c7c3d5;
+        border-radius: 3px;
     }
 
     .nav-tabs > li:nth-child(even) {
         background: #615A7F;
+        border-radius: 3px;
     }
 
         .nav-tabs > li:nth-child(even) > a {
-            color: white;
+            color: white
         }
+
+    .nav-tabs > li.active > a {
+        color: black;
+    }
 
 .admin_main {
     margin-top: 2.5em;
@@ -62,14 +72,14 @@ body {
 /*make list scrollable*/
 
 .auto {
-    height: 500px;
+    max-height: 500px;
     overflow: auto;
     max-width: 100%;
 }
 
 /*Punkte als Aufzählung*/
 
-#list_of_Keywords_admin {
+.list_admin {
     min-height: 200px;
     list-style: disc inside;
     padding: 15px 15px 15px;
