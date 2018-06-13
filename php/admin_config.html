@@ -1,10 +1,10 @@
-<!--<?php
+﻿<!--<?php
 include_once 'php/include/conn.php';
 include_once 'php/include/functions_login.php';
 
- 
+
 sec_session_start();
- 
+
 if (login_check($mysqli) == true) {
     $logged = 'in';
 } else {
@@ -46,20 +46,20 @@ if (login_check($mysqli) == true) {
 
     <!-- include Navbar -->
     <!--<?php
-			include ("php/include/navbar.php");
-		?>-->
+            include ("php/include/navbar.php");
+        ?>-->
 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <!-- role für browser zur erkennung-->
         <div class="container">
             <div class="navbar-header ">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<!-- erzeugen die 3 striche-->
-			</button>
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <!-- erzeugen die 3 striche-->
+                </button>
                 <a class="navbar-brand" href="index.php">MedAusbild</a>
                 <!-- Titel der Navbar-->
             </div>
@@ -111,54 +111,19 @@ if (login_check($mysqli) == true) {
                 </form>
             </div>
 
-            <!--Liste der Keywords-->
+            <!--Liste der Category-->
             <div class="col-md-6 col-sm-12 auto">
-                <h4>Schlüsselwörtern verfeinern / gewichten</h4>
+                <h4>Kategorien verfeinern / gewichten</h4>
                 <form class="myForm">
                     <div class="form-group">
-                        <label for="add_new_Keyword">Name des Schlüsselwortes</label>
-                        <input type="text" class="form-control" id="add_new_Keyword" placeholder="Keywordname">
+                        <label for="add_new_Category">Name der Kategorie</label>
+                        <input type="text" class="form-control" id="add_new_Category" placeholder="Kategoriename">
                     </div>
-                    <input type="range" min="0" max="100" value="50" class="slider" id="add_new_Keyword_Slider">
-                    <p id="add_new_Keyword_Slider_Value">50%</p>
-                    <button class="btn btn-primary" type="submit" id="btn_add_new_Keyword">Hinzufügen</button>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="add_new_Category_Slider" onchange="updateSlider(this.value,'add_new_Category_Slider_Value')">
+                    <p id="add_new_Category_Slider_Value">Gewicht: 50%</p>
+                    <button class="btn btn-primary" type="submit" id="btn_add_new_Category">Hinzufügen</button>
                 </form>
-                <ul id="list_of_Keywords_admin">
-                    <li>
-                        <p class="Keyword_Name">Keyword 1</p><input type="range" min="0" max="100" value="50" class="slider" id="Keyword_1_Slider">
-                        <p>50%</p>
-                    </li>
-                    <li>
-                        <p class="Keyword_Name">Keyword 2</p><input type="range" min="0" max="100" value="80" class="slider" id="Keyword_2_Slider">
-                        <p>80%</p>
-                    </li>
-                    <li>
-                        <p class="Keyword_Name">Keyword 3</p><input type="range" min="0" max="100" value="15" class="slider" id="Keyword_3_Slider">
-                        <p>15%</p>
-                    </li>
-                    <li>Keyword 4</li>
-                    <li>Keyword 5</li>
-                    <li>Keyword 1</li>
-                    <li>Keyword 2</li>
-                    <li>Keyword 3</li>
-                    <li>Keyword 4</li>
-                    <li>Keyword 5</li>
-                    <li>Keyword 1</li>
-                    <li>Keyword 2</li>
-                    <li>Keyword 3</li>
-                    <li>Keyword 4</li>
-                    <li>Keyword 5</li>
-                    <li>Keyword 1</li>
-                    <li>Keyword 2</li>
-                    <li>Keyword 3</li>
-                    <li>Keyword 4</li>
-                    <li>Keyword 5</li>
-                    <li>Keyword 1</li>
-                    <li>Keyword 2</li>
-                    <li>Keyword 3</li>
-                    <li>Keyword 4</li>
-                    <li>Keyword 5</li>
-                </ul>
+                <ul id="list_of_Category_admin"></ul>
             </div>
         </div>
 
@@ -174,8 +139,17 @@ if (login_check($mysqli) == true) {
         </div>
     </div>
 
-    <script src="../js/bootstrap.min.js"></script>
+    <div id="txtHint" style="display:none"><b>Person info will be listed here...</b></div>
+    <div id="pastHint" style="display:none"><b>Person info will be listed here...</b></div>
+    <div id="cbrhint" style="display:none"><b>CaseBase Data will be displayed here</b></div>
+
     <script src="../js/jquery-2.2.2.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/snowball-german.js"></script>
+    <script src="../js/stopWords.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/admin_config.js"></script>
+
 </body>
 
 </html>

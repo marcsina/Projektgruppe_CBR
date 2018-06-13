@@ -8,17 +8,17 @@
     border-style: solid;
 }
 
-.nav-tabs > li:nth-child(odd) {
-    background: white;
-}
+    .nav-tabs > li:nth-child(odd) {
+        background: white;
+    }
 
-.nav-tabs > li:nth-child(even) {
-    background: #615A7F;
-}
+    .nav-tabs > li:nth-child(even) {
+        background: #615A7F;
+    }
 
-.nav-tabs > li:nth-child(even) > a {
-    color: white;
-}
+        .nav-tabs > li:nth-child(even) > a {
+            color: white;
+        }
 
 .admin_main {
     margin-top: 2.5em;
@@ -42,7 +42,7 @@
 
 /*Slider*/
 
-li > .slider {
+li > p > p > .slider {
     max-width: 80%;
     outline: none;
     opacity: 0.75;
@@ -70,6 +70,7 @@ body {
 /*Punkte als Aufzählung*/
 
 #list_of_Keywords_admin {
+    min-height: 200px;
     list-style: disc inside;
     padding: 15px 15px 15px;
     border: 1px solid #615A7F;

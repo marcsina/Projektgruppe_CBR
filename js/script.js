@@ -508,7 +508,7 @@ function doStuffWhenClicked()
     var output = "";
     for ( i = 0; i < final_Weight.length; i++ )
     {
-        output = output +"<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_Weight[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_Weight[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_Weight[i].katName;
+        output = output + "<br> \u00A0 \u00A0 " + i + " || " + "\u00A0 \u00A0 \u00A0      Weight:   " + final_Weight[i].weight + "\u00A0 \u00A0 \u00A0     KategorieID:   " + final_Weight[i].katID + "\u00A0 \u00A0 \u00A0   KategorieName:   " + final_Weight[i].katName;
 
     }
     output = output + "<br><br><br><br><br>";
@@ -596,6 +596,187 @@ function doStuffWhenClicked()
     console.timeEnd( 'test2' );
 }
 
+function extractKeywords( inputText )
+{
+
+    var i = 0;
+    var j = 0;
+    var k = 0;
+    var z = 0;
+
+
+
+    //get Keywords and Past words
+    var keyWords = createKeywords();
+    var pastWords = createKeywordsArray_Past();
+
+    var negateWords = new Array( "nicht", "kein", "keine", "keinem", "keinen", "keiner", "keines", "nichts", "nie" );
+    var reinforing_words = new Array( "absolut", "äußerst", "ausgesprochen", "besonders", "extrem", "heftig", "höchst", "sehr", "total", "überaus", "ungemein", "ungewöhnlich" );
+
+    console.time( "test2" );
+
+    //remove unnecessary whitespace and write everything in lower case
+    inputText = inputText.trim();
+
+    //Delete abbrevations consist of maximum 1 letters, multiple whitespaces, and new lines starting with a space
+    inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[\s]{2,}/gmi, "\s" ).replace( /\n /gmi, "\n" ).replace( /[0-9]/, "\s" );
+
+    //Remove stopwords
+    inputText = inputText.removeStopWords();
+
+    //Split text in sentences
+    var sentence_array = inputText.replace( /([.!?;])\s*(?=[a-zA-Z])/gm, "$1|" ).split( "|" );
+
+    //array for sentences
+    var words_in_sentences_array = new Array( sentence_array.length );
+
+    //Split sentence at whitespace to get words
+    for ( i = 0; i < sentence_array.length; i++ )
+    {
+        words_in_sentences_array[i] = sentence_array[i].split( /\s/ );
+    }
+
+
+    //Make everything Lowercase and delete signs
+    for ( i = 0; i < words_in_sentences_array.length; i++ )
+    {
+        for ( j = 0; j < words_in_sentences_array[i].length; j++ )
+        {
+
+            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].toLowerCase();
+            words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9\-]/gm, "" ).replace( /\-/gm, " " );
+        }
+
+    }
+
+    //All sentences
+    for ( i = 0; i < words_in_sentences_array.length; i++ )
+    {
+        //All words in the sentence
+        for ( j = 0; j < words_in_sentences_array[i].length; j++ )
+        {
+            //Check all Keywords
+            for ( k = 0; k < keyWords.length; k++ )
+            {
+                //If the Word is one of the Keywords
+                if ( keyWords[k].word === stemm2( words_in_sentences_array[i][j] ) ) 
+                {
+                    //Check Past Words nearby --> Past
+                    if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, pastWords ) )
+                    {
+                        // Check Negate words nearby
+                        if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
+                        {
+                            // Check Reinforcing words nearby
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight past negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_base * 2 * 2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight past negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_base * 2, keyWords[k].katName ) );
+                            }
+
+                        }
+                        else
+                        {
+                            // Check Reinforcing words nearby
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight past NOT negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * 2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight past NOT negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base, keyWords[k].katName ) );
+                            }
+
+                        }
+                    }
+                    //No Past Word detected --> Present
+                    else
+                    {
+                        // Check Negate words nearby
+                        if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, negateWords ) )
+                        {
+                            // Check Reinforcing words nearby
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight present negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * 2 * 2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight present negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * 2, keyWords[k].katName ) );
+                            }
+                        }
+                        else
+                        {
+                            if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
+                            {
+                                //Todo Weight present NOT negate reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_base * 2, keyWords[k].katName ) );
+                            }
+                            else
+                            {
+                                //Todo Weight present NOT negate NOT reinforced
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, -1 * weight_base, keyWords[k].katName ) );
+                            }
+
+                        }
+                    }
+                }
+                words_in_sentences_array[i][j];
+            }
+        }
+
+
+    }
+
+
+    absolute_final_array.length = highest_katID;
+    //Check all possible categories if Keywords were found in text
+    for ( i = 0; i < absolute_final_array.length; i++ )
+    {
+        //create blank class
+        absolute_final_array[i] = new Final_Weight( i, 0.0, "" );
+
+        //Check all found Keywords
+        for ( j = 0; j < final_Weight.length; j++ )
+        {
+            //if an katID exisist with a weight, add it up
+            //put katName too
+            if ( i === parseInt( final_Weight[j].katID ) )
+            {
+                absolute_final_array[i].katName = final_Weight[j].katName;
+                absolute_final_array[i].weight += final_Weight[j].weight;
+                absolute_final_array[i].count++;
+            }
+        }
+    }
+
+    for ( i = 0; i < absolute_final_array.length; i++ )
+    {
+        //MAGIC FORMULA
+        absolute_final_array[i].weight = absolute_final_array[i].weight / ( absolute_final_array[i].count * 2 * 2 * weight_base );
+
+        //Cut the number
+        if ( absolute_final_array[i].weight > 1 )
+        {
+            absolute_final_array[i].weight = 1;
+        }
+        else if ( absolute_final_array[i].weight < 0 )
+        {
+            absolute_final_array[i].weight = 0;
+        }
+    }
+    console.timeEnd( 'test2' );
+    return absolute_final_array;
+}
 
 $( "#02_btn" ).click( function ( event )
 {
