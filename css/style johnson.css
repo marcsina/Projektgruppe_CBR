@@ -1,0 +1,97 @@
+﻿/*------------------------------------------/
+/----------------Navbar---------------------/
+/------------------------------------------*/
+.navbar-fixed-top {
+    background-color: #615A7F;
+	min-height: 50px;
+	width: 100%;
+	z-index: 999;
+}
+
+.first-after-navbar{
+    margin-top:50px;
+
+
+}
+.navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav > li > a:hover{ 
+    /*hintergrund bei hover
+    schriftfarbe bei focus
+    
+    '>' bezieht sich auf direkten nachfolger (child)*/
+    background-color: #EAE6FC;
+    color: ; /*schrift*/
+}
+
+.menuItem a, .navbar-brand{
+    font-weight: 600;
+    font-size: 20px;
+    color: #E2D8DE;
+}
+
+.navbar-brand{
+    color: #D1CCD5;
+    font-size: 45px;
+	
+}
+
+.navbar-header .navbar-brand:hover, .navbar-header .navbar-brand:focus{ /*schriftfarbe ändern bei hover*/
+    color: #EAE6FC;
+
+
+}
+.p1{
+	text-align:justify;
+	margin: 1px;
+	font-size: 15px;
+	font-weight: lighter;
+	
+}
+
+.p2{
+   
+    text-align: center;
+    font-weight: 200;
+}
+
+
+
+
+
+/*------------------------------------------/
+/----------------Image---------------------/
+/------------------------------------------*/
+
+#image{
+  
+    transition: transform .2s;
+
+
+ }  
+
+#image:hover {
+
+   box-shadow: 0px 0px 0px #000000;
+    z-index: 2;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1.5);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1.5);   
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1.5);
+    transition: all 200ms ease-in;
+    transform: scale(3.0);
+    }
+
+
+
+/*------------------------------------------/
+/----------------timeout--------------------/
+/------------------------------------------*/
+
+
+
+
+
+
+
+
