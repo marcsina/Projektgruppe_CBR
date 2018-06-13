@@ -61,10 +61,15 @@ $( "#btn_add_new_Category" ).click( function ( event )
         }
 
     }
-    if ( $( "#add_new_Category" ).val() != "" && isAlreadyOnList === false )
+    if ( $( "#add_new_Category" ).val() != "" )
     {
-        add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
+        if ( isAlreadyOnList === false )
+            add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
+        else
+            alert( "Kategorie schon in der Liste vorhanden" );
     }
+    else
+        alert( "Eingabefeld leer!" );
 }
 );
 
@@ -84,37 +89,48 @@ $( "#btn_search_Text" ).click( function ( event )
 
 $( "#btn_add_Case_to_DataBase" ).click( function ( event )
 {
-    if ( $( "#add_New_Case_Name" ).val() != "" && $( "#list_of_Category_admin" ).children().length > 0 )
+    if ( $( "#add_New_Case_Name" ).val() != "" )
     {
-        var array_of_keywords = new Array();
-        for ( i = 0; i < $( "#list_of_Category_admin" ).children().length; i++ )
+        if ( $( "#list_of_Category_admin" ).children().length > 0 )
         {
-            array_of_keywords.push( $( "#list_of_Category_admin>li>p.Category_Name" ).get( i ).innerText );
+            var array_of_keywords = new Array();
+            for ( i = 0; i < $( "#list_of_Category_admin" ).children().length; i++ )
+            {
+                array_of_keywords.push( $( "#list_of_Category_admin>li>p.Category_Name" ).get( i ).innerText );
+            }
+            //TODO ADD CASE TO DB
+            alert("YAY\n"+ array_of_keywords );
         }
-        //TODO ADD CASE TO DB
-        alert( array_of_keywords );
+        else
+            alert( "Liste leer" );
     }
+    else
+        alert( "Eingabefeld leer!" );
 } );
 
 //STUFF FOR ADD KEYWORD
 $( "#btn_add_new_Keyword" ).click( function ( event )
+{
+    var isAlreadyOnList = false;
+    for ( i = 0; i < count_of_Sliders; i++ )
     {
-        var isAlreadyOnList = false;
-        for ( i = 0; i < count_of_Sliders; i++ )
+        var string = "Keyword_list_name" + i;
+        if ( $( "#add_new_Keyword" ).val() === $( "#" + string ).text() )
         {
-            var string = "Keyword_list_name" + i;
-            if ( $( "#add_new_Keyword" ).val() === $( "#" + string ).text() )
-            {
-                isAlreadyOnList = true;
-            }
+            isAlreadyOnList = true;
+        }
 
-        }
-        if ( $( "#add_new_Keyword" ).val() != "" && isAlreadyOnList === false )
-        {
-            add_Item_to_Keyword_list( $( "#add_new_Keyword" ).val() );
-        }
     }
-    );
+    if ( $( "#add_new_Keyword" ).val() != "" )
+    {
+        if ( isAlreadyOnList === false )
+            add_Item_to_Keyword_list( $( "#add_new_Keyword" ).val() );
+        else
+            alert( "Keyword schon auf der Liste" );
+    } else
+        alert( "Eingabefeld leer!" );
+}
+);
 //ADD ITEM TO KEYWORD LIST
 function add_Item_to_Keyword_list( Keyword_name )
 {
@@ -139,14 +155,20 @@ function add_Item_to_Keyword_list( Keyword_name )
 //CLICKING BUTTON TO ADD KATEGORIE TO DB
 $( "#btn_add_Category_to_DataBase" ).click( function ( event )
 {
-    if ( $( "#add_new_Category_Category_Name" ).val() != "" && $( "#list_of_Keywords_admin" ).children().length >0)
+    if ( $( "#add_new_Category_Category_Name" ).val() != "" )
     {
-        var array_of_keywords = new Array();
-        for ( i = 0; i < $( "#list_of_Keywords_admin" ).children().length; i++ )
+        if ( $( "#list_of_Keywords_admin" ).children().length > 0 )
         {
-            array_of_keywords.push( $( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText);
+            var array_of_keywords = new Array();
+            for ( i = 0; i < $( "#list_of_Keywords_admin" ).children().length; i++ )
+            {
+                array_of_keywords.push( $( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText );
+            }
+            //TODO ADD Category TO DB WITH KAt ID AND EVERYTHING ELSE
+            alert( "YAY\n"+array_of_keywords );
         }
-        //TODO ADD Category TO DB WITH KAt ID AND EVERYTHING ELSE
-        alert( array_of_keywords );
-    }
+        else
+            alert( "Liste leer" );
+    } else
+        alert( "Eingabefeld leer!" );
 } );
