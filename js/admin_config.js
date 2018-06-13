@@ -48,25 +48,29 @@ function add_Item_to_Category_list( kategorie_name, sliderValue )
     count_of_Sliders++
 }
 
+function add_Item_to_Category_list_AREADY_THERE( kategorie_name, sliderValue, sliderID )
+{
+    var string1 = "slider_value_" + sliderID;
+    $( "#" + string1 ).text( "Gewicht: " + sliderValue + "%" );
+    var string2 = "slider" + sliderID;
+    $( "#" + string2 ).val( sliderValue );
+}
+
 //Add things to list 
 $( "#btn_add_new_Category" ).click( function ( event )
 {
-    var isAlreadyOnList = false;
     for ( i = 0; i < count_of_Sliders; i++ )
     {
         var string = "Category_list_name" + i;
         if ( $( "#add_new_Category" ).val() === $( "#" + string ).text() )
         {
-            isAlreadyOnList = true;
+            add_Item_to_Category_list_AREADY_THERE( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val(), i );
         }
 
     }
     if ( $( "#add_new_Category" ).val() != "" )
     {
-        if ( isAlreadyOnList === false )
-            add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
-        else
-            alert( "Kategorie schon in der Liste vorhanden" );
+        add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
     }
     else
         alert( "Eingabefeld leer!" );
@@ -83,7 +87,6 @@ $( "#btn_search_Text" ).click( function ( event )
     {
         if ( weighted_category_array[i].katName != "" && weighted_category_array[i].weight != "NaN" )
             add_Item_to_Category_list( weighted_category_array[i].katName, weighted_category_array[i].weight * 100 );
-        var t = 0;
     }
 } );
 
@@ -99,7 +102,7 @@ $( "#btn_add_Case_to_DataBase" ).click( function ( event )
                 array_of_keywords.push( $( "#list_of_Category_admin>li>p.Category_Name" ).get( i ).innerText );
             }
             //TODO ADD CASE TO DB
-            alert("YAY\n"+ array_of_keywords );
+            alert( "YAY\n" + array_of_keywords );
         }
         else
             alert( "Liste leer" );
@@ -165,7 +168,7 @@ $( "#btn_add_Category_to_DataBase" ).click( function ( event )
                 array_of_keywords.push( $( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText );
             }
             //TODO ADD Category TO DB WITH KAt ID AND EVERYTHING ELSE
-            alert( "YAY\n"+array_of_keywords );
+            alert( "YAY\n" + array_of_keywords );
         }
         else
             alert( "Liste leer" );
