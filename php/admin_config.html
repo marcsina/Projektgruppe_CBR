@@ -119,8 +119,8 @@ if (login_check($mysqli) == true) {
                     <!--Liste der Category-->
                     <div class="col-md-6 col-sm-12 auto">
                         <h4>Kategorien verfeinern / gewichten</h4>
-                        <form class="myForm">
-                            <div class="form-group">
+                        <form class="myForm" autocomplete="off" action="/action_page.php">
+                            <div class="form-group autocomplete">
                                 <label for="add_new_Category">Name der Kategorie</label>
                                 <input type="text" class="form-control" id="add_new_Category" placeholder="Kategoriename">
                             </div>
@@ -190,6 +190,7 @@ if (login_check($mysqli) == true) {
     <script src="../js/snowball-german.js"></script>
     <script src="../js/stopWords.js"></script>
     <script src="../js/script.js"></script>
+    <script src="../js/autocomplete.js"></script>
     <script src="../js/admin_config.js"></script>
 
 </body>

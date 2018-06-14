@@ -1,6 +1,8 @@
 var count_of_Sliders = 0;
 var i = 0;
 var Categories_From_DB = new Array();
+var Keywords_From_DB = new Array();
+var Categories_Name_Array = new Array();
 
 //Classes
 class Category_Word_ID
@@ -14,16 +16,18 @@ class Category_Word_ID
 //Update slider when page is loaded, due to the circumstance that forms, are not reseting
 updateSlider( $( "#add_new_Category_Slider" ).val(), "add_new_Category_Slider_Value" );
 
+
 $( document ).ready( function ()
 {
     //get Keywords and store them in hidden fields
-    getCategoriesFromDatabase( "cbr" );
-} );
+    getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
 
-"1,Alzheimer_frueh, department elektrotechnik und informatik der universität siegeninstitut für wissensbasierte systeme & wissensmanagement projektgruppe ?wissensbasiertes system zur unterstützung der medizinischen ausbildung (wissensweitergabe)? wintersemester 2016-2017 die entwicklung eines case-based reasoning system: fallbasis entwicklung für medizinischen ausbildungeingereicht von: gutachter:dan li prof. dr.-ing. madjid fathijosephine betreuer: m.sc. sara nasirideveloping a case-based reasoning system: case base development for dementia and its related diseases1. alzheimer demenz .....................................................................................31.1 die eurobiologischen grundlagen der alzheimer-krankheit......................41.2 die genetik der alzheimer-krankheit.....…"
+    getKeywordsFromDatabase2( "dementia", Keywords_From_DB );
+} );
+autocomplete( document.getElementById( "add_new_Category" ), Categories_Name_Array );
 
 //Get Categories from DB"
-function getKeywordsFromDatabase_Past( database )
+function getCategoriesFromDatabase( database,array, array_Name )
 {
     if ( database === "" )
     {
@@ -51,11 +55,55 @@ function getKeywordsFromDatabase_Past( database )
                 }
                 for ( i = 0; i < array2.length; i++ )
                 {
-                    Categories_From_DB.push( new Category_Word_ID( array2[i][0], array2[i][1] ));
+                    array.push( new Category_Word_ID( array2[i][0], array2[i][1] ) );
+                    array_Name.push( array2[i][1] );
                 }
             }
         };
         xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getCategories.php", true );
+        xmlhttp.send();
+    }
+}
+
+function getKeywordsFromDatabase2( database, givenArray )
+{
+    if ( database === "" )
+    {
+        return;
+    } else
+    {
+        if ( window.XMLHttpRequest )
+        {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else
+        {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject( "Microsoft.XMLHTTP" );
+        }
+        xmlhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                //String bei jedem ; splitten und in array packen
+                var array_erste_Stufe = this.responseText.split( ';' );
+
+                //Erste Stufe jeden eintrag bei , splitten und in neuen array packen
+                var array_zweite_Stufe = new Array();
+                for ( i = 0; i < array_erste_Stufe.length - 1; i++ )
+                {
+                    array_zweite_Stufe.push( array_erste_Stufe[i].split( ',' ) );
+                }
+
+                //Zweite Stufe als Klassen erstellen und in array_keywords speichern
+                var array_keywords = new Array();
+                for ( i = 0; i < array_zweite_Stufe.length; i++ )
+                {
+                    givenArray.push( new KeywordList( array_zweite_Stufe[i][0].toLowerCase(), array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
+                }
+            }
+        };
+        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getKeywords.php", true );
         xmlhttp.send();
     }
 }
