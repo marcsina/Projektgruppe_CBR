@@ -8,27 +8,28 @@
     border-style: solid;
     border-bottom: none;
 }
-    .nav-tabs > li  {
+
+    .nav-tabs > li {
         margin: 0px 5px 0px 5px;
     }
 
-    .nav-tabs > li:nth-child(odd) {
-        background: #c7c3d5;
-        border-radius: 3px;
-    }
-
-    .nav-tabs > li:nth-child(even) {
-        background: #615A7F;
-        border-radius: 3px;
-    }
-
-        .nav-tabs > li:nth-child(even) > a {
-            color: white
+        .nav-tabs > li:nth-child(odd) {
+            background: #c7c3d5;
+            border-radius: 3px;
         }
 
-    .nav-tabs > li.active > a {
-        color: black;
-    }
+        .nav-tabs > li:nth-child(even) {
+            background: #615A7F;
+            border-radius: 3px;
+        }
+
+            .nav-tabs > li:nth-child(even) > a {
+                color: white
+            }
+
+        .nav-tabs > li.active > a {
+            color: black;
+        }
 
 .admin_main {
     margin-top: 2.5em;
@@ -42,7 +43,7 @@
     box-sizing: border-box;
     display: block;
     max-width: 100%;
-    min-width:100%;
+    min-width: 100%;
     line-height: 1.5;
     padding: 15px 15px 15px;
     border-radius: 3px;
@@ -81,7 +82,7 @@ body {
 /*Punkte als Aufzählung*/
 
 .list_admin {
-    min-height: 200px;
+    min-height: 150px;
     list-style: disc inside;
     padding: 15px 15px 15px;
     border: 1px solid #615A7F;
@@ -114,6 +115,7 @@ hr {
     position: relative;
     display: block;
 }
+
 .autocomplete-items {
     position: sticky;
     border: 1px solid #d4d4d4;
@@ -125,6 +127,7 @@ hr {
     left: 0;
     right: 0;
 }
+
 autocomplete-items div {
     padding: 10px;
     cursor: pointer;
@@ -143,6 +146,6 @@ autocomplete-items div {
     color: #ffffff;
 }
 
-.btn-primary{
+.btn-primary {
     border-radius: 3px;
 }
