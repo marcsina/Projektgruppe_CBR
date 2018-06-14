@@ -1,0 +1,108 @@
+ <!doctype html>
+<html lang="en">
+
+    <!--Muss später am server eine php datei sein damit das geht -->
+    <?php include('conn.php'); ?>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <!-- user-scalable für mobile devices -->
+        <meta name="description" content="...">
+        <meta name="author" content="...">
+        <title>MedAusbild</title>
+
+
+
+
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+        <link href="css/style3.css" rel="stylesheet">
+
+    </head>
+
+    <body id="home">
+        <!-- _______________________________________NavBar_____________________________________________________-->
+
+        <nav class="navbar-default navbar-fixed-top" role="navigation">
+            <!-- role für browser zur                                                                            erkennung-->
+            <div class="container">
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                         <span class="sr-only">Toggle navigation</span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                        <!-- erzeugen die 3 striche-->
+                    </button>
+                     <a class="navbar-brand" href="#home">MedAusbild</a> 
+                    <!-- Titel der Navbar-->
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="menuItem"><a href="#...">Diagnose</a>
+                        </li>
+                        <li class="menuItem"><a href="#...">Quiz</a>
+                        </li>
+                        <li class="menuItem"><a href="#...">Checker</a>
+                        </li>
+
+                        <li class="menuItem"><a href="#...">Classroom</a>
+                        </li>
+                        <li class="menuItem"><a href="#...">Forum</a>
+                        </li>
+                        <li class="menuItem"><a href="#contact">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--container-->
+        </nav>
+        <!-- ________________________________________________________________________________________________________ -->
+
+
+        <!-- _________________________Content________________________________-->
+        <br>
+        <br>
+
+        <!-- every content should be nested in a way like the example below  -->
+
+        <!-- nested columns -->
+        <div class="row first-after-navbar">
+
+        <div class="col-md-offset-4 col-md-4 col-sm-8" >
+            <h3 class="checken">Wie wollen sie checken</h3>
+           
+            </br>
+            <div class="row">
+                <div class="col-md-5 col-sm-5"><a href="checkereinhacken.html" type="bouton" class="btn btn-danger btn-lg"></br>symptom</br> checker</a></div> 
+               <div class="col-md-offset-2 col-md-5 col-sm-5"><a href="checkertext.html" type="bouton" class="btn btn-danger btn-lg"></br></br>fall checker</a></div> 
+              
+
+        </div>
+            
+        </div>
+
+           
+        </div>
+
+
+
+        <!--____________________________________________________________________________________________________-->
+
+
+        <!-- Scripts -->
+        <script src="js/german-porter-stemmer.js"></script>
+        <script src="js/stopWords.js"></script>
+        <script src="js/jquery-2.2.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/code.js"></script>
+
+    </body>
+
+</html>
