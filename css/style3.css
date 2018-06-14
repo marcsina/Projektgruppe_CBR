@@ -1,0 +1,105 @@
+﻿/*------------------------------------------/
+/----------------Navbar---------------------/
+/------------------------------------------*/
+.navbar-fixed-top {
+    background-color: #615A7F;
+	min-height: 50px;
+	width: 100%;
+	z-index: 999;
+    margin-bottom: 100px;
+}
+
+.first-after-navbar{
+    margin-top: 50px;
+}
+.navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav > li > a:hover{ 
+    /*hintergrund bei hover
+    schriftfarbe bei focus
+    
+    '>' bezieht sich auf direkten nachfolger (child)*/
+    background-color: #EAE6FC;
+    color: #543B67; /*schrift*/
+}
+
+.menuItem a, .navbar-brand{
+    font-weight: 600;
+    font-size: 20px;
+    color: #E2D8DE;
+}
+
+.navbar-brand{
+    color: #D1CCD5;
+    font-size: 45px;
+}
+
+.navbar-header .navbar-brand:hover, .navbar-header .navbar-brand:focus{ /*schriftfarbe ändern bei hover*/
+    color: #EAE6FC;
+}
+
+/* code pour checker1*/
+body{
+    padding-top: 10px;
+}
+
+.checken{
+    border: 1px solid black;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+}
+.btn-lg {
+  width: 170px;
+  height: 170px;
+  border-radius: 75px;
+}
+/*fin*/
+/*debut pour checkereinhacken*/
+.tableau{
+     height: 300px;
+    overflow: auto;
+}
+.tableau{
+    border: 1px solid black;
+}
+.tableau2{
+     border: 1px solid black;
+     height: 200px;
+     overflow: auto;
+}
+.textar{
+    height: 300px;
+    width: 500px;
+    border: 1px solid black;
+     overflow: auto;
+     text-align: justify;
+}
+/*FORUM*/
+table{
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+.ulfo{
+    font-size: 1.1em;
+    list-style-type: none;
+   
+}
+li{
+    text-align:;
+    padding-bottom: 6px;
+    color: red;
+}
+.top{
+    margin-left: 45px;
+    padding-bottom: 10px;
+    color: green;
+}
+.hi{
+    color: green;
+}
+.BTN{
+     margin-left: 45px;
+}
+.text3{
+    height: 100px;
+    width: 500px;
+}
