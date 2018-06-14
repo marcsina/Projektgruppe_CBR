@@ -124,7 +124,7 @@ if (login_check($mysqli) == true) {
                                 <label for="add_new_Category">Name der Kategorie</label>
                                 <input type="text" class="form-control" id="add_new_Category" placeholder="Kategoriename">
                             </div>
-                            <input type="range" min="0" max="100" value="50" class="slider" id="add_new_Category_Slider" onchange="updateSlider(this.value,'add_new_Category_Slider_Value')">
+                            <input type="range" step="10" min="0" max="100" value="50" class="slider" id="add_new_Category_Slider" onchange="updateSlider(this.value,'add_new_Category_Slider_Value')">
                             <p id="add_new_Category_Slider_Value">Gewicht: 50%</p>
                             <button class="btn btn-primary" type="submit" id="btn_add_new_Category">Hinzufügen</button>
                         </form>
