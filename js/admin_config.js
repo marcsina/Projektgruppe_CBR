@@ -1,8 +1,64 @@
 var count_of_Sliders = 0;
 var i = 0;
+var Categories_From_DB = new Array();
 
+//Classes
+class Category_Word_ID
+{
+    constructor( id, name )
+    {
+        this.id = id;
+        this.name = name;
+    }
+}
 //Update slider when page is loaded, due to the circumstance that forms, are not reseting
 updateSlider( $( "#add_new_Category_Slider" ).val(), "add_new_Category_Slider_Value" );
+
+$( document ).ready( function ()
+{
+    //get Keywords and store them in hidden fields
+    getCategoriesFromDatabase( "cbr" );
+} );
+
+"1,Alzheimer_frueh, department elektrotechnik und informatik der universität siegeninstitut für wissensbasierte systeme & wissensmanagement projektgruppe ?wissensbasiertes system zur unterstützung der medizinischen ausbildung (wissensweitergabe)? wintersemester 2016-2017 die entwicklung eines case-based reasoning system: fallbasis entwicklung für medizinischen ausbildungeingereicht von: gutachter:dan li prof. dr.-ing. madjid fathijosephine betreuer: m.sc. sara nasirideveloping a case-based reasoning system: case base development for dementia and its related diseases1. alzheimer demenz .....................................................................................31.1 die eurobiologischen grundlagen der alzheimer-krankheit......................41.2 die genetik der alzheimer-krankheit.....…"
+
+//Get Categories from DB"
+function getKeywordsFromDatabase_Past( database )
+{
+    if ( database === "" )
+    {
+        return;
+    } else
+    {
+        if ( window.XMLHttpRequest )
+        {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else
+        {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject( "Microsoft.XMLHTTP" );
+        }
+        xmlhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                var array1 = this.responseText.split( ";" );
+                var array2 = new Array();
+                for ( i = 0; i < array1.length- 1; i++ )
+                {
+                    array2.push( array1[i].split( "," ) );
+                }
+                for ( i = 0; i < array2.length; i++ )
+                {
+                    Categories_From_DB.push( new Category_Word_ID( array2[i][0], array2[i][1] ));
+                }
+            }
+        };
+        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getCategories.php", true );
+        xmlhttp.send();
+    }
+}
 
 //update new Category Slider
 function updateSlider( slideAmount, textField )
