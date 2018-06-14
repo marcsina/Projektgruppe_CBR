@@ -163,21 +163,31 @@ function add_Item_to_Category_list_AREADY_THERE( kategorie_name, sliderValue, sl
 //Add things to list 
 $( "#btn_add_new_Category" ).click( function ( event )
 {
-    for ( i = 0; i < count_of_Sliders; i++ )
-    {
-        var string = "Category_list_name" + i;
-        if ( $( "#add_new_Category" ).val() === $( "#" + string ).text() )
-        {
-            add_Item_to_Category_list_AREADY_THERE( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val(), i );
-        }
-
-    }
+    var not_in_list = true;
     if ( $( "#add_new_Category" ).val() != "" )
     {
-        add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
+        for ( i = 0; i < count_of_Sliders; i++ )
+        {
+            var string = "Category_list_name" + i;
+            var t = $( "#add_new_Category" ).val();
+            var d = $( "#" + string ).text();
+            if ( $( "#add_new_Category" ).val() === $( "#" + string ).text() )
+            {
+                add_Item_to_Category_list_AREADY_THERE( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val(), i );
+                not_in_list = false;
+            }
+        }
+
+        if ( not_in_list === true )
+        {
+            if ( $( "#add_new_Category" ).val() != "" )
+            {
+                add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
+            }
+            else
+                alert( "Eingabefeld leer!" );
+        } 
     }
-    else
-        alert( "Eingabefeld leer!" );
 }
 );
 
