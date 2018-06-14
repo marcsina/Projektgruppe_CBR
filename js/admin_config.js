@@ -27,7 +27,7 @@ $( document ).ready( function ()
 autocomplete( document.getElementById( "add_new_Category" ), Categories_Name_Array );
 
 //Get Categories from DB"
-function getCategoriesFromDatabase( database,array, array_Name )
+function getCategoriesFromDatabase( database, array, array_Name )
 {
     if ( database === "" )
     {
@@ -49,7 +49,7 @@ function getCategoriesFromDatabase( database,array, array_Name )
             {
                 var array1 = this.responseText.split( ";" );
                 var array2 = new Array();
-                for ( i = 0; i < array1.length- 1; i++ )
+                for ( i = 0; i < array1.length - 1; i++ )
                 {
                     array2.push( array1[i].split( "," ) );
                 }
@@ -155,7 +155,7 @@ function add_Item_to_Category_list( kategorie_name, sliderValue )
 function add_Item_to_Category_list_AREADY_THERE( kategorie_name, sliderValue, sliderID )
 {
     var string1 = "slider_value_" + sliderID;
-    $( "#" + string1 ).text( "Gewicht: " + sliderValue + "%" );
+    $( "#" + string1 ).text( "Gewicht: " + Math.round( sliderValue * 100 ) / 100 + "%" );
     var string2 = "slider" + sliderID;
     $( "#" + string2 ).val( sliderValue );
 }
@@ -169,8 +169,6 @@ $( "#btn_add_new_Category" ).click( function ( event )
         for ( i = 0; i < count_of_Sliders; i++ )
         {
             var string = "Category_list_name" + i;
-            var t = $( "#add_new_Category" ).val();
-            var d = $( "#" + string ).text();
             if ( $( "#add_new_Category" ).val() === $( "#" + string ).text() )
             {
                 add_Item_to_Category_list_AREADY_THERE( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val(), i );
@@ -180,14 +178,14 @@ $( "#btn_add_new_Category" ).click( function ( event )
 
         if ( not_in_list === true )
         {
-            if ( $( "#add_new_Category" ).val() != "" )
-            {
-                add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
-            }
-            else
-                alert( "Eingabefeld leer!" );
-        } 
+            add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
+        }
     }
+    else
+    {
+        alert( "Eingabefeld leer!" );
+    }
+
 }
 );
 
@@ -200,7 +198,22 @@ $( "#btn_search_Text" ).click( function ( event )
     for ( i = 0; i < weighted_category_array.length; i++ )
     {
         if ( weighted_category_array[i].katName != "" && weighted_category_array[i].weight != "NaN" )
-            add_Item_to_Category_list( weighted_category_array[i].katName, weighted_category_array[i].weight * 100 );
+        {
+            var not_in_list = true;
+            for ( var j = 0; j < count_of_Sliders; j++ )
+            {
+                var string = "Category_list_name" + j;
+                if ( weighted_category_array[i].katName === $( "#" + string ).text() )
+                {
+                    add_Item_to_Category_list_AREADY_THERE( weighted_category_array[i].katName, weighted_category_array[i].weight * 100, j );
+                    not_in_list = false;
+                }
+            }
+            if ( not_in_list === true )
+            {
+                add_Item_to_Category_list( weighted_category_array[i].katName, weighted_category_array[i].weight * 100 );
+            }
+        }
     }
 } );
 

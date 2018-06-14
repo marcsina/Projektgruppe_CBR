@@ -42,6 +42,7 @@
     box-sizing: border-box;
     display: block;
     max-width: 100%;
+    min-width:100%;
     line-height: 1.5;
     padding: 15px 15px 15px;
     border-radius: 3px;
@@ -140,4 +141,8 @@ autocomplete-items div {
     /*when navigating through the items using the arrow keys:*/
     background-color: DodgerBlue !important;
     color: #ffffff;
+}
+
+.btn-primary{
+    border-radius: 3px;
 }
