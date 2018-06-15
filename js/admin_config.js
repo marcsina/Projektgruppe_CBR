@@ -3,6 +3,7 @@ var i = 0;
 var Categories_From_DB = new Array();
 var Keywords_From_DB = new Array();
 var Categories_Name_Array = new Array();
+var Keywords_Name_Array = new Array();
 
 //Classes
 class Category_Word_ID
@@ -22,9 +23,11 @@ $( document ).ready( function ()
     //get Keywords and store them in hidden fields
     getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
 
-    getKeywordsFromDatabase2( "dementia", Keywords_From_DB );
+    getKeywordsFromDatabase2( "dementia", Keywords_From_DB, Keywords_Name_Array );
 } );
+//Activate autocomplete at inputfields by ID
 autocomplete( document.getElementById( "add_new_Category" ), Categories_Name_Array );
+autocomplete( document.getElementById( "add_new_Category_Category_Name" ), Categories_Name_Array );
 
 //Get Categories from DB"
 function getCategoriesFromDatabase( database, array, array_Name )
@@ -65,7 +68,8 @@ function getCategoriesFromDatabase( database, array, array_Name )
     }
 }
 
-function getKeywordsFromDatabase2( database, givenArray )
+//Get Keywords From DB
+function getKeywordsFromDatabase2( database, givenArray, givenArray2 )
 {
     if ( database === "" )
     {
@@ -100,6 +104,7 @@ function getKeywordsFromDatabase2( database, givenArray )
                 for ( i = 0; i < array_zweite_Stufe.length; i++ )
                 {
                     givenArray.push( new KeywordList( array_zweite_Stufe[i][0].toLowerCase(), array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
+                    givenArray2.push( array_zweite_Stufe[i][0].toLowerCase() );
                 }
             }
         };
@@ -146,12 +151,13 @@ function add_Item_to_Category_list( kategorie_name, sliderValue )
                 ( "<B>" + kategorie_name + "</B>" )
             ).append
             ( $( '<p>' ).attr( 'id', "slider_value_" + count_of_Sliders ).attr( 'class', "Slider_Value" ).append( "Gewicht: " + Math.round( sliderValue * 100 ) / 100 + "%" ) ).append
-            ( $( '<input>' ).attr( 'type', "range" ).attr( 'min', "0" ).attr( 'max', "100" ).attr( 'value', Math.round( sliderValue * 100 ) / 100 ).attr( 'class', "slider" ).attr( 'id', "slider" + count_of_Sliders ).attr( 'onchange', string_1 ).attr('step',"10")
+            ( $( '<input>' ).attr( 'type', "range" ).attr( 'min', "0" ).attr( 'max', "100" ).attr( 'value', Math.round( sliderValue * 100 ) / 100 ).attr( 'class', "slider" ).attr( 'id', "slider" + count_of_Sliders ).attr( 'onchange', string_1 ).attr( 'step', "10" )
             ).append
             ( $( '<button>' ).attr( 'id', "btn_delete_Category" + count_of_Sliders ).attr( 'class', "btn" ).attr( 'class', "btn-primary" ).attr( 'onclick', string_2 ).append( "Kategorie löschen" ) ) );
-    count_of_Sliders++
+    count_of_Sliders++;
 }
 
+//If Category already on List update slider Value to Given
 function add_Item_to_Category_list_AREADY_THERE( kategorie_name, sliderValue, sliderID )
 {
     var string1 = "slider_value_" + sliderID;
@@ -164,22 +170,34 @@ function add_Item_to_Category_list_AREADY_THERE( kategorie_name, sliderValue, sl
 $( "#btn_add_new_Category" ).click( function ( event )
 {
     var not_in_list = true;
-    if ( $( "#add_new_Category" ).val() != "" )
+    //Check if entry is empty
+    if ( $( "#add_new_Category" ).val() !== "" )
     {
-        for ( i = 0; i < count_of_Sliders; i++ )
+        //check if word is valid category
+        if ( !checkIfGivenWordIsInDB( $( "#add_new_Category" ).val(), Categories_Name_Array ) )
         {
-            var string = "Category_list_name" + i;
-            if ( $( "#add_new_Category" ).val() === $( "#" + string ).text() )
+            alert( "Kategorie nicht vorhanden" );
+
+        } else
+        {
+        //check if word is already in List
+            for ( i = 0; i < count_of_Sliders; i++ )
             {
-                add_Item_to_Category_list_AREADY_THERE( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val(), i );
-                not_in_list = false;
+                var string = "Category_list_name" + i;
+                if ( $( "#add_new_Category" ).val() === $( "#" + string ).text() )
+                {
+                //is in list--> update it
+                    add_Item_to_Category_list_AREADY_THERE( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val(), i );
+                    not_in_list = false;
+                }
+            }
+            //not in list--> put it there
+            if ( not_in_list === true )
+            {
+                add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
             }
         }
 
-        if ( not_in_list === true )
-        {
-            add_Item_to_Category_list( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val() );
-        }
     }
     else
     {
@@ -188,16 +206,26 @@ $( "#btn_add_new_Category" ).click( function ( event )
 
 }
 );
-
+//check if Given Word is in Given Array
+function checkIfGivenWordIsInDB( wordToCheck, arrayOfDBWords )
+{
+    for ( i = 0; i < arrayOfDBWords.length; i++ )
+    {
+        if ( wordToCheck === arrayOfDBWords[i] )
+        {
+            return true;
+        }
+    }
+    return false;
+}
 //Search for keywords in text
 $( "#btn_search_Text" ).click( function ( event )
 {
-    //TODO 
     var text = $( "#text_admin" ).val();
     var weighted_category_array = extractKeywords( text );
     for ( i = 0; i < weighted_category_array.length; i++ )
     {
-        if ( weighted_category_array[i].katName != "" && weighted_category_array[i].weight != "NaN" )
+        if ( weighted_category_array[i].katName !== "" && weighted_category_array[i].weight !== "NaN" )
         {
             var not_in_list = true;
             for ( var j = 0; j < count_of_Sliders; j++ )
@@ -219,17 +247,18 @@ $( "#btn_search_Text" ).click( function ( event )
 
 $( "#btn_add_Case_to_DataBase" ).click( function ( event )
 {
-    if ( $( "#add_New_Case_Name" ).val() != "" )
+    if ( $( "#add_New_Case_Name" ).val() !== "" )
     {
         if ( $( "#list_of_Category_admin" ).children().length > 0 )
         {
-            var array_of_keywords = new Array();
+            var array_of_categories = new Array();
             for ( i = 0; i < $( "#list_of_Category_admin" ).children().length; i++ )
             {
-                array_of_keywords.push( $( "#list_of_Category_admin>li>p.Category_Name" ).get( i ).innerText );
+                var string = $( "#list_of_Category_admin>li>p.Category_Name" ).get( i ).innerText;
+                array_of_categories.push( new Category_Word_ID( searchForIDOfCategory( string, Categories_From_DB ), string ) );
             }
             //TODO ADD CASE TO DB
-            alert( "YAY\n" + array_of_keywords );
+            alert( "YAY\n" + array_of_categories[0].name + array_of_categories[0].id );
         }
         else
             alert( "Liste leer" );
@@ -251,7 +280,7 @@ $( "#btn_add_new_Keyword" ).click( function ( event )
         }
 
     }
-    if ( $( "#add_new_Keyword" ).val() != "" )
+    if ( $( "#add_new_Keyword" ).val() !== "" )
     {
         if ( isAlreadyOnList === false )
             add_Item_to_Keyword_list( $( "#add_new_Keyword" ).val() );
@@ -279,13 +308,23 @@ function add_Item_to_Keyword_list( Keyword_name )
                 ( "<B>" + Keyword_name + "</B>" )
             ).append
             ( $( '<button>' ).attr( 'id', "btn_delete_Category" + count_of_Sliders ).attr( 'class', "btn" ).attr( 'class', "btn-primary" ).attr( 'onclick', string_2 ).append( "Kategorie löschen" ) ) );
-    count_of_Sliders++
+    count_of_Sliders++;
 }
-
+//Search For ID OF Category
+function searchForIDOfCategory( word, givenArray )
+{
+    var id = -1;
+    for ( i = 0; i < givenArray.length; i++ )
+    {
+        if ( word === givenArray[i].name )
+            return givenArray[i].id;
+    }
+    return id;
+}
 //CLICKING BUTTON TO ADD KATEGORIE TO DB
 $( "#btn_add_Category_to_DataBase" ).click( function ( event )
 {
-    if ( $( "#add_new_Category_Category_Name" ).val() != "" )
+    if ( $( "#add_new_Category_Category_Name" ).val() !== "" )
     {
         if ( $( "#list_of_Keywords_admin" ).children().length > 0 )
         {

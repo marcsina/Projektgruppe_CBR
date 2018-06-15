@@ -152,9 +152,11 @@ if (login_check($mysqli) == true) {
                     <!--Kategorienameneingeben-->
                     <div class="col-md-6 col-sm-12">
                         <h4>Kategorienamen eingeben</h4>
-                        <form class="myForm">
-                            <label for="add_new_Category_Category_Name ">Name der Kategorie</label>
-                            <input type="text" class="form-control" id="add_new_Category_Category_Name" placeholder="Kategoriename">
+                        <form class="myForm" autocomplete="off" action="/action_page.php">
+                            <div class="form-group autocomplete">
+                                <label for="add_new_Category_Category_Name ">Name der Kategorie</label>
+                                <input type="text" class="form-control" id="add_new_Category_Category_Name" placeholder="Kategoriename">
+                            </div>
                         </form>
                     </div>
 
