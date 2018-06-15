@@ -8,11 +8,10 @@
     z-index: 999;
 }
 
-.first-after-navbar {
+.first-after-navbar{
     margin-top: 50px;
 }
-
-.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+.navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav > li > a:hover{ 
     /*hintergrund bei hover
     schriftfarbe bei focus
     
@@ -21,53 +20,55 @@
     color: #543B67; /*schrift*/
 }
 
-.menuItem a, .navbar-brand {
+.menuItem a, .navbar-brand{
     font-weight: 600;
     font-size: 20px;
     color: #E2D8DE;
 }
 
-.navbar-brand {
+.navbar-brand{
     color: #D1CCD5;
     font-size: 45px;
 }
 
-.navbar-header .navbar-brand:hover, .navbar-header .navbar-brand:focus { /*schriftfarbe ändern bei hover*/
+.navbar-header .navbar-brand:hover, .navbar-header .navbar-brand:focus{ /*schriftfarbe ändern bei hover*/
     color: #EAE6FC;
 }
 
-.rondedImage {
-    overflow: hidden;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    border-radius: 50px;
-    width: 90px;
-    height: 90px;
-}
+.rondedImage{
+    overflow:hidden; 
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius:50px;
+    width:90px;
+    height:90px;
+  }  
 
 .neurologie {
-    float: left;
+float:left;
 }
 
 .demenz {
-    float: left;
+float:left;
 }
 
 .innere_medezin {
-    float: left;
+float:left;
 }
 
-.kardio {
-    float: left;
+.kardio{
+float:left;
 }
 
 .rectangle {
-    border: 1px solid green;
-    background: #615A7F;
+  border: 1px solid green ;
+  background: #615A7F;
+
 }
 
 .rectangle_2 {
-    border: 1px solid green;
+  border: 1px solid green ;
+
 }
 
 table, th, td {
@@ -81,28 +82,24 @@ body {
     font-family: 'Open Sans';
     font-weight: 300;
 }
-
 .main {
     background: white url(machine_a_ecrire.jpg) right top no-repeat;
     background-size: contain;
     padding: 80px 20px 20px;
     margin-top: 120px;
 }
-
 @media only screen and (max-width : 992px) {
     .main {
         background: white;
         margin-top: 30px;
     }
 }
-
 h1 {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     color: #555;
     margin-bottom: 0;
 }
-
 h2 {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
@@ -110,60 +107,59 @@ h2 {
     font-size: 18px;
     margin-top: 5px;
 }
-
 form {
     margin-top: 60px;
 }
-
-input.form-control, input[type="submit"], .btn {
+input.form-control , input[type="submit"] , .btn {
     border-radius: 0px;
 }
-
 .btn {
     transition: all ease-in-out 0.2s;
 }
-
 .credits {
     margin-top: 100px;
     color: #999;
     font-size: 12px;
 }
-
-    .credits a {
-        color: inherit;
-    }
+.credits a {
+    color: inherit;
+}
 
 .a {
-    display: inline-block;
+  display:inline-block;
 }
 
 .bloc {
-    float: left;
-    text-align: center;
+    float:left;
+    text-align:center;
 }
 
 
 
 
 .holder {
-    width: 320px;
-    height: 240px;
+width: 320px;
+height: 240px;
 }
 
 
 .image-lightbox img {
-    /* La transition s'applique à la fois sur la largeur et la hauteur, avec une durée d'une seconde. */
-    transition: all 1s ease;
+/* La transition s'applique à la fois sur la largeur et la hauteur, avec une durée d'une seconde. */
+
+transition: all 1s ease;
 }
 
 .image-lightbox:hover img {
-    /* L'image est grossie de 25% */
-    transform: scale(none);
+/* L'image est grossie de 25% */
+
+transform:scale(none);
 }
 
 .holder.close a:hover {
-    box-shadow: inset 0px -24px 20px -15px rgba(255, 255, 255, 0.01), inset 0px 0px 10px rgba(0,0,0,0.4), 0px 0px 20px rgba(255,255,255,0.4);
-    transform: scale(1.25);
+    box-shadow: inset 0px -24px 20px -15px rgba(255, 255, 255, 0.01), 
+        inset 0px 0px 10px rgba(0,0,0,0.4), 
+        0px 0px 20px rgba(255,255,255,0.4);
+        transform:scale(1.25);
 }
 
 
@@ -174,14 +170,14 @@ input.form-control, input[type="submit"], .btn {
     position: relative;
     top: -20px;
 }
-
+ 
 .image-lightbox img {
     /* Chaque image hérite ses dimensions de son parent */
     width: inherit;
     height: inherit;
     z-index: 3000;
 }
-
+ 
 .holder {
     /* Dimension des images, vous pouvez les modifier */
     width: 250px;
@@ -190,7 +186,7 @@ input.form-control, input[type="submit"], .btn {
     float: left;
     margin: 0 20px 0 0;
 }
-
+ 
 .image-lightbox {
     /* Les dimensions héritent de .holder */
     width: inherit;
@@ -211,57 +207,50 @@ input.form-control, input[type="submit"], .btn {
     -o-transition: all ease-in 0.5s;
 }
 
-    .image-lightbox span {
-        display: none;
-    }
-
-    .image-lightbox .expand {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        z-index: 4000;
-        background: rgba(0,0,0,0); /* Fixe un bogue d'IE */
-        left: 0;
-    }
-
-    .image-lightbox .close {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        right: 20px;
-        top: 20px;
-    }
-
-        .image-lightbox .close a {
-            height: auto;
-            width: auto;
-            padding: 5px 10px;
-            color: #fff;
-            text-decoration: none;
-            background: #22272c;
-            box-shadow: inset 0px 24px 20px -15px rgba(255, 255, 255, 0.1), inset 0px 0px 10px rgba(0,0,0,0.4), 0px 0px 30px rgba(255,255,255,0.4);
-            border-radius: 5px;
-            font-weight: bold;
-            float: right;
-        }
-
-            .image-lightbox .close a:hover {
-                box-shadow: inset 0px -24px 20px -15px rgba(255, 255, 255, 0.01), inset 0px 0px 10px rgba(0,0,0,0.4), 0px 0px 20px rgba(255,255,255,0.4);
-            }
-
-
-div#image-1 {
+.image-lightbox span {
+    display: none;
+}
+ 
+.image-lightbox .expand {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 4000;
+    background: rgba(0,0,0,0); /* Fixe un bogue d'IE */
     left: 0;
 }
-
-div#image-2 {
-    left: 290px;
+ 
+.image-lightbox .close {
+    position: absolute;
+    width: 20px; height: 20px;
+    right: 20px; top: 20px;
+}
+ 
+.image-lightbox .close a {
+    height: auto; width: auto;
+    padding: 5px 10px;
+    color: #fff;
+    text-decoration: none;
+    background: #22272c;
+    box-shadow: inset 0px 24px 20px -15px rgba(255, 255, 255, 0.1), 
+        inset 0px 0px 10px rgba(0,0,0,0.4), 
+        0px 0px 30px rgba(255,255,255,0.4);
+    border-radius: 5px;
+    font-weight: bold;
+    float: right;
+}
+ 
+.image-lightbox .close a:hover {
+    box-shadow: inset 0px -24px 20px -15px rgba(255, 255, 255, 0.01), 
+        inset 0px 0px 10px rgba(0,0,0,0.4), 
+        0px 0px 20px rgba(255,255,255,0.4);
 }
 
-div#image-3 {
-    left: 580px;
-}
+
+div#image-1 { left: 0; }
+div#image-2 { left: 290px; }
+div#image-3 { left: 580px; }
 
 div[id^=image]:target {
     width: 450px;
@@ -270,44 +259,153 @@ div[id^=image]:target {
     top: 50px;
     left: 200px;
 }
-
-    div[id^=image]:target .close {
-        display: block;
-    }
-
-    div[id^=image]:target .expand {
-        display: none;
-    }
-
-div#image-1:target, div#image-2:target, div#image-3:target {
-    left: 200px;
+div[id^=image]:target .close {
+    display: block;
 }
+ 
+div[id^=image]:target .expand {
+    display: none;
+}
+ 
+div#image-1:target, div#image-2:target, div#image-3:target { left: 200px; } 
 
 
 .zoom {
-    width: 320px;
-    height: 240px;
+width: 320px;
+height: 240px;
 }
-
 .image {
-    width: 100%;
-    height: 100%;
+width: 100%;
+height: 100%;
+}
+.image img {
+/* La transition s'applique à la fois sur la largeur et la hauteur, avec une durée d'une seconde. */
+-webkit-transition: all 1s ease; /* Safari et Chrome */
+-moz-transition: all 1s ease; /* Firefox */
+-ms-transition: all 1s ease; /* Internet Explorer 9 */
+-o-transition: all 1s ease; /* Opera */
+transition: all 1s ease;
+}
+.image:hover img {
+/* L'image est grossie de 25% */
+-webkit-transform:scale(3); /* Safari et Chrome */
+-moz-transform:scale(3); /* Firefox */
+-ms-transform:scale(3); /* Internet Explorer 9 */
+-o-transform:scale(3); /* Opera */
+transform:scale(3);
 }
 
-    .image img {
-        /* La transition s'applique à la fois sur la largeur et la hauteur, avec une durée d'une seconde. */
-        -webkit-transition: all 1s ease; /* Safari et Chrome */
-        -moz-transition: all 1s ease; /* Firefox */
-        -ms-transition: all 1s ease; /* Internet Explorer 9 */
-        -o-transition: all 1s ease; /* Opera */
-        transition: all 1s ease;
-    }
 
-    .image:hover img {
-        /* L'image est grossie de 25% */
-        -webkit-transform: scale(3); /* Safari et Chrome */
-        -moz-transform: scale(3); /* Firefox */
-        -ms-transform: scale(3); /* Internet Explorer 9 */
-        -o-transform: scale(3); /* Opera */
-        transform: scale(3);
-    }
+/*--------------------user profil--------------------------*/
+
+
+
+.profile-banner {
+  width: 100%;
+  height: 300px;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  background-color: #252932;
+  border-bottom: 4px solid #fff;
+  box-shadow: 2px 0px 4px rgba(0,0,0,0.1);
+}
+
+.avatar-container {
+  height: 300px;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 200px;
+  position: relative;
+  margin: 0px auto;
+  margin-top: 196px;
+  border: 4px solid #f3f3f3;
+}
+
+.profile-actions {
+  position: absolute;
+  bottom: 20px;
+}
+
+.user-profile-2 {
+  margin-top: 50px;
+}
+
+.user-profile-sidebar {
+  margin: 0 0 20px 0;
+}
+
+.user-profile-sidebar .user-identity {
+  margin: 20px 0 0 0;
+}
+
+.user-profile-sidebar img {
+  width: 90px;
+}
+
+.account-status-data {
+  text-align: center;
+  padding: 10px 0;
+  border-top: 1px dashed #ddd;
+  border-bottom: 1px dashed #ddd;
+  margin: 10px 0 20px 0;
+}
+
+.account-status-data h5 {
+  font-size: 11px;
+  line-height: 150%;
+  color: #909090;
+}
+
+.user-button {
+  margin: 15px 0;
+}
+
+.user-button .btn {
+  margin: 5px 0;
+}
+
+#social {
+  padding: 10px;
+  background: #E5E9EC;
+  text-align: center;
+}
+
+#social a:hover {
+  text-decoration: none;
+}
+
+.fa-circle.facebook {
+  color: #5471AE;
+}
+
+.fa-circle.twitter {
+  color: #4EC6F6;
+}
+
+.fa-circle.gplus {
+  color: #E24E3E;
+}
+
+.fa-circle.tumblr {
+  color: #4D77A3;
+}
+
+.fa-circle.linkedin {
+  color: #3097CE;
+}
+
+.user-profile-content {
+  margin: 30px 15px;
+}
+
+.tab-pane{
+    padding-top:20px;    
+}
+
+.user-message{
+width:50px;
+height:50px;
+}
