@@ -8,10 +8,11 @@ var Keywords_Name_Array = new Array();
 //Classes
 class Category_Word_ID
 {
-    constructor( id, name )
+    constructor( id, name, value )
     {
         this.id = id;
         this.name = name;
+        this.value = value;
     }
 }
 //Update slider when page is loaded, due to the circumstance that forms, are not reseting
@@ -180,13 +181,13 @@ $( "#btn_add_new_Category" ).click( function ( event )
 
         } else
         {
-        //check if word is already in List
+            //check if word is already in List
             for ( i = 0; i < count_of_Sliders; i++ )
             {
                 var string = "Category_list_name" + i;
                 if ( $( "#add_new_Category" ).val() === $( "#" + string ).text() )
                 {
-                //is in list--> update it
+                    //is in list--> update it
                     add_Item_to_Category_list_AREADY_THERE( $( "#add_new_Category" ).val(), $( "#add_new_Category_Slider" ).val(), i );
                     not_in_list = false;
                 }
@@ -247,18 +248,40 @@ $( "#btn_search_Text" ).click( function ( event )
 
 $( "#btn_add_Case_to_DataBase" ).click( function ( event )
 {
+
     if ( $( "#add_New_Case_Name" ).val() !== "" )
     {
         if ( $( "#list_of_Category_admin" ).children().length > 0 )
         {
+            //Array Which contains Categoryname + ID
             var array_of_categories = new Array();
+            var array_CategoryName = new Array();
+            var array_CategroyID = new Array();
+            var array_CategoryValue = new Array();
+            console.log( $( "#list_of_Category_admin" ).children().length );
             for ( i = 0; i < $( "#list_of_Category_admin" ).children().length; i++ )
             {
+                var c = i;
                 var string = $( "#list_of_Category_admin>li>p.Category_Name" ).get( i ).innerText;
-                array_of_categories.push( new Category_Word_ID( searchForIDOfCategory( string, Categories_From_DB ), string ) );
+                var sliderValue = $( "#list_of_Category_admin>li>input.slider" ).get( i ).value;
+                array_of_categories.push( new Category_Word_ID( searchForIDOfCategory( string, Categories_From_DB ), string, sliderValue ) );
+
+                array_CategoryName.push( string );
+                array_CategroyID.push( searchForIDOfCategory( string, Categories_From_DB ) );
+                array_CategoryValue.push( sliderValue );
+                i = c;
             }
-            //TODO ADD CASE TO DB
-            alert( "YAY\n" + array_of_categories[0].name + array_of_categories[0].id );
+            for ( i = 0; i < array_CategoryName.length; i++ )
+            {
+                console.log( "Name: " + array_CategoryName[i] + " ID: " + array_CategroyID[i] + " Wert: " + array_CategoryValue[i]+"\n" );
+            }
+            $.post( 'include/AddCaseTest.php', {
+                caseName: $( "#add_New_Case_Name" ).val(),
+                name: JSON.stringify(array_CategoryName),
+                id: JSON.stringify(array_CategroyID),
+                value: JSON.stringify(array_CategoryValue)
+            } );
+            
         }
         else
             alert( "Liste leer" );

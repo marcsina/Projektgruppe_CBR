@@ -60,20 +60,20 @@ if (login_check($mysqli) == true) {
                     <span class="icon-bar"></span>
                     <!-- erzeugen die 3 striche-->
                 </button>
-                <a class="navbar-brand" href="index.php">MedAusbild</a>
+                <a class="navbar-brand" href="../index.php">MedAusbild</a>
                 <!-- Titel der Navbar-->
             </div>
 
             <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li class="menuItem">
-                        <a href="diagnose_seite.php">Diagnose</a>
+                        <a href="../diag_seite_new.html">Diagnose</a>
                     </li>
                     <li class="menuItem">
-                        <a href="#...">Quiz</a>
+                        <a href="../quiz1.html">Quiz</a>
                     </li>
                     <li class="menuItem">
-                        <a href="#...">Checker</a>
+                        <a href="../checker1.html">Checker</a>
                     </li>
 
                     <li class="menuItem">
@@ -119,7 +119,7 @@ if (login_check($mysqli) == true) {
                     <!--Liste der Category-->
                     <div class="col-md-6 col-sm-12 auto">
                         <h4>Kategorien verfeinern / gewichten</h4>
-                        <form class="myForm" autocomplete="off" action="/action_page.php">
+                        <form class="myForm" autocomplete="off">
                             <div class="form-group autocomplete">
                                 <label for="add_new_Category">Name der Kategorie</label>
                                 <input type="text" class="form-control" id="add_new_Category" placeholder="Kategoriename">
@@ -152,7 +152,7 @@ if (login_check($mysqli) == true) {
                     <!--Kategorienameneingeben-->
                     <div class="col-md-6 col-sm-12">
                         <h4>Kategorienamen eingeben</h4>
-                        <form class="myForm" autocomplete="off" action="/action_page.php">
+                        <form class="myForm" autocomplete="off">
                             <div class="form-group autocomplete">
                                 <label for="add_new_Category_Category_Name ">Name der Kategorie</label>
                                 <input type="text" class="form-control" id="add_new_Category_Category_Name" placeholder="Kategoriename">
