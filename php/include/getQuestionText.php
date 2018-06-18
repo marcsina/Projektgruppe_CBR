@@ -22,6 +22,6 @@ $sql="SELECT text FROM Quiz_Fragetexte ORDER BY id LIMIT 1 OFFSET $randomNumber"
 $result = $mysqli->query($sql);
 		while($row = $result->fetch_assoc()) {
 			$frage = $row["text"];
-			echo $frage;
+			echo utf8_decode($frage);
 		}
 ?>

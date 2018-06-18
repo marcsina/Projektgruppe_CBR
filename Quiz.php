@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'php/include/conn.php';
 include_once 'php/include/functions_login.php';
 
@@ -98,7 +98,7 @@ if (login_check($mysqli) == true) {
 				<br>
                            <!-- Timer-->   
                         <div class="col-md-12" >
-                                  <p id="timer" class=" " title=" Time-left" style="text-align: center; font-size: 40px; color: red; animation-duration: s; animation-delay: s; animation-iteration-count: ;"> </p>
+                                  <p id="timer" class=" " title=" Time-left" style="text-align: center; font-size: 40px; color: green; animation-duration: s; animation-delay: s; animation-iteration-count: ;"> </p>
                             </div>
 
       <div class="row">
@@ -203,76 +203,5 @@ if (login_check($mysqli) == true) {
 
     </body>
 
-
-    <script >
-
-         $(document).ready(function()
-      {
-       
-        /*var allWells = $('.questionsection');
-        var allWellsExceptFirst = $('.questionsection:not(:first)');
-        allWellsExceptFirst.hide();
-        next.click(function(e)
-        {
-            e.preventDefault();
-
-            var target = 
-            $('#' + target).show();
-        });*/
-        });
- </script>
 </html>
-
-    
-<script type="text/javascript">
-$time_limit = "2018-06-11 00:10:00"
-var d = new Date($time_limit);
-var hours = d.getHours(); //00 hours
-var minutes = d.getMinutes(); //10 minutes
-var seconds = 60 * minutes; // 600seconds
-
-if (typeof(Storage) !== "undefined") {
-  if (localStorage.seconds) {
-    seconds = localStorage.seconds;
-  }
-}
-
-function secondPassed() {
-  var minutes = Math.round((seconds - 30) / 60);
-  console.log(minutes);
-  var hours = Math.round((minutes) / 60);
-  var remainingSeconds = seconds % 60;
-  if (remainingSeconds < 10) {
-    remainingSeconds = "0" + remainingSeconds;  
-  }
-
-  if (typeof(Storage) !== "undefined") {
-    localStorage.setItem("seconds", seconds);
-  }
-  document.getElementById('timer').innerHTML =  minutes + ":" + remainingSeconds;
-
-  if (seconds == 0) {
-    clearInterval(myVar);
-    document.getElementById('timer').innerHTML = "Time Out";
-    $( "next" ).click(function() {
-
-});
-    if (typeof(Storage) !== "undefined") {
-      localStorage.removeItem("seconds");
-    }
-  } else {
-    seconds--;
-    console.log(seconds);
-  }
-
-}
-var myVar = setInterval(secondPassed, 1000);
-
-        
-
-        
-
-            </script>
-
-
 </html>
