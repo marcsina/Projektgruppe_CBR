@@ -19,7 +19,7 @@
 					<a href="diagnose_seite.php">Diagnose</a>
 				</li>
 				<li class="menuItem">
-					<a href="#...">Quiz</a>
+					<a href="Quiz.php">Quiz</a>
 				</li>
 				<li class="menuItem">
 					<a href="#...">Checker</a>
