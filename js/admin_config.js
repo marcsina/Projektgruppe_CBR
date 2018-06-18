@@ -275,7 +275,7 @@ $( "#btn_add_Case_to_DataBase" ).click( function ( event )
             {
                 console.log( "Name: " + array_CategoryName[i] + " ID: " + array_CategroyID[i] + " Wert: " + array_CategoryValue[i]+"\n" );
             }
-            $.post( 'include/AddCaseTest.php', {
+            $.post( 'include/AddCaseAdmin.php', {
                 caseName: $( "#add_New_Case_Name" ).val(),
                 name: JSON.stringify(array_CategoryName),
                 id: JSON.stringify(array_CategroyID),
@@ -344,18 +344,40 @@ function searchForIDOfCategory( word, givenArray )
     }
     return id;
 }
+//Checks if given KatName is already in DB
+function checkIFCategoryalreadyExists( katName )
+{
+    for ( i = 0; i < Categories_Name_Array.length; i++ )
+    {
+        if ( Categories_Name_Array[i] === katName )
+            return true;
+    }
+    return false;
+}
 //CLICKING BUTTON TO ADD KATEGORIE TO DB
 $( "#btn_add_Category_to_DataBase" ).click( function ( event )
 {
     if ( $( "#add_new_Category_Category_Name" ).val() !== "" )
     {
-        if ( $( "#list_of_Keywords_admin" ).children().length > 0 )
+        //update keywords
+        getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
+        if ( checkIFCategoryalreadyExists( $( "#add_new_Category_Category_Name" ).val() ) )
+        {
+            //TODO update einbinden
+            alert( "Kategorie exisitiert bereits!" );
+        }
+        else if ( $( "#list_of_Keywords_admin" ).children().length > 0 )
         {
             var array_of_keywords = new Array();
             for ( i = 0; i < $( "#list_of_Keywords_admin" ).children().length; i++ )
             {
-                array_of_keywords.push( $( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText );
+                array_of_keywords.push( stemm2($( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText) );
             }
+            $.post( 'include/AddNewKategorie.php', {
+                katName: $( "#add_new_Category_Category_Name" ).val(),
+                keywords: JSON.stringify( array_of_keywords )
+            } );
+
             //TODO ADD Category TO DB WITH KAt ID AND EVERYTHING ELSE
             alert( "YAY\n" + array_of_keywords );
         }
