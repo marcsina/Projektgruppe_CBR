@@ -1,13 +1,22 @@
- <!doctype html>
-<html lang="en">
+  <?php
+include_once 'php/include/conn.php';
+include_once 'php/include/functions_login.php';
 
-    <!--Muss später am server eine php datei sein damit das geht -->
-    <?php include('conn.php'); ?>
+ 
+sec_session_start();
+ 
+if (login_check($mysqli) == true) {
+    $logged = 'in';
+} else {
+    $logged = 'out';
+}
+?>
+<html lang="en">
 
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-        <!-- user-scalable für mobile devices -->
+        <!-- user-scalable f�r mobile devices -->
         <meta name="description" content="...">
         <meta name="author" content="...">
         <title>MedAusbild</title>
@@ -28,43 +37,9 @@
     background-color:#e9ebee;">
         <!-- _______________________________________NavBar_____________________________________________________-->
 
-        <nav class="navbar-default navbar-fixed-top" role="navigation">
-            <!-- role für browser zur                                                                            erkennung-->
-            <div class="container">
-                <div class="navbar-header ">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                         <span class="sr-only">Toggle navigation</span>
-                         <span class="icon-bar"></span>
-                         <span class="icon-bar"></span>
-                         <span class="icon-bar"></span>
-                        <!-- erzeugen die 3 striche-->
-                    </button>
-                     <a class="navbar-brand" href="#home">MedAusbild</a> 
-                    <!-- Titel der Navbar-->
-                </div>
-
-                <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="menuItem"><a href="#...">Diagnose</a>
-                        </li>
-                        <li class="menuItem"><a href="#...">Quiz</a>
-                        </li>
-                        <li class="menuItem"><a href="#...">Checker</a>
-                        </li>
-
-                        <li class="menuItem"><a href="#...">Classroom</a>
-                        </li>
-                        <li class="menuItem"><a href="#...">Forum</a>
-                        </li>
-                        <li class="menuItem"><a href="#contact">Kontakt</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!--container-->
-        </nav>
-        <!-- ________________________________________________________________________________________________________ -->
-
+        <?php
+        include ("php/include/navbar.php");
+        ?>
 
         <!-- _________________________Content________________________________-->
         <br>
