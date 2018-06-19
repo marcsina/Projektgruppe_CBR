@@ -69,95 +69,14 @@ if (login_check($mysqli) == true) {
             <div class="col-md-offset-1 col-md-5 col-sm-5 tableau">
                 <section class>
                     <form id="form_symptoms">
-                        </br>
-
-                        <div class="row">
-                            <label class="col-md-4" for="1"><abbr title="kopf tut weh">headache</abbr></label>
-                            <input class="col-md-4" type="checkbox" name="1" value="headache" id="checkbox_headache">
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1"><abbr title="es wird vergessen">vergesslessiskeit</abbr></label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">laufen</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-                        <div class="row">
-                            <label class="col-md-4" for="1">constipation</label>
-                            <input class=" col-md-4" type="checkbox" name="1" value="constipation" id="1"></br>
-                        </div>
-
-
-
+                        </br>                      
                     </form>
                 </section>
 
             </div>
 
             <section id="section_symptoms" class="col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-5 tableau">
-                </br>
-                <div class="row">
-                    <div class="col-md-3 col-sm-3">vergesslichkeit</div>
-                    <div class=" col-md-offset-2 col-md-6 col-sm-offset-2 col-sm-7 btn-group ">
-                        <button class="btn btn-info btn-sm">klein</button>
-                        <button class="btn btn-warning btn-sm">mittel</button>
-                        <button class="btn btn-danger btn-sm">hoch</button>
-                    </div>
-                    <div class=" col-md-1"> <button type="button" class="close btn btn-info" data-dismiss="modal">x</button></div>
-                </div>
-               
-
-                <div class="row">
-					 </br>
-                    <div class="col-md-3 col-sm-3">laufen</div>
-                    <div class=" col-md-offset-2 col-md-6 col-sm-offset-2 col-sm-7 btn-group " data-toggle="buttons">
-                        <button class="btn btn-info btn-sm">klein</button>
-                        <button class="btn btn-warning btn-sm">mittel</button>
-                        <button class="btn btn-danger btn-sm">hoch</button>
-                    </div>
-                    <div class=" col-md-1"> <button type="button" class="close btn btn-info" data-dismiss="modal">x</button></div>
-                </div>
+                
 
 
 

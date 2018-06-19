@@ -6,7 +6,7 @@ var ergebnis = new Array();
 
 function loadSymptoms() {
 	//TO-DO: Symptome aus der Datenbank laden
-	var symptome = ["kopfschmerzen", "fussschmerzen", "herzschmerz"];
+	var symptome = ["Kopfschmerzen", "Fussschmerzen", "Herzschmerz", "Juckreiz", "Vergesslichkeit"];
 	var i;
 	for (i = 0; i < symptome.length; i++) {
 		var symptom = symptome[i];
@@ -60,7 +60,7 @@ $('body').on('click', 'button.impairmentbutton', function () {
 	var impairment = "";
 
 	if (clickedBtnID.includes("klein")) {
-		alert("Symptom: " + idOhnePrefix + " - " + "geringe Einfluss");
+		alert("Symptom: " + idOhnePrefix + " - " + "geringer Einfluss");
 	}
 	if (clickedBtnID.includes("mittel")) {
 		alert("Symptom: " + idOhnePrefix + " - " + "mittlerer Einfluss");
