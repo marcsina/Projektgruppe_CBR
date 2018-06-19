@@ -735,14 +735,14 @@ function extractKeywords( inputText )
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
         //create blank class
-        absolute_final_array[i] = new Final_Weight( i, 0.0, "" );
+        absolute_final_array[i] = new Final_Weight( i + 1, 0.0, "" );
 
         //Check all found Keywords
         for ( j = 0; j < final_Weight.length; j++ )
         {
             //if an katID exisist with a weight, add it up
             //put katName too
-            if ( i === parseInt( final_Weight[j].katID ) )
+            if ( i + 1 === parseInt( final_Weight[j].katID ) )
             {
                 absolute_final_array[i].katName = final_Weight[j].katName;
                 absolute_final_array[i].weight += final_Weight[j].weight;

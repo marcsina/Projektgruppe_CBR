@@ -50,7 +50,15 @@
     border: 1px solid #615A7F;
     transition: box-shadow 0.5s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
 }
+
+
+
 
 /*Slider*/
 
@@ -148,4 +156,9 @@ autocomplete-items div {
 
 .btn-primary {
     border-radius: 3px;
+}
+
+
+#div_edit_case {
+    visibility: hidden;
 }

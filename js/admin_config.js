@@ -128,7 +128,7 @@ function removeFromList( name )
 }
 
 //switch between tabs
-$( ".nav-tabs a" ).click( function () { $( this ).tab( 'show' ); } );
+$( ".nav-tabs a" ).click( function () { $( this ).tab( 'show' ); } ); 
 
 ///STUFF FOR ADD CATEGORY
 
@@ -170,6 +170,9 @@ function add_Item_to_Category_list_AREADY_THERE( kategorie_name, sliderValue, sl
 //Add things to list 
 $( "#btn_add_new_Category" ).click( function ( event )
 {
+    getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
+
+    getKeywordsFromDatabase2( "dementia", Keywords_From_DB, Keywords_Name_Array );
     var not_in_list = true;
     //Check if entry is empty
     if ( $( "#add_new_Category" ).val() !== "" )
@@ -222,7 +225,10 @@ function checkIfGivenWordIsInDB( wordToCheck, arrayOfDBWords )
 //Search for keywords in text
 $( "#btn_search_Text" ).click( function ( event )
 {
-    var text = $( "#text_admin" ).val();
+    getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
+
+    getKeywordsFromDatabase2( "dementia", Keywords_From_DB, Keywords_Name_Array );
+    var text = $( "#text_admin" ).text();
     var weighted_category_array = extractKeywords( text );
     for ( i = 0; i < weighted_category_array.length; i++ )
     {
@@ -244,11 +250,60 @@ $( "#btn_search_Text" ).click( function ( event )
             }
         }
     }
+
+
+
+    //-------------------------Show detected Words in HTML------------------------------------------
+    //split the Text
+    var everyWordArray = $( "#text_admin" ).text().split( /\s/ );
+
+    var showEveryWord = "";
+    var checked = 0;
+
+    var keyWords = createKeywords();
+
+    //Check every Word in the Text
+    for ( i = 0; i < everyWordArray.length; i++ )
+    {
+        everyWordArray[i] = everyWordArray[i].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
+
+        //Stemm the word 
+        //variable so that it wont check twice and wont save the word twice
+        checked = 0;
+
+        //check every KeyWord
+        for ( j = 0; j < keyWords.length; j++ )
+        {
+            //if word = keyword highlight it
+            if ( stemm2( everyWordArray[i].toLowerCase() ) === keyWords[j].word && checked === 0 )
+            {
+                //make it bold and blue
+                showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
+
+                checked = 1;
+            }
+
+        }
+
+        //if the word was not found in the array make it normal
+        if ( checked === 0 )
+        {
+            //make it normal
+            showEveryWord = showEveryWord + " " + everyWordArray[i];
+        }
+
+    }
+
+    $( "#text_admin" ).html( showEveryWord );
+    //----------------------------------------------------------------------------------
+
 } );
 
 $( "#btn_add_Case_to_DataBase" ).click( function ( event )
 {
+    getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
 
+    getKeywordsFromDatabase2( "dementia", Keywords_From_DB, Keywords_Name_Array );
     if ( $( "#add_New_Case_Name" ).val() !== "" )
     {
         if ( $( "#list_of_Category_admin" ).children().length > 0 )
@@ -293,6 +348,9 @@ $( "#btn_add_Case_to_DataBase" ).click( function ( event )
 //STUFF FOR ADD KEYWORD
 $( "#btn_add_new_Keyword" ).click( function ( event )
 {
+    getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
+
+    getKeywordsFromDatabase2( "dementia", Keywords_From_DB, Keywords_Name_Array );
     var isAlreadyOnList = false;
     for ( i = 0; i < count_of_Sliders; i++ )
     {
@@ -316,6 +374,7 @@ $( "#btn_add_new_Keyword" ).click( function ( event )
 //ADD ITEM TO KEYWORD LIST
 function add_Item_to_Keyword_list( Keyword_name )
 {
+
     //String for list ID
     var string_2 = "removeFromList('li_ID_" + count_of_Sliders + "')";
     //Command for deleting list item
@@ -357,6 +416,9 @@ function checkIFCategoryalreadyExists( katName )
 //CLICKING BUTTON TO ADD KATEGORIE TO DB
 $( "#btn_add_Category_to_DataBase" ).click( function ( event )
 {
+    getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
+
+    getKeywordsFromDatabase2( "dementia", Keywords_From_DB, Keywords_Name_Array );
     if ( $( "#add_new_Category_Category_Name" ).val() !== "" )
     {
         //update keywords
