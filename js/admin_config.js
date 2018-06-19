@@ -273,15 +273,15 @@ $( "#btn_add_Case_to_DataBase" ).click( function ( event )
             }
             for ( i = 0; i < array_CategoryName.length; i++ )
             {
-                console.log( "Name: " + array_CategoryName[i] + " ID: " + array_CategroyID[i] + " Wert: " + array_CategoryValue[i]+"\n" );
+                console.log( "Name: " + array_CategoryName[i] + " ID: " + array_CategroyID[i] + " Wert: " + array_CategoryValue[i] + "\n" );
             }
             $.post( 'include/AddCaseAdmin.php', {
                 caseName: $( "#add_New_Case_Name" ).val(),
-                name: JSON.stringify(array_CategoryName),
-                id: JSON.stringify(array_CategroyID),
-                value: JSON.stringify(array_CategoryValue)
+                name: JSON.stringify( array_CategoryName ),
+                id: JSON.stringify( array_CategroyID ),
+                value: JSON.stringify( array_CategoryValue )
             } );
-            
+
         }
         else
             alert( "Liste leer" );
@@ -371,7 +371,7 @@ $( "#btn_add_Category_to_DataBase" ).click( function ( event )
             var array_of_keywords = new Array();
             for ( i = 0; i < $( "#list_of_Keywords_admin" ).children().length; i++ )
             {
-                array_of_keywords.push( stemm2($( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText) );
+                array_of_keywords.push( stemm2( $( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText ) );
             }
             $.post( 'include/AddNewKategorie.php', {
                 katName: $( "#add_new_Category_Category_Name" ).val(),
@@ -385,4 +385,12 @@ $( "#btn_add_Category_to_DataBase" ).click( function ( event )
             alert( "Liste leer" );
     } else
         alert( "Eingabefeld leer!" );
+} );
+
+$( "#btn_add_all_Category" ).click( function ( event )
+{
+    for ( i = 0; i < Categories_Name_Array.length; i++ )
+    {
+        add_Item_to_Category_list( Categories_Name_Array[i], 0 );
+    }
 } );
