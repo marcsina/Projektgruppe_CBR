@@ -297,7 +297,7 @@ $("#btn_add_Case_to_DataBase").click(function(event) {
             for (i = 0; i < array_CategoryName.length; i++) {
                 console.log("Name: " + array_CategoryName[i] + " ID: " + array_CategroyID[i] + " Wert: " + array_CategoryValue[i] + "\n");
             }
-            $.post('include/AddCaseAdmin.php', {
+            $.post('php/include/AddCaseAdmin.php', {
                 caseName: $("#add_New_Case_Name").val(),
                 name: JSON.stringify(array_CategoryName),
                 id: JSON.stringify(array_CategroyID),
@@ -385,7 +385,7 @@ $("#btn_add_Category_to_DataBase").click(function(event) {
             for (i = 0; i < $("#list_of_Keywords_admin").children().length; i++) {
                 array_of_keywords.push(stemm2($("#list_of_Keywords_admin>li>p.Keyword_Name").get(i).innerText));
             }
-            $.post('include/AddNewKategorie.php', {
+            $.post('php/include/AddNewKategorie.php', {
                 katName: $("#add_new_Category_Category_Name").val(),
                 keywords: JSON.stringify(array_of_keywords)
             });
@@ -430,7 +430,7 @@ $( "#btn_load_case" ).click( function ( event )
 
     Edit_Case_Array = [];
 
-    $.post('include/getCaseAdmin.php', {
+    $.post('php/include/getCaseAdmin.php', {
         caseName: $("#edit_Case_Name").val()
     }).done(function(data) {
 
@@ -469,7 +469,7 @@ $("#btn_edit_case_save_to_db").click(function (event) {
         i = c;
     }
 
-    var result = $.post( 'include/EditCaseAdmin.php', {
+    var result = $.post( 'php/include/EditCaseAdmin.php', {
         caseID: Edit_Case_Array[0].caseId,
         id: JSON.stringify(array_CategroyID),
         value: JSON.stringify(array_CategoryValue)

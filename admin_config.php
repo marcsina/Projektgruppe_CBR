@@ -28,7 +28,7 @@ if (login_check($mysqli) == true) {
 
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,8 +36,8 @@ if (login_check($mysqli) == true) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link href="../css/style2.css" rel="stylesheet">
-    <link href="../css/style_admin.css" rel="stylesheet">
+    <link href="css/style2.css" rel="stylesheet">
+    <link href="css/style_admin.css" rel="stylesheet">
 
 
 </head>
@@ -45,51 +45,11 @@ if (login_check($mysqli) == true) {
 <body id="admin_config">
 
     <!-- include Navbar -->
-    <!--<?php
+    <?php
             include ("php/include/navbar.php");
-        ?>-->
+    ?>
 
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <!-- role für browser zur erkennung-->
-        <div class="container">
-            <div class="navbar-header ">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <!-- erzeugen die 3 striche-->
-                </button>
-                <a class="navbar-brand" href="../index.php">MedAusbild</a>
-                <!-- Titel der Navbar-->
-            </div>
-
-            <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="menuItem">
-                        <a href="../diag_seite_new.html">Diagnose</a>
-                    </li>
-                    <li class="menuItem">
-                        <a href="../quiz1.html">Quiz</a>
-                    </li>
-                    <li class="menuItem">
-                        <a href="../checker1.html">Checker</a>
-                    </li>
-
-                    <li class="menuItem">
-                        <a href="#...">Classroom</a>
-                    </li>
-                    <li class="menuItem">
-                        <a href="#...">Forum</a>
-                    </li>
-                    <li class="menuItem">
-                        <a href="#contact">Kontakt</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!--container-->
-    </nav>
+    
 
 
 
@@ -228,13 +188,13 @@ if (login_check($mysqli) == true) {
     <div id="pastHint" style="display:none"><b>Person info will be listed here...</b></div>
     <div id="cbrhint" style="display:none"><b>CaseBase Data will be displayed here</b></div>
 
-    <script src="../js/jquery-2.2.2.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/snowball-german.js"></script>
-    <script src="../js/stopWords.js"></script>
-    <script src="../js/script.js"></script>
-    <script src="../js/autocomplete.js"></script>
-    <script src="../js/admin_config.js"></script>
+    <script src="js/jquery-2.2.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/snowball-german.js"></script>
+    <script src="js/stopWords.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/autocomplete.js"></script>
+    <script src="js/admin_config.js"></script>
 
 </body>
 
