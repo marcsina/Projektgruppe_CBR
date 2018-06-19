@@ -4,6 +4,7 @@ var Categories_From_DB = new Array();
 var Keywords_From_DB = new Array();
 var Categories_Name_Array = new Array();
 var Keywords_Name_Array = new Array();
+var Edit_Case_Array = new Array();
 
 //Classes
 class Category_Word_ID {
@@ -424,9 +425,10 @@ function add_Item_to_Category_list_case_edit(kategorie_name, sliderValue) {
     count_of_Sliders++;
 }
 //------------Edit Case Button
-$("#btn_load_case").click(function(event) {
+$( "#btn_load_case" ).click( function ( event ) 
+{
 
-
+    Edit_Case_Array = [];
 
     $.post('include/getCaseAdmin.php', {
         caseName: $("#edit_Case_Name").val()
@@ -437,10 +439,9 @@ $("#btn_load_case").click(function(event) {
         var array_zweiter_split = new Array(array_erster_split.length);
         for (i = 0; i < array_erster_split.length - 1; i++) {
             array_zweiter_split[i] = array_erster_split[i].split(",");
-            add_Item_to_Category_list_case_edit(array_zweiter_split[i][2], array_zweiter_split[i][4]);
-
+            add_Item_to_Category_list_case_edit( array_zweiter_split[i][2], array_zweiter_split[i][4] );
+            Edit_Case_Array.push( new Case( array_zweiter_split[i][0], array_zweiter_split[i][1], array_zweiter_split[i][2], array_zweiter_split[i][3], array_zweiter_split[i][4] ) );
         }
-
 
         //make the div visible
         document.getElementById("div_edit_case").style.visibility = "visible";
@@ -448,4 +449,29 @@ $("#btn_load_case").click(function(event) {
     });
 
 
+});
+
+$("#btn_edit_case_save_to_db").click(function (event) {
+
+    //Array Which contains Categoryname + ID
+    var array_of_categories = new Array();
+    var array_CategoryName = new Array();
+    var array_CategroyID = new Array();
+    var array_CategoryValue = new Array();
+    for (i = 0; i < $("#list_of_Keywords_case_edit").children().length; i++) {
+        var c = i;
+        var string = $("#list_of_Keywords_case_edit>li>p.Category_Name").get(i).innerText;
+        var sliderValue = $("#list_of_Keywords_case_edit>li>input.slider").get(i).value;
+
+        //array_CategoryName.push(string);
+        array_CategroyID.push(searchForIDOfCategory(string, Categories_From_DB));
+        array_CategoryValue.push(sliderValue/100);
+        i = c;
+    }
+
+    var result = $.post( 'include/EditCaseAdmin.php', {
+        caseID: Edit_Case_Array[0].caseId,
+        id: JSON.stringify(array_CategroyID),
+        value: JSON.stringify(array_CategoryValue)
+    })
 });

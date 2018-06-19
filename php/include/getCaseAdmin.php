@@ -18,7 +18,7 @@ function getCase($connection)
 	{
 		$caseName = filter_input(INPUT_POST, 'caseName');
 	
-		$sqlStmt = "SELECT Cases.id AS caseid, Cases.name AS casename ,Cases_Kategorie_Values.kategorieid AS casekategorie, Cases_Kategorie_Values.value AS casevalue, CBR_ICF_Kategorie.DE AS katname  FROM Cases, Cases_Kategorie_Values, CBR_ICF_Kategorie WHERE Cases.name = ('$caseName') AND Cases_Kategorie_Values.caseid = Cases.id AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid ORDER BY Cases.id;";
+		$sqlStmt = "SELECT Cases.id AS caseid, Cases.name AS casename ,Cases_Kategorie_Values.kategorieid AS casekategorie, Cases_Kategorie_Values.value AS casevalue, CBR_ICF_Kategorie.DE AS katname  FROM Cases, Cases_Kategorie_Values, CBR_ICF_Kategorie WHERE Cases.name = ('$caseName') AND Cases_Kategorie_Values.caseid = Cases.id AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid ORDER BY Cases_Kategorie_Values.kategorieid ;";
 		
         $result =  mysqli_query($connection,$sqlStmt);
 		
