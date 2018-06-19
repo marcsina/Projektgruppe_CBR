@@ -13,7 +13,7 @@ function getMain($connection)
 
 function getCategories($connection)
 {
-    $sqlStmt = "SELECT * FROM Cases ORDER BY id;";
+    $sqlStmt = "SELECT * FROM CBR_ICF_Kategorie ORDER BY id;";
 
         $result =  mysqli_query($connection,$sqlStmt);
         $data = array();
@@ -22,10 +22,9 @@ function getCategories($connection)
             while ($row = $result->fetch_assoc())
             {
                 $id = $row["id"];
-                $name = $row["name"];
-				$text = $row["text"];
+                $DE = $row["DE"];
 
-                array_push($data,array("ID"=> $id,"name"=>$name));
+                array_push($data,array("ID"=> $id,"DE"=>$DE));
             }
 
             // Objekt freigeben
@@ -37,9 +36,9 @@ function getCategories($connection)
         foreach ($data as $d)
         {
             $id = $d["ID"];
-            $name = $d["name"];
+            $DE = $d["DE"];
 
-            echo utf8_decode("$id,$name");
+            echo utf8_decode("$id,$DE");
             echo ";";
         }
 
