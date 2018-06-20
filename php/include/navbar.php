@@ -22,7 +22,7 @@
 					<a href="Quiz.php">Quiz</a>
 				</li>
 				<li class="menuItem">
-					<a href="#...">Checker</a>
+					<a href="checker1.php">Checker</a>
 				</li>
 
 				<li class="menuItem">
@@ -33,6 +33,9 @@
 				</li>
 				<li class="menuItem">
 					<a href="#contact">Kontakt</a>
+				</li>
+				<li class="menuItem">
+					<a href="profil.php">Profil</a>
 				</li>
 			</ul>
 		</div>
