@@ -1,5 +1,5 @@
 <nav class="navbar-default navbar-fixed-top" role="navigation">
-	<!-- role für browser zur                                                                            erkennung-->
+	<!-- role fï¿½r browser zur                                                                            erkennung-->
 	<div class="container">
 		<div class="navbar-header ">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -29,7 +29,7 @@
 					<a href="#...">Classroom</a>
 				</li>
 				<li class="menuItem">
-					<a href="#...">Forum</a>
+					<a href="forum.php">Forum</a>
 				</li>
 				<li class="menuItem">
 					<a href="#contact">Kontakt</a>

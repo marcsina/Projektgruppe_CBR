@@ -24,6 +24,8 @@
 
 table, th, td {
     border: 1px solid black;
+    border-right: none;
+	border-left: none;
 }
 
 table > tbody > tr > th {
@@ -31,6 +33,8 @@ table > tbody > tr > th {
 	padding:5px;
 	color: black;
 	font-size: 20px;
+	border-right: none;
+	border-left: none;
 }
 
 table > tbody > tr > td {
@@ -38,6 +42,8 @@ table > tbody > tr > td {
 	padding:5px;
 	color: black;
 	font-size: 20px;
+	border-right: none;
+	border-left: none;
 }
 
 body {
