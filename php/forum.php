@@ -50,13 +50,13 @@ if (login_check($mysqli) == true) {
             $result3 = $value2->fetch_assoc();
             ?>
             
-            <li><a><button type="submit" name="kategorie" value=<?php echo $result2['k']?>>-><?php echo $result3['n']?></button></a></li>  
+            <li><a><button type="submit" name="kategorie" value=<?php echo $result2['k']?>>-> <?php echo $result3['n']?></button></a></li>  
             
             <?php
             $value = $mysqli->query("SELECT titel as n FROM Forum_Topic WHERE id = '".$_POST["topic"]."';");
             $result2 = $value->fetch_assoc();
             ?>
-            <li><a>-><?php echo $result2['n']?></a></li>
+            <li><a>-> Topic: <?php echo $result2['n']?></a></li>
             <?php
         }
         else if(isset($_POST["kategorie"]))
@@ -64,7 +64,7 @@ if (login_check($mysqli) == true) {
             $value = $mysqli->query("SELECT name as n FROM Forum_Kategorie WHERE id = '".$_POST["kategorie"]."';");
             $result2 = $value->fetch_assoc();
             ?>
-            <li><a>-><?php echo $result2['n']?></a></li>
+            <li><a>-> <?php echo $result2['n']?></a></li>
             <?php
         }
         ?>
@@ -81,7 +81,7 @@ if (login_check($mysqli) == true) {
         $result2 = $value->fetch_assoc();
         ?>
         <tr>
-            <th style = "min-width: 200px">Thema</th>
+            <th style = "min-width: 200px">Thema:</th>
             <th style = "min-width: 900px"><?php echo $result2['t']?></th>
             <th></th>
         </tr>
@@ -95,14 +95,14 @@ if (login_check($mysqli) == true) {
             while ($row = $result->fetch_assoc())
             {
                 ?>                
-                <tr style = "border: 1px solid black">
+                <tr style = "">
                 	<?php
                 	$value = $mysqli->query("SELECT username as n FROM members WHERE id = '".$row['user']."';");
                     $result2 = $value->fetch_assoc();
                     ?>
-                    <td style = "border: 1px solid black;vertical-align:top;">Name: <?php echo $result2['n']?></td>
-                    <td style = "border: 1px solid black"><?php echo $row['inhalt']?> <br><br>geschrieben am: <?php echo $row['datum']?></td>
-                    <td style = "border: 1px solid black"><?php echo $row['beitragsnr']?></td>
+                    <td style = "vertical-align:top;padding:10px;"><?php echo $result2['n']?></td>
+                    <td style = "padding:10px;"><?php echo $row['inhalt']?> <br><br><div style="font-size: 12px;font-color: #D3D3D3;">geschrieben am: <?php echo $row['datum']?></div></td>
+                    <td style = ""><?php echo $row['beitragsnr']?></td>
                 </tr>      
             	<?php
             }
