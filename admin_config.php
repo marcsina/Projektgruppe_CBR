@@ -60,6 +60,7 @@ if (login_check($mysqli) == true) {
             <li class="active"><a href="#addNewCase">Neuen Case einpflegen</a></li>
             <li><a href="#addNewCategory">Neue Kategorie hinzufügen</a></li>
             <li><a href="#editCase">Case bearbeiten</a></li>
+            <li><a href="#editSymptom">Kategorie bearbeiten</a></li> //dati!!!!!!!!!!!
         </ul>
         <div class="tab-content">
 
