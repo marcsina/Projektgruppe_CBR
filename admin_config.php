@@ -59,7 +59,7 @@ if (login_check($mysqli) == true) {
         <ul class="nav nav-tabs">
             <li class="active"><a href="#addNewCase">Neuen Case einpflegen</a></li>
             <li><a href="#addNewCategory">Neue Kategorie hinzufügen</a></li>
-            <li><a href="#editCase">Case bearbeiten</a></li>
+            <li><a href="#editCase">Case bearbeitenn</a></li>
         </ul>
         <div class="tab-content">
 
