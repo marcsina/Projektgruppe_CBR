@@ -58,9 +58,9 @@ if (login_check($mysqli) == true) {
 
         <ul class="nav nav-tabs">
             <li class="active"><a href="#addNewCase">Neuen Case einpflegen</a></li>
+			<li><a href="#editCase">Case bearbeiten</a></li>
             <li><a href="#addNewCategory">Neue Kategorie hinzufügen</a></li>
-            <li><a href="#editCase">Case bearbeiten</a></li>
-
+			<li><a href="#editCategory">Kategorie bearbeiten</a></li>
         </ul>
         <div class="tab-content">
 
@@ -181,13 +181,47 @@ if (login_check($mysqli) == true) {
                         <button class="btn btn-primary" type="submit" id="btn_edit_case_save_to_db">Case Speichern</button>
                     </form>
                 </div>
-            </div>
-        </div>
+			</div>
+
+
+			<!--EditCategory-->
+				<div class="tab-pane fade" id="editCategory">
+                <div class="admin_main">
+                    <h3>Kategorie Editieren</h3>
+                    <!--Kategorienameneingeben-->
+                    <div class="col-md-6 col-sm-12">                        
+                        <form class="myForm" autocomplete="off">
+                            <div class="form-group autocomplete">
+                                <label for="edit_Category_Name">Name der Kategorie</label>
+                                <input type="text" class="form-control" id="edit_Category_Name" placeholder="Casename">
+                            </div>
+                            <button class="btn btn-primary" type="reset" id="btn_load_Category">Kategorie laden</button>
+                        </form>
+                    </div>
+
+                    <!--Liste der Category-->
+                    <div class="col-md-6 col-sm-12 auto" id="div_edit_category">
+                        <h4>Symptom hinzufügen</h4>
+                        <form class="myForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="add_new_symptom" placeholder="Symptomname">
+                            </div>
+                            <button class="btn btn-primary" type="submit" id="btn_add_new_symptom">Symptom Hinzufügen</button>
+                        </form>
+
+                        <label>Vorhandene Symptome in gekürzter Form</label>
+                        <ul id="list_of_symptoms_category_edit"></ul>
+                    </div>
+                </div>
+                <div class="Adding_Category col-md-12 col-sm-12">
+                    <hr>
+                    <form class="myForm">
+                        <button class="btn btn-primary" type="submit" id="btn_edit_category_save_to_db">Kategorie Speichern</button>
+                    </form>
+                </div>
+			</div>
+		</div>
     </div>
-
-
-
-
 
     <div id="txtHint" style="display:none"><b>Person info will be listed here...</b></div>
     <div id="pastHint" style="display:none"><b>Person info will be listed here...</b></div>

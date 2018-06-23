@@ -162,3 +162,7 @@ autocomplete-items div {
 #div_edit_case {
     visibility: hidden;
 }
+
+#div_edit_category {
+    visibility: hidden;
+}
