@@ -6,6 +6,9 @@ var Categories_Name_Array = new Array();
 var Keywords_Name_Array = new Array();
 var Edit_Case_Array = new Array();
 var Edit_Category_Array = new Array();
+var Cases_From_DB = new Array();
+var Cases_Name_Array = new Array();
+var Case_To_Delete_Array = new Array();
 
 //Classes
 class Category_Word_ID
@@ -18,6 +21,15 @@ class Category_Word_ID
     }
 }
 
+class Case_Base
+{
+    constructor( id, name )
+    {
+        this.id = id;
+        this.name = name;
+    }
+
+}
 class Case
 {
     constructor( caseId, caseName, katName, katId, katValue )
@@ -32,7 +44,7 @@ class Case
 
 class Symptom
 {
-    constructor( ICFid, name)
+    constructor( ICFid, name )
     {
         this.ICFid = ICFid;
         this.name = name;
@@ -44,11 +56,13 @@ $( document ).ready( function ()
     //get Keywords and store them in hidden fields
     getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
     getKeywordsFromDatabase2( "dementia", Keywords_From_DB, Keywords_Name_Array );
+    getCasesFromDatabase( "dementia", Cases_From_DB, Cases_Name_Array );
 } );
 //Activate autocomplete at inputfields by ID
 autocomplete( document.getElementById( "add_new_Category" ), Categories_Name_Array );
 autocomplete( document.getElementById( "add_new_Category_Category_Name" ), Categories_Name_Array );
 autocomplete( document.getElementById( "edit_Category_Name" ), Categories_Name_Array );
+autocomplete( document.getElementById( "delete_Case_Name" ), Cases_Name_Array );
 
 //Update slider when page is loaded, due to the circumstance that forms, are not reseting
 updateSlider( $( "#add_new_Category_Slider" ).val(), "add_new_Category_Slider_Value" );
@@ -83,16 +97,21 @@ function getCategoriesFromDatabase( database, array, array_Name )
                 {
                     array2.push( array1[i].split( "," ) );
                 }
-                Categories_From_DB = [];
-                Categories_Name_Array = [];
+
+                Categories_From_DB = new Array();
+                Categories_Name_Array = new Array();
                 for ( i = 0; i < array2.length; i++ )
                 {
-                    array.push( new Category_Word_ID( array2[i][0], array2[i][1] ) );
-                    array_Name.push( array2[i][1] );
+                    Categories_From_DB.push( new Category_Word_ID( array2[i][0], array2[i][1] ) );
+                    Categories_Name_Array.push( array2[i][1] );
                 }
+
+                autocomplete( document.getElementById( "add_new_Category" ), Categories_Name_Array );
+                autocomplete( document.getElementById( "add_new_Category_Category_Name" ), Categories_Name_Array );
+                autocomplete( document.getElementById( "edit_Category_Name" ), Categories_Name_Array );
             }
         };
-        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getCategories.php", true );
+        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getCategories.php", false );
         xmlhttp.send();
     }
 }
@@ -127,18 +146,65 @@ function getKeywordsFromDatabase2( database, givenArray, givenArray2 )
                 {
                     array_zweite_Stufe.push( array_erste_Stufe[i].split( ',' ) );
                 }
-                Keywords_From_DB = [];
-                Keywords_Name_Array = [];
+                Keywords_From_DB = new Array();
+                Keywords_Name_Array = new Array();
                 //Zweite Stufe als Klassen erstellen und in array_keywords speichern
                 var array_keywords = new Array();
                 for ( i = 0; i < array_zweite_Stufe.length; i++ )
                 {
-                    givenArray.push( new KeywordList( array_zweite_Stufe[i][0].toLowerCase(), array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
-                    givenArray2.push( array_zweite_Stufe[i][0].toLowerCase() );
+                    Keywords_From_DB.push( new KeywordList( array_zweite_Stufe[i][0].toLowerCase(), array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
+                    Keywords_Name_Array.push( array_zweite_Stufe[i][0].toLowerCase() );
                 }
             }
         };
-        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getKeywords.php", true );
+        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getKeywords.php", false );
+        xmlhttp.send();
+    }
+}
+
+function getCasesFromDatabase( database, givenArray, givenArray2 )
+{
+    if ( database === "" )
+    {
+        return;
+    } else
+    {
+        if ( window.XMLHttpRequest )
+        {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else
+        {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject( "Microsoft.XMLHTTP" );
+        }
+        xmlhttp.onreadystatechange = function ()
+        {
+            if ( this.readyState === 4 && this.status === 200 )
+            {
+                //String bei jedem ; splitten und in array packen
+                var array_erste_Stufe = this.responseText.split( ';' );
+
+                //Erste Stufe jeden eintrag bei , splitten und in neuen array packen
+                var array_zweite_Stufe = new Array();
+                for ( i = 0; i < array_erste_Stufe.length - 1; i++ )
+                {
+                    array_zweite_Stufe.push( array_erste_Stufe[i].split( ',' ) );
+                }
+                Cases_From_DB = new Array();
+                Cases_Name_Array = new Array();
+                //Zweite Stufe als Klassen erstellen und in array_keywords speichern
+                var array_keywords = new Array();
+                for ( i = 0; i < array_zweite_Stufe.length; i++ )
+                {
+                    Cases_From_DB.push( new Case_Base( array_zweite_Stufe[i][0], array_zweite_Stufe[i][1] ) );
+                    Cases_Name_Array.push( array_zweite_Stufe[i][1] );
+                }
+
+                autocomplete( document.getElementById( "delete_Case_Name" ), Cases_Name_Array );
+            }
+        };
+        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getCases.php", false );
         xmlhttp.send();
     }
 }
@@ -537,6 +603,7 @@ $( "#btn_load_case" ).click( function ( event )
     } );
 } );
 
+
 $( "#btn_edit_case_save_to_db" ).click( function ( event )
 {
 
@@ -584,7 +651,7 @@ $( "#btn_load_Category" ).click( function ( event )
         {
             array_zweiter_split[i] = array_erster_split[i].split( "," );
             add_Item_to_Category_list_category_edit( array_zweiter_split[i][1] );
-            Edit_Category_Array.push( new Symptom( array_zweiter_split[i][0], array_zweiter_split[i][1]) );
+            Edit_Category_Array.push( new Symptom( array_zweiter_split[i][0], array_zweiter_split[i][1] ) );
         }
 
         //make the div visible
@@ -613,33 +680,36 @@ $( "#btn_edit_category_save_to_db" ).click( function ( event )
         //TODO ADD Category TO DB WITH KAt ID AND EVERYTHING ELSE
         alert( "YAY\n" + array_of_keywords );
     }
-   
+
 } );
 
-$("#btn_add_new_symptom").click(function (event)
+$( "#btn_add_new_symptom" ).click( function ( event )
 {
-    getCategoriesFromDatabase("dementia", Categories_From_DB, Categories_Name_Array);
+    getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
 
-    getKeywordsFromDatabase2("dementia", Keywords_From_DB, Keywords_Name_Array);
+    getKeywordsFromDatabase2( "dementia", Keywords_From_DB, Keywords_Name_Array );
 
     var isAlreadyOnList = false;
-    for (i = 0; i < count_of_Sliders; i++) {
+    for ( i = 0; i < count_of_Sliders; i++ )
+    {
         var string = "Category_list_name_edit" + i;
-        if ($("#add_new_symptom").val() === $("#" + string).text()) {
+        if ( $( "#add_new_symptom" ).val() === $( "#" + string ).text() )
+        {
             isAlreadyOnList = true;
         }
 
     }
-    if ($("#add_new_symptom").val() !== "") {
-        if (isAlreadyOnList === false)
-            add_Item_to_Category_list_category_edit( $("#add_new_symptom").val());
+    if ( $( "#add_new_symptom" ).val() !== "" )
+    {
+        if ( isAlreadyOnList === false )
+            add_Item_to_Category_list_category_edit( $( "#add_new_symptom" ).val() );
         else
-            alert("Keyword schon auf der Liste");
+            alert( "Keyword schon auf der Liste" );
     } else
-        alert("Eingabefeld leer!");
+        alert( "Eingabefeld leer!" );
 
 
-});
+} );
 
 function add_Item_to_Category_list_category_edit( kategorie_name )
 {
@@ -662,3 +732,57 @@ function add_Item_to_Category_list_category_edit( kategorie_name )
 }
 
 //-------------------------------------------------------------------
+
+//------------------Delete Case-------------------
+$( "#btn_load_case_in_delete" ).click( function ( event ) 
+{
+    Case_To_Delete_Array = [];
+    $.post( 'php/include/getCaseAdmin.php', {
+        caseName: $( "#delete_Case_Name" ).val()
+    } ).done( function ( data )
+    {
+
+        var array_erster_split = data.split( ";" );
+
+        var array_zweiter_split = new Array( array_erster_split.length );
+        for ( i = 0; i < array_erster_split.length - 1; i++ )
+        {
+            array_zweiter_split[i] = array_erster_split[i].split( "," );
+            add_Item_to_Category_list_case_delete( array_zweiter_split[i][2], array_zweiter_split[i][4] );
+
+            Case_To_Delete_Array.push( new Case( array_zweiter_split[i][0], array_zweiter_split[i][1], array_zweiter_split[i][2], array_zweiter_split[i][3], array_zweiter_split[i][4] ) );
+        }
+
+        //make the div visible
+        document.getElementById( "div_delete_case" ).style.visibility = "visible";
+
+    } );
+} );
+
+function add_Item_to_Category_list_case_delete( kategorie_name, sliderValue )
+{
+    //ADD BOX AROUND LIST
+    if ( $( "#list_of_case_delete" ).children().length === 0 )
+    {
+        $( "#list_of_case_delete" ).addClass( "list_admin" );
+    }
+    //CREATE NEW LIST ITEM WITH SLIDER ETC.
+    $( "#list_of_case_delete" ).append
+        (
+        $( '<li>' ).attr( 'id', "li_ID_edit" + count_of_Sliders ).append
+            ( $( '<p>' ).attr( 'class', "Category_Name" ).attr( 'id', "Case_list_name_edit" + count_of_Sliders ).append
+                ( "<B>" + kategorie_name + "</B>" )
+            ).append
+            ( $( '<p>' ).attr( 'id', "slider_value_edit_" + count_of_Sliders ).attr( 'class', "Slider_Value" ).append( "Gewicht: " + Math.round( sliderValue ) + "%" ) ).append
+            ( $( '<input>' ).attr( 'type', "range" ).attr( 'min', "0" ).attr( 'max', "100" ).attr( 'value', Math.round( sliderValue ) ).attr( 'class', "slider" ).attr( 'id', "slider" + count_of_Sliders ).attr( 'step', "10" ).attr('disabled', "true")
+            )
+        );
+    count_of_Sliders++;
+}
+
+$( "#btn_delet_case_from_db" ).click( function ( event )
+{
+    $.post( 'php/include/DeleteCaseAdmin.php', {
+        CaseID: Case_To_Delete_Array[0].caseId
+    } );
+} );

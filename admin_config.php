@@ -49,21 +49,17 @@ if (login_check($mysqli) == true) {
             include ("php/include/navbar.php");
     ?>
 
-    
-
-
-
     <div class="container">
         <h2>Adminfunktionen</h2>
 
         <ul class="nav nav-tabs">
             <li class="active"><a href="#addNewCase">Neuen Case einpflegen</a></li>
 			<li><a href="#editCase">Case bearbeiten</a></li>
+			<li><a href="#deleteCase">Case löschen</a></li>
             <li><a href="#addNewCategory">Neue Kategorie hinzufügen</a></li>
 			<li><a href="#editCategory">Kategorie bearbeiten</a></li>
         </ul>
         <div class="tab-content">
-
 
             <div class="tab-pane fade in active" id="addNewCase">
                 <div class="admin_main">
@@ -107,7 +103,36 @@ if (login_check($mysqli) == true) {
                 </div>
             </div>
 
+			<div class="tab-pane fade" id="deleteCase">
+                <div class="admin_main">
+                    <h3>Case Editieren</h3>
+                    <!--Kategorienameneingeben-->
+                    <div class="col-md-6 col-sm-12">                        
+                        <form class="myForm" autocomplete="off">
+                            <div class="form-group autocomplete">
+                                <label for="delete_Case_Name ">Name des Cases</label>
+                                <input type="text" class="form-control" id="delete_Case_Name" placeholder="Casename">
+                            </div>
+                            <button class="btn btn-primary" type="reset" id="btn_load_case_in_delete">Case laden</button>
+                        </form>
+                    </div>
 
+                    <!--Liste der Category-->
+                    <div class="col-md-6 col-sm-12 auto" id="div_delete_case">
+
+                        <label>Vorhandene Kategorien</label>
+                        <ul id="list_of_case_delete"></ul>
+
+                        
+                    </div>
+                </div>
+                <div class="Adding_Category col-md-12 col-sm-12">
+                    <hr>
+                    <form class="myForm">
+                        <button class="btn btn-primary" type="submit" id="btn_delet_case_from_db">Case löschen</button>
+                    </form>
+                </div>
+			</div>
 
             <div class="tab-pane fade" id="addNewCategory">
                 <div class="admin_main">
@@ -129,7 +154,7 @@ if (login_check($mysqli) == true) {
                         <form class="myForm">
                             <div class="form-group">
                                 <label for="add_new_Keyword">Keyword für Kategorie</label>
-                                <input type="text" class="form-control" id="add_new_Keyword" placeholder="Kategoriename">
+                                <input type="text" class="form-control" id="add_new_Keyword" placeholder="Keyword">
                             </div>
                             <button class="btn btn-primary" type="submit" id="btn_add_new_Keyword">Keyword Hinzufügen</button>
                         </form>
@@ -183,7 +208,6 @@ if (login_check($mysqli) == true) {
                 </div>
 			</div>
 
-
 			<!--EditCategory-->
 				<div class="tab-pane fade" id="editCategory">
                 <div class="admin_main">
@@ -193,7 +217,7 @@ if (login_check($mysqli) == true) {
                         <form class="myForm" autocomplete="off">
                             <div class="form-group autocomplete">
                                 <label for="edit_Category_Name">Name der Kategorie</label>
-                                <input type="text" class="form-control" id="edit_Category_Name" placeholder="Casename">
+                                <input type="text" class="form-control" id="edit_Category_Name" placeholder="Kategoriename">
                             </div>
                             <button class="btn btn-primary" type="reset" id="btn_load_Category">Kategorie laden</button>
                         </form>
