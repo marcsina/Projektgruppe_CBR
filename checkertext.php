@@ -65,17 +65,14 @@ if (login_check($mysqli) == true) {
         <div class="col-md-offset-1 col-md-5 col-sm-6 ">
 
             <form class="col-md-5">
-            
-               
-                <textarea  class="textar" id="text" name="text"  ></textarea>
-               
+                          
+                <textarea  class="textar" id="textarea_eingabe" name="text"  ></textarea>               
                 
             </form>
             </div>
 
-             <section class="col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-5 tableau">
-            </br>
-            <div class="row">
+             <section class="col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-5 tableau" id="section_symptoms">
+             <!--<div class="row">
               <div class="col-md-3 col-sm-3">vergesslichkeit</div>  
              <div class=" col-md-offset-2 col-md-6 col-sm-offset-1 col-sm-7 btn-group ">
                  <button class="btn btn-info btn-sm" >klein</button>
@@ -94,7 +91,7 @@ if (login_check($mysqli) == true) {
                    <button class="btn btn-danger btn-sm">hoch</button>
                   </div>
                   <div class=" col-md-1"> <button type="button" class="close btn btn-info" data-dismiss="modal">x</button></div> 
-            </div>
+            </div>-->
             
             
            
@@ -110,8 +107,8 @@ if (login_check($mysqli) == true) {
         
         </br >
         <div class="row">
-              <button class=" col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-2 btn btn-success type="submit" ">Submit</button>
-            <button class=" col-md-offset-5 col-md-1 col-sm-offset-5 col-sm-2 btn btn-success type="submit" ">Starten</button>
+			<button id="btn_submit" class=" col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-2 btn btn-success type=" submit" ">Submit</button>
+            <button id="btn_start" class=" col-md-offset-5 col-md-1 col-sm-offset-5 col-sm-2 btn btn-success type=" submit" ">Starten</button>
 
 
             
@@ -124,17 +121,10 @@ if (login_check($mysqli) == true) {
          </div>
      
        <div class="row">
-            <section class=" col-md-offset-4 col-md-5 col-sm-offset-4 col-sm-5 tableau2"></section>
-            
-
-
-        
-
-
-       
-
-
-        </div>
+            <section class=" col-md-offset-4 col-md-5 col-sm-offset-4 col-sm-5 tableau2">
+				<div id='div_ausgabe'></div>
+			</section>-
+       </div>
 
 
         <!--____________________________________________________________________________________________________-->
@@ -147,6 +137,8 @@ if (login_check($mysqli) == true) {
         <script src="js/bootstrap.min.js"></script>
         <script src="js/script.js"></script>
         <script src="js/code.js"></script>
+		<script src="js/CBR.js"></script>
+		<script src="js/Checker_text.js"></script>
 
     </body>
 

@@ -97,7 +97,7 @@ if (login_check($mysqli) == true) {
         <div class="row">
             <section class=" col-md-offset-4 col-md-5 col-sm-offset-4 col-sm-5 tableau2">
 				<div id='div_ausgabe'></div>
-			</section>-
+			</section>
 			
         </div>
 

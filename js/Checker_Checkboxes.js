@@ -1,3 +1,11 @@
+/*
+	TO-DO:
+	- Submit Button benötigt 2 Klicks ???
+	- Autocomplete
+	- CBR aktuell nur für ersten 10 Fälle, da Aufbau DB sich geändert hat
+	- Farben Impaitment Buttons
+*/
+
 $(document).ready(function () {
 	cbr.loadIncomingCase("no name", "no text");
 	loadSymptoms();
