@@ -30,22 +30,13 @@
 		this.incomingCase = this.Cases[nr];
 	}
 
-	loadIncomingCase() {
-		this.incomingCase = new Case(-1, "Incoming Case", $("#input-textarea").text());
-		var i;
-		var k;
-		var value = 0;
+	loadIncomingCase(name, text) {
+		this.incomingCase = new Case(-1, name, text);
 
-		for (i = 0; i < this.Cases[0].Symptoms.length; i++) {
-            for ( k = 0; k < absolute_final_array.length; k++) {							
-                if ( i == absolute_final_array[k].katID) {
-                    value = absolute_final_array[k].weight;	
-				}
-			}
-			this.incomingCase.Symptoms.push(new Symptom(i, "bla", value));
-			value = 0;
-		}
-		
+		// Gets Categories for Symptoms from Database and stores them into an Array
+		getCategoriesFromDatabase("MedAusbildSS18", this.incomingCase.Symptoms);
+
+		//alert(this.incomingCase.Symptoms[4].id);
 	}
 
 	// Vergleich zwischen Incoming Case und Case Base
@@ -206,6 +197,37 @@ function getCasesFromDatabase(database) {
 	}
 }
 
+//Original from admin_config
+//Get Categories from DB
+function getCategoriesFromDatabase(database, array_symptoms) {
+	if (database === "") {
+		return;
+	} else {
+		if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {
+			// code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function () {
+			if (this.readyState === 4 && this.status === 200) {
+
+				var array_split_IntoDatasets = this.responseText.split(";");
+				var array_split_DatasetsIntoSingleData = new Array();
+				for (i = 0; i < array_split_IntoDatasets.length - 1; i++) {
+					array_split_DatasetsIntoSingleData.push(array_split_IntoDatasets[i].split(","));
+				}
+				for (i = 0; i < array_split_DatasetsIntoSingleData.length; i++) {
+					array_symptoms.push(new Symptom(array_split_DatasetsIntoSingleData[i][0], array_split_DatasetsIntoSingleData[i][1], 0));
+				}
+			}
+		};
+		xmlhttp.open("GET", "http://141.99.248.92/Projektgruppe/php/include/getCategories.php", false);
+		xmlhttp.send();
+	}
+}
+
 function AddCase_Check(form,name,beschreibung,hiddenkat) {
 	
 	var supercase = new Case(0,name.value+"", beschreibung.value+"");
@@ -225,14 +247,18 @@ function AddCase_Check(form,name,beschreibung,hiddenkat) {
 	return true;
 }
 
-$(document).ready(function () { getCasesFromDatabase("MedAusbildSS18"); });
+$(document).ready(function () {
+	getCasesFromDatabase("MedAusbildSS18");
+});
+
+var cbr = new CBR();
 
 $('#cbr').click(function () {
 
 	var testcbr = new CBR();
 	testcbr.loadAllArrays();
 	
-	testcbr.loadIncomingCase();
+	/*testcbr.loadIncomingCase();
 	testcbr.ergebnisse = testcbr.ergebnisse + "---------------------------------------------------------------------------------------Incoming Case<br>";
 	testcbr.ergebnisse = testcbr.ergebnisse + "<pre style=\"color:#000000;\">"
 	testcbr.ergebnisse = testcbr.ergebnisse + "                          Simple<br><br>";
@@ -254,6 +280,6 @@ $('#cbr').click(function () {
 	testcbr.calculateSimilarityComplex();
 	testcbr.ergebnisse = testcbr.ergebnisse + "</pre>"
 	testcbr.ergebnisse = testcbr.ergebnisse + "---------------------------------------------------------------------------------------Ende CBR<br>";
-	$("#CBRtestfeld").html(testcbr.ergebnisse);
+	$("#CBRtestfeld").html(testcbr.ergebnisse);*/
 	
 });

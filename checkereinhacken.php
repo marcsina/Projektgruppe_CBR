@@ -117,16 +117,18 @@ if (login_check($mysqli) == true) {
 
         </div>
 
-
+		<div id="txtHint" style="display:none"><b>CaseBase Categories will be displayed here</b></div>
 
         <!--____________________________________________________________________________________________________-->
         <!-- Scripts -->
         <script src="js/german-porter-stemmer.js"></script>
         <script src="js/jquery-2.2.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/script.js"></script>
+		<script src="js/script.js"></script>	
         <script src="js/code.js"></script>
+		<script src="js/CBR.js"></script>
 		<script src="js/Checker_Checkboxes.js"></script>
+		
 
     </body>
 

@@ -1,17 +1,18 @@
 $(document).ready(function () {
+	cbr.loadIncomingCase("no name", "no text");
 	loadSymptoms();
 });
 
 var ergebnis = new Array();
 
 function loadSymptoms() {
-	//TO-DO: Symptome aus der Datenbank laden
-	var symptome = ["Kopfschmerzen", "Fussschmerzen", "Herzschmerz", "Juckreiz", "Vergesslichkeit"];
+	//TO-DO: Symptome aus der Datenbank laden	
+
 	var i;
-	for (i = 0; i < symptome.length; i++) {
-		var symptom = symptome[i];
+
+	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
 		//TO-DO: Beschreibungen der Symptome in Datenbank einfügen
-		$('#form_symptoms').append('<div id=' + 'div_' + symptome[i] + ' class="row"><label class="col-md-4" for= "1" > <abbr title="TO-DO: Beschreibungen von Symptomen in DB">' + symptome[i] + '</abbr></label><input class="col-md-4 checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + symptome[i] + '></div>');
+		$('#form_symptoms').append('<div id=' + 'div_' + i + ' class="row"><label class="col-md-4" for= "1" > <abbr title="TO-DO: Beschreibungen von Symptomen in DB">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</abbr></label><input class="col-md-4 checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + i + '></div>');
 	}
 }
 
@@ -25,29 +26,27 @@ $('#btn_start').click(function () {
 	//AlertAusgabe ersetzen durch Auswertung und anschließender Ausgabe in einem Textfeld
 	var i;
 	var ausgabe = "";
-	for (i = 1; i < ergebnis.length+1; i++) {
-		ausgabe = ausgabe + "Symptom " + i + ": " + ergebnis[i-1] + "\n";
+	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
+		ausgabe = ausgabe + "Symptom " + parseInt(i * 1 + 1*1) + ": " + cbr.incomingCase.Symptoms[i].name + " Wert: " + cbr.incomingCase.Symptoms[i].wert + "\n";
 	}
 	alert(ausgabe);
 });
 
-// Wird ausgeführt beim Nnklicken einer Checkbox
+// Wird ausgeführt beim Anklicken einer Checkbox
 $('body').on('click', '.checkboxes', function () {
 	var clickedBtnID = $(this).attr('id');
 	var idOhnePrefix = clickedBtnID.replace(/.*_/g, "");
 
 	if ($("#" + clickedBtnID).is(':checked')) {
 		// checked
-		$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="row"><br><div class="col-md-3 col-sm-3">' + idOhnePrefix + '</div > <div class=" col-md-offset-2 col-md-6 col-sm-offset-2 col-sm-7 btn-group " data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
-		//TO-DO: Standardwert für Symptom setzen
-		ergebnis.push(idOhnePrefix);
+		$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="row"><br><div class="col-md-3 col-sm-3">' + parseInt(idOhnePrefix*1 + 1*1) + ': ' + cbr.incomingCase.Symptoms[idOhnePrefix].name + '</div > <div class=" col-md-offset-2 col-md-6 col-sm-offset-2 col-sm-7 btn-group " data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
+		// Standardwerte setzen
+		$('#' + 'btn_klein_' + idOhnePrefix).click();
 	}
 	else {
 		// unchecked
-		$('#' + 'div_impairment' + idOhnePrefix).remove();
-		//TO-DO: Symptom Wert zurücksetzen (0); Vielleicht unnötig
-		var index = ergebnis.indexOf(idOhnePrefix);
-		ergebnis.splice(index, 1);
+		$('#' + 'div_impairment_' + idOhnePrefix).remove();
+		cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0;
 	}	
 
 
@@ -57,19 +56,18 @@ $('body').on('click', '.checkboxes', function () {
 $('body').on('click', 'button.impairmentbutton', function () {
 	var clickedBtnID = $(this).attr('id');
 	var idOhnePrefix = clickedBtnID.replace(/.*_/g, "");
-	var impairment = "";
 
 	if (clickedBtnID.includes("klein")) {
-		alert("Symptom: " + idOhnePrefix + " - " + "geringer Einfluss");
+		cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.3;
 	}
 	if (clickedBtnID.includes("mittel")) {
-		alert("Symptom: " + idOhnePrefix + " - " + "mittlerer Einfluss");
+		cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.6;
 	}
 	if (clickedBtnID.includes("hoch")) {
-		alert("Symptom: " + idOhnePrefix + " - " + "riesiger Einfluss");
+		cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.9;
 	}
-	
-	//TO-DO: Stärke im Symptom gemäß Eingabe aktualisieren
+
+	// TO-DO: Farben anpassen
 });
 
 // X Button Rechte Seite
@@ -80,6 +78,7 @@ $('body').on('click', 'button.xbutton', function () {
 	$('#div_impairment_' + idOhnePrefix).remove();
 	// Entsprechende Checkbox auf "unchecked" setzen
 	$("#checkbox_" + idOhnePrefix).prop("checked", false);
+	// Symptom Wert auf 0 setzen
+	cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0;
 
-	//TO-DO: Stärke im Symptom gemäß Eingabe aktualisieren
 });
