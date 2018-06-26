@@ -75,16 +75,7 @@ if (login_check($mysqli) == true) {
 
             </div>
 
-            <section id="section_symptoms" class="col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-5 tableau">
-                
-
-
-
-
-
-
-
-
+            <section id="section_symptoms" class="col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-5 tableau">              
 
             </section>
 
@@ -95,7 +86,6 @@ if (login_check($mysqli) == true) {
             <button id="btn_submit" class=" col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-2 btn btn-success type=" submit" ">Submit</button>
             <button id="btn_start" class=" col-md-offset-5 col-md-1 col-sm-offset-5 col-sm-2 btn btn-success type=" submit" ">Starten</button>
 
-
         </div>
 
         <div class="row">
@@ -105,19 +95,13 @@ if (login_check($mysqli) == true) {
         </div>
 
         <div class="row">
-            <section class=" col-md-offset-4 col-md-5 col-sm-offset-4 col-sm-5 tableau2"></section>
-
-
-
-
-
-
-
-
-
+            <section class=" col-md-offset-4 col-md-5 col-sm-offset-4 col-sm-5 tableau2">
+				<div id='div_ausgabe'></div>
+			</section>
+			
         </div>
 
-		<div id="txtHint" style="display:none"><b>CaseBase Categories will be displayed here</b></div>
+		<div id="cbrhint" style="display:none"><b>CaseBase Categories will be displayed here</b></div>
 
         <!--____________________________________________________________________________________________________-->
         <!-- Scripts -->
