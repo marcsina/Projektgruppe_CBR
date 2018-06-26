@@ -35,12 +35,11 @@
 
 		// Gets Categories for Symptoms from Database and stores them into an Array
 		getCategoriesFromDatabase("MedAusbildSS18", this.incomingCase.Symptoms);
-
-		//alert(this.incomingCase.Symptoms[4].id);
 	}
 
 	// Vergleich zwischen Incoming Case und Case Base
 	calculateSimilarityComplex() {
+		this.ergebnisse = "";
 		var i;
 		for (i = 0; i < this.Cases.length; i++) {
 			var percentageValue = 0;
@@ -81,8 +80,10 @@
 	}
 	
 	calculateSimilaritySimple() {
-		var i;
-		for (i = 0; i < this.Cases.length; i++) {
+		this.ergebnisse = "";
+		var i;		
+		for (i = 0; i < 10; i++) {
+		//for (i = 0; i < this.Cases.length; i++) {
 			var percentageValue = 0;
 			var numberSymptoms = 0;
 			var zwischen = 0 ;
@@ -192,7 +193,7 @@ function getCasesFromDatabase(database) {
 				$("#cbrhint").text(this.responseText);
 			}
 		};
-		xmlhttp.open("GET", "http://141.99.248.92/Projektgruppe/php/include/getCaseValues.php", true);
+		xmlhttp.open("GET", "http://141.99.248.92/Projektgruppe/php/include/getCaseValues.php", false);
 		xmlhttp.send();
 	}
 }

@@ -6,8 +6,6 @@ $(document).ready(function () {
 var ergebnis = new Array();
 
 function loadSymptoms() {
-	//TO-DO: Symptome aus der Datenbank laden	
-
 	var i;
 
 	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
@@ -19,11 +17,12 @@ function loadSymptoms() {
 
 
 $('#btn_submit').click(function () {
-
+	cbr.loadAllArrays();
+	cbr.calculateSimilaritySimple();
+	$('#div_ausgabe').html(cbr.ergebnisse);
 });
 
 $('#btn_start').click(function () {
-	//AlertAusgabe ersetzen durch Auswertung und anschließender Ausgabe in einem Textfeld
 	var i;
 	var ausgabe = "";
 	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
@@ -67,7 +66,7 @@ $('body').on('click', 'button.impairmentbutton', function () {
 		cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.9;
 	}
 
-	// TO-DO: Farben anpassen
+	// TO-DO: Buttondesign anpassen
 });
 
 // X Button Rechte Seite
