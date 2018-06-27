@@ -32,8 +32,29 @@ if (login_check($mysqli) == true) {
     <?php
             include ("php/include/navbar.php");
     ?>
-    
-    
+    You are currently logged <?php echo $logged ?>.
+     <?php
+    if($logged == 'out')
+    {
+        ?>
+        <form style="margin-top: 0px;" action="php/include/login_process.php" method="post" name="login_form">                      
+            Email: <input type="text" name="email" />
+            Password: <input type="password" 
+                             name="password" 
+                             id="password"/>
+            <input type="button" 
+                   value="Login" 
+                   onclick="formhash(this.form, this.form.password);" /> 
+        </form>
+        <?php
+    }
+    else
+    {
+        ?>
+        If you are done, please <a href="php/include/logout.php">log out</a>.
+        <?php
+    }
+    ?>
         
 	
     
@@ -41,161 +62,32 @@ if (login_check($mysqli) == true) {
     	<form action="forum.php" method="post">
     	<ul class="nav top">
             <li><a href="forum.php">Forum</a></li>
-        <?php
-        if(isset($_POST["topic"]))
-        {
-            $value = $mysqli->query("SELECT kategorie as k FROM Forum_Topic WHERE id = '".$_POST["topic"]."';");
-            $result2 = $value->fetch_assoc();
-            $value2 = $mysqli->query("SELECT name as n FROM Forum_Kategorie WHERE id = '".$result2['k']."';");
-            $result3 = $value2->fetch_assoc();
-            ?>
-            
-            <li><a><button type="submit" name="kategorie" value=<?php echo $result2['k']?>>-> <?php echo $result3['n']?></button></a></li>  
-            
-            <?php
-            $value = $mysqli->query("SELECT titel as n FROM Forum_Topic WHERE id = '".$_POST["topic"]."';");
-            $result2 = $value->fetch_assoc();
-            ?>
-            <li><a>-> Topic: <?php echo $result2['n']?></a></li>
-            <?php
-        }
-        else if(isset($_POST["kategorie"]))
-        {
-            $value = $mysqli->query("SELECT name as n FROM Forum_Kategorie WHERE id = '".$_POST["kategorie"]."';");
-            $result2 = $value->fetch_assoc();
-            ?>
-            <li><a>-> <?php echo $result2['n']?></a></li>
-            <?php
-        }
-        ?>
         </ul>
         </form>
     <br>  
        
     <table>
-    	
-    <?php
-    if(isset($_POST["topic"]))
-    {
-        $value = $mysqli->query("SELECT titel as t FROM Forum_Topic WHERE id = '".$_POST["topic"]."';");
-        $result2 = $value->fetch_assoc();
-        ?>
-        <tr>
-            <th style = "min-width: 200px">Thema:</th>
-            <th style = "min-width: 900px"><?php echo $result2['t']?></th>
-            <th></th>
-        </tr>
-        <?php
-        $sqlStmt = "SELECT * FROM Forum_Beitrag WHERE topic = '".$_POST['topic']."';";
-        
-        $result =  mysqli_query($mysqli,$sqlStmt);
-        $data = array();
-        if ($result = $mysqli->query($sqlStmt))
-        {
-            while ($row = $result->fetch_assoc())
-            {
-                ?>                
-                <tr style = "">
-                	<?php
-                	$value = $mysqli->query("SELECT username as n FROM members WHERE id = '".$row['user']."';");
-                    $result2 = $value->fetch_assoc();
-                    ?>
-                    <td style = "vertical-align:top;padding:10px;"><?php echo $result2['n']?></td>
-                    <td style = "padding:10px;"><?php echo $row['inhalt']?> <br><br><div style="font-size: 12px;font-color: #D3D3D3;">geschrieben am: <?php echo $row['datum']?></div></td>
-                    <td style = ""><?php echo $row['beitragsnr']?></td>
-                </tr>      
-            	<?php
-            }
-        
-        // Objekt freigeben
-        $result->free();
-        }
-    }
-    else if(isset($_POST["kategorie"]))
-    {
-        ?>
-        <tr>
-            <th style = "min-width: 200px">Nr</th>
-            <th style = "min-width: 200px">Topic</th>
-            <th style = "min-width: 200px">Beiträge</th>
-            <th style = "min-width: 200px">Letzter Beitrag</th>
-        </tr>
-        <?php
-        $sqlStmt = "SELECT * FROM Forum_Topic WHERE kategorie = '".$_POST['kategorie']."';";
-        
-        $result =  mysqli_query($mysqli,$sqlStmt);
-        $data = array();
-        if ($result = $mysqli->query($sqlStmt))
-        {
-            while ($row = $result->fetch_assoc())
-            {
-                ?>
-                <form action="forum.php" method="post">
-                <tr>
-                    <td><?php echo $row['id']?></td>
-                    <td><button type="submit" name="topic" value=<?php echo $row['id']?>><?php echo $row['titel']?> </button></td>
-                    <?php
-                    $value = $mysqli->query("SELECT COUNT(*) as total FROM Forum_Beitrag WHERE topic = '".$row['id']."';");
-                    $result2 = $value->fetch_assoc();
-					?>
-                    <td><?php echo $result2['total']?></td>
-                    
-                    <?php
-                    $value = $mysqli->query("SELECT MAX(datum) as max FROM Forum_Beitrag WHERE topic = '".$row['id']."';");
-                    $result2 = $value->fetch_assoc();
-					?>
-                    <td><?php echo $result2['max']?></td>
-                </tr>
-                </form>
-            	<?php
-            }
-        
-        // Objekt freigeben
-        $result->free();
-        }
-    }
-    else
-    {
-        ?>
         <tr>
             <th style = "min-width: 200px">Nr</th>
             <th style = "min-width: 200px">Kategorie</th>
         </tr>
-        <?php
-        
-        $sqlStmt = "SELECT * FROM Forum_Kategorie;";
-        
-        $result =  mysqli_query($mysqli,$sqlStmt);
-        $data = array();
-        if ($result = $mysqli->query($sqlStmt))
-        {
-            while ($row = $result->fetch_assoc())
-            {
-                ?>
-                <form action="forum.php" method="post">
-                <tr>
-                    <td><?php echo $row['id']?></td>
-                    <td><button type="submit" name="kategorie" value=<?php echo $row['id']?>><?php echo $row['name']?> </button></td>
-                </tr>
-                </form>
-            	<?php
-            }
-        
-        // Objekt freigeben
-        $result->free();
-        }
-    }
-    
-    ?> 
+        <tr>
+            <td>1</td>
+            <td><a href="forum_demenz.php" style="color: black;text-decoration: none;">Demenz</a></td>
+        </tr>
     </table>           
         
  	</div>
+ 	
+ 	
 	<script src="js/jquery-2.2.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/snowball-german.js"></script>
     <script src="js/stopWords.js"></script>
     <script src="js/script.js"></script>
     <script src="js/autocomplete.js"></script>
+    <script type="text/JavaScript" src="js/sha512.js"></script> 
+    <script type="text/JavaScript" src="js/forms.js"></script> 
 
 </body>
 </html>
