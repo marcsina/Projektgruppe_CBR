@@ -8,21 +8,18 @@
 	}
 
 	loadAllArrays() {
-		var string_caseValues = $("#cbrhint").text();
 
+		//Loads All Cases from Database
+		getCasesFromDatabase("MedAusbildSS18", cbr.Cases);
+		//Fills all Cases with Symptoms
+		getCaseValuesFromDatabase("MedAusbildSS18", cbr.Cases);
 
-		var split_end = string_caseValues.split('[||separatorend||]');
-
-		var i;
-		for (i = 0; i < split_end.length; i++) {
-
-			var split_mid = split_end[i].split('(//separatormid//)');
-			if (this.Cases[split_mid[0] - 1] + "" === "undefined") {
-				this.Cases[split_mid[0] - 1] = new Case(split_mid[0] - 1, "fake", "faketext");
-			}
-			var symptom = new Symptom(split_mid[1], "name", split_mid[2]);
-			this.GiveCaseSymptom(split_mid[0] - 1, symptom);
+		var ausgabe = "";
+		/*for (i = 0; i < this.Cases[2].Symptoms.length; i++) {
+			ausgabe = ausgabe + "Symptom " + parseInt(i * 1 + 1 * 1) + ": " + this.Cases[0].Symptoms[i].id + " Wert: " + this.Cases[0].Symptoms[i].wert + "\n";
 		}
+		alert(ausgabe);*/
+
 
 	}
 
@@ -81,39 +78,65 @@
 	
 	calculateSimilaritySimple() {
 		this.ergebnisse = "";
-		var i;		
-		for (i = 0; i < 10; i++) {
-		//for (i = 0; i < this.Cases.length; i++) {
+		var i;
+		const copyArrayCaseSymptoms = this.Cases[1].Symptoms.slice();
+		const copyArrayIncomingCaseSymptoms = this.incomingCase.Symptoms.slice();
+		
+		for (i = 0; i < this.Cases.length; i++) {
 			var percentageValue = 0;
 			var numberSymptoms = 0;
 			var zwischen = 0 ;
 			var k;
-			for (k = 0; k < this.incomingCase.Symptoms.length; k++) {
-				var wij = 1;
+			const copyArrayCaseSymptoms = this.Cases[i].Symptoms.slice();
+			const copyArrayIncomingCaseSymptoms = this.incomingCase.Symptoms.slice();
 
-				if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert>0)
-				{
-					zwischen = 1;
-					numberSymptoms += 1;
-					percentageValue += zwischen*1;
-				}
-				else if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert==0)
-				{
+			//Symptome in eingehendem Fall überprüfen
+			for (k = copyArrayIncomingCaseSymptoms.length-1; k >= 0; k--) {
+				var wij = 1;
+				const index = copyArrayCaseSymptoms.map(e => e.id).indexOf(copyArrayIncomingCaseSymptoms[k].id);
+
+				//Symptom in eingehendem fall vorhanden, aber nicht in Fall aus CaseBase
+				if (index == -1) { 
 					zwischen = 0;
 					numberSymptoms += 1;
-					percentageValue += zwischen*1;
+					percentageValue += zwischen * 1;					
 				}
-				else if(this.incomingCase.Symptoms[k].wert==0&&this.Cases[i].Symptoms[k].wert>0)
-				{
-					zwischen = 0;
-					numberSymptoms += 1;
-					percentageValue += zwischen*1;
-				}
+				//Symptom in eingehendem Fall und in Fall aus Case Base vorhanden
+				else {
+					if (copyArrayIncomingCaseSymptoms[k].wert > 0 && copyArrayCaseSymptoms[index].wert > 0) {
+						zwischen = 1;
+						numberSymptoms += 1;
+						percentageValue += zwischen * 1;
+					}
+					else if (copyArrayIncomingCaseSymptoms[k].wert > 0 && copyArrayCaseSymptoms[index].wert == 0) {
+						zwischen = 0;
+						numberSymptoms += 1;
+						percentageValue += zwischen * 1;
+					}
+					else if (copyArrayIncomingCaseSymptoms[k].wert == 0 && copyArrayCaseSymptoms[index].wert > 0) {
+						zwischen = 0;
+						numberSymptoms += 1;
+						percentageValue += zwischen * 1;
+					}
+					copyArrayCaseSymptoms.splice(index, 1);
+				}				
+				copyArrayIncomingCaseSymptoms.splice(k, 1);				
+			}
+
+			//Symptome des Falles aus der Case base überprüfen
+			//Symptom in Fall aus Case Base vorhanden, aber nicht im eingehenden Fall
+			for (k = copyArrayCaseSymptoms.length - 1; k >= 0; k--) {
+				zwischen = 0;
+				numberSymptoms += 1;
+				percentageValue += zwischen * 1;
+
+				copyArrayCaseSymptoms.splice(k, 1);
+
 			}
 			var factor = Math.pow(10, 2);
 			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
-			this.ergebnisse = this.ergebnisse + "" + "incomingCase: " + this.incomingCase.id + "          Case: " + this.Cases[i].id + "          Similarity: " + this.Similarities[i] +"%<br>";
-		}
+			this.ergebnisse = this.ergebnisse + "" + "incomingCase: " + this.incomingCase.id + "          Case: " + this.Cases[i].id + "          Similarity: " + this.Similarities[i] + "%<br>";			
+		}		
 	}
 
 	GiveCaseSymptom(nr, S) {
@@ -176,7 +199,10 @@ class Symptom {
 	}
 }
 
-function getCasesFromDatabase(database) {
+var cbr = new CBR();
+
+//Gets all Symptoms and their values for all Cases
+function getCaseValuesFromDatabase(database, arrayCases) {
 	if (database === "") {
 		$("#cbrhint").html("Verbindung konnte nicht aufgebaut werden");
 		return;
@@ -190,10 +216,57 @@ function getCasesFromDatabase(database) {
 		}
 		xmlhttp.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
-				$("#cbrhint").text(this.responseText);
+				var split_end = this.responseText.split(';');
+				//alert(split_end.length); // = In DB 1540 einträge, aber split_end bzw. Server Response = 1513 ?????????????????????????????
+				var i;
+				for (i = 0; i < split_end.length; i++) {
+
+					var split_mid = split_end[i].split(',');
+
+					const index = cbr.Cases.map(e => e.id).indexOf(split_mid[0]);
+					
+					cbr.GiveCaseSymptom(index, new Symptom(split_mid[1], "name", split_mid[2]));
+				}
+				
 			}
 		};
+		
 		xmlhttp.open("GET", "http://141.99.248.92/Projektgruppe/php/include/getCaseValues.php", false);
+		xmlhttp.send();
+		
+	}
+}
+
+//Original function from admin_config
+//Gets Cases from DB
+function getCasesFromDatabase(database, arrayCases) {
+	if (database === "") {
+		return;
+	} else {
+		if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {
+			// code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function () {
+			if (this.readyState === 4 && this.status === 200) {
+				//String bei jedem ; splitten und in array packen
+				var array_erste_Stufe = this.responseText.split(';');
+
+				//Erste Stufe jeden eintrag bei , splitten und in neuen array packen
+				var array_zweite_Stufe = new Array();
+				for (i = 0; i < array_erste_Stufe.length - 1; i++) {
+					array_zweite_Stufe.push(array_erste_Stufe[i].split(','));
+				}
+				//Zweite Stufe als Klassen erstellen und in array_keywords speichern
+				for (i = 0; i < array_zweite_Stufe.length; i++) {
+					arrayCases.push(new Case(array_zweite_Stufe[i][0], array_zweite_Stufe[i][1], "Text nicht verfügbar"));
+				}
+			}
+		};
+		xmlhttp.open("GET", "http://141.99.248.92/Projektgruppe/php/include/getCases.php", false);
 		xmlhttp.send();
 	}
 }
@@ -249,10 +322,18 @@ function AddCase_Check(form,name,beschreibung,hiddenkat) {
 }
 
 $(document).ready(function () {
-	getCasesFromDatabase("MedAusbildSS18");
+	cbr.loadAllArrays();	
 });
 
-var cbr = new CBR();
+function wasnschrott() {
+	//alert(cbr.Cases[8].id);
+	var ausgabe = "";
+	var k;
+	for (k = 0; k < cbr.Cases.length; k++) {
+		ausgabe = ausgabe + cbr.Cases[k].id + "\n";
+	}
+	alert(ausgabe);
+}
 
 $('#cbr').click(function () {
 

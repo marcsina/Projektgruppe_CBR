@@ -24,8 +24,7 @@ function loadSymptoms() {
 
 
 
-$('#btn_submit').click(function () {
-	cbr.loadAllArrays();
+$('#btn_submit').click(function () {	
 	cbr.calculateSimilaritySimple();
 	$('#div_ausgabe').html(cbr.ergebnisse);
 });

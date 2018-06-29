@@ -35,7 +35,8 @@ if (login_check($mysqli) == true) {
     </head>
 
     <body id="home">
-        <!-- _______________________________________NavBar_____________________________________________________-->
+        <div class="container">
+		<!-- _______________________________________NavBar_____________________________________________________-->
         <?php
         include ("php/include/navbar.php");
         ?>
@@ -113,7 +114,7 @@ if (login_check($mysqli) == true) {
 		<script src="js/CBR.js"></script>
 		<script src="js/Checker_Checkboxes.js"></script>
 		
-
+	</div>
     </body>
 
 </html>
