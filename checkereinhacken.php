@@ -22,99 +22,82 @@ if (login_check($mysqli) == true) {
         <meta name="author" content="...">
         <title>MedAusbild</title>
 
-
-
-
-
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
-
         <link href="css/style3.css" rel="stylesheet">
+		<link href="css/style_autocomplete.css" rel="stylesheet">
 
     </head>
 
     <body id="home">
-        <div class="container">
+        
 		<!-- _______________________________________NavBar_____________________________________________________-->
         <?php
         include ("php/include/navbar.php");
         ?>
         <!-- _________________________Content________________________________-->
-        </br>
-        </br>
-        </br>
-        </br>
+		<div class="container">
 
-        <!-- every content should be nested in a way like the example below  -->
-        <!-- nested columns -->
-        <div class="row first-after-navbar">
-            <div class="col-md-offset-1 col-md-1 "> <h4>Symptome</h4></div>
-            <div class="col-md-offset-1 col-md-3 col-sm-3">
-                <form>
+		<!-- Header Row -->
+		<div class="row newRow">
+			<div class="col-md-6">
+				<div class="col-md-3"> 
+					<h4>Symptome</h4>
+				</div>
+				<div class="col-md-9">
+					<form autocomplete="off">
+						<input type="text" name="suche" id="input_category" placeholder="Suchen" class="form-control " value="">
+					</form>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="col-md-6 col-sm-6">
+					<h4>Gewählte Symptome</h4>
+				</div>
+				<div class=" col-md-3 col-sm-5">
+					<div ><h4>Gewichtung</h4></div>
+				</div>
+			</div>
+		</div>
+		<!-- Content Row: Available Symptoms and found Symptoms --> 
+		<div class="row">
+			<div class="col-md-6">
+				<section class ="tableau">
+					<form id="form_symptoms"></form>
+				</section>
+			</div>
 
-                    <input type="text" name="suche" id="suche" placeholder="Suchen" class="form-control " value="">
-
-
-
-                </form>
-            </div>
-            <div class="col-md-offset-1 col-md-2 col-sm-offset-3 col-sm-2">
-                <h4>Gefundene Symptome</h4>
-            </div>
-            <div class="col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2"><h4>Gewichtung</h4></div>
-
-        </div>
-        <div class="row">
-
-            <div class="col-md-offset-1 col-md-5 col-sm-5 tableau">
-                <section class>
-                    <form id="form_symptoms">
-                        </br>                      
-                    </form>
-                </section>
-
-            </div>
-
-            <section id="section_symptoms" class="col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-5 tableau">              
-
-            </section>
-
-        </div>
-
-        </br >
-        <div class="row">
-            <button id="btn_submit" class=" col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-2 btn btn-success type=" submit" ">Submit</button>
-            <button id="btn_start" class=" col-md-offset-5 col-md-1 col-sm-offset-5 col-sm-2 btn btn-success type=" submit" ">Starten</button>
-
-        </div>
-
-        <div class="row">
-
-            </br>
-            <h4 class="col-md-offset-4 col-md-1 col-sm-offset-4 col-sm-1">Resultat</h4>
-        </div>
-
-        <div class="row">
-            <section class=" col-md-offset-4 col-md-5 col-sm-offset-4 col-sm-5 tableau2">
-				<div id='div_ausgabe'></div>
-			</section>
-			
-        </div>
-
-		<div id="cbrhint" style="display:none"><b>CaseBase Categories will be displayed here</b></div>
+			<div class="col-md-6">
+				<section id="section_symptoms" class="tableau"></section>
+			</div>
+		</div>											
+		<!-- Button row -->
+		<div class="row newRow">
+			<div class="col-md-offset-5 col-xs-offset-right-5 col-md-2 col-sm-12">
+				<button id="btn_submit" class=" btn btn-success" type="submit" align="center">Submit</button>
+			</div>
+		</div>
+		<!-- 2nd Header Row -->
+		<div class="row newRow">
+			<h4 class="col-md-offset-3 col-md-1 col-sm-1">Resultat</h4>		
+		</div>
+		<!-- Result row -->
+		<div class="row">
+			<section class="col-md-offset-3 col-md-6 col-sm-12 col-xs-offset-right-3 tableau2">
+				<div class="result" id='div_ausgabe'></div>
+			</section>			
+		</div>			
 
         <!--____________________________________________________________________________________________________-->
         <!-- Scripts -->
-        <script src="js/german-porter-stemmer.js"></script>
         <script src="js/jquery-2.2.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-		<script src="js/script.js"></script>	
-        <script src="js/code.js"></script>
 		<script src="js/CBR.js"></script>
 		<script src="js/Checker_Checkboxes.js"></script>
+		<script src="js/Checker_Checkboxes_autocomplete.js"></script>
 		
-	</div>
+		</div>
     </body>
 
 </html>

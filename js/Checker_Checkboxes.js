@@ -9,6 +9,7 @@
 $(document).ready(function () {
 	cbr.loadIncomingCase("no name", "no text");
 	loadSymptoms();
+	autocomplete(document.getElementById("input_category"), makeCategoryNamesArray());
 });
 
 var ergebnis = new Array();
@@ -18,15 +19,45 @@ function loadSymptoms() {
 
 	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
 		//TO-DO: Beschreibungen der Symptome in Datenbank einfügen
-		$('#form_symptoms').append('<div id=' + 'div_' + i + ' class="row"><label class="col-md-4" for= "1" > <abbr title="TO-DO: Beschreibungen von Symptomen in DB">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</abbr></label><input class="col-md-4 checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + i + '></div>');
+		$('#form_symptoms').append('<div id=' + 'div_' + i + ' class="row symptom"><label class="col-md-11">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</label><input class="col-md-1 checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + i + '></div>');
 	}
+}
+
+function makeCategoryNamesArray() {
+	var CategoryNamesArray = [];
+	var i;
+	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
+		CategoryNamesArray.push(cbr.incomingCase.Symptoms[i].name);
+	}
+	return CategoryNamesArray;
+}
+
+function autocompleteAddSymptom(nameClickedSymptom) {
+	const index = cbr.incomingCase.Symptoms.map(e => e.name).indexOf(nameClickedSymptom);
+	if ($("#checkbox_" + index).is(':checked')) {
+		alert("");
+	}
+	else {
+		$("#checkbox_" + index).click();
+	}
+}
+
+function buildOutput() {
+	var ausgabe = "";
+	var ausgabe = ausgabe + "Ergebnisse des Vergleichs mit der Datenbank:<br><br>";
+	var i;
+	for (i = 0; i < cbr.Similarities.length; i++) {
+		ausgabe = ausgabe + "Case " + cbr.Similarities[i].id + " - " + cbr.Similarities[i].name + ": " + cbr.Similarities[i].similarity + "%<br>";
+	}
+	return ausgabe;
+	
 }
 
 
 
 $('#btn_submit').click(function () {	
-	cbr.calculateSimilaritySimple();
-	$('#div_ausgabe').html(cbr.ergebnisse);
+	cbr.calculateSimilarityComplex();
+	$('#div_ausgabe').html(buildOutput());
 });
 
 $('#btn_start').click(function () {
@@ -45,7 +76,7 @@ $('body').on('click', '.checkboxes', function () {
 
 	if ($("#" + clickedBtnID).is(':checked')) {
 		// checked
-		$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="row"><br><div class="col-md-3 col-sm-3">' + parseInt(idOhnePrefix*1 + 1*1) + ': ' + cbr.incomingCase.Symptoms[idOhnePrefix].name + '</div > <div class=" col-md-offset-2 col-md-6 col-sm-offset-2 col-sm-7 btn-group " data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
+		$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="symptom row"><div class="col-md-6 col-sm-6">' + parseInt(idOhnePrefix * 1 + 1 * 1) + ': ' + cbr.incomingCase.Symptoms[idOhnePrefix].name + '</div > <div class="col-md-5 col-sm-5 btn-group" data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
 		// Standardwerte setzen
 		$('#' + 'btn_klein_' + idOhnePrefix).click();
 	}

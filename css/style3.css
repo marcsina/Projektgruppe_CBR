@@ -1,6 +1,9 @@
 ﻿/*------------------------------------------/
 /----------------Navbar---------------------/
 /------------------------------------------*/
+#btn_submit {
+    width: 100px;
+}
 .navbar-fixed-top {
     background-color: #615A7F;
 	min-height: 50px;
@@ -38,7 +41,7 @@
 
 /* code pour checker1*/
 body{
-    padding-top: 10px;
+    padding-top: 70px;
 }
 
 .checken{
@@ -74,6 +77,23 @@ body{
      overflow: auto;
      text-align: justify;
 }
+.close {
+    color: black;
+}
+
+.newRow {
+    padding-top: 25px;
+}
+
+.symptom {
+    padding-top: 10px;
+    margin-left: -15px;
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
 /*FORUM*/
 table{
     margin-bottom: 20px;
@@ -104,3 +124,51 @@ li{
     height: 100px;
     width: 500px;
 }
+
+/*     Genereates Right Side Offset     */
+.col-xs-offset-right-12 {
+    margin-right: 100%;
+}
+
+.col-xs-offset-right-11 {
+    margin-right: 91.66666667%;
+}
+
+.col-xs-offset-right-10 {
+    margin-right: 83.33333333%;
+}
+
+.col-xs-offset-right-9 {
+    margin-right: 75%;
+}
+
+.col-xs-offset-right-8 {
+    margin-right: 66.66666667%;
+}
+
+.col-xs-offset-right-7 {
+    margin-right: 58.33333333%;
+}
+
+.col-xs-offset-right-6 {
+    margin-right: 50%;
+}
+
+.col-xs-offset-right-5 {
+    margin-right: 41.66666667%;
+}
+
+.col-xs-offset-right-4 {
+    margin-right: 33.33333333%;
+}
+
+.col-xs-offset-right-3 {
+    margin-right: 25%;
+}
+
+.col-xs-offset-right-2 {
+    margin-right: 16.66666667%;
+}
+
+.col-xs-offset-right-1 {
+    margin-right: 8.33333333%;
