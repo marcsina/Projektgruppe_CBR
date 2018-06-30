@@ -35,7 +35,7 @@ function makeCategoryNamesArray() {
 function autocompleteAddSymptom(nameClickedSymptom) {
 	const index = cbr.incomingCase.Symptoms.map(e => e.name).indexOf(nameClickedSymptom);
 	if ($("#checkbox_" + index).is(':checked')) {
-		alert("");
+		alert("Symptom bereits gesetzt");
 	}
 	else {
 		$("#checkbox_" + index).click();
