@@ -1,9 +1,6 @@
 /*
 	TO-DO:
-	- Submit Button benötigt 2 Klicks ???
-	- Autocomplete
-	- CBR aktuell nur für ersten 10 Fälle, da Aufbau DB sich geändert hat
-	- Farben Impaitment Buttons
+	- Farben Impairment Buttons
 */
 
 $(document).ready(function () {
@@ -19,7 +16,7 @@ function loadSymptoms() {
 
 	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
 		//TO-DO: Beschreibungen der Symptome in Datenbank einfügen
-		$('#form_symptoms').append('<div id=' + 'div_' + i + ' class="row symptom"><label class="col-md-11">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</label><input class="col-md-1 checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + i + '></div>');
+		$('#form_symptoms').append('<div id=' + 'div_' + i + ' class="row symptom"><label class="col-md-11">' + parseInt(i+1) + ': ' + cbr.incomingCase.Symptoms[i].name + '</label><input class="col-md-1 checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + i + '></div>');
 	}
 }
 
