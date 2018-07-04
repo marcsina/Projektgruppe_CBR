@@ -7,7 +7,7 @@ sec_session_start();
  
 if (login_check($mysqli) == true) {
     $logged = 'in';
-    $userid = '1';
+    $userid = $_SESSION['user_id'];
 } else {
     $logged = 'out';
     $username = 'anonymous';
@@ -83,7 +83,7 @@ if(isset($_POST["createbeitrag"]))
     else 
     {
         ?>
-        If you are done, please <a href="php/include/logout.php">log out</a>.
+        If you are done <?php echo $_SESSION['username'] ?>, please <a href="php/include/logout.php">log out</a>.
         <?php
     }
     ?>
@@ -108,7 +108,6 @@ if(isset($_POST["createbeitrag"]))
         </form>
     <br>  
        
-    <table>
     	
     <?php
     if(isset($_POST["topic"]))
@@ -116,11 +115,13 @@ if(isset($_POST["createbeitrag"]))
         $value = $mysqli->query("SELECT titel as t FROM Forum_Topic WHERE id = '".$_POST["topic"]."';");
         $result2 = $value->fetch_assoc();
         ?>
-        <tr>
-            <th style = "min-width: 200px">Thema:</th>
-            <th style = "min-width: 900px"><?php echo $result2['t']?></th>
-            <th></th>
+        <table style = "width: 100%;">
+        <tr >
+            <th >Thema:</th>
+            <th ><?php echo $result2['t']?></th>
         </tr>
+        </table>
+        <br>
         <?php
         $sqlStmt = "SELECT * FROM Forum_Beitrag WHERE topic = '".$_POST['topic']."';";
         
@@ -130,17 +131,26 @@ if(isset($_POST["createbeitrag"]))
         {
             while ($row = $result->fetch_assoc())
             {
-                ?>                
-                <tr style = "">
+                ?> 
+                             
+                
                 	<?php
                 	$value = $mysqli->query("SELECT username as n FROM members WHERE id = '".$row['user']."';");
                     $result2 = $value->fetch_assoc();
                     ?>
+                <table style = "width: 100%;">
+                <tr bgcolor = "#A4A4A4">  
+                	<td style = "width: 200px"><div style="font-size: 12px;font-color: #D3D3D3;"><?php echo $row['beitragsnr']?></div> </td>
+                	<td style = ""><div style="font-size: 12px;font-color: #D3D3D3;"><?php echo $row['datum']?></div></td>
+                </tr>     
+                <tr bgcolor = "#D8D8D8">
                     <td style = "vertical-align:top;padding:10px;"><?php echo $result2['n']?></td>
-                    <td style = "padding:10px;"><?php echo $row['inhalt']?> <br><br><div style="font-size: 12px;font-color: #D3D3D3;">geschrieben am: <?php echo $row['datum']?></div></td>
-                    <td style = ""><?php echo $row['beitragsnr']?></td>
-                </tr>      
+                    <td style = "padding:10px;"><?php echo $row['inhalt']?> <br> <br> </td>
+                </tr> 
+                </table>  
+                <br>   
             	<?php
+            	$i++;
             }
         
         // Objekt freigeben
@@ -150,7 +160,8 @@ if(isset($_POST["createbeitrag"]))
     else
     {
         ?>
-        <tr>
+        <table style = "width: 100%;">
+        <tr bgcolor = "#A4A4A4">
             <th style = "min-width: 200px">Nr</th>
             <th style = "min-width: 200px">Topic</th>
             <th style = "min-width: 200px">Beiträge</th>
@@ -163,11 +174,21 @@ if(isset($_POST["createbeitrag"]))
         $data = array();
         if ($result = $mysqli->query($sqlStmt))
         {
+            $i=0;
             while ($row = $result->fetch_assoc())
             {
                 ?>
                 <form action="forum_demenz.php" method="post">
-                <tr>
+                <?php
+                if ($i % 2 == 0)
+                {
+                    ?><tr bgcolor = "#D8D8D8"><?php
+                }
+                else
+                {
+                    ?><tr bgcolor = "#D8D8D8"><?php
+                }
+                ?>
                     <td><?php echo $row['id']?></td>
                     <td><button type="submit" name="topic" value=<?php echo $row['id']?>><?php echo $row['titel']?> </button></td>
                     <?php
@@ -184,6 +205,7 @@ if(isset($_POST["createbeitrag"]))
                 </tr>
                 </form>
             	<?php
+            	$i++;
             }
         
         // Objekt freigeben
@@ -223,7 +245,10 @@ if(isset($_POST["createbeitrag"]))
             <?php
         }
     }
+    
+    
     ?>
+    
  	</div>
 	<script src="js/jquery-2.2.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

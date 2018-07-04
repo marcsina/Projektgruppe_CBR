@@ -66,12 +66,12 @@ if (login_check($mysqli) == true) {
         </form>
     <br>  
        
-    <table>
-        <tr>
-            <th style = "min-width: 200px">Nr</th>
-            <th style = "min-width: 200px">Kategorie</th>
+    <table style = "width: 100%;">
+        <tr bgcolor = "#A4A4A4">
+            <th style = "width: 200px">Nr</th>
+            <th>Kategorie</th>
         </tr>
-        <tr>
+        <tr bgcolor = "#D8D8D8">
             <td>1</td>
             <td><a href="forum_demenz.php" style="color: black;text-decoration: none;">Demenz</a></td>
         </tr>
