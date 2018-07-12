@@ -26,7 +26,7 @@ function sec_session_start() {
 
 function login($email, $password, $mysqli) {
     // Das Benutzen vorbereiteter Statements verhindert SQL-Injektion.
-    if ($stmt = $mysqli->prepare("SELECT id, username, password, salt 
+    if ($stmt = $mysqli->prepare("SELECT id, username, password, salt,admin 
         FROM members
        WHERE email = ?
         LIMIT 1")) {
@@ -35,7 +35,7 @@ function login($email, $password, $mysqli) {
         $stmt->store_result();
  
         // hole Variablen von result.
-        $stmt->bind_result($user_id, $username, $db_password, $salt);
+        $stmt->bind_result($user_id, $username, $db_password, $salt, $admin);
         $stmt->fetch();
  
         // hash das Passwort mit dem eindeutigen salt.
@@ -65,6 +65,9 @@ function login($email, $password, $mysqli) {
                     $_SESSION['username'] = $username;
                     $_SESSION['login_string'] = hash('sha512', 
                               $password . $user_browser);
+
+					$_SESSION['admin'] = $admin;
+
                     // Login erfolgreich.
                     return true;
                 } else {
@@ -113,11 +116,12 @@ function login_check($mysqli) {
     // Überprüfe, ob alle Session-Variablen gesetzt sind 
     if (isset($_SESSION['user_id'], 
                         $_SESSION['username'], 
-                        $_SESSION['login_string'])) {
+                        $_SESSION['login_string'], $_SESSION['admin'])) {
  
         $user_id = $_SESSION['user_id'];
         $login_string = $_SESSION['login_string'];
         $username = $_SESSION['username'];
+		$admin = $_SESSION['admin'];
  
         // Hole den user-agent string des Benutzers.
         $user_browser = $_SERVER['HTTP_USER_AGENT'];

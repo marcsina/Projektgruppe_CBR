@@ -1,16 +1,28 @@
-﻿ <!--<?php
+﻿ <?php
 include_once 'php/include/conn.php';
 include_once 'php/include/functions_login.php';
 
 
 sec_session_start();
 
-if (login_check($mysqli) == true) {
+if (login_check($mysqli) == true) 
+{
     $logged = 'in';
-} else {
+
+	if($_SESSION['admin'] == 0)
+	{
+		//Wenn kein Admin dann zurück auf die index		
+		header('Location: http://141.99.248.92/Projektgruppe');	
+		exit;		
+	}
+} else 
+{
     $logged = 'out';
+	//Wenn kein Admin dann zurück auf die index
+	header('Location: http://141.99.248.92/Projektgruppe');	
+	exit;	
 }
-?>-->
+?>
 
 <!doctype html>
 <html lang="de">
