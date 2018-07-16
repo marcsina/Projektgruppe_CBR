@@ -1,14 +1,18 @@
   <?php
 include_once 'php/include/conn.php';
 include_once 'php/include/functions_login.php';
+include_once 'php/include/functions_profile.php';
 
  
 sec_session_start();
  
 if (login_check($mysqli) == true) {
     $logged = 'in';
+	$userDataArray = getUserDataByUsername($_SESSION['username'], $mysqli);
 } else {
     $logged = 'out';
+	header('Location: http://141.99.248.92/Projektgruppe/login.php?logged=0');	
+	exit;
 }
 ?>
 <html lang="en">

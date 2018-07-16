@@ -1,7 +1,6 @@
 <?php
 include_once 'php/include/conn.php';
 include_once 'php/include/functions_login.php';
-include_once 'php/include/functions_profile.php';
 
  
 sec_session_start();
@@ -9,9 +8,9 @@ sec_session_start();
 $returnVal = getUserDataByEmail("test@example.com", $mysqli);
 if (login_check($mysqli) == true) {
     $logged = 'in';	
-	
 } else {
     $logged = 'out';
+		
 }
 ?>
 <!doctype html>
