@@ -6,7 +6,7 @@ include_once 'php/include/functions_profile.php';
  
 sec_session_start();
 
-$returnVal = getUserDataByEmail2("test@example.com", $mysqli);
+$returnVal = getUserDataByEmail("test@example.com", $mysqli);
 if (login_check($mysqli) == true) {
     $logged = 'in';	
 	
@@ -119,6 +119,11 @@ chirurgischen Eingriff.
 				{
 					//echo var_dump($returnVal);
 					echo $returnVal["vorname"];
+					echo $returnVal["id"];
+					echo $returnVal["nachname"];
+					echo $returnVal["beschreibung"];
+					echo $returnVal["profilbild"];
+					echo $returnVal["username"];
 				} ?></p>
                 </div>
 				

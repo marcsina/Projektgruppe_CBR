@@ -1,7 +1,6 @@
   <?php
 include_once 'php/include/conn.php';
 include_once 'php/include/functions_login.php';
-include_once 'php/include/functions_profile.php';
 
  
 sec_session_start();
@@ -78,8 +77,7 @@ if (login_check($mysqli) == true) {
                 <div class="text-center user-profile-2" style="margin-top:120px">
                     <ul class="list-group">
                       <li class="list-group-item">
-					  
-                        <h4><b>Ben</b></h4>
+                        <h4>Balaye, <b>Ben</b></h4>
                         <h5>Student, Medical science</h5>
                       </li>
                       <li class="list-group-item">
