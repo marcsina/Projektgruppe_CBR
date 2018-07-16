@@ -70,12 +70,13 @@ body{
      height: 200px;
      overflow: auto;
 }
-.textar{
-    height: 300px;
-    width: 500px;
-    border: 1px solid black;
-     overflow: auto;
-     text-align: justify;
+.textar {
+    height: 100%;
+    width: 100%;
+    border: 0px;
+    overflow: auto;
+    text-align: justify;
+    resize: none;
 }
 .close {
     color: black;

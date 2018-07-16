@@ -1,13 +1,41 @@
-$('#btn_submit').click(function () {
+$(document).ready(function () {
+	cbr.loadIncomingCase("no name", "no text");
+});
+
+function buildOutput() {
+	var ausgabe = "";
+	var ausgabe = ausgabe + "Ergebnisse des Vergleichs mit der Datenbank:<br><br>";
 	var i;
-	alert("Hello");
-	for (i = 0; i < 10; i++) {
-		$('#section_symptoms').append('<div id=' + 'div_impairment_' + i + ' class="row"><br><div class="col-md-3 col-sm-3">' + i + '</div > <div class=" col-md-offset-2 col-md-6 col-sm-offset-2 col-sm-7 btn-group " data-toggle="buttons"><button id=' + 'btn_klein_' + i + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + i + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + i + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + i + ' class="close btn btn-info xbutton">x</button></div></div>');
-	}		
+	for (i = 0; i < cbr.Similarities.length; i++) {
+		ausgabe = ausgabe + "Case " + cbr.Similarities[i].id + " - " + cbr.Similarities[i].name + ": " + cbr.Similarities[i].similarity + "%<br>";
+	}
+	return ausgabe;
+}
+
+$('#btn_submit').click(function () {
+	// Filtern der Symptome und Übergabe an CBR 
+	var text = $('#textarea_eingabe').val();
+	var kategorieAusTextArray = new Array();
+	kategorieAusTextArray = extractKeywords(text);
+
+	var i;
+	for (i = 0; i < kategorieAusTextArray.length; i++) {
+		if (isNaN(kategorieAusTextArray[i].weight)) {
+			// mach nix
+		}
+		else {
+			cbr.incomingCase.Symptoms[i].wert = kategorieAusTextArray[i].weight;
+		}
+	}
+
+	// Anzeigen der gefilterten Symptome
+	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
+		if (cbr.incomingCase.Symptoms[i].wert > 0) {
+			$('#section_symptoms').append('<div id=' + 'div_impairment_' + i + ' class="row"><br><div class="col-md-7 col-sm-3">' + cbr.incomingCase.Symptoms[i].name + '</div > <div class=" col-md-offset-2 col-md-2 col-sm-offset-2 col-sm-2 ">' + cbr.incomingCase.Symptoms[i].wert + '</div></div>');
+		}		
+	}
+
+	// Berechnung und Ausgabe des Ergebnisses
+	cbr.calculateSimilarityComplex();
+	$('#div_ausgabe').html(buildOutput());
 });
-
-$('#btn_start').click(function () {
-	
-});
-
-
