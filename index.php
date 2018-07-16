@@ -1,12 +1,15 @@
 <?php
 include_once 'php/include/conn.php';
 include_once 'php/include/functions_login.php';
+include_once 'php/include/functions_profile.php';
 
  
 sec_session_start();
- 
+
+$returnVal = getUserDataByEmail2("test@example.com", $mysqli);
 if (login_check($mysqli) == true) {
-    $logged = 'in';
+    $logged = 'in';	
+	
 } else {
     $logged = 'out';
 }
@@ -108,9 +111,17 @@ chirurgischen Eingriff.
                     <button type="button" id="berechnen">GetKeywords</button>
 					<button type="button" id="berechnen2">GetKeywords_New_Version</button>
                     <button type="button" id="cbr">CBR Auswertung</button>
-
+					
+				<p><?php if($returnVal == false)
+				{
+					echo "fuckthisshit";
+				}else
+				{
+					//echo var_dump($returnVal);
+					echo $returnVal["vorname"];
+				} ?></p>
                 </div>
-
+				
                 <!-- third nested column -->
                 <div class="col-md-12">
                     <label>
