@@ -117,6 +117,7 @@ li{
     margin-right: 50%;
 }
 
+
 .col-xs-offset-right-5 {
     margin-right: 41.66666667%;
 }
@@ -135,4 +136,41 @@ li{
 
 .col-xs-offset-right-1 {
     margin-right: 8.33333333%;
+}
+
+/* classroom*/
+.oui li{
+  background-color: #EAE6FC;
+}
+.lehre,.video{
+  text-align: center;
+}
+.pour{
+  border-right: 2px solid black;
+  padding-right: 5px;
+}
+.op{
+  color: red;
+}
+.noir{
+  
+   height: 300px;
+ 
+     background-color: #474e5d;
+}
+.prune{
+    background-color: #f6f6f6;
+}
+.peno{
+  background-color: #f6f6f6;
+  height: 600px;
+
+}
+.pe{
+  height: 100px;
+}
+.sene{
+   background-color: #474e5d;
+  height: 500px;
+  color: white;
 }
