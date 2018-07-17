@@ -280,8 +280,7 @@ if (login_check($mysqli) == true)
                             <div class="user-profile-content">
                                 <h5><strong>ABOUT</strong> ME</h5>
                                 <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-                                </p>
+                                <?php echo $userDataArray["beschreibung"]; ?></p>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -292,7 +291,7 @@ if (login_check($mysqli) == true)
                                             </address>
                                             <address>
                                                 <strong>Email</strong><br>
-                                                <a href="mailto:#">benbalaye@gmail.com</a>
+                                                <a href="mailto:<?php echo $userDataArray["email"]; ?>"><?php echo $userDataArray["email"]; ?></a>
                                             </address>
                                             <address>
                                                 <strong>Website</strong><br>
