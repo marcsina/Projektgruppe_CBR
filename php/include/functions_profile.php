@@ -6,7 +6,7 @@ include_once'conf.php';
 
 function getUserDataByEmail($email, $mysqli)
 {
-	if ($stmt = $mysqli->prepare("SELECT id, username, vorname, nachname, beschreibung, profilbild FROM members WHERE email = ?")) 
+	if ($stmt = $mysqli->prepare("SELECT id, username, vorname, nachname, beschreibung, profilbild, website FROM members WHERE email = ?")) 
 	{
 		$stmt->bind_param('s', $email);
         $stmt->execute();   // Execute the prepared query.
@@ -14,7 +14,7 @@ function getUserDataByEmail($email, $mysqli)
 
 		if ($stmt->num_rows == 1) 
 		{
-			$stmt->bind_result($id, $username, $vorname, $nachname, $beschreibung ,$profilbild);
+			$stmt->bind_result($id, $username, $vorname, $nachname, $beschreibung ,$profilbild, $website);
 			$stmt->fetch();
 			$res = ["id"=>$id,
 					"email"=>$email,
@@ -22,7 +22,8 @@ function getUserDataByEmail($email, $mysqli)
 					"vorname"=>$vorname,
 					"nachname"=>$nachname,
 					"beschreibung"=>$beschreibung,
-					"profilbild"=>$profilbild];
+					"profilbild"=>$profilbild,
+					"website"=>$website];
 
 			if(empty(res['id']))
 			{
@@ -46,10 +47,9 @@ function getUserDataByEmail($email, $mysqli)
 	}
 }
 
-//untested
 function getUserDataByUsername($username, $mysqli)
 {
-	if ($stmt = $mysqli->prepare("SELECT id, email, vorname, nachname, beschreibung, profilbild FROM members WHERE username = ?")) 
+	if ($stmt = $mysqli->prepare("SELECT id, email, vorname, nachname, beschreibung, profilbild, website FROM members WHERE username = ?")) 
 	{
 		$stmt->bind_param('s', $username);
         $stmt->execute();   // Execute the prepared query.
@@ -57,7 +57,7 @@ function getUserDataByUsername($username, $mysqli)
 
 		if ($stmt->num_rows == 1) 
 		{
-			$stmt->bind_result($id, $email, $vorname, $nachname, $beschreibung ,$profilbild);
+			$stmt->bind_result($id, $email, $vorname, $nachname, $beschreibung ,$profilbild, $website);
 			$stmt->fetch();
 			$res = ["id"=>$id,
 					"email"=>$email,
@@ -65,7 +65,8 @@ function getUserDataByUsername($username, $mysqli)
 					"vorname"=>$vorname,
 					"nachname"=>$nachname,
 					"beschreibung"=>$beschreibung,
-					"profilbild"=>$profilbild];
+					"profilbild"=>$profilbild,
+					"website"=>$website];
 			return $res;
 		}
 		else
@@ -78,14 +79,13 @@ function getUserDataByUsername($username, $mysqli)
 	}
 }
 
-//untested
 function getUserDataByUsernameGET($mysqli)
 {
 	if(isset($_GET['username']))
 	{
 		$username = filter_input(INPUT_GET, 'username', FILTER_SANITIZE_STRING);
 
-		if ($stmt = $mysqli->prepare("SELECT id, email, vorname, nachname, beschreibung, profilbild FROM members WHERE username = ?")) 
+		if ($stmt = $mysqli->prepare("SELECT id, email, vorname, nachname, beschreibung, profilbild, website FROM members WHERE username = ?")) 
 		{
 			$stmt->bind_param('s', $username);
 			$stmt->execute();   // Execute the prepared query.
@@ -93,7 +93,7 @@ function getUserDataByUsernameGET($mysqli)
 
 			if ($stmt->num_rows == 1) 
 			{
-				$stmt->bind_result($id, $email, $vorname, $nachname, $beschreibung ,$profilbild);
+				$stmt->bind_result($id, $email, $vorname, $nachname, $beschreibung ,$profilbild, $website);
 				$stmt->fetch();
 				$res = ["id"=>$id,
 						"email"=>$email,
@@ -101,7 +101,8 @@ function getUserDataByUsernameGET($mysqli)
 						"vorname"=>$vorname,
 						"nachname"=>$nachname,
 						"beschreibung"=>$beschreibung,
-						"profilbild"=>$profilbild];
+						"profilbild"=>$profilbild, 
+						"website"=>$website];
 				return $res;
 			}
 			else
