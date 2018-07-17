@@ -150,10 +150,16 @@ if (login_check($mysqli) == true)
                     <div class="user-button">
                         <div class="row">
                             <div class="col-lg-6">
-                                <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
+								<form action="" method="post">
+									<input type="submit" class="btn btn-primary btn-sm btn-block" value="Nachricht abschicken"/>
+								</form>
                             </div>
                             <div class="col-lg-6">
-                                <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-user"></i> Add as friend</button>
+								<form action="" method="post">
+									<input type="hidden" name='id1' value='<?php echo $_SESSION['user_id']; ?>'></input>
+									<input type="hidden" name='id2' value='<?php echo $userDataArray['id']; ?>'></input>
+									<input type="submit" class="btn btn-default btn-sm btn-block" name="addFriend" value="Freund hinzufügen"></input>
+								</form>
                             </div>
                         </div>
                     </div><!-- End div .user-button -->

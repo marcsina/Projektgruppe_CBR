@@ -3,6 +3,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 header("Access-Control-Allow-Origin: *");
 //Verbindung aufbauen
 include_once'conf.php';
+include 'conn.php';
 
 function getUserDataByEmail($email, $mysqli)
 {
@@ -142,5 +143,39 @@ function getCountOfForumPostByUserID($id, $mysqli)
 	{
 		return false;
 	}	
+}
+
+function addFriendByUserID($id1, $id2, $mysqli)
+{
+	if ($stmt = $mysqli->prepare("INSERT INTO friends_member (userID_1, userID_2) VALUES (?,?)")) 
+	{
+		$stmt->bind_param('ii', $id1,$id2);
+		if($stmt->execute())   // Execute the prepared query.
+		{
+			echo "succes";
+			return true;
+		}
+		else 
+		{
+			echo "failure1";
+			return false;
+		}
+	}
+	else
+	{
+		echo "failure2";
+		return false;
+	}	
+}
+/*
+if(isset($_GET['id1'], $_GET['id2']))
+{
+	echo "hallo";
+	addFriendByUserID($_GET['id1'], $_GET['id2'], $mysqli);
+}*/
+
+if(isset($_POST['addFriend'], $_POST['id1'], $_POST['id2']))
+{
+	addFriendByUserID($_POST['id1'], $_POST['id2'], $mysqli);
 }
 ?>
