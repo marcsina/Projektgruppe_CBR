@@ -15,7 +15,7 @@ if (login_check($mysqli) == true)
 	//Überprüfen ob URL auf Profil verweist
 	if(!empty($_GET["username"]))
 	{
-		//TODO do something when url is pointing to specific profile
+		//do something when url is pointing to specific profile
 		//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
 		$userDataArray = getUserDataByUsernameGET($mysqli);
 		//Überprüfen ob Nutzer exisitert, wenn nicht dann...
@@ -68,10 +68,6 @@ if (login_check($mysqli) == true)
         <meta name="description" content="...">
         <meta name="author" content="...">
         <title>MedAusbild</title>
-
-
-
-
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -126,7 +122,11 @@ if (login_check($mysqli) == true)
                         Following
                       </li>
                       <li class="list-group-item">
-                        <span class="badge">4512</span>
+                        <span class="badge">
+							<?php 
+							echo getCountOfForumPostByUserID($userDataArray['id'], $mysqli);
+							?>
+						</span>
                         posts
                       </li>
 
@@ -272,28 +272,29 @@ if (login_check($mysqli) == true)
                                 <?php echo $userDataArray["beschreibung"]; ?></p>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <h5><strong>CONTACT</strong> ME</h5>
-                                            <address>
+                                            <!--<address>
                                                 <strong>Phone</strong><br>
                                                 <abbr title="Phone">+49 123 456 789 </abbr>
-                                            </address>
+                                            </address>-->
                                             <address>
                                                 <strong>Email</strong><br>
                                                 <a href="mailto:<?php echo $userDataArray["email"]; ?>"><?php echo $userDataArray["email"]; ?></a>
                                             </address>
                                             <address>
                                                 <strong>Website</strong><br>
-                                                <a href="http://r209.com">http://www.MedAusbild.com</a>
+                                                <a href="http://<?php echo $userDataArray['website']; ?>"><?php echo $userDataArray["website"]; ?></a>
                                             </address>
                                     </div>
+									<!--
                                     <div class="col-sm-6">
                                         <h5><strong>MY</strong> SKILLS</h5>
                                         <p>UI Design</p>
                                         <p>java Programming</p>
                                         <p>Java Programming</p>
                                         <p>Java Programming</p>
-                                    </div>
+                                    </div>-->
                                 </div><!-- End div .row -->
                             </div><!-- End div .user-profile-content -->
                         </div><!-- End div .tab-pane -->
