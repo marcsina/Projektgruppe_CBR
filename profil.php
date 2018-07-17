@@ -69,10 +69,6 @@ if (login_check($mysqli) == true)
         <meta name="author" content="...">
         <title>MedAusbild</title>
 
-
-
-
-
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -137,7 +133,11 @@ if (login_check($mysqli) == true)
                         Following
                       </li>
                       <li class="list-group-item">
-                        <span class="badge">4512</span>
+                        <span class="badge">
+							<?php 
+							echo getCountOfForumPostByUserID($userDataArray['id'], $mysqli);
+							?>
+						</span>
                         posts
                       </li>
 

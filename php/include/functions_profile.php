@@ -119,4 +119,28 @@ function getUserDataByUsernameGET($mysqli)
 	}
 }
 
+function getCountOfForumPostByUserID($id, $mysqli)
+{
+	if ($stmt = $mysqli->prepare("SELECT COUNT(id) FROM Forum_Beitrag WHERE user = ?")) 
+	{
+		$stmt->bind_param('i', $id);
+		$stmt->execute();   // Execute the prepared query.
+		$stmt->store_result();
+
+		if ($stmt->num_rows == 1) 
+		{
+			$stmt->bind_result($count);
+			$stmt->fetch();
+			
+			return $count;
+		}
+		else
+		{
+			return false;
+		}
+	}else
+	{
+		return false;
+	}	
+}
 ?>
