@@ -145,14 +145,65 @@ function getCountOfForumPostByUserID($id, $mysqli)
 	}	
 }
 
+function checkIfFriendsOrOwnProfile($id1, $id2, $mysqli)
+{
+	if($id1 == $id2)
+	{
+		return "failure1";
+	}
+	if($stmt = $mysqli->prepare("SELECT * FROM friends_member WHERE userID_1 = ? AND userID_2 = ?"))
+	{
+		$stmt->bind_param('ii', $id1, $id2);
+		$stmt->execute();
+		$stmt->store_result();
+
+		$stmt->bind_result($userID_1, $userID_2);
+        $stmt->fetch();
+
+		if($stmt->num_rows == 1)
+		{
+			return "success";
+		}
+		else
+		{
+			return "failure2";
+		}
+	}
+	else 
+	{
+		return "failure3";	
+	}
+}
+
 function addFriendByUserID($id1, $id2, $mysqli)
 {
+	//mit sich selbst befrundet
+	if($id1 == $id2)
+	{
+		return false;
+	}
+	//schon mit einander befreundet
+	else if($stmt = $mysqli->prepare("SELECT * FROM friends_member WHERE userID_1 = ? AND userID_2 = ?"))
+	{
+		$stmt->bind_param('ii', $id1, $id2);
+		$stmt->execute();
+		$stmt->store_result();
+
+		$stmt->bind_result($userID_1, $userID_2);
+        $stmt->fetch();
+
+		if($stmt->num_rows == 1)
+		{
+			return false;
+		}		
+	}
+	//nicht mit einander befreundet --> Eintrag wird erstellt
 	if ($stmt = $mysqli->prepare("INSERT INTO friends_member (userID_1, userID_2) VALUES (?,?)")) 
 	{
 		$stmt->bind_param('ii', $id1,$id2);
 		if($stmt->execute())   // Execute the prepared query.
 		{
-			echo "succes";
+			echo "success";
 			return true;
 		}
 		else 
@@ -167,15 +218,46 @@ function addFriendByUserID($id1, $id2, $mysqli)
 		return false;
 	}	
 }
-/*
-if(isset($_GET['id1'], $_GET['id2']))
-{
-	echo "hallo";
-	addFriendByUserID($_GET['id1'], $_GET['id2'], $mysqli);
-}*/
 
+function deleteFriendByUserID($id1, $id2, $mysqli)
+{
+	if ($stmt = $mysqli->prepare("DELETE FROM friends_member WHERE userID_1 = ? AND userID_2 = ?")) 
+	{
+		$stmt->bind_param('ii', $id1,$id2);
+		if($stmt->execute())   // Execute the prepared query.
+		{
+			echo "success";
+			return true;
+		}
+		else 
+		{
+			echo "failure1";
+			return false;
+		}
+	}
+	else
+	{
+		echo "failure2";
+		return false;
+	}	
+}
+
+//entgegennahme der form_POSTS
 if(isset($_POST['addFriend'], $_POST['id1'], $_POST['id2']))
 {
-	addFriendByUserID($_POST['id1'], $_POST['id2'], $mysqli);
+	//Unnötiges abfangen
+	$p1 = filter_input(INPUT_POST, 'id1', FILTER_SANITIZE_NUMBER_INT);
+	$p2 = filter_input(INPUT_POST, 'id2', FILTER_SANITIZE_NUMBER_INT);
+	//aufruf der eigentlichen methode
+	addFriendByUserID($p1, $p2, $mysqli);
+}
+
+if(isset($_POST['deleteFriend'], $_POST['id1'], $_POST['id2']))
+{
+	//Unnötiges abfangen
+	$p1 = filter_input(INPUT_POST, 'id1', FILTER_SANITIZE_NUMBER_INT);
+	$p2 = filter_input(INPUT_POST, 'id2', FILTER_SANITIZE_NUMBER_INT);
+	//aufruf der eigentlichen methode
+	deleteFriendByUserID($p1, $p2, $mysqli);
 }
 ?>

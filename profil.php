@@ -18,6 +18,7 @@ if (login_check($mysqli) == true)
 		//do something when url is pointing to specific profile
 		//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
 		$userDataArray = getUserDataByUsernameGET($mysqli);
+
 		//Überprüfen ob Nutzer exisitert, wenn nicht dann...
 		if($userDataArray == false)
 		{
@@ -154,7 +155,18 @@ if (login_check($mysqli) == true)
 									<input type="submit" class="btn btn-primary btn-sm btn-block" value="Nachricht abschicken"/>
 								</form>
                             </div>
-                            <div class="col-lg-6">
+							<?php 
+							if(checkIfFriendsOrOwnProfile($_SESSION['user_id'], $userDataArray['id'], $mysqli))
+							{
+								$s1 = $_SESSION['user_id'];
+								$s2 = $userDataArray['id'];
+								echo "<div class='col-lg-6'><form action='' method='post'><input type='hidden' name='id1' value='$s1'><input type='hidden' name='id2' value='$s2'><input type='submit' class='btn btn-default btn-sm btn-block' name='deleteFriend' value='Freund entfernen'></div>";
+								//echo "<div class='col-lg-6'>Bereits befreundet</div>";
+							}?>
+                            <div class="col-lg-6"<?php if(checkIfFriendsOrOwnProfile($_SESSION['user_id'], $userDataArray['id'], $mysqli))
+							{
+							echo "style='visibility: hidden'";
+							}?>>
 								<form action="" method="post">
 									<input type="hidden" name='id1' value='<?php echo $_SESSION['user_id']; ?>'></input>
 									<input type="hidden" name='id2' value='<?php echo $userDataArray['id']; ?>'></input>
