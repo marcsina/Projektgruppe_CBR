@@ -58,12 +58,15 @@ if(isset($_POST["createbeitrag"]))
     <link href="css/style_forum.css" rel="stylesheet">
 
 </head>
-<body>
 
-	<!-- include Navbar -->
+<!-- include Navbar -->
     <?php
             include ("php/include/navbar.php");
     ?>
+
+<body>
+
+	
     You are currently logged <?php echo $logged ?>.
     <?php
     if($logged == 'out')

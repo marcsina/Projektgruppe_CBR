@@ -33,12 +33,14 @@ if (login_check($mysqli) == true) {
 
     </head>
 
+	<?php
+        include ("php/include/navbar.php");
+        ?>
+
     <body id="home">
         <!-- _______________________________________NavBar_____________________________________________________-->
 
-        <?php
-        include ("php/include/navbar.php");
-        ?>
+        
 
         <!-- _________________________Content________________________________-->
         <br>

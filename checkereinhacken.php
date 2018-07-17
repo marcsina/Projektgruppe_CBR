@@ -29,13 +29,13 @@ if (login_check($mysqli) == true) {
 		<link href="css/style_autocomplete.css" rel="stylesheet">
 
     </head>
-
-    <body id="home">
-        
-		<!-- _______________________________________NavBar_____________________________________________________-->
-        <?php
+	<!-- _______________________________________NavBar_____________________________________________________-->
+	 <?php
         include ("php/include/navbar.php");
         ?>
+
+    <body id="home">
+       
         <!-- _________________________Content________________________________-->
 		<div class="container">
 

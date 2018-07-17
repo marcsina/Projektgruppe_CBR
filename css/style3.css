@@ -1,42 +1,5 @@
-﻿/*------------------------------------------/
-/----------------Navbar---------------------/
-/------------------------------------------*/
-#btn_submit {
+﻿#btn_submit {
     width: 100px;
-}
-.navbar-fixed-top {
-    background-color: #615A7F;
-	min-height: 50px;
-	width: 100%;
-	z-index: 999;
-    margin-bottom: 100px;
-}
-
-.first-after-navbar{
-    margin-top: 50px;
-}
-.navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav > li > a:hover{ 
-    /*hintergrund bei hover
-    schriftfarbe bei focus
-    
-    '>' bezieht sich auf direkten nachfolger (child)*/
-    background-color: #EAE6FC;
-    color: #543B67; /*schrift*/
-}
-
-.menuItem a, .navbar-brand{
-    font-weight: 600;
-    font-size: 20px;
-    color: #E2D8DE;
-}
-
-.navbar-brand{
-    color: #D1CCD5;
-    font-size: 45px;
-}
-
-.navbar-header .navbar-brand:hover, .navbar-header .navbar-brand:focus{ /*schriftfarbe ändern bei hover*/
-    color: #EAE6FC;
 }
 
 /* code pour checker1*/
@@ -106,7 +69,6 @@ table{
    
 }
 li{
-    text-align:;
     padding-bottom: 6px;
     color: red;
 }
@@ -173,3 +135,4 @@ li{
 
 .col-xs-offset-right-1 {
     margin-right: 8.33333333%;
+}

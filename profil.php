@@ -80,24 +80,13 @@ if (login_check($mysqli) == true)
         <link href="css/style2.css" rel="stylesheet">
 
     </head>
-
-    <body id="home" style="margin-top:20px;
-    background-color:#e9ebee;">
-        <!-- _______________________________________NavBar_____________________________________________________-->
+	 <!-- _______________________________________NavBar_____________________________________________________-->
 
         <?php
         include ("php/include/navbar.php");
         ?>
-
-        <!-- _________________________Content________________________________-->
-        <br>
-        <br>
-
-        <!-- every content should be nested in a way like the example below  -->
-
-        <!-- nested columns -->
-        
- <!-- ------------------------------------------------------------------------cc-->
+    <body id="home" style="background-color:#e9ebee";>
+       
 
 
  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">

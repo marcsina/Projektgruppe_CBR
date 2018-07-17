@@ -22,16 +22,20 @@ if (login_check($mysqli) == true) {
     <title>MedAusbild Forum</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style2.css" rel="stylesheet">
+    <!-- <link href="css/style2.css" rel="stylesheet"> -->
+
     <link href="css/style_forum.css" rel="stylesheet">
 
 </head>
-<body>
 
-	<!-- include Navbar -->
+<!-- include Navbar -->
     <?php
             include ("php/include/navbar.php");
     ?>
+
+<body>
+
+	
     You are currently logged <?php echo $logged ?>.
      <?php
     if($logged == 'out')

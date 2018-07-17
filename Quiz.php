@@ -27,7 +27,7 @@ if (login_check($mysqli) == true) {
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
 
-        <link href="css/style.css" rel="stylesheet">
+       <!-- <link href="css/style.css" rel="stylesheet"> -->
 
         <!-- animate.CSS -->
          <link rel="stylesheet" href="css/animate.css" />
@@ -39,12 +39,13 @@ if (login_check($mysqli) == true) {
 
           
     </head>
-
-    <body id="home" style= "">
-        <!-- _______________________________________NavBar_____________________________________________________-->
+	<!-- _______________________________________NavBar_____________________________________________________-->
         <?php
 			include ("php/include/navbar.php");
 		?>
+
+    <body id="home" style= "">
+        
 
 
         <!-- _________________________Content________________________________-->

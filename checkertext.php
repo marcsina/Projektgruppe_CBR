@@ -24,15 +24,18 @@ if (login_check($mysqli) == true) {
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/style3.css" rel="stylesheet">
+        
+		<link href="css/style3.css" rel="stylesheet">
 
     </head>
 
-    <body id="home">
-        <!-- _______________________________________NavBar_____________________________________________________-->
+	<!-- _______________________________________NavBar_____________________________________________________-->
         <?php
         include ("php/include/navbar.php");
         ?>
+
+    <body id="home">
+        
         <!-- _________________________Content________________________________-->
 
 		<div class="container">

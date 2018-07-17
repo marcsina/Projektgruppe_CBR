@@ -24,9 +24,11 @@
         }
 
             .nav-tabs > li:nth-child(even) > a {
-                color: white
+                color: white;
             }
-
+            .nav-tabs > li:nth-child(uneven) > a {
+                color: black;
+            }
         .nav-tabs > li.active > a {
             color: black;
         }
