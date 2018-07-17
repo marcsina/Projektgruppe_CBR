@@ -7,6 +7,12 @@ include_once 'php/include/functions_login.php';
 
 sec_session_start();
 
+if($_GET['logged'] == 0)
+{
+	$message = "Bitte logge dich zuerst ein";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
+
 if (login_check($mysqli) == true) {
     $logged = 'in';
     $message = "Du bist bereits eingeloggt!";
