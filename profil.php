@@ -6,13 +6,57 @@ include_once 'php/include/functions_profile.php';
  
 sec_session_start();
  
-if (login_check($mysqli) == true) {
+if (login_check($mysqli) == true) 
+{
     $logged = 'in';
+	//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB
 	$userDataArray = getUserDataByUsername($_SESSION['username'], $mysqli);
-} else {
+
+	//Überprüfen ob URL auf Profil verweist
+	if(!empty($_GET["username"]))
+	{
+		//TODO do something when url is pointing to specific profile
+		//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
+		$userDataArray = getUserDataByUsernameGET($mysqli);
+		//Überprüfen ob Nutzer exisitert, wenn nicht dann...
+		if($userDataArray == false)
+		{
+			//Weitergeleitet auf eigenes Profil, wenn gewünschter Nutzer nicht vorhanden
+			header('Location: http://141.99.248.92/Projektgruppe/profil.php');	
+			exit;
+		}
+		// wenn er existiert
+		else
+		{
+			//TODO DO YOUR THING
+		}
+	}
+} else 
+{
     $logged = 'out';
-	header('Location: http://141.99.248.92/Projektgruppe/login.php?logged=0');	
-	exit;
+	//Überprüfen ob URL auf Profil verweist
+	if(!empty($_GET["username"]))
+	{
+		//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
+		$userDataArray = getUserDataByUsernameGET($mysqli);
+		//Überprüfen ob Nutzer exisitert, wenn nicht dann...
+		if($userDataArray == false)
+		{
+			//Weitergeleitet auf Startseite wenn Nutzer nicht vorhanden
+			header('Location: http://141.99.248.92/Projektgruppe');	
+			exit;
+		}
+		// wenn er existiert
+		else
+		{
+			//TODO DO YOUR THING
+		}
+	}
+	else
+	{
+		header('Location: http://141.99.248.92/Projektgruppe/login.php?logged=0');	
+		exit;
+	}
 }
 ?>
 <html lang="en">
@@ -81,7 +125,7 @@ if (login_check($mysqli) == true) {
                 <div class="text-center user-profile-2" style="margin-top:120px">
                     <ul class="list-group">
                       <li class="list-group-item">
-                        <h4>Balaye, <b>Ben</b></h4>
+                        <h4><?php echo $userDataArray["nachname"]; ?>, <b><?php echo $userDataArray["vorname"]; ?></b></h4>
                         <h5>Student, Medical science</h5>
                       </li>
                       <li class="list-group-item">

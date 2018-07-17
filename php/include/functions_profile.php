@@ -23,14 +23,25 @@ function getUserDataByEmail($email, $mysqli)
 					"nachname"=>$nachname,
 					"beschreibung"=>$beschreibung,
 					"profilbild"=>$profilbild];
-			return $res;
+
+			if(empty(res['id']))
+			{
+				//Nutzer nicht vorhanden
+				return false;
+			}
+			else
+			{
+				return $res;
+			}
 		}
 		else
 		{
+			//DB Fehler
 			return false;
 		}
 	}else
 	{
+		//DB Fehler
 		return false;
 	}
 }
@@ -72,7 +83,7 @@ function getUserDataByUsernameGET($mysqli)
 {
 	if(isset($_GET['username']))
 	{
-		$username = $_GET['username'];
+		$username = filter_input(INPUT_GET, 'username', FILTER_SANITIZE_STRING);
 
 		if ($stmt = $mysqli->prepare("SELECT id, email, vorname, nachname, beschreibung, profilbild FROM members WHERE username = ?")) 
 		{
