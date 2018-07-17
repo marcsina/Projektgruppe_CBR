@@ -43,7 +43,7 @@ sec_session_start();
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.png">
+                                <img alt="" src="Fotos/avatar1_small.png">
                             </span>
                             <span class="username">Username</span>
                             <b class="caret"></b>
