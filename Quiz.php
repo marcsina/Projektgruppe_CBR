@@ -91,14 +91,14 @@ if (login_check($mysqli) == true) {
                     <div id="div_question">
 						<?php
 						$questionData = loadRandomQuestion($mysqli);
-						echo "Welches ist ein stark ausgeprägtes Symptom in dem Fall". $questionData['casename'] . "";	
-								echo $questionData['correctAnswerPosition'];				 
+						echo utf8_decode("Welches ist ein stark ausgeprägtes Symptom in dem Fall ". $questionData['casename'] . "?");		 
 						?>
 					</div>
                     <!-- " Answer section" -->               
                     <h2 style="text-align: center"> <b> Antwort </b></h2>
 					<!-- TODO BUTTONS einfügen-->
-                    <form action="" method="post">                          
+                    <form action="" method="post">
+						<input type="hidden" name="correctanswer" value="<?php echo $questionData['correctAnswerPosition'];?>"/>
                         <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort1_Button" value="<?php echo $questionData['antwort1'];?>"/>
 						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort2_Button" value="<?php echo $questionData['antwort2'];?>"/>
 						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort3_Button" value="<?php echo $questionData['antwort3'];?>"/>
