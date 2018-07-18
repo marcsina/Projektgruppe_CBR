@@ -1,7 +1,7 @@
 /* Tabs einfärben*/
 
 .top {
-    background: #D8D8D8;
+    background: #2d4457;
     margin-top: 25px;
     border-color: #000000;
     border-width: 1px;
@@ -11,14 +11,14 @@
 
 .top > li{
     margin: -5px -5px -5px -5px;
-    background: #A4A4A4;
+    background: #1a2732;
     border-radius: 0px;
     border: 1px solid black;
     float: left;
 }
 
 .top > li > a{
-    color: black;
+    color: #007aff;
     font-size: 20px;
 }
 
@@ -31,7 +31,7 @@ table, th, td {
 table > tbody > tr > th {
 	border: 1px solid black;
 	padding:5px;
-	color: black;
+	color: #007aff;
 	font-size: 20px;
 	border-right: none;
 	border-left: none;
@@ -40,7 +40,7 @@ table > tbody > tr > th {
 table > tbody > tr > td {
 	border: 1px solid black;
 	padding:5px;
-	color: black;
+	color: #ffffff;
 	font-size: 20px;
 	border-right: none;
 	border-left: none;

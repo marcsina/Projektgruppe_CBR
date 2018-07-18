@@ -63,21 +63,19 @@ if (login_check($mysqli) == true) {
 	
     
     <div class="container">
-    	<form action="forum.php" method="post">
     	<ul class="nav top">
-            <li><a href="forum.php">Forum</a></li>
+            <li><a style = "font-weight: normal" href="forum.php">Forum</a></li>
         </ul>
-        </form>
     <br>  
        
     <table style = "width: 100%;">
-        <tr bgcolor = "#A4A4A4">
+        <tr bgcolor = "#1a2732">
             <th style = "width: 200px">Nr</th>
             <th>Kategorie</th>
         </tr>
-        <tr bgcolor = "#D8D8D8">
+        <tr bgcolor = "#2d4457">
             <td>1</td>
-            <td><a href="forum_demenz.php" style="color: black;text-decoration: none;">Demenz</a></td>
+            <td><a href="forum_demenz.php" style="color: white;text-decoration: none;">Demenz</a></td>
         </tr>
     </table>           
         

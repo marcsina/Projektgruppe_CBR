@@ -38,8 +38,8 @@ if(isset($_POST["createbeitrag"]))
     {
         CreateBeitrag($userid,$_POST["topic"],$_POST["inserttext"],1,$mysqli);
     }
-    //header('Location: forum_demenz.php');
-    //exit();
+    header('Location: forum_demenz.php?topic='.$_POST["topic"].'');
+    exit();
 }
 
 ?>
@@ -93,40 +93,59 @@ if(isset($_POST["createbeitrag"]))
 	
     
     <div class="container">
-    	<form action="forum.php" method="post">
     	<ul class="nav top">
-            <li><a href="forum.php">Forum</a></li>
-            <li><a href="forum_demenz.php">-> Demenz</a></li>
+            <li ><a style = "font-weight: normal" href="forum.php">Forum</a></li>
+            <li ><a style = "font-weight: normal" href="forum_demenz.php">-> Demenz</a></li>
         <?php
-        if(isset($_POST["topic"]))
+        if(isset($_GET["topic"]))
         {
-            $value = $mysqli->query("SELECT titel as n FROM Forum_Topic WHERE id = '".$_POST["topic"]."';");
+            $value = $mysqli->query("SELECT name as n FROM Cases WHERE id = '".$_GET["topic"]."';");
             $result2 = $value->fetch_assoc();
             ?>
-            <li><a>-> Topic: <?php echo $result2['n']?></a></li>
+            <li ><a style = "font-weight: normal">-> Topic: <?php echo $result2['n']?></a></li>
             <?php
         }
         ?>
         </ul>
-        </form>
     <br>  
        
     	
     <?php
-    if(isset($_POST["topic"]))
+    if(isset($_GET["topic"]))
     {
-        $value = $mysqli->query("SELECT titel as t FROM Forum_Topic WHERE id = '".$_POST["topic"]."';");
+        $value = $mysqli->query("SELECT name as t FROM Cases WHERE id = '".$_GET["topic"]."';");
         $result2 = $value->fetch_assoc();
         ?>
         <table style = "width: 100%;">
-        <tr >
+        <tr bgcolor = "#1a2732">
             <th >Thema:</th>
             <th ><?php echo $result2['t']?></th>
         </tr>
         </table>
+        
+        <?php 
+        
+        $value = $mysqli->query("SELECT text as tt FROM Cases WHERE id = '".$_GET["topic"]."';");
+        $result2 = $value->fetch_assoc();
+        
+        ?>
+        
+        <table style = "width: 100%;">
+        <tr bgcolor = "#2d4457">
+        	
+            <th style="color: white;font-weight: normal">
+            <details>
+        	<p>
+            <?php echo $result2['tt']?>
+            </p>
+            </details>
+            </th>
+        </tr>
+        </table>
+        
         <br>
         <?php
-        $sqlStmt = "SELECT * FROM Forum_Beitrag WHERE topic = '".$_POST['topic']."';";
+        $sqlStmt = "SELECT * FROM Forum_Beitrag WHERE topic = '".$_GET['topic']."';";
         
         $result =  mysqli_query($mysqli,$sqlStmt);
         $data = array();
@@ -142,13 +161,13 @@ if(isset($_POST["createbeitrag"]))
                     $result2 = $value->fetch_assoc();
                     ?>
                 <table style = "width: 100%;">
-                <tr bgcolor = "#A4A4A4">  
-                	<td style = "width: 200px"><div style="font-size: 12px;font-color: #D3D3D3;"><?php echo $row['beitragsnr']?></div> </td>
-                	<td style = ""><div style="font-size: 12px;font-color: #D3D3D3;"><?php echo $row['datum']?></div></td>
+                <tr bgcolor = "#1a2732">  
+                	<td style = "width: 200px"><div style="font-size: 12px;color: #007aff;"><?php echo $row['beitragsnr']?></div> </td>
+                	<td><div style="font-size: 12px;color: #007aff;"><?php echo $row['datum']?></div></td>
                 </tr>     
-                <tr bgcolor = "#D8D8D8">
-                    <td style = "vertical-align:top;padding:10px;"><?php echo $result2['n']?></td>
-                    <td style = "padding:10px;"><?php echo $row['inhalt']?> <br> <br> </td>
+                <tr bgcolor = "#2d4457">
+                    <td style = "vertical-align:top;padding:10px;font-color: white;font-weight: bold"><a href="profil.php?username='.$result2['n'].''" style = "color:white;"><?php echo $result2['n']?></a></td>
+                    <td style = "padding:10px;font-color: white;"><?php echo $row['inhalt']?> <br> <br> </td>
                 </tr> 
                 </table>  
                 <br>   
@@ -164,15 +183,15 @@ if(isset($_POST["createbeitrag"]))
     {
         ?>
         <table style = "width: 100%;">
-        <tr bgcolor = "#A4A4A4">
+        <tr bgcolor = "#1a2732">
             <th style = "min-width: 200px">Nr</th>
             <th style = "min-width: 200px">Topic</th>
             <th style = "min-width: 200px">Beiträge</th>
             <th style = "min-width: 200px">Letzter Beitrag</th>
         </tr>
         <?php
-        $sqlStmt = "SELECT * FROM Forum_Topic WHERE kategorie = 1 ORDER BY id DESC;";
-        
+        /*$sqlStmt = "SELECT * FROM Forum_Topic WHERE kategorie = 1 ORDER BY id DESC;";*/
+        $sqlStmt = "SELECT * FROM Cases ORDER BY id DESC;";
         $result =  mysqli_query($mysqli,$sqlStmt);
         $data = array();
         if ($result = $mysqli->query($sqlStmt))
@@ -181,30 +200,22 @@ if(isset($_POST["createbeitrag"]))
             while ($row = $result->fetch_assoc())
             {
                 ?>
-                <form action="forum_demenz.php" method="post">
+                <form action="forum_demenz.php" method="get">
+               	<tr bgcolor = "#2d4457">
+               	
+                <td><?php echo $row['id']?></td>
+                <td><button type="submit" name="topic" value=<?php echo $row['id']?>><?php echo $row['name']?> </button></td>
                 <?php
-                if ($i % 2 == 0)
-                {
-                    ?><tr bgcolor = "#D8D8D8"><?php
-                }
-                else
-                {
-                    ?><tr bgcolor = "#D8D8D8"><?php
-                }
-                ?>
-                    <td><?php echo $row['id']?></td>
-                    <td><button type="submit" name="topic" value=<?php echo $row['id']?>><?php echo $row['titel']?> </button></td>
-                    <?php
-                    $value = $mysqli->query("SELECT COUNT(*) as total FROM Forum_Beitrag WHERE topic = '".$row['id']."';");
-                    $result2 = $value->fetch_assoc();
-					?>
-                    <td><?php echo $result2['total']?></td>
-                    
-                    <?php
-                    $value = $mysqli->query("SELECT MAX(datum) as max FROM Forum_Beitrag WHERE topic = '".$row['id']."';");
-                    $result2 = $value->fetch_assoc();
-					?>
-                    <td><?php echo $result2['max']?></td>
+                $value = $mysqli->query("SELECT COUNT(*) as total FROM Forum_Beitrag WHERE topic = '".$row['id']."';");
+                $result2 = $value->fetch_assoc();
+				?>
+                <td><?php echo $result2['total']?></td>
+                
+                <?php
+                $value = $mysqli->query("SELECT MAX(datum) as max FROM Forum_Beitrag WHERE topic = '".$row['id']."';");
+                $result2 = $value->fetch_assoc();
+				?>
+                <td><?php echo $result2['max']?></td>
                 </tr>
                 </form>
             	<?php
@@ -218,9 +229,9 @@ if(isset($_POST["createbeitrag"]))
     ?> 
     </table>           
     <?php    
-    if(!isset($_POST["topic"]))
+    if(!isset($_GET["topic"]))
     {
-        if($logged == 'in')
+       /* if($logged == 'in')
         {
             ?>
             <br><br>
@@ -231,7 +242,7 @@ if(isset($_POST["createbeitrag"]))
             <input type="submit" name="createtopic" value="Erstellen"/>
             </form>
             <?php
-        }
+        } */
     }
     else 
     {
@@ -242,7 +253,7 @@ if(isset($_POST["createbeitrag"]))
             <a style="color: black;text-decoration: none;font-size: 25px;">Neuer Beitrag</a>
             <form action="forum_demenz.php" method="post">
             <textarea rows="8" cols="175" onclick="this.value=''" name="inserttext" id="text"> Enter text here...</textarea>
-            <input name="topic" style="display:none" value=<?php echo $_POST["topic"]?>></input>
+            <input name="topic" style="display:none" value=<?php echo $_GET["topic"]?>></input>
             <input type="submit" name="createbeitrag" value="Verschicken"/>
             </form>
             <?php
