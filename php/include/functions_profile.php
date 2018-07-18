@@ -149,7 +149,7 @@ function checkIfFriendsOrOwnProfile($id1, $id2, $mysqli)
 {
 	if($id1 == $id2)
 	{
-		return "failure1";
+		return true;
 	}
 	if($stmt = $mysqli->prepare("SELECT * FROM friends_member WHERE userID_1 = ? AND userID_2 = ?"))
 	{
@@ -162,23 +162,27 @@ function checkIfFriendsOrOwnProfile($id1, $id2, $mysqli)
 
 		if($stmt->num_rows == 1)
 		{
-			return "success";
+			return true;
 		}
 		else
 		{
-			return "failure2";
+			return false;
 		}
 	}
 	else 
 	{
-		return "failure3";	
+		return false;	
 	}
 }
 
 function addFriendByUserID($id1, $id2, $mysqli)
 {
+	if(checkIfFriendsOrOwnProfile($id1, $id2, $mysqli))
+	{
+		return false;
+	}
 	//mit sich selbst befrundet
-	if($id1 == $id2)
+	/*if($id1 == $id2)
 	{
 		return false;
 	}
@@ -196,7 +200,7 @@ function addFriendByUserID($id1, $id2, $mysqli)
 		{
 			return false;
 		}		
-	}
+	}*/
 	//nicht mit einander befreundet --> Eintrag wird erstellt
 	if ($stmt = $mysqli->prepare("INSERT INTO friends_member (userID_1, userID_2) VALUES (?,?)")) 
 	{
