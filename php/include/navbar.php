@@ -4,6 +4,13 @@ include_once 'php/include/functions_login.php';
 
 
 sec_session_start();
+
+if (login_check($mysqli) == true) {
+    $logged = 'in';
+} else {
+    $logged = 'out';
+}
+
 ?>
 
 <div class ="navbar-fixed-top">
@@ -35,53 +42,55 @@ sec_session_start();
 
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-
-          
-  
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="profile-ava">
-                                <img alt="" src="Fotos/avatar1_small.png">
-                            </span>
-                            <span class="username">Username</span>
-                            <b class="caret"></b>
-                        </a>
-            <ul class="dropdown-menu extended logout">
-              <div class="log-arrow-up"></div>
-              <li class="eborder-top">
-                <a href="profil.php"><i class="icon_profile"></i> My Profile</a>
-              </li>
-              <li>
-                <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
-              </li>
-              <li>
-                <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
-              </li>
-              <li>
-                <a href="#"><i class="icon_chat_alt"></i> Chats</a>
-              </li>
-              <li>
-                <a href="php/include/logout.php"><i class="icon_key_alt"></i> Log Out</a>
-              </li>
-              <li>
-                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
-              </li>
-			  <?php
-						if (login_check($mysqli) == true) 
+		<?php
+		if($logged == 'out')
+		{
+			echo "<div class='nav pull-right top-menu'><a href = 'login.php'>Login</a></div>";
+		}?>
+         <ul class="nav pull-right top-menu" <?php
+		if($logged == 'out')
+		{
+			echo "style='visibility: hidden'";
+		}?>>
+		 <li class='dropdown'>
+			<a data-toggle='dropdown' class='dropdown-toggle' href='#'>
+				<span class='profile-ava'>
+						<img alt='' src='Fotos/avatar1_small.png'>
+					</span>
+					<span class="username"><?php echo $_SESSION['username']; ?></span>
+                    <b class="caret"></b>
+                 </a>
+				<ul class="dropdown-menu extended logout">
+				  <div class="log-arrow-up"></div>
+				  <li class="eborder-top">
+					<a href="profil.php"><i class="icon_profile"></i> My Profile</a>
+				  </li>
+				  <li>
+					<a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+				  </li>
+				  <li>
+					<a href="#"><i class="icon_clock_alt"></i> Timeline</a>
+				  </li>
+				  <li>
+					<a href="#"><i class="icon_chat_alt"></i> Chats</a>
+				  </li>
+				  <li>
+					<a href="php/include/logout.php"><i class="icon_key_alt"></i> Log Out</a>
+				  </li>
+				  <li>
+					<a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+				  </li>
+				  <?php
+					if (login_check($mysqli) == true) 
+					{
+						if($_SESSION['admin'] == 1)
 						{
-							if($_SESSION['admin'] == 1)
-							{
-								echo "<li><a href='admin_config.php'><i class='icon_key_alt'></i>Adminseite</a></li>";
-							}
+							echo "<li><a href='admin_config.php'><i class='icon_key_alt'></i>Adminseite</a></li>";
 						}
-			  ?>
-
-              
-            </ul>
-          </li>
-          
+					}
+				  ?>
+				</ul>
+			</li>  
         </ul>
        
 
