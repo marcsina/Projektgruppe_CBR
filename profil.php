@@ -186,7 +186,12 @@ if (login_check($mysqli) == true)
                       <li class="active"><a href="#my-timeline" data-toggle="tab"><i class="fa fa-pencil"></i> Timeline</a></li>
                       <li><a href="#about" data-toggle="tab"><i class="fa fa-user"></i> About</a></li>
                       <li><a href="#user-activities" data-toggle="tab"><i class="fa fa-laptop"></i> Activities</a></li>
-                      <li><a href="#mymessage" data-toggle="tab"><i class="fa fa-envelope"></i> Message</a></li>
+                      <li><a href="#mymessage" data-toggle="tab"><i class="fa fa-envelope"></i> Message</a></li>	
+					  <?php
+						if($_SESSION['user_id'] == $userDataArray['id'])
+						{
+						echo "<li><a href='#edit_profil' data-toggle='tab'><i class='fa fa-edit'></i> edit profil</a></li>";
+					  }?>
                     </ul>
                     <!-- End nav tab -->
 
@@ -498,6 +503,93 @@ if (login_check($mysqli) == true)
                             </div><!-- End div .scroll-user-widget -->
                         </div><!-- End div .tab-pane -->
                         <!-- End Tab user messages -->
+
+						<?php
+						if($_SESSION['user_id'] == $userDataArray['id'])
+						{
+						 echo "<div class='tab-pane animated fadeInRight' id='edit_profil'>
+							
+							<form class='form' action='##' method='post' id='registrationForm'>
+
+								<div class='form-group'>
+
+									<div class='col-xs-6'>
+										<label for='first_name'>First name</label>
+										<input type='text' class='form-control' name='first_name' id='first_name' placeholder='first name' title='enter your first name if any.' value='". $userDataArray['vorname'] . "'>
+									</div>
+								</div>
+								<div class='form-group'>
+
+									<div class='col-xs-6'>
+										<label for='last_name'>Last name</label>
+										<input type='text' class='form-control' name='last_name' id='last_name' placeholder='last name' title='enter your last name if any.' value='". $userDataArray['nachname'] . "'>
+									</div>
+								</div>
+
+								<div class='form-group'>
+
+									<div class='col-xs-6'>
+										<label for='phone'>Mobile</label>
+										<input type='text' class='form-control' name='phone' id='phone' placeholder='enter phone number' title='enter your phone number if any.'>
+									</div>
+								</div>
+
+								<div class='form-group'>
+									<div class='col-xs-6'>
+										<label for='mobile'>Profession</label>
+										<input type='text' class='form-control' name='Profession' id='Profession' placeholder='enter your Profession' title='enter your profession.'>
+									</div>
+								</div>
+								<div class='form-group'>
+
+									<div class='col-xs-6'>
+										<label for='email'>Email</label>
+										<input type='email' class='form-control' name='email' id='email' placeholder='you@email.com' title='enter your email.' value='". $userDataArray['email'] . "'>
+									</div>
+								</div>
+								<div class='form-group'>
+
+									<div class='col-xs-6'>
+										<label for='email'>Domain</label>
+										<input type='text' class='form-control' id='Domain' placeholder='enter your Domain' title='enter your Domain'>
+									</div>
+								</div>
+								<div class='form-group'>
+
+									<div class='col-xs-6'>
+										<label for='password'>Password</label>
+										<input type='password' class='form-control' name='password' id='password' placeholder='enter your password' title='enter your password.'>
+									</div>
+								</div>
+								<div class='form-group'>
+
+									<div class='col-xs-6'>
+										<label for='password2'>Verify</label>
+										<input type='password' class='form-control' name='password2' id='password2' placeholder='enter your password' title='enter your password.'>
+									</div>
+								</div>
+
+								<div class='form-group'>
+
+									<div class='col-xs-6'>
+										<label for='website'>Website</label>
+										<input type='text' class='form-control' name='website' id='website' placeholder='enter your website' title='enter your website.' value='". $userDataArray['website'] . "'>
+									</div>
+								</div>
+
+
+								<div class='form-group'>
+									<div class='col-xs-6'>
+										<br>
+										<button class='btn btn-md btn-success pull-right' type='submit'><i class='glyphicon glyphicon-ok-sign'></i> Save</button>
+										<button class='btn btn-md' type='reset'><i class='glyphicon glyphicon-repeat'></i> Reset</button>
+									</div>
+								</div>
+							</form>
+						</div>";
+						}?>
+						
+
                     </div><!-- End div .tab-content -->
                 </div><!-- End div .box-info -->
             </div>
