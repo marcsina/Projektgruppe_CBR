@@ -97,7 +97,8 @@ if (login_check($mysqli) == true) {
                     <!-- " Answer section" -->               
                     <h2 style="text-align: center"> <b> Antwort </b></h2>
 					<!-- TODO BUTTONS einfügen-->
-                    <form action="" method="post">                          
+                    <form action="" method="post">
+						<input type="hidden" name="correctanswer" value='<?php echo $questionData['correctAnswerPosition'];?>'\>
                         <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort1_Button" value="<?php echo $questionData['antwort1'];?>"/>
 						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort2_Button" value="<?php echo $questionData['antwort2'];?>"/>
 						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort3_Button" value="<?php echo $questionData['antwort3'];?>"/>

@@ -115,4 +115,47 @@ function loadRandomQuestion($mysqli)
 	}
 
 }
+
+function checkCorrectAnswer(givenAnswer, correctAnswer)
+{
+	//TODO Chris schreib hier mal was cooles
+	
+}
+
+
+if(isset($_POST['antwort1_Button'], $_POST['correctanswer'])
+{
+	//$p1 = filter_input(INPUT_POST, 'antwort1_Button', FILTER_SANITIZE_STRING);
+	$p2 = filter_input(INPUT_POST, 'correctanswer', FILTER_SANITIZE_NUMBER_INT);
+
+	//TODO
+	checkCorrectAnswer(0, $p2);
+}
+
+if(isset($_POST['antwort2_Button'], $_POST['correctanswer'])
+{
+	//$p1 = filter_input(INPUT_POST, 'antwort2_Button', FILTER_SANITIZE_STRING);
+	$p2 = filter_input(INPUT_POST, 'correctanswer', FILTER_SANITIZE_NUMBER_INT);
+
+	//TODO
+	checkCorrectAnswer(1, $p2);
+}
+
+if(isset($_POST['antwort3_Button'], $_POST['correctanswer'])
+{
+	//$p1 = filter_input(INPUT_POST, 'antwort3_Button', FILTER_SANITIZE_STRING);
+	$p2 = filter_input(INPUT_POST, 'correctanswer', FILTER_SANITIZE_NUMBER_INT);
+
+	//TODO
+	checkCorrectAnswer(2, $p2);
+}
+
+if(isset($_POST['antwort4_Button'], $_POST['correctanswer'])
+{
+	//$p1 = filter_input(INPUT_POST, 'antwort4_Button', FILTER_SANITIZE_STRING);
+	$p2 = filter_input(INPUT_POST, 'correctanswer', FILTER_SANITIZE_NUMBER_INT);
+
+	//TODO
+	checkCorrectAnswer(3, $p2);
+}
 ?>

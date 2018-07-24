@@ -194,7 +194,7 @@ if (login_check($mysqli) == true)
                       <li><a href="#user-activities" data-toggle="tab"><i class="fa fa-laptop"></i> Activities</a></li>
                       <li><a href="#mymessage" data-toggle="tab"><i class="fa fa-envelope"></i> Message</a></li>	
 					  <?php
-						if($ownProfile])
+						if($ownProfile)
 						{
 						echo "<li><a href='#edit_profil' data-toggle='tab'><i class='fa fa-edit'></i> edit profil</a></li>";
 					  }?>
