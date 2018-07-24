@@ -166,7 +166,7 @@ if(isset($_POST["createbeitrag"]))
                 	<td><div style="font-size: 12px;color: #007aff;"><?php echo $row['datum']?></div></td>
                 </tr>     
                 <tr bgcolor = "#2d4457">
-                    <td style = "vertical-align:top;padding:10px;font-color: white;font-weight: bold"><a href="profil.php?username='.$result2['n'].''" style = "color:white;"><?php echo $result2['n']?></a></td>
+                    <td style = "vertical-align:top;padding:10px;font-color: white;font-weight: bold"><a href="profil.php?username=<?php echo $result2['n'] ?>" style = "color:white;"><?php echo $result2['n']?></a></td>
                     <td style = "padding:10px;font-color: white;"><?php echo $row['inhalt']?> <br> <br> </td>
                 </tr> 
                 </table>  
