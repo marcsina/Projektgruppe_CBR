@@ -17,7 +17,7 @@ if (login_check($mysqli) == true) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-        <!-- user-scalable für mobile devices -->
+        <!-- user-scalable fÃ¼r mobile devices -->
         <meta name="description" content="...">
         <meta name="author" content="...">
         <title>MedAusbild</title>
@@ -91,12 +91,12 @@ if (login_check($mysqli) == true) {
                     <div id="div_question">
 						<?php
 						$questionData = loadRandomQuestion($mysqli);
-						echo utf8_decode("Welches ist ein stark ausgeprägtes Symptom in dem Fall". $questionData['casename'] . "");		 
+						echo utf8_decode("Welches ist ein stark ausgeprägtes Symptom in dem Fall ". $questionData['casename'] . "?");		 
 						?>
 					</div>
                     <!-- " Answer section" -->               
                     <h2 style="text-align: center"> <b> Antwort </b></h2>
-					<!-- TODO BUTTONS einfügen-->
+					<!-- TODO BUTTONS einfÃ¼gen-->
                     <form action="" method="post">
 						<input type="hidden" name="correctanswer" value='<?php echo $questionData['correctAnswerPosition'];?>'\>
                         <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort1_Button" value="<?php echo $questionData['antwort1'];?>"/>

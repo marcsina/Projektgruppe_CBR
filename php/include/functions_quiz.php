@@ -2,6 +2,23 @@
 header('Content-Type: text/html; charset=ISO-8859-1');
 header("Access-Control-Allow-Origin: *");
 
+/*class Answer
+{
+	var $kat_id;
+	var $kat_name;
+
+	function get_ID
+	{
+		return $this->kat_id;
+	}
+
+	function get_Name
+	{
+		return $this->kat_name;
+	}
+}*/
+
+
 //shuffle answers to question
 function shuffleAnswers($questionData)
 {
@@ -116,14 +133,21 @@ function loadRandomQuestion($mysqli)
 
 }
 
-function checkCorrectAnswer(givenAnswer, correctAnswer)
+function checkCorrectAnswer($givenAnswer, $correctAnswer)
 {
-	//TODO Chris schreib hier mal was cooles
-	
+	//korrekte Antwort
+	if($givenAnswer, $correctAnswer)
+	{
+		
+	}
+	//falsche Antwortelse
+	else
+	{
+		
+	}
 }
 
-
-if(isset($_POST['antwort1_Button'], $_POST['correctanswer'])
+if(isset($_POST['antwort1_Button'], $_POST['correctanswer']))
 {
 	//$p1 = filter_input(INPUT_POST, 'antwort1_Button', FILTER_SANITIZE_STRING);
 	$p2 = filter_input(INPUT_POST, 'correctanswer', FILTER_SANITIZE_NUMBER_INT);
@@ -132,7 +156,7 @@ if(isset($_POST['antwort1_Button'], $_POST['correctanswer'])
 	checkCorrectAnswer(0, $p2);
 }
 
-if(isset($_POST['antwort2_Button'], $_POST['correctanswer'])
+if(isset($_POST['antwort2_Button'], $_POST['correctanswer']))
 {
 	//$p1 = filter_input(INPUT_POST, 'antwort2_Button', FILTER_SANITIZE_STRING);
 	$p2 = filter_input(INPUT_POST, 'correctanswer', FILTER_SANITIZE_NUMBER_INT);
@@ -141,7 +165,7 @@ if(isset($_POST['antwort2_Button'], $_POST['correctanswer'])
 	checkCorrectAnswer(1, $p2);
 }
 
-if(isset($_POST['antwort3_Button'], $_POST['correctanswer'])
+if(isset($_POST['antwort3_Button'], $_POST['correctanswer']))
 {
 	//$p1 = filter_input(INPUT_POST, 'antwort3_Button', FILTER_SANITIZE_STRING);
 	$p2 = filter_input(INPUT_POST, 'correctanswer', FILTER_SANITIZE_NUMBER_INT);
@@ -150,7 +174,7 @@ if(isset($_POST['antwort3_Button'], $_POST['correctanswer'])
 	checkCorrectAnswer(2, $p2);
 }
 
-if(isset($_POST['antwort4_Button'], $_POST['correctanswer'])
+if(isset($_POST['antwort4_Button'], $_POST['correctanswer']))
 {
 	//$p1 = filter_input(INPUT_POST, 'antwort4_Button', FILTER_SANITIZE_STRING);
 	$p2 = filter_input(INPUT_POST, 'correctanswer', FILTER_SANITIZE_NUMBER_INT);
