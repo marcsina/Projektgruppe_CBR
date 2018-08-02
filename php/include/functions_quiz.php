@@ -133,6 +133,37 @@ function loadRandomQuestionHigh($mysqli)
 	}
 
 }
+//Challenge someone to a Quiz
+function challengeSomeone($userID1, $userID2)
+{
+	//Check if the Challenge is already in the DB
+	if($stmt = $mysqli->prepare("SELECT * FROM PENDING_CHALLENGE WHERE User_ID_1 = ? AND User_ID_2 = ?; "))
+	{
+		$stmt->bind_param('ii', $userID1, $userID2);
+        $stmt->execute();
+        $stmt->store_result();
+
+		//if not insert it
+		if ($stmt->num_rows < 1)
+		{
+            
+            if($stmt2 = $mysqli->prepare("INSERT INTO PENDING_CHALLENGE(User_ID_1, User_ID_2) VALUES (?,?);"))
+            {
+                $stmt->bind_param('ii', $userID1, $userID2);
+	            $stmt2->execute();
+				return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
 
 //Returns a random Question with random answers and correct Answer Position for Low Value
 function loadRandomQuestionLow($mysqli)

@@ -335,3 +335,4 @@ ASALocalRun/
 /php/include/updateKeywords.php
 /php/include/getKeywordsForUpdate.php
 /js/stemmKeywords.js
+/php/test.php
