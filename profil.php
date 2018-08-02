@@ -7,7 +7,8 @@ include_once 'php/include/functions_profile.php';
 $ownProfile = false;
 
 sec_session_start();
- 
+
+
 if (login_check($mysqli) == true) 
 {
     $logged = 'in';

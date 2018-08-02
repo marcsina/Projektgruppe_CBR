@@ -228,11 +228,11 @@ function genereateFourQuestionsMultiplayer($mysqli)
 		if( rand(0,1) == 0)
 		{
 			$question = loadRandomQuestionHigh($mysqli);
-			$type = 0;
+			$type = 0
 		}else
 		{
 			$question = loadRandomQuestionLow($mysqli);
-			$type = 1;
+			$type = 1
 		}
 
 		if ($insert_stmt = $mysqli->prepare("INSERT INTO `MP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`) VALUES (?,?,?,?,?,?)")) {
