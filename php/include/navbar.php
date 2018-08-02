@@ -98,7 +98,7 @@ if (login_check($mysqli) == true) {
          <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                        
-                        <li class="menuItem"><a href="Quiz.php"><?php echo $pendingChallenges; ?>Quiz <i class="icon_table"></i></a>
+                        <li class="menuItem"><a href="Quiz_uebersicht.php"><?php echo $pendingChallenges; ?>Quiz <i class="icon_table"></i></a>
                         </li>
 
                         <li class="menuItem"><a href="forum.php">Forum  <i class="icon_genius"></i></a>

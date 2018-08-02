@@ -237,19 +237,6 @@ function loadRandomQuestionLow($mysqli)
 	}
 
 }
-function checkCorrectAnswer($givenAnswer, $correctAnswer)
-{
-	//korrekte Antwort
-	if($givenAnswer, $correctAnswer)
-	{
-
-	}
-	//falsche Antwortelse
-	else
-	{
-
-	}
-}
 
 function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
 {
@@ -273,6 +260,26 @@ function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
             $insert_stmt->execute();
         }
     }
+}
+
+function getAllChallenges($mysqli, $userid)
+{
+	$sqlStmt = "SELECT PENDING_CHALLENGE.User_ID_1, members.username FROM PENDING_CHALLENGE, members WHERE User_ID_2 = $userid AND PENDING_CHALLENGE.User_ID_1 = members.id;";
+    $result = mysqli_query($mysqli,$sqlStmt);
+	$data = array();
+    if ($result = $mysqli->query($sqlStmt))
+    {
+        while ($row = $result->fetch_assoc())
+        {
+			$userID1= $row["User_ID_1"];
+			$username = $row["username"];
+
+			array_push($data,array("userID1"=>$userID1, "username"=>$username)); 
+        }
+        // Objekt freigeben
+        $result->free();
+    }
+	return $data;
 }
 
 if(isset($_POST['antwort1_Button'], $_POST['correctanswer']))

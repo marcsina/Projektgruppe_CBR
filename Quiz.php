@@ -90,7 +90,7 @@ if (login_check($mysqli) == true) {
 					<!-- eigentliche Frage -->
                     <div id="div_question">
 						<?php
-						$questionData = loadRandomQuestion($mysqli);
+						$questionData = loadRandomQuestionHigh($mysqli);
 						echo utf8_decode("Welches ist ein stark ausgeprägtes Symptom in dem Fall ". $questionData['casename'] . "?");		 
 						?>
 					</div>
