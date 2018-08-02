@@ -251,7 +251,7 @@ function checkCorrectAnswer($givenAnswer, $correctAnswer)
 	}
 }
 
-function genereateFourQuestionsMultiplayer($mysqli)
+function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
 {
 	for($questionCounter = 0; $questionCounter < 5; $questionCounter++)
 	{
@@ -266,10 +266,9 @@ function genereateFourQuestionsMultiplayer($mysqli)
 			$type = 1;
 		}
 
-		if ($insert_stmt = $mysqli->prepare("INSERT INTO `MP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`) VALUES (?,?,?,?,?,?)"))
+		if ($insert_stmt = $mysqli->prepare("INSERT INTO `MP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`, MP_QUIZ_ID) VALUES (?,?,?,?,?,?,?)"))
         {
-            echo "3";
-            $insert_stmt->bind_param('isssss', $type, $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'] );
+            $insert_stmt->bind_param('isssssi', $type, $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $mp_quiz_ID );
             // Führe die vorbereitete Anfrage aus.
             $insert_stmt->execute();
         }
