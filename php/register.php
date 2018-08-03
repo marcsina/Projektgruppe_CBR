@@ -65,7 +65,7 @@ include_once 'include/functions_login.php';
                                    this.form.password,
                                    this.form.confirmpwd);" /> 
         </form>
-        <p><h4>Return to the <a href="../login.php">login page</a>.</h4></p>
+        <p><h4>Return to the <a href="login.php">login page</a>.</h4></p>
         </div>
    
 

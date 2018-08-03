@@ -62,7 +62,7 @@ if (login_check($mysqli) == true)
 	}
 	else
 	{
-		header('Location: http://141.99.248.92/Projektgruppe/login.php?logged=0');	
+		header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');	
 		exit;
 	}
 }

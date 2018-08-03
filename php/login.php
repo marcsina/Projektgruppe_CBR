@@ -66,7 +66,7 @@ if (login_check($mysqli) == true) {
         }
         ?>
 
-        <form action="php/include/login_process.php" method="post" name="login_form">
+        <form action="include/login_process.php" method="post" name="login_form">
             <div class="login-wrap">
                 <p class="login-img"><i class="icon_lock_alt"></i></p>
                 <div class="input-group">

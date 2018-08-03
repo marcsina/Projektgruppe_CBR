@@ -87,7 +87,7 @@ if (login_check($mysqli) == true) {
 					{
 						if($_SESSION['admin'] == 1)
 						{
-							echo "<li><a href='admin_config.php'><i class='icon_key_alt'></i>Adminseite</a></li>";
+							echo "<li><a href='/Projektgruppe/php/admin_config.php'><i class='icon_key_alt'></i>Adminseite</a></li>";
 						}
 					}
 				  ?>
@@ -121,7 +121,7 @@ if (login_check($mysqli) == true) {
 						</li>
 						<li class="menuItem"><a href="#...">Statistik  <i class="icon_piechart"></i></a></li>
 
-						<li class="menuItem"><a href="/Projektgruppe/php/contact_medausbild.html">Kontakt <i class="icon_documents_alt"></i></a></li>
+						<li class="menuItem"><a href="/Projektgruppe/php/contact_medausbild.php">Kontakt <i class="icon_documents_alt"></i></a></li>
                     </ul>
                 </div>
       </div>
