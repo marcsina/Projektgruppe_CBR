@@ -24,7 +24,7 @@
 </head>
 
 <?php
- //include ('include/navbar.php');
+ include ('include/navbar.php');
 ?>
 <body>
     <!-- container section start -->

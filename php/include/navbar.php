@@ -1,7 +1,8 @@
 <?php
-include_once 'php/include/conn.php';
-include_once 'php/include/functions_login.php';
-include_once 'quiz_countPendingChallenges.php';
+$path = $_SERVER['DOCUMENT_ROOT'];
+include_once ($path . '/Projektgruppe/php/include/conn.php');
+include_once ($path . '/Projektgruppe/php/include/functions_login.php');
+include_once ($path . '/Projektgruppe/php/include/quiz_countPendingChallenges.php');
 
 sec_session_start();
 
