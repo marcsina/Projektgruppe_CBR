@@ -13,10 +13,10 @@ include_once 'include/functions_login.php';
         <!-- user-scalable für mobile devices -->
         <meta name="description" content="...">
         <meta name="author" content="...">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 
 
-        <link href="css/style3.css" rel="stylesheet">
+        <link href="../css/style3.css" rel="stylesheet">
  
         
     </head>
