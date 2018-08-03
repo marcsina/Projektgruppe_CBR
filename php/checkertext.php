@@ -23,9 +23,9 @@ if (login_check($mysqli) == true) {
         <title>MedAusbild</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
         
-		<link href="css/style3.css" rel="stylesheet">
+		<link href="../css/style3.css" rel="stylesheet">
 
     </head>
 
@@ -91,14 +91,14 @@ if (login_check($mysqli) == true) {
 
 
         <!-- Scripts -->
-        <script src="js/german-porter-stemmer.js"></script>
-        <script src="js/stopWords.js"></script>
-        <script src="js/jquery-2.2.2.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/script.js"></script>
-		<script src="js/CBR.js"></script>
-		<script src="js/snowball-german.js"></script>
-		<script src="js/Checker_text.js"></script>
+        <script src="../js/german-porter-stemmer.js"></script>
+        <script src="../js/stopWords.js"></script>
+        <script src="../js/jquery-2.2.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/script.js"></script>
+		<script src="../js/CBR.js"></script>
+		<script src="../js/snowball-german.js"></script>
+		<script src="../js/Checker_text.js"></script>
 		</div>
 
 		<div id="txtHint" style="display:none"><b>Person info will be listed here...</b></div>

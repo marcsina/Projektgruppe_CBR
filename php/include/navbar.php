@@ -18,7 +18,7 @@ if (login_check($mysqli) == true) {
 <header class="header dark-bg">
       <div class="toggle-nav">
         <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"> 
-            <a class="" href="index.php">
+            <a class="" href="/Projektgruppe/index.php">
                           <i class="icon_house_alt"></i>
                           <span></span>
                       </a>
@@ -37,7 +37,7 @@ if (login_check($mysqli) == true) {
 	  
 
       <!--logo start-->
-      <a href="index.php" class="logo">Medausbild <span class="lite">Siegen</span></a>
+      <a href="/Projektgruppe/index.php" class="logo">Medausbild <span class="lite">Siegen</span></a>
       <!--logo end-->
 
       
@@ -47,7 +47,7 @@ if (login_check($mysqli) == true) {
 		<?php
 		if($logged == 'out')
 		{
-			echo "<div class='nav pull-right top-menu'><a href = 'login.php'>Login</a></div>";
+			echo "<div class='nav pull-right top-menu'><a href = '/Projektgruppe/php/login.php'>Login</a></div>";
 		}?>
          <ul class="nav pull-right top-menu" <?php
 		if($logged == 'out')
@@ -55,7 +55,7 @@ if (login_check($mysqli) == true) {
 			echo "style='visibility: hidden'";
 		}?>>
 		 <li class='dropdown'>
-			<a data-toggle='dropdown' class='dropdown-toggle' href='#'>
+			<a data-toggle='dropdown' class='dropdown-toggle' href='/Projektgruppe/php/profil.php'>
 				<span class='profile-ava'>
 						<img alt='' src='Fotos/avatar1_small.png'>
 					</span>
@@ -65,7 +65,7 @@ if (login_check($mysqli) == true) {
 				<ul class="dropdown-menu extended logout">
 				  <div class="log-arrow-up"></div>
 				  <li class="eborder-top">
-					<a href="profil.php"><i class="icon_profile"></i> My Profile</a>
+					<a href="/Projektgruppe/php/profil.php"><i class="icon_profile"></i> My Profile</a>
 				  </li>
 				  <li>
 					<a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
@@ -77,10 +77,10 @@ if (login_check($mysqli) == true) {
 					<a href="#"><i class="icon_chat_alt"></i> Chats</a>
 				  </li>
 				  <li>
-					<a href="php/include/logout.php"><i class="icon_key_alt"></i> Log Out</a>
+					<a href="/Projektgruppe/php/include/logout.php"><i class="icon_key_alt"></i> Log Out</a>
 				  </li>
 				  <li>
-					<a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+					<a href=""><i class="icon_key_alt"></i> Documentation</a>
 				  </li>
 				  <?php
 					if (login_check($mysqli) == true) 
@@ -99,31 +99,29 @@ if (login_check($mysqli) == true) {
          <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                        
-                        <li class="menuItem"><a href="Quiz_uebersicht.php"><?php echo $pendingChallenges; ?>Quiz <i class="icon_table"></i></a>
+                        <li class="menuItem"><a href="/Projektgruppe/php/Quiz_uebersicht.php"><?php echo $pendingChallenges; ?>Quiz <i class="icon_table"></i></a>
                         </li>
 
-                        <li class="menuItem"><a href="forum.php">Forum  <i class="icon_genius"></i></a>
+                        <li class="menuItem"><a href="/Projektgruppe/php/forum.php">Forum  <i class="icon_genius"></i></a>
                         </li>
                        
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Checker <i class="icon_document_alt"></i><span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="checkereinhacken.php">Symptom Checker</a></li>
-              <li><a href="checkertext.php">Fall Checker</a></li>
-            </ul>
-          </li>
+							<ul class="dropdown-menu">
+							  <li><a href="/Projektgruppe/php/checkereinhacken.php">Symptom Checker</a></li>
+							  <li><a href="/Projektgruppe/php/checkertext.php">Fall Checker</a></li>
+							</ul>
+						</li>
 
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Classroom <i class="icon_desktop"></i><span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#section41">Scripts</a></li>
-              <li><a href="#section42">Tutorials</a></li>
-              <li><a href="#section42">videos</a></li>
+						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Classroom <i class="icon_desktop"></i><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							  <li><a href="#section41">Scripts</a></li>
+							  <li><a href="#section42">Tutorials</a></li>
+							  <li><a href="#section42">videos</a></li>
+							</ul>
+						</li>
+						<li class="menuItem"><a href="#...">Statistik  <i class="icon_piechart"></i></a></li>
 
-            </ul>
-          </li>
-           <li class="menuItem"><a href="#...">Statistik  <i class="icon_piechart"></i></a>
-                        </li>
-
-           <li class="menuItem"><a href="#contact">Kontakt <i class="icon_documents_alt"></i></a></li>
+						<li class="menuItem"><a href="/Projektgruppe/php/contact_medausbild.html">Kontakt <i class="icon_documents_alt"></i></a></li>
                     </ul>
                 </div>
       </div>

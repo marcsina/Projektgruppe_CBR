@@ -37,16 +37,16 @@ if (login_check($mysqli) == true) {
     <title>Login </title>
 
     <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap theme -->
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="../css/bootstrap-theme.css" rel="stylesheet">
     <!--external css-->
     <!-- font icon -->
-    <link href="css/elegant-icons-style.css" rel="stylesheet" />
-    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="../css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="../css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles -->
-    <link href="css/style_login.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="../css/style_login.css" rel="stylesheet">
+    <link href="../css/style-responsive.css" rel="stylesheet" />
 
 
 </head>
@@ -85,12 +85,12 @@ if (login_check($mysqli) == true) {
                
             </div>
         </form>
-        <button class="btn btn-info btn-lg btn-block" type="submit" onclick="window.location.href='php/register.php'">Signup</button>
+        <button class="btn btn-info btn-lg btn-block" type="submit" onclick="window.location.href='register.php'">Signup</button>
 
     </div>
 
-    <script type="text/JavaScript" src="js/sha512.js"></script>
-    <script type="text/JavaScript" src="js/forms.js"></script>
+    <script type="text/JavaScript" src="../js/sha512.js"></script>
+    <script type="text/JavaScript" src="../js/forms.js"></script>
 </body>
 
 </html>

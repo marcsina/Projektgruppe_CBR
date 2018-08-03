@@ -23,10 +23,10 @@ if (login_check($mysqli) == true) {
         <title>MedAusbild</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 
-        <link href="css/style3.css" rel="stylesheet">
-		<link href="css/style_autocomplete.css" rel="stylesheet">
+        <link href="../css/style3.css" rel="stylesheet">
+		<link href="../css/style_autocomplete.css" rel="stylesheet">
 
     </head>
 	<!-- _______________________________________NavBar_____________________________________________________-->
@@ -91,11 +91,11 @@ if (login_check($mysqli) == true) {
 
         <!--____________________________________________________________________________________________________-->
         <!-- Scripts -->
-        <script src="js/jquery-2.2.2.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-		<script src="js/CBR.js"></script>
-		<script src="js/Checker_Checkboxes.js"></script>
-		<script src="js/Checker_Checkboxes_autocomplete.js"></script>
+        <script src="../js/jquery-2.2.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+		<script src="../js/CBR.js"></script>
+		<script src="../js/Checker_Checkboxes.js"></script>
+		<script src="../js/Checker_Checkboxes_autocomplete.js"></script>
 		
 		</div>
     </body>

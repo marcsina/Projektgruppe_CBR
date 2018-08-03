@@ -26,15 +26,15 @@ if (login_check($mysqli) == true) {
 
 
         <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 
 
-        <link href="css/style3.css" rel="stylesheet">
+        <link href="../css/style3.css" rel="stylesheet">
 
         <!-- animate.CSS -->
-        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="../css/animate.css">
 
-        <link rel="stylesheet" href="css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="../css/font-awesome.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     </head>
     <!-- _______________________________________NavBar_____________________________________________________-->
@@ -70,8 +70,8 @@ if (login_check($mysqli) == true) {
 		<!--____________________________________________________________________________________________________-->
 
 		<!-- Scripts -->
-        <script src="js/jquery-2.2.2.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../js/jquery-2.2.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
 	</body>
 
 </html>
