@@ -26,13 +26,14 @@ if (login_check($mysqli) == true) {
       </div>
 
 	  <!-- Style -->
-	  <link href="css/style_home.css" rel="stylesheet">
+	  <link href="/Projektgruppe/css/style_home.css" rel="stylesheet">
 	  <!-- bootstrap theme -->
-	  <link href="css/bootstrap-theme.css" rel="stylesheet">
+	  <link href="/Projektgruppe/css/bootstrap-theme.css" rel="stylesheet">
 	  
-	   <link href="css/style-responsive.css" rel="stylesheet" />
+	  <link href="/Projektgruppe/css/style-responsive.css" rel="stylesheet" />
 
-	  <link href="css/elegant-icons-style.css" rel="stylesheet" />
+	  <link href="/Projektgruppe/css/elegant-icons-style.css" rel="stylesheet" />
+
 	  
 
       <!--logo start-->
