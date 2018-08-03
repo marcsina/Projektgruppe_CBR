@@ -95,11 +95,11 @@ include_once 'include/functions_login.php';
 
 
         <!-- Scripts -->
-        <script src="js/german-porter-stemmer.js"></script>
-        <script src="js/stopWords.js"></script>
-        <script src="js/jquery-2.2.2.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/script.js"></script>
-        <script src="js/code.js"></script>
+        <script src="../js/german-porter-stemmer.js"></script>
+        <script src="../js/stopWords.js"></script>
+        <script src="../js/jquery-2.2.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/script.js"></script>
+        <script src="../js/code.js"></script>
     </body>
 </html>

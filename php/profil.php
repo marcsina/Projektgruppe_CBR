@@ -78,10 +78,10 @@ if (login_check($mysqli) == true)
         <title>MedAusbild</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
 
 
-        <link href="css/style2.css" rel="stylesheet">
+        <link href="../css/style2.css" rel="stylesheet">
 
     </head>
 	 <!-- _______________________________________NavBar_____________________________________________________-->
@@ -580,12 +580,12 @@ if (login_check($mysqli) == true)
 
 
         <!-- Scripts -->
-        <script src="js/german-porter-stemmer.js"></script>
-        <script src="js/stopWords.js"></script>
-        <script src="js/jquery-2.2.2.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/script.js"></script>
-        <script src="js/code.js"></script>
+        <script src="../js/german-porter-stemmer.js"></script>
+        <script src="../js/stopWords.js"></script>
+        <script src="../js/jquery-2.2.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/script.js"></script>
+        <script src="../js/code.js"></script>
 
     </body>
 

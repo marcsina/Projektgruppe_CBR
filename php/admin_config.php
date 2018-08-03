@@ -40,7 +40,7 @@ if (login_check($mysqli) == true)
 
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -48,8 +48,8 @@ if (login_check($mysqli) == true)
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link href="css/style2.css" rel="stylesheet">
-    <link href="css/style_admin.css" rel="stylesheet">
+    <link href="../css/style2.css" rel="stylesheet">
+    <link href="../css/style_admin.css" rel="stylesheet">
 
 
 </head>
@@ -263,13 +263,13 @@ if (login_check($mysqli) == true)
     <div id="pastHint" style="display:none"><b>Person info will be listed here...</b></div>
     <div id="cbrhint" style="display:none"><b>CaseBase Data will be displayed here</b></div>
 
-    <script src="js/jquery-2.2.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/snowball-german.js"></script>
-    <script src="js/stopWords.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/autocomplete.js"></script>
-    <script src="js/admin_config.js"></script>
+    <script src="../js/jquery-2.2.2.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/snowball-german.js"></script>
+    <script src="../js/stopWords.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/autocomplete.js"></script>
+    <script src="../js/admin_config.js"></script>
 
 </body>
 
