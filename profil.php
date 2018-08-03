@@ -562,7 +562,7 @@ if (login_check($mysqli) == true)
 								<div class='form-group'>
 									<div class='col-xs-6'>
 										<br>
-										<button class='btn btn-md btn-success pull-right' type='submit'><i class='glyphicon glyphicon-ok-sign'></i> Save</button>
+										<button class='btn btn-md btn-success pull-right' type='submit' name='editProfile'><i class='glyphicon glyphicon-ok-sign'></i> Save</button>
 										<button class='btn btn-md' type='reset'><i class='glyphicon glyphicon-repeat'></i> Reset</button>
 									</div>
 								</div>
