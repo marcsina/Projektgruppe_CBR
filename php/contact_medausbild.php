@@ -23,12 +23,13 @@
 
 </head>
 
+<?php
+ //include ('include/navbar.php');
+?>
 <body>
     <!-- container section start -->
     <!--logo end-->
-    <?php
-    include ("include/navbar.php");
-    ?>
+    
 
         <!-- page start-->
         <div class="row">
