@@ -1,25 +1,25 @@
-<?php
+﻿<?php
 include_once 'include/register_process.php';
 include_once 'include/functions_login.php';
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Secure Login: Registration Form</title>
-        <script type="text/JavaScript" src="../js/sha512.js"></script> 
-        <script type="text/JavaScript" src="../js/forms.js"></script>
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-        <!-- user-scalable für mobile devices -->
-        <meta name="description" content="...">
-        <meta name="author" content="...">
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <!-- include Header -->
+    <?php
+    include('include/header.php');
+    ?>
+
+    <script type="text/JavaScript" src="../js/sha512.js"></script>
+    <script type="text/JavaScript" src="../js/forms.js"></script>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
 
-        <link href="../css/style3.css" rel="stylesheet">
- 
-        
-    </head>
+    <link href="../css/style3.css" rel="stylesheet">
+
+
+</head>
     <body>
        <div class="row first-after-navbar ip">
 

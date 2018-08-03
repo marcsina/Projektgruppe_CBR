@@ -1,4 +1,4 @@
-  <?php
+ï»¿  <?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_profile.php';
@@ -19,17 +19,17 @@ if (login_check($mysqli) == true)
 	{
 		$ownProfile = true;
 	}
-	//Überprüfen ob URL auf Profil verweist
+	//ï¿½berprï¿½fen ob URL auf Profil verweist
 	if(!empty($_GET["username"]))
 	{
 		//do something when url is pointing to specific profile
 		//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
 		$userDataArray = getUserDataByUsernameGET($mysqli);
 
-		//Überprüfen ob Nutzer exisitert, wenn nicht dann...
+		//ï¿½berprï¿½fen ob Nutzer exisitert, wenn nicht dann...
 		if($userDataArray == false)
 		{
-			//Weitergeleitet auf eigenes Profil, wenn gewünschter Nutzer nicht vorhanden
+			//Weitergeleitet auf eigenes Profil, wenn gewï¿½nschter Nutzer nicht vorhanden
 			header('Location: http://141.99.248.92/Projektgruppe/profil.php');	
 			exit;
 		}
@@ -42,12 +42,12 @@ if (login_check($mysqli) == true)
 } else 
 {
     $logged = 'out';
-	//Überprüfen ob URL auf Profil verweist
+	//ï¿½berprï¿½fen ob URL auf Profil verweist
 	if(!empty($_GET["username"]))
 	{
 		//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
 		$userDataArray = getUserDataByUsernameGET($mysqli);
-		//Überprüfen ob Nutzer exisitert, wenn nicht dann...
+		//ï¿½berprï¿½fen ob Nutzer exisitert, wenn nicht dann...
 		if($userDataArray == false)
 		{
 			//Weitergeleitet auf Startseite wenn Nutzer nicht vorhanden
@@ -69,21 +69,19 @@ if (login_check($mysqli) == true)
 ?>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-        <!-- user-scalable für mobile devices -->
-        <meta name="description" content="...">
-        <meta name="author" content="...">
-        <title>MedAusbild</title>
+<head>
+    <!-- include Header -->
+    <?php
+    include('include/header.php');
+    ?>
 
-        <!-- Bootstrap core CSS -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
 
-        <link href="../css/style2.css" rel="stylesheet">
+    <link href="../css/style2.css" rel="stylesheet">
 
-    </head>
+</head>
 	 <!-- _______________________________________NavBar_____________________________________________________-->
 
         <?php
@@ -177,7 +175,7 @@ if (login_check($mysqli) == true)
 								<form action="" method="post">
 									<input type="hidden" name='id1' value='<?php echo $_SESSION['user_id']; ?>'></input>
 									<input type="hidden" name='id2' value='<?php echo $userDataArray['id']; ?>'></input>
-									<input type="submit" class="btn btn-default btn-sm btn-block" name="addFriend" value="Freund hinzufügen"></input>
+									<input type="submit" class="btn btn-default btn-sm btn-block" name="addFriend" value="Freund hinzufï¿½gen"></input>
 								</form>
                             </div>
                         </div>

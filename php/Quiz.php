@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_quiz.php';
@@ -14,33 +14,31 @@ if (login_check($mysqli) == true) {
 ?>
 <html lang="de">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-        <!-- user-scalable fÃ¼r mobile devices -->
-        <meta name="description" content="...">
-        <meta name="author" content="...">
-        <title>MedAusbild</title>
+<head>
+    <!-- include Header -->
+    <?php
+    include('include/header.php');
+    ?>
 
 
 
 
-        <!-- Bootstrap core CSS -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
 
-        <link href="../css/style3.css" rel="stylesheet">
+    <link href="../css/style3.css" rel="stylesheet">
 
-        <!-- animate.CSS -->
-        <link rel="stylesheet" href="../css/animate.css" />
+    <!-- animate.CSS -->
+    <link rel="stylesheet" href="../css/animate.css" />
 
-        <link rel="stylesheet" href="../css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
-
+    <link rel="stylesheet" href="../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 
-    </head>
+
+
+</head>
     <!-- _______________________________________NavBar_____________________________________________________-->
     <?php
     include ("include/navbar.php");
