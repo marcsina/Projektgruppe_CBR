@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once 'php/include/conn.php';
 include_once 'php/include/functions_login.php';
 
@@ -14,12 +14,10 @@ if (login_check($mysqli) == true) {
 <!doctype html>
 <html lang="de">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-    <!-- user-scalable für mobile devices -->
-    <meta name="description" content="...">
-    <meta name="author" content="...">
-    <title>MedAusbild Forum</title>
+    <!-- include Header -->
+    <?php
+    include('include/header.php');
+    ?>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="css/style2.css" rel="stylesheet"> -->
