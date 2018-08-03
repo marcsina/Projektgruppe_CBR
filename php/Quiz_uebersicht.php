@@ -1,7 +1,7 @@
 <?php
-include_once 'php/include/conn.php';
-include_once 'php/include/functions_login.php';
-include_once 'php/include/functions_quiz.php';
+include_once 'include/conn.php';
+include_once 'include/functions_login.php';
+include_once 'include/functions_quiz.php';
 
 
 sec_session_start();
@@ -39,7 +39,7 @@ if (login_check($mysqli) == true) {
     </head>
     <!-- _______________________________________NavBar_____________________________________________________-->
     <?php
-		include ("php/include/navbar.php");
+		include ("include/navbar.php");
     ?>
 
 

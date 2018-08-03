@@ -1,6 +1,6 @@
 ﻿ <?php
-include_once 'php/include/conn.php';
-include_once 'php/include/functions_login.php';
+include_once 'include/conn.php';
+include_once 'include/functions_login.php';
 
 
 sec_session_start();
@@ -58,7 +58,7 @@ if (login_check($mysqli) == true)
 
     <!-- include Navbar -->
     <?php
-            include ("php/include/navbar.php");
+            include ("include/navbar.php");
     ?>
 
     <div class="container">
