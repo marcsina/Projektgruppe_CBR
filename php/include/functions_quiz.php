@@ -2,6 +2,8 @@
 header('Content-Type: text/html; charset=ISO-8859-1');
 header("Access-Control-Allow-Origin: *");
 
+include 'conn.php';
+
 /*class Answer
 {
 	var $kat_id;
@@ -134,7 +136,7 @@ function loadRandomQuestionHigh($mysqli)
 
 }
 //Challenge someone to a Quiz
-function challengeSomeone($userID1, $userID2)
+function challengeSomeone($userID1, $userID2, $mysqli)
 {
 	//Check if the Challenge is already in the DB
 	if($stmt = $mysqli->prepare("SELECT * FROM PENDING_CHALLENGE WHERE User_ID_1 = ? AND User_ID_2 = ?; "))
@@ -142,14 +144,12 @@ function challengeSomeone($userID1, $userID2)
 		$stmt->bind_param('ii', $userID1, $userID2);
         $stmt->execute();
         $stmt->store_result();
-
 		//if not insert it
 		if ($stmt->num_rows < 1)
 		{
-            
             if($stmt2 = $mysqli->prepare("INSERT INTO PENDING_CHALLENGE(User_ID_1, User_ID_2) VALUES (?,?);"))
             {
-                $stmt->bind_param('ii', $userID1, $userID2);
+                $stmt2->bind_param('ii', $userID1, $userID2);
 	            $stmt2->execute();
 				return true;
             }
@@ -282,6 +282,54 @@ function getAllChallenges($mysqli, $userid)
 	return $data;
 }
 
+function getAlreadyChallengedUsers($mysqli, $currentUser)
+{
+	// Get Alle Running Challenges for current users
+	if($stmt = $mysqli->prepare("SELECT * FROM PENDING_CHALLENGE WHERE User_ID_1 = ?; "))
+	{
+		$stmt->bind_param('i', $currentUser);
+        $stmt->execute();
+        $stmt->store_result();
+		$data = array();
+
+		$stmt->bind_result($id, $userid1, $userid2);
+
+		while ($stmt->fetch())
+        {
+			array_push($data,array("userID2"=>$userid2)); 
+        }
+    }
+    else
+    {
+        return false;
+    }
+	return $data;
+}
+
+function getPendingChallengesUsers($mysqli, $currentUser)
+{
+	// Get Alle Pending Challenges for current users
+	if($stmt = $mysqli->prepare("SELECT * FROM PENDING_CHALLENGE WHERE User_ID_2 = ?; "))
+	{
+		$stmt->bind_param('i', $currentUser);
+        $stmt->execute();
+        $stmt->store_result();
+		$data = array();
+
+		$stmt->bind_result($id, $userid1, $userid2);
+
+		while ($stmt->fetch())
+        {
+			array_push($data,array("userID1"=>$userid1)); 
+        }
+    }
+    else
+    {
+        return false;
+    }
+	return $data;
+}
+
 if(isset($_POST['antwort1_Button'], $_POST['correctanswer']))
 {
 	//$p1 = filter_input(INPUT_POST, 'antwort1_Button', FILTER_SANITIZE_STRING);
@@ -316,5 +364,10 @@ if(isset($_POST['antwort4_Button'], $_POST['correctanswer']))
 
 	//TODO
 	checkCorrectAnswer(3, $p2);
+}
+
+if(isset($_POST['functionname'], $_POST['arguments']))
+{
+	challengeSomeone($_POST['arguments'][0], $_POST['arguments'][1], $mysqli);
 }
 ?>

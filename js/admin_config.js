@@ -582,7 +582,7 @@ $( "#btn_load_case" ).click( function ( event )
 
     Edit_Case_Array = [];
 
-    $.post( 'php/include/getCaseAdmin.php', {
+    $.post( 'include/getCaseAdmin.php', {
         caseName: $( "#edit_Case_Name" ).val()
     } ).done( function ( data )
     {
