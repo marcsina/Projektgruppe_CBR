@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/html; charset=ISO-8859-1');
+header('Content-Type: text/html; charset=utf-8');
 header("Access-Control-Allow-Origin: *");
 
 include 'conn.php';
@@ -65,7 +65,7 @@ function shuffleAnswers($questionData)
 //Returns a random Question with random answers and correct Answer Position for High Value
 function loadRandomQuestionHigh($mysqli)
 {
-	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value = 1 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
+	if($stmt = $mysqli->prepare("SELECT Cases.id, Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value = 1 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
 	{
 		//$stmt->bind_param('i', 1);
 		$stmt->execute();
@@ -73,9 +73,9 @@ function loadRandomQuestionHigh($mysqli)
 
 		if ($stmt->num_rows == 1)
 		{
-			$stmt->bind_result($casename, $kategoriename);
+			$stmt->bind_result($id, $casename, $kategoriename);
 			$stmt->fetch();
-			$res = ["casename"=>$casename, "antwort1"=>$kategoriename];
+			$res = ["casename"=>utf8_decode($casename), "antwort1"=>utf8_decode($kategoriename), "id"=>$id ];
 		}
 		else
 		{
@@ -91,9 +91,9 @@ function loadRandomQuestionHigh($mysqli)
 	}
 
 	//Gegebenfalls noch den Wert Anpassen nachdem neue Cases da sind
-	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value < 0.7 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.name = ? ORDER BY RAND() LIMIT 3"))
+	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value < 0.8 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
 	{
-		$stmt->bind_param('s', $res['casename']);
+		$stmt->bind_param('i', $res['id']);
 		$stmt->execute();
 		$stmt->store_result();
 
@@ -104,15 +104,15 @@ function loadRandomQuestionHigh($mysqli)
 		{
 			if($i == 0)
 			{
-				$antwort2 = $kategoriename;
+				$antwort2 = utf8_decode($kategoriename);
 			}
 			else if($i == 1)
 			{
-				$antwort3 = $kategoriename;
+				$antwort3 = utf8_decode($kategoriename);
 			}
 			else if($i == 2)
 			{
-				$antwort4 = $kategoriename;
+				$antwort4 = utf8_decode($kategoriename);
 			}
 			else
 			{
@@ -168,7 +168,7 @@ function challengeSomeone($userID1, $userID2, $mysqli)
 //Returns a random Question with random answers and correct Answer Position for Low Value
 function loadRandomQuestionLow($mysqli)
 {
-	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value = 0 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
+	if($stmt = $mysqli->prepare("SELECT Cases.id, Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value < 0.25 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
 	{
 		//$stmt->bind_param('i', 1);
 		$stmt->execute();
@@ -176,9 +176,9 @@ function loadRandomQuestionLow($mysqli)
 
 		if ($stmt->num_rows == 1)
 		{
-			$stmt->bind_result($casename, $kategoriename);
+			$stmt->bind_result($id, $casename, $kategoriename);
 			$stmt->fetch();
-			$res = ["casename"=>$casename, "antwort1"=>$kategoriename];
+			$res = ["casename"=>utf8_decode($casename), "antwort1"=>utf8_decode($kategoriename), "id"=>$id];
 		}
 		else
 		{
@@ -194,9 +194,9 @@ function loadRandomQuestionLow($mysqli)
 	}
 
 	//Gegebenfalls noch den Wert Anpassen nachdem neue Cases da sind
-	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value > 0.7 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.name = ? ORDER BY RAND() LIMIT 3"))
+	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value > 0.7 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
 	{
-		$stmt->bind_param('s', $res['casename']);
+		$stmt->bind_param('i', $res['id']);
 		$stmt->execute();
 		$stmt->store_result();
 
@@ -207,15 +207,15 @@ function loadRandomQuestionLow($mysqli)
 		{
 			if($i == 0)
 			{
-				$antwort2 = $kategoriename;
+				$antwort2 = utf8_decode($kategoriename);
 			}
 			else if($i == 1)
 			{
-				$antwort3 = $kategoriename;
+				$antwort3 = utf8_decode($kategoriename);
 			}
 			else if($i == 2)
 			{
-				$antwort4 = $kategoriename;
+				$antwort4 = utf8_decode($kategoriename);
 			}
 			else
 			{
@@ -240,7 +240,7 @@ function loadRandomQuestionLow($mysqli)
 
 function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
 {
-	for($questionCounter = 0; $questionCounter < 5; $questionCounter++)
+	for($questionCounter = 0; $questionCounter < 4; $questionCounter++)
 	{
         //Load random Question Type High with 50% probability and Low with 50% probability
 		if( rand(0,1) == 0)
@@ -330,6 +330,54 @@ function getPendingChallengesUsers($mysqli, $currentUser)
 	return $data;
 }
 
+function generateMP_Quiz($mysqli, $userID1, $userID2)
+{
+    if($stmt = $mysqli->prepare("INSERT INTO MP_QUIZ (User_ID_1, User_ID_2) VALUES (?,?);"))
+    {
+        $stmt->bind_param('ii', $userID1, $userID2);		
+	    if($stmt->execute())
+		{
+			$quiz_ID = $mysqli->insert_id;
+			if($stmt2 = $mysqli->prepare("DELETE FROM PENDING_CHALLENGE WHERE User_ID_1 = ? AND User_ID_2 = ?;"))
+			{
+				$stmt2->bind_param('ii', $userID1, $userID2);
+				$stmt2->execute();
+				return $quiz_ID;
+			}
+		}
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function showCurrentMPGames($mysqli, $currentUser)
+{
+    if($stmt = $mysqli->prepare("SELECT members.username, members.id, MP_QUIZ.ID, IF(MP_QUIZ.User_ID_1 = ?, MP_QUIZ.startdatum_user_1, MP_QUIZ.startdatum_user_2) AS startdatum FROM MP_QUIZ, members WHERE (MP_QUIZ.User_ID_1 = ? OR MP_QUIZ.User_ID_2 = ?) AND (MP_QUIZ.User_ID_1 = members.id OR MP_QUIZ.User_ID_2 = members.id) AND NOT members.id = ? ORDER BY startdatum ASC;"))
+    {
+        $stmt->bind_param('iiii', $currentUser, $currentUser, $currentUser, $currentUser);		
+	    if($stmt->execute())
+		{
+			$stmt->store_result();
+			$data = array();
+
+			$stmt->bind_result($username, $membersid, $quizid, $startdatum);
+
+			while ($stmt->fetch())
+			{
+				array_push($data, array("username"=>$username, "membersid"=>$membersid, "quizid"=>$quizid, "startdatum"=>$startdatum)); 
+			}
+
+			return $data;
+		}
+    }
+    else
+    {
+        return false;
+    }
+}
+
 if(isset($_POST['antwort1_Button'], $_POST['correctanswer']))
 {
 	//$p1 = filter_input(INPUT_POST, 'antwort1_Button', FILTER_SANITIZE_STRING);
@@ -366,8 +414,32 @@ if(isset($_POST['antwort4_Button'], $_POST['correctanswer']))
 	checkCorrectAnswer(3, $p2);
 }
 
-if(isset($_POST['functionname'], $_POST['arguments']))
+/*
+*	Nutzer wurde herausgefordert und nimmt Quiz an, wird in tabelle eingetragen
+*/
+if(isset($_POST['newQuiz'],$_POST['challengedUserID'],$_POST['challengerUserID']))
 {
-	challengeSomeone($_POST['arguments'][0], $_POST['arguments'][1], $mysqli);
+	$p1 = filter_input(INPUT_POST, 'challengerUserID', FILTER_SANITIZE_NUMBER_INT);
+	$p2 = filter_input(INPUT_POST, 'challengedUserID', FILTER_SANITIZE_NUMBER_INT);
+	$quiz_ID = generateMP_Quiz($mysqli, $p1, $p2);
+
+	genereateFourQuestionsMultiplayer($mysqli, $quiz_ID);
+
+	//Go to Quiz
+	header('Location: ../Quiz.php');
+}
+if(isset($_POST['challengeUser'],$_POST['challengedUserID'],$_POST['challengerUserID']))
+{
+	$p1 = filter_input(INPUT_POST, 'challengerUserID', FILTER_SANITIZE_NUMBER_INT);
+	$p2 = filter_input(INPUT_POST, 'challengedUserID', FILTER_SANITIZE_NUMBER_INT);
+	challengeSomeone($p1, $p2 ,$mysqli);
+	header('Location: ../Quiz_uebersicht.php');
+}
+
+if(isset($_POST['continueQuiz'],$_POST['quizid']))
+{
+	$p1 = filter_input(INPUT_POST, 'quizid', FILTER_SANITIZE_NUMBER_INT);
+	//TODO Continue QUIZ
+	header('Location: ../Quiz.php');
 }
 ?>
