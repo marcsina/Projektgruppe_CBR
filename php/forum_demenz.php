@@ -1,7 +1,7 @@
 ﻿<?php
-include_once 'php/include/conn.php';
-include_once 'php/include/functions_login.php';
-include_once 'php/include/functions_forum.php';
+include_once 'include/conn.php';
+include_once 'include/functions_login.php';
+include_once 'include/functions_forum.php';
 
 sec_session_start();
  
@@ -51,45 +51,18 @@ if(isset($_POST["createbeitrag"]))
     include('include/header.php');
     ?>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style2.css" rel="stylesheet">
-    <link href="css/style_forum.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style2.css" rel="stylesheet">
+    <link href="../css/style_forum.css" rel="stylesheet">
 
 </head>
 
 <!-- include Navbar -->
     <?php
-            include ("php/include/navbar.php");
+            include ("include/navbar.php");
     ?>
 
 <body>
-
-	
-    You are currently logged <?php echo $logged ?>.
-    <?php
-    if($logged == 'out')
-    {
-        ?>
-        <form style="margin-top: 0px;" action="php/include/login_process.php" method="post" name="login_form">                      
-            Email: <input type="text" name="email" />
-            Password: <input type="password" 
-                             name="password" 
-                             id="password"/>
-            <input type="button" 
-                   value="Login" 
-                   onclick="formhash(this.form, this.form.password);" /> 
-        </form>
-        <?php
-    }
-    else 
-    {
-        ?>
-        If you are done <?php echo $_SESSION['username'] ?>, please <a href="php/include/logout.php">log out</a>.
-        <?php
-    }
-    ?>
-	
-    
     <div class="container">
     	<ul class="nav top">
             <li ><a style = "font-weight: normal" href="forum.php">Forum</a></li>
@@ -182,7 +155,7 @@ if(isset($_POST["createbeitrag"]))
         ?>
         <table style = "width: 100%;">
         <tr bgcolor = "#1a2732">
-            <th style = "min-width: 200px">Nr</th>
+            <th style = "min-width: 50px">Nr</th>
             <th style = "min-width: 200px">Topic</th>
             <th style = "min-width: 200px">Beiträge</th>
             <th style = "min-width: 200px">Letzter Beitrag</th>
@@ -202,7 +175,13 @@ if(isset($_POST["createbeitrag"]))
                	<tr bgcolor = "#2d4457">
                	
                 <td><?php echo $row['id']?></td>
-                <td><button type="submit" name="topic" value=<?php echo $row['id']?>><?php echo $row['name']?> </button></td>
+                
+                <?php
+                $value = $mysqli->query("SELECT text as tt FROM Cases WHERE id = '".$row['id']."';");
+        		$result2 = $value->fetch_assoc();
+        		?>
+                
+                <td><button class="nicehover" title="<?php echo substr($result2['tt'], 0, 1000)?>" type="submit" name="topic" value=<?php echo $row['id']?> style="height:100%;width:100%;text-align:left"><?php echo $row['name']?></button></td>
                 <?php
                 $value = $mysqli->query("SELECT COUNT(*) as total FROM Forum_Beitrag WHERE topic = '".$row['id']."';");
                 $result2 = $value->fetch_assoc();
@@ -213,7 +192,7 @@ if(isset($_POST["createbeitrag"]))
                 $value = $mysqli->query("SELECT MAX(datum) as max FROM Forum_Beitrag WHERE topic = '".$row['id']."';");
                 $result2 = $value->fetch_assoc();
 				?>
-                <td><?php echo $result2['max']?></td>
+                <td><?php echo date("d-m-Y ", strtotime($result2['max'])) ," at ", date(" H:i", strtotime($result2['max']))?></td>
                 </tr>
                 </form>
             	<?php

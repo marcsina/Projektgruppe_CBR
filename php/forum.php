@@ -1,6 +1,6 @@
 ﻿<?php
-include_once 'php/include/conn.php';
-include_once 'php/include/functions_login.php';
+include_once 'include/conn.php';
+include_once 'include/functions_login.php';
 
 sec_session_start();
  
@@ -19,47 +19,19 @@ if (login_check($mysqli) == true) {
     include('include/header.php');
     ?>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="css/style2.css" rel="stylesheet"> -->
 
-    <link href="css/style_forum.css" rel="stylesheet">
+    <link href="../css/style_forum.css" rel="stylesheet">
 
 </head>
 
 <!-- include Navbar -->
     <?php
-            include ("php/include/navbar.php");
+            include ("include/navbar.php");
     ?>
 
 <body>
-
-	
-    You are currently logged <?php echo $logged ?>.
-     <?php
-    if($logged == 'out')
-    {
-        ?>
-        <form style="margin-top: 0px;" action="php/include/login_process.php" method="post" name="login_form">                      
-            Email: <input type="text" name="email" />
-            Password: <input type="password" 
-                             name="password" 
-                             id="password"/>
-            <input type="button" 
-                   value="Login" 
-                   onclick="formhash(this.form, this.form.password);" /> 
-        </form>
-        <?php
-    }
-    else
-    {
-        ?>
-        If you are done, please <a href="php/include/logout.php">log out</a>.
-        <?php
-    }
-    ?>
-        
-	
-    
     <div class="container">
     	<ul class="nav top">
             <li><a style = "font-weight: normal" href="forum.php">Forum</a></li>
@@ -68,12 +40,12 @@ if (login_check($mysqli) == true) {
        
     <table style = "width: 100%;">
         <tr bgcolor = "#1a2732">
-            <th style = "width: 200px">Nr</th>
+            <th style = "width: 50px">Nr</th>
             <th>Kategorie</th>
         </tr>
         <tr bgcolor = "#2d4457">
             <td>1</td>
-            <td><a href="forum_demenz.php" style="color: white;text-decoration: none;">Demenz</a></td>
+            <td><a href="forum_demenz.php" style="color: white;text-decoration: none;"><div class="nicehover" style="height:100%;width:100%">Demenz</div></a></td>
         </tr>
     </table>           
         
