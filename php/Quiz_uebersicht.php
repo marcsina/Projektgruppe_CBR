@@ -10,6 +10,8 @@ if (login_check($mysqli) == true) {
     $logged = 'in';
 } else {
     $logged = 'out';
+	header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');	
+	exit;
 }
 ?>
 <html lang="de">
@@ -41,7 +43,18 @@ if (login_check($mysqli) == true) {
 		<!--Singleplayer-->
 		<div class ="col-lg-6 col-md-6 col-sm-12">
 			<div class ="row">
-				<button class ="btn btn-lg" value="Einzelspieler" id="singleplayerStart"/>
+				<?php 
+					//TODO Check if already running Singleplayer game is active
+					$array = activeSingleplayerGame($mysqli, $_SESSION['user_id']);
+					if(!is_null($array[0]['quizID']))
+					{
+						echo "<form action='include/functions_quiz.php' method='post'><input type='hidden' name='continueQuiz' value='true'><input type='hidden' name='quizID' value='".$array['quizID']."'><input type='hidden' value='".$_SESSION['user_id']."' name='singpleplayerUserID'><input type='submit' value='Quiz fortsetzen'></form>";
+					}
+					else
+					{
+						echo "<form action='include/functions_quiz.php' method='post'><input type='hidden' name='startQuiz' value='true'><input type='hidden' value='".$_SESSION['user_id']."' name='singpleplayerUserID'><input type='submit' value='Quiz starten'></form>";
+					}
+				?>
 			</div>
 		</div>
 		<!-- Multiplayer -->
