@@ -28,7 +28,6 @@ if (login_check($mysqli) == true) {
 <!-- include Navbar -->
     <?php
             include ("include/navbar.php");
-            echo $userid;
     ?>
 
 <body>
