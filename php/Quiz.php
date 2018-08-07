@@ -87,11 +87,26 @@ if (login_check($mysqli) == true) {
 
 					<!-- eigentliche Frage -->
                     <div id="div_question">
-						<?php
-						$questionData = loadRandomQuestionHigh($mysqli);
-						echo utf8_decode("Welches ist ein stark ausgeprägtes Symptom in dem Fall ". $questionData['casename'] . "?");		 
-						?>
-					</div>
+                        <?php
+                        $questionData = getQuizData($mysqli, $type, $quiz_ID);
+                        if($questionData['questionString'] != null or $questionData['questionString'] != "Finish")
+                        {
+                            echo utf8_decode("". $questionData['questionString']);
+                        }
+                        else if($questionData['questionString'] == "Finish")
+                        {
+                            //TODO
+                        }
+                        else
+                        {
+                            //TODO: DELETE QUIZ
+                            //header("Refresh:0");
+                        }
+
+						$questionData = shuffleAnswers($questionData);
+
+                        ?>
+                    </div>
                     <!-- " Answer section" -->               
                     <h2 style="text-align: center"> <b> Antwort </b></h2>
 					<!-- TODO BUTTONS einfÃ¼gen-->

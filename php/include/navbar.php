@@ -58,7 +58,7 @@ if (login_check($mysqli) == true) {
 		 <li class='dropdown'>
 			<a data-toggle='dropdown' class='dropdown-toggle' href='/Projektgruppe/php/profil.php'>
 				<span class='profile-ava'>
-						<img alt='' src='Fotos/avatar1_small.png'>
+						<img alt='' src='/Projektgruppe/Fotos/avatar1_small.png'>
 					</span>
 					<span class="username"><?php echo $_SESSION['username']; ?></span>
                     <b class="caret"></b>
@@ -120,7 +120,7 @@ if (login_check($mysqli) == true) {
 							  <li><a href="#section42">videos</a></li>
 							</ul>
 						</li>
-						<li class="menuItem"><a href="#...">Statistik  <i class="icon_piechart"></i></a></li>
+						<li class="menuItem"><a href="/Projektgruppe/php/statistik.php">Statistik  <i class="icon_piechart"></i></a></li>
 
 						<li class="menuItem"><a href="/Projektgruppe/php/contact_medausbild.php">Kontakt <i class="icon_documents_alt"></i></a></li>
                     </ul>
