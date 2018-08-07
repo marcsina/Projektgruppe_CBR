@@ -229,7 +229,8 @@ if(isset($_POST["createbeitrag"]))
             <br><br>
             <a style="color: black;text-decoration: none;font-size: 25px;">Neuer Beitrag</a>
             <form action="forum_demenz.php" method="post">
-            <textarea rows="8" cols="175" onclick="this.value=''" name="inserttext" id="text"> Enter text here...</textarea>
+            <textarea rows="8" cols="175" onclick="this.value=''" name="inserttext" id="text" style="resize: none;border: 1px;border-style: solid;"> Enter text here...</textarea>
+            <br>
             <input name="topic" style="display:none" value=<?php echo $_GET["topic"]?>></input>
             <input type="submit" name="createbeitrag" value="Verschicken"/>
             </form>
@@ -241,14 +242,8 @@ if(isset($_POST["createbeitrag"]))
     ?>
     
  	</div>
-	<script src="js/jquery-2.2.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/snowball-german.js"></script>
-    <script src="js/stopWords.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/autocomplete.js"></script>
-    <script type="text/JavaScript" src="js/sha512.js"></script> 
-    <script type="text/JavaScript" src="js/forms.js"></script> 
+	<script src="../js/jquery-2.2.2.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
 </body>
 </html>
