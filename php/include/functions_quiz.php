@@ -5,39 +5,40 @@ header("Access-Control-Allow-Origin: *");
 include 'conn.php';
 
 //shuffle answers to question
-function shuffleAnswers($questionData)
+function shuffleAnswers($answer1, $answer2, $answer3, $answer4)
 {
+
 	$i = rand(0,3);
 
 	//Puts the correct answer on a random position
 	switch($i)
 	{
 		case 0:
-			$antwort1 = $questionData['answer1'];
-			$antwort2 = $questionData['answer2'];
-			$antwort3 = $questionData['answer3'];
-			$antwort4 = $questionData['answer4'];
+			$antwort1 = $answer1;
+			$antwort2 = $answer2;
+			$antwort3 = $answer3;
+			$antwort4 = $answer4;
 			$correctAnswer = $i;
 			break;
 		case 1:
-			$antwort1 = $questionData['answer2'];
-			$antwort2 = $questionData['answer1'];
-			$antwort3 = $questionData['answer3'];
-			$antwort4 = $questionData['answer4'];
+			$antwort1 = $answer2;
+			$antwort2 = $answer1;
+			$antwort3 = $answer3;
+			$antwort4 = $answer4;
 			$correctAnswer = $i;
 			break;
 		case 2:
-			$antwort1 = $questionData['answer2'];
-			$antwort2 = $questionData['answer3'];
-			$antwort3 = $questionData['answer1'];
-			$antwort4 = $questionData['answer4'];
+			$antwort1 = $answer2;
+			$antwort2 = $answer3;
+			$antwort3 = $answer1;
+			$antwort4 = $answer4;
 			$correctAnswer = $i;
 			break;
 		case 3:
-			$antwort1 = $questionData['answer2'];
-			$antwort2 = $questionData['answer3'];
-			$antwort3 = $questionData['answer4'];
-			$antwort4 = $questionData['answer1'];
+			$antwort1 = $answer2;
+			$antwort2 = $answer3;
+			$antwort3 = $answer4;
+			$antwort4 = $answer1;
 			$correctAnswer = $i;
 			break;
 	}
@@ -448,17 +449,25 @@ function addStartdatumForChallengerMP($mysqli, $mp_quiz_ID)
 		if($stmt->execute())
 		{
 			$stmt->store_result();
-			$stmt->bind_result($startdatum);
-
-			//Check if $startdatum is null, if yes set it to actual time
-			if(is_null($startdatum))
+			if($stmt->num_rows >0)
 			{
-				if($stmt = $mysqli->prepare("UPDATE MP_QUIZ SET startdatum_user_1 = CURRENT_TIMESTAMP WHERE ID= ?"))
+				$stmt->bind_result($startdatum);
+				$stmt->fetch();
+
+				//Check if $startdatum is null, if yes set it to actual time
+				if(is_null($startdatum))
 				{
-					$stmt->bind_param('i', $mp_quiz_ID);
-					if($stmt->execute())
+					if($stmt = $mysqli->prepare("UPDATE MP_QUIZ SET startdatum_user_1 = CURRENT_TIMESTAMP WHERE ID= ?"))
 					{
-						return true;
+						$stmt->bind_param('i', $mp_quiz_ID);
+						if($stmt->execute())
+						{
+							return true;
+						}
+						else
+						{
+							return false;
+						}
 					}
 					else
 					{
@@ -514,7 +523,7 @@ function getQuizData($mysqli, $type, $quiz_ID)
 	//Singleplayer
 	if($type =="SP")
 	{
-	    if($stmt = $mysqli->prepare("SELECT Casename, Type, Correct_A1, A2, A3, A4 FROM SP_FRAGE WHERE Given_A != 0 AND SP_QUIZ_ID = ? ORDER BY ID ASC LIMIT 1;"))
+	    if($stmt = $mysqli->prepare("SELECT Casename, Type, Correct_A1, A2, A3, A4 FROM SP_FRAGE WHERE Given_A = 0 AND SP_QUIZ_ID = ? ORDER BY ID ASC LIMIT 1;"))
         {
             $stmt->bind_param('i',$quiz_ID);
 	        $stmt->execute();
@@ -528,6 +537,8 @@ function getQuizData($mysqli, $type, $quiz_ID)
             else
 			{
 				$stmt->bind_result($casename, $questionType, $correctA, $answer2, $answer3, $answer4);
+				$stmt->fetch();
+
 				$data = array();
 
 
@@ -542,8 +553,7 @@ function getQuizData($mysqli, $type, $quiz_ID)
 
 				$finalQuestion = "Was ist ein ".$questionString." ausgerägtes Symptom in dem Fall".$casename."?";
 
-
-				array_push($data,array("casename"=>$casename, "questiontype"=>$questionType, "answer1"=> $correctA, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "questionString"=>$finalQuestion));
+				array_push($data,array("casename"=>$casename, "questiontype"=>$questionType, "answer1"=>$correctA, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "questionString"=>$finalQuestion));
 
                 return $data;
 			}
@@ -556,6 +566,7 @@ function getQuizData($mysqli, $type, $quiz_ID)
 	//Multiplayer
 	else
 	{
+        //----------------------TODO-------------------------------------------
 		if($stmt = $mysqli->prepare("SELECT Casename, Type FROM MP_FRAGE WHERE Given_A != 0 AND MP_QUIZ_ID = ? ORDER BY ID ASC LIMIT 1;"))
         {
             $stmt->bind_param('i',$quiz_ID);
@@ -570,6 +581,9 @@ function getQuizData($mysqli, $type, $quiz_ID)
             else
 			{
 				$stmt->bind_result($casename, $questionType);
+
+
+                $stmt->fetch();
 				if($questionType == 0)
 				{
 					$questionString = "stark";
@@ -627,6 +641,7 @@ function endSPQuiz($mysqli)
 
 }
 
+//----------------TODO----------------------------
 if(isset($_POST['antwort1_Button']))
 {
      insertAnswer($mysqli, $_POST['quizID'], $question_id, $_POST['antwort1_Button']);
@@ -682,9 +697,10 @@ if(isset($_POST['challengeUser'],$_POST['challengedUserID'],$_POST['challengerUs
 }
 
 //Multiplayer
-if(isset($_POST['continueQuiz'],$_POST['quizid']))
+if(isset($_POST['continueQuiz'],$_POST['quizID']))
 {
-	$p1 = filter_input(INPUT_POST, 'quizid', FILTER_SANITIZE_NUMBER_INT);
+	$p1 = filter_input(INPUT_POST, 'quizID', FILTER_SANITIZE_NUMBER_INT);
+	addStartdatumForChallengerMP($mysqli, $p1);
 	//TODO Continue QUIZ
 	header('Location: ../Quiz.php');
 }
@@ -694,8 +710,6 @@ if(isset($_POST['continueQuiz'],$_POST['singpleplayerUserID'],$_POST['quizID']))
 {
 	$p1 = filter_input(INPUT_POST, 'singpleplayerUserID', FILTER_SANITIZE_NUMBER_INT);
 	$p2 = filter_input(INPUT_POST, 'quizID', FILTER_SANITIZE_NUMBER_INT);
-
-	addStartdatumForChallengerMP($mysqli, $p2);
 	//TODO Continue QUIZ
 	header('Location: ../Quiz.php');
 }
@@ -709,4 +723,27 @@ if(isset($_POST['startQuiz'],$_POST['singpleplayerUserID']))
 	//TODO Start QUIZ
 	header('Location: ../Quiz.php');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+function debug_to_console( $data )
+{
+    $output = $data;
+    if ( is_array( $output ) )
+        $output = implode( ',', $output);
+
+    echo "
+<script>console.log('Debug Objects: " . $output . "');</script>";
+}
+
 ?>

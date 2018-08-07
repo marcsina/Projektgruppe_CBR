@@ -88,34 +88,39 @@ if (login_check($mysqli) == true) {
 					<!-- eigentliche Frage -->
                     <div id="div_question">
                         <?php
+						/***TODO DELETE THESE TWO **/
+                        $type="SP";
+                        $quiz_ID=43;
+
+
+						/***********************/
                         $questionData = getQuizData($mysqli, $type, $quiz_ID);
-                        if($questionData['questionString'] != null or $questionData['questionString'] != "Finish")
+                        if($questionData[0]['questionString'] != null or $questionData[0]['questionString'] != "Finish")
                         {
-                            echo utf8_decode("". $questionData['questionString']);
+							echo utf8_decode("". $questionData[0]['questionString']);
                         }
-                        else if($questionData['questionString'] == "Finish")
+                        else if($questionData[0]['questionString'] == "Finish")
                         {
-                            //TODO
+                        //TODO
                         }
                         else
                         {
-                            //TODO: DELETE QUIZ
-                            //header("Refresh:0");
+                        //TODO: DELETE QUIZ
+                        //header("Refresh:0");
                         }
-
-						$questionData = shuffleAnswers($questionData);
-
+                        $answerData = shuffleAnswers($questionData[0]['answer1'],$questionData[0]['answer2'],$questionData[0]['answer3'],$questionData[0]['answer4']);
+                        
                         ?>
                     </div>
                     <!-- " Answer section" -->               
                     <h2 style="text-align: center"> <b> Antwort </b></h2>
 					<!-- TODO BUTTONS einfÃ¼gen-->
                     <form action="" method="post">
-						<input type="hidden" name="correctanswer" value='<?php echo $questionData['correctAnswerPosition'];?>'\>
-                        <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort1_Button" value="<?php echo $questionData['antwort1'];?>"/>
-						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort2_Button" value="<?php echo $questionData['antwort2'];?>"/>
-						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort3_Button" value="<?php echo $questionData['antwort3'];?>"/>
-						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort4_Button" value="<?php echo $questionData['antwort4'];?>"/>                          
+						<input type="hidden" name="correctanswer" value="<?php echo $answerData['correctAnswerPosition'];?>">
+                        <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort1_Button" value="<?php echo $answerData['antwort1'];?>">
+						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort2_Button" value="<?php echo $answerData['antwort2'];?>">
+						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort3_Button" value="<?php echo $answerData['antwort3'];?>">
+						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort4_Button" value="<?php echo $answerData['antwort4'];?>">                          
                     </form>                            
                 </div>
 
