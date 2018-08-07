@@ -10,7 +10,7 @@
 }
 
 .top > li{
-    margin: -5px -5px -5px -5px;
+    margin: -5px -5px -5px -1px;
     background: #1a2732;
     border-radius: 0px;
     border: 1px solid black;
@@ -20,6 +20,7 @@
 .top > li > a{
     color: #007aff;
     font-size: 20px;
+    padding-left: 0px;
 }
 
 table, th, td {
