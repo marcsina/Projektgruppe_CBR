@@ -48,7 +48,7 @@ if (login_check($mysqli) == true) {
 					$array = activeSingleplayerGame($mysqli, $_SESSION['user_id']);
 					if(!is_null($array[0]['quizID']))
 					{
-						echo "<form action='include/functions_quiz.php' method='post'><input type='hidden' name='continueQuiz' value='true'><input type='hidden' name='quizID' value='".$array['quizID']."'><input type='hidden' value='".$_SESSION['user_id']."' name='singpleplayerUserID'><input type='submit' value='Quiz fortsetzen'></form>";
+						echo "<form action='include/functions_quiz.php' method='post'><input type='hidden' name='continueQuiz' value='true'><input type='hidden' name='quizID' value='".$array[0]['quizID']."'><input type='hidden' value='".$_SESSION['user_id']."' name='singpleplayerUserID'><input type='submit' value='Quiz fortsetzen'></form>";
 					}
 					else
 					{
@@ -64,10 +64,13 @@ if (login_check($mysqli) == true) {
 			<ul>
 				<?php
 					$array = showCurrentMPGames($mysqli, $_SESSION['user_id']);
+					
 					foreach($array as &$user )
 					{
+						$playernumber = getCurrentPlayerID($mysqli, $user['quizid'], $_SESSION['user_id']);
 						$message ="";
 						$buttontext ="";
+						$checkStarted = 0;
 						if(!is_null($user['startdatum']))
 						{
 							$message = "Mit ".$user['username']." weiterkämpfen<br>Spiel hat begonnen am ".$user['startdatum'];
@@ -77,8 +80,9 @@ if (login_check($mysqli) == true) {
 						{
 							$message = "Sie haben das Spiel gegen ".$user['username']." noch nicht begonnen";
 							$buttontext = "Quiz starten";
+							$checkStarted = 1;
 						}
-						echo "<li>".$message."<form action='include/functions_quiz.php' method='post'><input type='hidden' name='continueQuiz' value='true'><input type='hidden' name='quizID' value='".$user['quizid']."'><input type='submit' value='".$buttontext."'></form></li>";
+						echo "<li>".$message."<form action='include/functions_quiz.php' method='post'><input type='hidden' name='continueQuiz' value='true'><input type='hidden' name='playernumber' value='".$playernumber."'><input type='hidden' name='quizID' value='".$user['quizid']."'><input type='hidden' name='checkStarted' value='".$checkStarted."'><input type='submit' value='".$buttontext."'></form></li>";
 					}
 				?>
 			</ul>

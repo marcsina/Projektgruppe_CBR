@@ -6,6 +6,8 @@ include_once 'include/functions_quiz.php';
 
 sec_session_start();
 
+debug_to_console("QuizID: ".$_SESSION["quiz_id"]."Playernumber: ".$_SESSION['player']."Type ".$_SESSION['type']);
+
 if (login_check($mysqli) == true) {
     $logged = 'in';
 } else {
@@ -39,112 +41,122 @@ if (login_check($mysqli) == true) {
 
 
 </head>
-    <!-- _______________________________________NavBar_____________________________________________________-->
+<!-- _______________________________________NavBar_____________________________________________________-->
     <?php
     include ("include/navbar.php");
     ?>
 
-    <body id="home" style= "">
+<body id="home" style="">
 
-        <div class="container">
+    <div class="container">
 
-            <!-- nested columns -->
-            <div class="row" >
+        <!-- nested columns -->
+        <div class="row">
 
-                <header class=""  class=" col-md-12" style="font-weight: 15px; font-size: 30px; text-align: center ; color: brown; animation-duration: 0s; animation-delay: 0s; animation-iteration-count: 0;" title=" a small Quiz">
-                    <b> Topic: </b> What do you know about Demenz ?
-                </header>
-            </div>
-            <!-- "" MIni menu leftside and question box" --> 
+            <header class="" class=" col-md-12" style="font-weight: 15px; font-size: 30px; text-align: center ; color: brown; animation-duration: 0s; animation-delay: 0s; animation-iteration-count: 0;" title=" a small Quiz">
+                <b> Topic: </b> What do you know about Demenz ?
+            </header>
+        </div>
+        <!-- "" MIni menu leftside and question box" -->
 
-            <div class="row">
-                <!-- "" reasearch bar" -->
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <br>
-                    <!-- Timer-->   
-                    <div class="col-md-12" >
-                        <p id="timer" class=" " title=" Time-left" style="text-align: center; font-size: 40px; color: green; animation-duration: s; animation-delay: s; animation-iteration-count: ;"> </p>
-                    </div>
+        <div class="row">
+            <!-- "" reasearch bar" -->
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <br>
+                <!-- Timer-->
+                <div class="col-md-12">
+                    <p id="timer" class=" " title=" Time-left" style="text-align: center; font-size: 40px; color: green; animation-duration: s; animation-delay: s; animation-iteration-count: ;"> </p>
                 </div>
             </div>
-            <div class="row">
-                <div class=" questionsection " id="1" style=" padding-left: 10px ; padding-right: 10px;">                    
-                    <h3 style=" color: blue;"> <b>Frage</b> <span id="span_QuestionNumber" style=" color: red; ">1</span> of 12: <span  class="animated fadeIn" style=" color: #ff7f00 ; animation-duration: 3s; animation-delay: 0s; animation-iteration-count: ; ">(Fall-beschreibung)</span>
-                    </h3>
-                    <!-- "progress bar" -->
-                    <div class="progress" >
-                        <div class="progress-bar progress-bar-info progress-bar-striped active massive-font" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style=" width:5%">
-                            5%
-                        </div>
+        </div>
+        <div class="row">
+            <div class=" questionsection " id="1" style=" padding-left: 10px ; padding-right: 10px;">
+                <h3 style=" color: blue;">
+                    <b>Frage</b> <span id="span_QuestionNumber" style=" color: red; ">1</span> of 12: <span class="animated fadeIn" style=" color: #ff7f00 ; animation-duration: 3s; animation-delay: 0s; animation-iteration-count: ; ">(Fall-beschreibung)</span>
+                </h3>
+                <!-- "progress bar" -->
+                <div class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped active massive-font" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style=" width:5%">
+                        5%
                     </div>
-
-
                 </div>
+
+
             </div>
-            <!-- "" Question section" -->
-            <div class="row">
-                <div class=" col-md-12">
+        </div>
+        <!-- "" Question section" -->
+        <div class="row">
+            <div class=" col-md-12">
 
-					<!-- eigentliche Frage -->
-                    <div id="div_question">
-                        <?php
-						/***TODO DELETE THESE TWO **/
-                        $type="SP";
-                        $quiz_ID=43;
+                <!-- eigentliche Frage -->
+                <div id="div_question">
+                    <?php
 
-
-						/***********************/
-                        $questionData = getQuizData($mysqli, $type, $quiz_ID);
-                        if($questionData[0]['questionString'] != null or $questionData[0]['questionString'] != "Finish")
-                        {
+						$questionData = getQuizData($mysqli, $_SESSION['type'], $_SESSION["quiz_id"], $_SESSION['player']);
+                    
+						//Quiz running
+						if($questionData[0]['questionString'] != null or $questionData[0]['questionString'] != "Finish")
+						{
 							echo utf8_decode("". $questionData[0]['questionString']);
-                        }
-                        else if($questionData[0]['questionString'] == "Finish")
-                        {
-                        //TODO
-                        }
-                        else
-                        {
-                        //TODO: DELETE QUIZ
-                        //header("Refresh:0");
-                        }
-                        $answerData = shuffleAnswers($questionData[0]['answer1'],$questionData[0]['answer2'],$questionData[0]['answer3'],$questionData[0]['answer4']);
-                        
-                        ?>
-                    </div>
-                    <!-- " Answer section" -->               
-                    <h2 style="text-align: center"> <b> Antwort </b></h2>
-					<!-- TODO BUTTONS einfÃ¼gen-->
-                    <form action="" method="post">
-						<input type="hidden" name="correctanswer" value="<?php echo $answerData['correctAnswerPosition'];?>">
-                        <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort1_Button" value="<?php echo $answerData['antwort1'];?>">
-						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort2_Button" value="<?php echo $answerData['antwort2'];?>">
-						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort3_Button" value="<?php echo $answerData['antwort3'];?>">
-						<input type="submit" class="btn btn-default btn-sm btn-block" name="antwort4_Button" value="<?php echo $answerData['antwort4'];?>">                          
-                    </form>                            
-                </div>
+						}
+						//Quiz Finished
+						else if($questionData[0]['questionString'] == "Finish")
+						{
+							if($_SESSION['type'] == "SP")
+							{
+								endSPQuiz($mysqli, $_SESSION['user_id']);
+							}
+							else
+							{
+								endMPQuiz($mysqli, $_SESSION["quiz_id"], $_SESSION['user_id']);
+							}
 
-                <div class="col-md-4">
-                    <!-- " TODO Bild Section " -->                 
+							header('Location: Quiz_Endseite.php');
+						}
+						//Quiz Error
+						else
+						{
+						//TODO: DELETE QUIZ
+						//header("Refresh:0");
+						}
+
+						$answerData = shuffleAnswers($questionData[0]['answer1'],$questionData[0]['answer2'],$questionData[0]['answer3'],$questionData[0]['answer4']);
+						debug_to_console("GETQUIZDATA///QUIZ.PHP/////Position1: ".$questionData[0]['answer1']." Position2: ".$questionData[0]['answer2']." Position3: ".$questionData[0]['answer3']." Position4: ".$questionData[0]['answer4']);
+                    ?>
+                </div>
+                <!-- " Answer section" -->
+                <h2 style="text-align: center"> <b> Antwort </b></h2>
+                <!-- TODO BUTTONS einfÃ¼gen-->
+                <form action="" method="post">
+					<input type='hidden' name='positionAnswer1' value='<?php echo $answerData['positionAnswer1'];?>'>
+                    <input type='hidden' name='positionAnswer2' value='<?php echo $answerData['positionAnswer2'];?>'>
+                    <input type='hidden' name='positionAnswer3' value='<?php echo $answerData['positionAnswer3'];?>'>
+                    <input type='hidden' name='positionAnswer4' value='<?php echo $answerData['positionAnswer4'];?>'>
+                    <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort1_Button" value="<?php echo $answerData['antwort1'];?>">
+                    <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort2_Button" value="<?php echo $answerData['antwort2'];?>">
+                    <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort3_Button" value="<?php echo $answerData['antwort3'];?>">
+                    <input type="submit" class="btn btn-default btn-sm btn-block" name="antwort4_Button" value="<?php echo $answerData['antwort4'];?>">
+                </form>
+    </div>
+
+    <div class="col-md-4">
+        <!-- " TODO Bild Section " -->
                     <h2 style="font-weight: bold;font-size:20px; color: brown; text-align: center;"></h2>
                     <div id="image">
                     </div>
-                </div>
-            </div>			            
+</div>
         </div>
+    </div>
 
 
 
 
-        <!--____________________________________________________________________________________________________-->
+    <!--____________________________________________________________________________________________________-->
+    <!-- Scripts -->
+    <script src="../js/jquery-2.2.2.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
 
-        <!-- Scripts -->
-        <script src="../js/jquery-2.2.2.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/Quiz.js"></script>
-
-
-    </body>
+</body>
 
 </html>
