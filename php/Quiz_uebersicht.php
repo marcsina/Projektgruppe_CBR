@@ -63,7 +63,7 @@ if (login_check($mysqli) == true) {
 <!-- Multiplayer -->
 		<div class ="col-lg-6 col-md-6 col-sm-12">
 
-			<h3>Aktuelle Spielessssssssss</h3>
+			<h3>Aktuelle Spieles</h3>
 			<ul>
 				<?php
 					$array = showCurrentMPGames($mysqli, $_SESSION['user_id']);
