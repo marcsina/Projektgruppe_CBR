@@ -55,12 +55,15 @@ if (login_check($mysqli) == true) {
 						echo "<form action='include/functions_quiz.php' method='post'><input type='hidden' name='startQuiz' value='true'><input type='hidden' value='".$_SESSION['user_id']."' name='singpleplayerUserID'><input type='submit' value='Quiz starten'></form>";
 					}
 				?>
+
 			</div>
 		</div>
-		<!-- Multiplayer -->
+
+
+<!-- Multiplayer -->
 		<div class ="col-lg-6 col-md-6 col-sm-12">
 
-			<h3>Aktuelle Spiele</h3>
+			<h3>Aktuelle Spieles</h3>
 			<ul>
 				<?php
 					$array = showCurrentMPGames($mysqli, $_SESSION['user_id']);
@@ -178,6 +181,10 @@ if (login_check($mysqli) == true) {
 					}
 				?>
 			</ul>
+		</div>
+
+		<div >
+			
 		</div>
 
 		<!--____________________________________________________________________________________________________-->
