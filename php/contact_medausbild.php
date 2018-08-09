@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-lg-offset-1 col-lg-5">
                 <div class="recent">
-                    <h3>Send us a message</h3>
+                    <h3>Send us a Message</h3>
                 </div>
                 <div id="sendmessage">Your message has been sent. Thank you!</div>
                 <div id="errormessage"></div>
@@ -57,7 +57,7 @@
                         <div class="validation"></div>
                     </div>
 
-                    <div class="text-center"><button type="submit" class="btn btn-primary btn-lg">Send Message</button></div>
+                    <div class="text-center"><button type="submit" class="btn btn-primary btn-lg">Send message</button></div>
                 </form>
             </div>
 
