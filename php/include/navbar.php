@@ -115,6 +115,7 @@ if (login_check($mysqli) == true) {
 
 						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Classroom <i class="icon_desktop"></i><span class="caret"></span></a>
 							<ul class="dropdown-menu">
+                                <li><a href="/Projektgruppe/php/artikel.php">Artikel</a></li>
 							  <li><a href="#section41">Scripts</a></li>
 							  <li><a href="#section42">Tutorials</a></li>
 							  <li><a href="#section42">videos</a></li>
