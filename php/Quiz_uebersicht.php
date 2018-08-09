@@ -106,7 +106,7 @@ if (login_check($mysqli) == true) {
 					$array = getAllMembers($mysqli);
 					$array2 = getAlreadyChallengedUsers($mysqli, $_SESSION['user_id']);
 					$array3 = getPendingChallengesUsers($mysqli, $_SESSION['user_id']);
-					$array4 = showCurrentMPGames($mysqli, $_SESSION['user_id']);
+					$array4 = checkCurrentMPGamesForChallenges($mysqli, $_SESSION['user_id']);
 
 					$check = 0;
 					//alle nutzer
@@ -157,8 +157,8 @@ if (login_check($mysqli) == true) {
 									//User schon herausgefordert
 									if($check == 0)
 									{
-										//echo "<li>".$userWeAreAlreadyFightingWith['username']." hat dich bereits geraufgefordert. Nimm an</li>";
 										$check = 1;
+										//echo "<li>".$userWeAreAlreadyFightingWith['username']." hat dich bereits geaufgefordert. Nimm an</li>";																							
 									}
 								}
 								else

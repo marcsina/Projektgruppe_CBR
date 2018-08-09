@@ -3,7 +3,6 @@ include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_quiz.php';
 
-
 sec_session_start();
 
 debug_to_console("QuizID: ".$_SESSION["quiz_id"]."Playernumber: ".$_SESSION['player']."Type ".$_SESSION['type']);
@@ -93,14 +92,14 @@ if (login_check($mysqli) == true) {
                     <?php
 
 						$questionData = getQuizData($mysqli, $_SESSION['type'], $_SESSION["quiz_id"], $_SESSION['player']);
-                    
+
 						//Quiz running
-						if($questionData[0]['questionString'] != null or $questionData[0]['questionString'] != "Finish")
+						if($questionData != "Finish")
 						{
-							echo utf8_decode("". $questionData[0]['questionString']);
+							echo "". $questionData[0]['questionString'];
 						}
 						//Quiz Finished
-						else if($questionData[0]['questionString'] == "Finish")
+						else if($questionData == "Finish")
 						{
 							if($_SESSION['type'] == "SP")
 							{
@@ -110,8 +109,8 @@ if (login_check($mysqli) == true) {
 							{
 								endMPQuiz($mysqli, $_SESSION["quiz_id"], $_SESSION['user_id']);
 							}
-
-							header('Location: Quiz_Endseite.php');
+                            echo "<script type='text/javascript'> document.location = 'Quiz_Endseite.php'; </script>";
+                            exit();
 						}
 						//Quiz Error
 						else
@@ -121,7 +120,9 @@ if (login_check($mysqli) == true) {
 						}
 
 						$answerData = shuffleAnswers($questionData[0]['answer1'],$questionData[0]['answer2'],$questionData[0]['answer3'],$questionData[0]['answer4']);
-						debug_to_console("GETQUIZDATA///QUIZ.PHP/////Position1: ".$questionData[0]['answer1']." Position2: ".$questionData[0]['answer2']." Position3: ".$questionData[0]['answer3']." Position4: ".$questionData[0]['answer4']);
+
+
+
                     ?>
                 </div>
                 <!-- " Answer section" -->

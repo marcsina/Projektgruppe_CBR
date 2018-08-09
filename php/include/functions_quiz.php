@@ -1,7 +1,6 @@
-<?php
+ï»¿<?php
 header('Content-Type: text/html; charset=utf-8');
 header("Access-Control-Allow-Origin: *");
-
 
 include_once 'functions_login.php';
 include 'conn.php';
@@ -76,7 +75,7 @@ function loadRandomQuestionHigh($mysqli)
 		{
 			$stmt->bind_result($id, $casename, $kategoriename);
 			$stmt->fetch();
-			$res = ["casename"=>utf8_decode($casename), "antwort1"=>utf8_decode($kategoriename), "id"=>$id ];
+			$res = ["casename"=>$casename, "antwort1"=>$kategoriename, "id"=>$id ];
 		}
 		else
 		{
@@ -105,15 +104,15 @@ function loadRandomQuestionHigh($mysqli)
 		{
 			if($i == 0)
 			{
-				$antwort2 = utf8_decode($kategoriename);
+				$antwort2 = $kategoriename;
 			}
 			else if($i == 1)
 			{
-				$antwort3 = utf8_decode($kategoriename);
+				$antwort3 = $kategoriename;
 			}
 			else if($i == 2)
 			{
-				$antwort4 = utf8_decode($kategoriename);
+				$antwort4 = $kategoriename;
 			}
 			else
 			{
@@ -122,7 +121,7 @@ function loadRandomQuestionHigh($mysqli)
 			$i = $i+1;
 		}
 
-		$result = ["casename"=>utf8_decode($res['casename']), "antwort1"=>utf8_decode($res['antwort1']), "antwort2"=>utf8_decode($antwort2),"antwort3"=>utf8_decode($antwort3), "antwort4"=>utf8_decode($antwort4)];
+		$result = ["casename"=>$res['casename'], "antwort1"=>$res['antwort1'], "antwort2"=>$antwort2,"antwort3"=>$antwort3, "antwort4"=>$antwort4];
 
 		return $result;
 		//Shuffle the answers before return
@@ -209,7 +208,7 @@ function loadRandomQuestionLow($mysqli)
 		{
 			$stmt->bind_result($id, $casename, $kategoriename);
 			$stmt->fetch();
-			$res = ["casename"=>utf8_decode($casename), "antwort1"=>utf8_decode($kategoriename), "id"=>$id];
+			$res = ["casename"=>$casename, "antwort1"=>$kategoriename, "id"=>$id];
 		}
 		else
 		{
@@ -238,15 +237,15 @@ function loadRandomQuestionLow($mysqli)
 		{
 			if($i == 0)
 			{
-				$antwort2 = utf8_decode($kategoriename);
+				$antwort2 = $kategoriename;
 			}
 			else if($i == 1)
 			{
-				$antwort3 = utf8_decode($kategoriename);
+				$antwort3 = $kategoriename;
 			}
 			else if($i == 2)
 			{
-				$antwort4 = utf8_decode($kategoriename);
+				$antwort4 = $kategoriename;
 			}
 			else
 			{
@@ -255,7 +254,7 @@ function loadRandomQuestionLow($mysqli)
 			$i = $i+1;
 		}
 
-		$result = ["casename"=>utf8_decode($res['casename']), "antwort1"=>utf8_decode($res['antwort1']), "antwort2"=>utf8_decode($antwort2),"antwort3"=>utf8_decode($antwort3), "antwort4"=>utf8_decode($antwort4)];
+		$result = ["casename"=>$res['casename'], "antwort1"=>$res['antwort1'], "antwort2"=>$antwort2,"antwort3"=>$antwort3, "antwort4"=>$antwort4];
 
 		return $result;
 		//Shuffle the answers before return
@@ -288,7 +287,7 @@ function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
 		if ($insert_stmt = $mysqli->prepare("INSERT INTO `MP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`, MP_QUIZ_ID) VALUES (?,?,?,?,?,?,?)"))
         {
             $insert_stmt->bind_param('isssssi', $type, $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $mp_quiz_ID );
-            // Führe die vorbereitete Anfrage aus.
+            // FÃ¼hre die vorbereitete Anfrage aus.
             $insert_stmt->execute();
         }
     }
@@ -314,7 +313,7 @@ function genereateFourQuestionsSingleplayer($mysqli, $sp_quiz_ID)
 		if ($insert_stmt = $mysqli->prepare("INSERT INTO `SP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`, SP_QUIZ_ID) VALUES (?,?,?,?,?,?,?)"))
         {
             $insert_stmt->bind_param('isssssi', $type, $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $sp_quiz_ID);
-            // Führe die vorbereitete Anfrage aus.
+            // FÃ¼hre die vorbereitete Anfrage aus.
             $insert_stmt->execute();
         }
     }
@@ -433,7 +432,7 @@ function generateMP_Quiz($mysqli, $userID1, $userID2)
 
 function showCurrentMPGames($mysqli, $currentUser)
 {
-    if($stmt = $mysqli->prepare("SELECT members.username, members.id, MP_QUIZ.ID, IF(MP_QUIZ.User_ID_1 = ?, MP_QUIZ.startdatum_user_1, MP_QUIZ.startdatum_user_2) AS startdatum FROM MP_QUIZ, members WHERE (MP_QUIZ.User_ID_1 = ? OR MP_QUIZ.User_ID_2 = ?) AND (MP_QUIZ.User_ID_1 = members.id OR MP_QUIZ.User_ID_2 = members.id) AND NOT members.id = ? ORDER BY startdatum ASC;"))
+    if($stmt = $mysqli->prepare("SELECT members.username, members.id, MP_QUIZ.ID, IF(MP_QUIZ.User_ID_1 = ?, MP_QUIZ.startdatum_user_1, MP_QUIZ.startdatum_user_2) AS startdatum, status_user_1, status_user_2, User_ID_1, User_ID_2 FROM MP_QUIZ, members WHERE (MP_QUIZ.User_ID_1 = ? OR MP_QUIZ.User_ID_2 = ?) AND (MP_QUIZ.User_ID_1 = members.id OR MP_QUIZ.User_ID_2 = members.id) AND NOT members.id = ? ORDER BY startdatum ASC;"))
     {
         $stmt->bind_param('iiii', $currentUser, $currentUser, $currentUser, $currentUser);
 	    if($stmt->execute())
@@ -441,11 +440,49 @@ function showCurrentMPGames($mysqli, $currentUser)
 			$stmt->store_result();
 			$data = array();
 
-			$stmt->bind_result($username, $membersid, $quizid, $startdatum);
+			$stmt->bind_result($username, $membersid, $quizid, $startdatum, $status_user_1, $status_user_2, $User_ID_1, $User_ID_2);
 
 			while ($stmt->fetch())
 			{
-				array_push($data, array("username"=>$username, "membersid"=>$membersid, "quizid"=>$quizid, "startdatum"=>$startdatum));
+				if($status_user_1 == 0 && $User_ID_1 == $currentUser)
+				{
+					array_push($data, array("username"=>$username, "membersid"=>$membersid, "quizid"=>$quizid, "startdatum"=>$startdatum, "status_user_1"=>$status_user_1, "status_user_2"=>$status_user_2));
+				}
+				else if($status_user_2 == 0 && $User_ID_2 == $currentUser)
+				{
+					array_push($data, array("username"=>$username, "membersid"=>$membersid, "quizid"=>$quizid, "startdatum"=>$startdatum, "status_user_1"=>$status_user_1, "status_user_2"=>$status_user_2));
+				}
+				
+			}
+
+			return $data;
+		}
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function checkCurrentMPGamesForChallenges($mysqli, $currentUser)
+{
+    if($stmt = $mysqli->prepare("SELECT members.id,  status_user_1, status_user_2 FROM MP_QUIZ, members WHERE (MP_QUIZ.User_ID_1 = ? OR MP_QUIZ.User_ID_2 = ?) AND (MP_QUIZ.User_ID_1 = members.id OR MP_QUIZ.User_ID_2 = members.id) AND NOT members.id = ? ORDER BY startdatum ASC;"))
+    {
+        $stmt->bind_param('iiii', $currentUser, $currentUser, $currentUser, $currentUser);
+	    if($stmt->execute())
+		{
+			$stmt->store_result();
+			$data = array();
+
+			$stmt->bind_result($membersid, $status_user_1, $status_user_2);
+
+			while ($stmt->fetch())
+			{
+				if($status_user_1 == 0 || $status_user_2 == 0)
+				{
+					array_push($data, array("membersid"=>$membersid, "status_user_1"=>$status_user_1, "status_user_2"=>$status_user_2));
+					//echo "<li>".$userWeAreAlreadyFightingWith['username']." hat dich bereits geaufgefordert. Nimm an</li>";
+				}								
 			}
 
 			return $data;
@@ -549,7 +586,7 @@ function insertAnswer($mysqli, $type, $player, $quiz_id, $answer)
 			}
 			else
 			{
-				return false;			
+				return false;
 			}
 		}
         else
@@ -580,22 +617,22 @@ function insertAnswer($mysqli, $type, $player, $quiz_id, $answer)
 						}
 						else
 						{
-							return false;						
+							return false;
 						}
 					}
 					else
 					{
-						return false;						
+						return false;
 					}
 				}
 				else
 				{
-					return false;						
+					return false;
 				}
 			}
 			else
 			{
-				return false;						
+				return false;
 			}
         }
         else
@@ -617,22 +654,22 @@ function insertAnswer($mysqli, $type, $player, $quiz_id, $answer)
 						}
 						else
 						{
-							return false;						
+							return false;
 						}
 					}
 					else
 					{
-						return false;						
+						return false;
 					}
 				}
 				else
 				{
-					return false;						
+					return false;
 				}
 			}
 			else
 			{
-				return false;						
+				return false;
 			}
         }
     }
@@ -671,8 +708,7 @@ function getQuizData($mysqli, $type, $quiz_ID, $player)
 				{
 					$questionString = "schwach";
 				}
-
-				$finalQuestion = "Was ist ein ".$questionString." ausgerägtes Symptom in dem Fall".$casename."?";
+				$finalQuestion = "Was ist ein ".$questionString." ausgeprÃ¤gtes Symptom in dem Fall ".$casename."?";
 
 				array_push($data,array("casename"=>$casename, "questiontype"=>$questionType, "answer1"=>$correctA, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "questionString"=>$finalQuestion));
 
@@ -726,9 +762,8 @@ function getQuizData($mysqli, $type, $quiz_ID, $player)
 					$questionString = "schwach";
 				}
 
-				$finalQuestion = "Was ist ein ".$questionString." ausgerägtes Symptom in dem Fall ".$casename."?";
+				$finalQuestion = "Was ist ein ".$questionString." ausgerÃ¤gtes Symptom in dem Fall ".$casename."?";
 				array_push($data,array("casename"=>$casename, "questiontype"=>$questionType, "answer1"=>$correctA, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "questionString"=>$finalQuestion));
-				debug_to_console("GETQUIZDATA/////Position1: ".$data[0]['answer1']." Position2: ".$data[0]['answer2']." Position3: ".$data[0]['answer3']." Position4: ".$data[0]['answer4']);
                 return $data;
 			}
         }
@@ -746,9 +781,6 @@ function endMPQuiz($mysqli, $quizid, $userid)
         $stmt->bind_param('iiiii', $userid, $userid, $userid, $userid, $quizid);
 	    if($stmt->execute())
 		{
-
-            //----------------------------------------------------------------------------------To Remove-----------------------------------------------
-            debug_to_console("End MPQuiz Geht");
 			return true;
 		}
     }
@@ -765,9 +797,6 @@ function endSPQuiz($mysqli, $userid)
         $stmt->bind_param('i', $userid);
 	    if($stmt->execute())
 		{
-
-            //----------------------------------------------------------------------------------To Remove-----------------------------------------------
-            debug_to_console("End SPQuiz Geht");
 			return true;
 		}
     }
@@ -829,125 +858,36 @@ function cleanpost()
 	unset($_POST['positionAnswer3']);
 	unset($_POST['positionAnswer4']);
 }
-//----------------TODO   Type der Quiz.php übergeben----------------------------
+//----------------TODO   Type der Quiz.php Ã¼bergeben----------------------------
 if(isset($_POST['antwort1_Button']))
 {
 	$position1 = filter_input(INPUT_POST, 'positionAnswer1', FILTER_SANITIZE_NUMBER_INT);
-	$position2 = filter_input(INPUT_POST, 'positionAnswer2', FILTER_SANITIZE_NUMBER_INT);
-	$position3 = filter_input(INPUT_POST, 'positionAnswer3', FILTER_SANITIZE_NUMBER_INT);
-	$position4 = filter_input(INPUT_POST, 'positionAnswer4', FILTER_SANITIZE_NUMBER_INT);
 
-    debug_to_console("Position1: ".$position1." Position2: ".$position2." Position3: ".$position3." Position4: ".$position4);
-
-    if($position1 == 1)
-    {
-        $answer = 1;
-    }
-	else if($position2 == 1)
-    {
-        $answer = 2;
-    }
-	else if($position3 == 1)
-    {
-        $answer = 3;
-    }
-	else if($position4 == 1)
-    {
-        $answer = 4;
-    }
-
-    insertAnswer($mysqli, $_SESSION['type'], $_SESSION['player'], $_SESSION['quiz_id'], $answer);
+    insertAnswer($mysqli, $_SESSION['type'], $_SESSION['player'], $_SESSION['quiz_id'], $position1);
 	cleanpost();
 }
 
 if(isset($_POST['antwort2_Button']))
 {
-	$position1 = filter_input(INPUT_POST, 'positionAnswer1', FILTER_SANITIZE_NUMBER_INT);
 	$position2 = filter_input(INPUT_POST, 'positionAnswer2', FILTER_SANITIZE_NUMBER_INT);
-	$position3 = filter_input(INPUT_POST, 'positionAnswer3', FILTER_SANITIZE_NUMBER_INT);
-	$position4 = filter_input(INPUT_POST, 'positionAnswer4', FILTER_SANITIZE_NUMBER_INT);
 
-    debug_to_console("Position1: ".$position1." Position2: ".$position2." Position3: ".$position3." Position4: ".$position4);
-
-    if($position1 == 2)
-    {
-        $answer = 1;
-    }
-	else if($position2 == 2)
-    {
-        $answer = 2;
-    }
-	else if($position3 == 2)
-    {
-        $answer = 3;
-    }
-	else if($position4 == 2)
-    {
-        $answer = 4;
-    }
-
-    insertAnswer($mysqli, $_SESSION['type'], $_SESSION['player'], $_SESSION['quiz_id'], $answer);
+    insertAnswer($mysqli, $_SESSION['type'], $_SESSION['player'], $_SESSION['quiz_id'], $position2);
 	cleanpost();
 }
 
 if(isset($_POST['antwort3_Button']))
 {
-	$position1 = filter_input(INPUT_POST, 'positionAnswer1', FILTER_SANITIZE_NUMBER_INT);
-	$position2 = filter_input(INPUT_POST, 'positionAnswer2', FILTER_SANITIZE_NUMBER_INT);
 	$position3 = filter_input(INPUT_POST, 'positionAnswer3', FILTER_SANITIZE_NUMBER_INT);
-	$position4 = filter_input(INPUT_POST, 'positionAnswer4', FILTER_SANITIZE_NUMBER_INT);
 
-    debug_to_console("Position1: ".$position1." Position2: ".$position2." Position3: ".$position3." Position4: ".$position4);
-
-    if($position1 == 3)
-    {
-        $answer = 1;
-    }
-	else if($position2 == 3)
-    {
-        $answer = 2;
-    }
-	else if($position3 == 3)
-    {
-        $answer = 3;
-    }
-	else if($position4 == 3)
-    {
-        $answer = 4;
-    }
-
-    insertAnswer($mysqli, $_SESSION['type'], $_SESSION['player'], $_SESSION['quiz_id'], $answer);
+    insertAnswer($mysqli, $_SESSION['type'], $_SESSION['player'], $_SESSION['quiz_id'], $position3);
 	cleanpost();
 }
 
 if(isset($_POST['antwort4_Button']))
 {
-	$position1 = filter_input(INPUT_POST, 'positionAnswer1', FILTER_SANITIZE_NUMBER_INT);
-	$position2 = filter_input(INPUT_POST, 'positionAnswer2', FILTER_SANITIZE_NUMBER_INT);
-	$position3 = filter_input(INPUT_POST, 'positionAnswer3', FILTER_SANITIZE_NUMBER_INT);
 	$position4 = filter_input(INPUT_POST, 'positionAnswer4', FILTER_SANITIZE_NUMBER_INT);
 
-    debug_to_console("Position1: ".$position1." Position2: ".$position2." Position3: ".$position3." Position4: ".$position4);
-
-    if($position1 == 4)
-    {
-        $answer = 1;
-    }
-	else if($position2 == 4)
-    {
-        $answer = 2;
-    }
-	else if($position3 == 4)
-    {
-        $answer = 3;
-    }
-	else if($position4 == 4)
-    {
-        $answer = 4;
-    }
-
-    insertAnswer($mysqli, $_SESSION['type'], $_SESSION['player'], $_SESSION['quiz_id'], $answer);
-
+    insertAnswer($mysqli, $_SESSION['type'], $_SESSION['player'], $_SESSION['quiz_id'], $position4);
 	cleanpost();
 }
 
@@ -978,7 +918,7 @@ if(isset($_POST['newQuiz'],$_POST['challengedUserID'],$_POST['challengerUserID']
 }
 
 
-//MP fortführen oder starten
+//MP fortfÃ¼hren oder starten
 if(isset($_POST['continueQuiz'],$_POST['quizID'], $_POST['playernumber'], $_POST['checkStarted']))
 {
 
