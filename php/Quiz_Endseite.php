@@ -23,96 +23,113 @@ sec_session_start();
     ?>
 
     <div class="container" style="text-align: center">
-        <span>
-            <h2>Auswertung</h2>
-        </span>
+        <h2>Auswertung</h2>
         <!--Linke Seite -- Textuelle Darstellung-->
         <div class="col-md-6 col-sm-12">
-            <div class="row">
-                <h3>Auswertung</h3>
-                <table>
-                    <tr>
-                        <th>Frage</th>
-                        <th>Abgegebene Antwort</th>
-                        <th>Richtige Antwort</th>
-                    </tr>
-                    <tr>
-                        <td>Frage 1</td>
-                        <td>Eigene Antwort 1</td>
-                        <td>Richtige Antwort 1</td>
-                    </tr>
-                    <tr>
-                        <td>Frage 2</td>
-                        <td>Eigene Antwort 2</td>
-                        <td>Richtige Antwort 2</td>
-                    </tr>
-                    <tr>
-                        <td>Frage 3</td>
-                        <td>Eigene Antwort 3</td>
-                        <td>Richtige Antwort 3</td>
-                    </tr>
-                    <tr>
-                        <td>Frage 4</td>
-                        <td>Eigene Antwort 4</td>
-                        <td>Richtige Antwort 4</td>
-                    </tr>
-                </table>
-            </div>
+            <?php
+				$array = getEndData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['player']);
+				echo "
+				<table>
+					<tr>
+						<th>Frage</th>
+						<th>Abgegebene Antwort</th>
+						<th>Richtige Antwort</th>
+					</tr>
+				";
+                $count = 0;
+                debug_to_console("COUNT ARRAY".count($array));
+				foreach($array as &$data)
+				{
+                    if($data['type'] == 0)
+                    {
+                        $questionString = "stark";
+                    }
+                    else if($data['type'] == 1)
+                    {
+                        $questionString = "schwach";
+                    }
+                    $Question = "Was ist ein ".$questionString." ausgeprägtes Symptom in dem Fall ".$data['casename']."?";
+
+                    debug_to_console("GIVEN A //  ".$data['givenA']);
+                    switch($data['givenA'])
+                    {
+                        case 1:
+                            $answer = $data['answer1'];
+                            $count++;
+                            break;
+                        case 2:
+                            $answer = $data['answer2'];
+                            break;
+                        case 3:
+                            $answer = $data['answer3'];
+                            break;
+                        case 4:
+                            $answer = $data['answer4'];
+                            break;
+                        default:
+                            $answer = "DB Fehler";
+                            break;
+                    }
+
+					echo "
+					<tr>
+						<td>".$Question."</td>
+						<td>".$answer."</td>
+						<td>".$data['answer1']."</td>
+					</tr>
+					";
+				}
+				echo "</table>";
+            ?>                    
         </div>
         <!-- Rechte Seite Visuelle Darstellung-->
         <div class="col-md-6 col-sm-12">
-            <div class="row">
 
-                <div class="charty">
-                    <canvas id="Chart1"></canvas>
-                </div>
-
+            <div class="charty">
+                <canvas id="Chart1"></canvas>
             </div>
         </div>
 
-        <a href="Quiz_uebersicht.php">Zurück zur Quizübersicht</a>
+        <a href="Quiz_uebersicht.php">
+            <button class="btn">Zurück zur Quizübersicht</button>
+        </a>
     </div>
-
-
-   
 
     <!-- Scripts -->
     <script src="../js/jquery-2.2.2.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/Chart.js"></script>
     <script>
-                    var ctx1 = document.getElementById("Chart1").getContext('2d');
-                    var myChart1 = new Chart(ctx1, {
-                        type: 'pie',
-                        data: {
-                            labels: ["Richtige Antworten", "Falsche Antworten"],
-                            datasets: [{
-                                label: 'Grafische Auswertung',
-                                data: [1, 3],
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero:true
-                                    }
-                                }]
-                            }
+        var ctx1 = document.getElementById( "Chart1" ).getContext( '2d' );
+        var myChart1 = new Chart( ctx1, {
+            type: 'pie',
+            data: {
+                labels: ["Falsche Antworten", "Richtige Antworten"],
+                datasets: [{
+                    label: 'Grafische Auswertung',
+                    data: [<?php echo count($array)-$count;?>,<?php echo $count;?>],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
                         }
-                    });
+                    }]
+                }
+            }
+        } );
     </script>
-
-       
 </body>
 </html>

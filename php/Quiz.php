@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_quiz.php';
@@ -52,7 +52,7 @@ if (login_check($mysqli) == true) {
         <!-- nested columns -->
         <div class="row">
 
-            <header class="" class=" col-md-12" style="font-weight: 15px; font-size: 30px; text-align: center ; color: brown; animation-duration: 0s; animation-delay: 0s; animation-iteration-count: 0;" title=" a small Quiz">
+            <header class=" col-md-12" style="font-weight: 15px; font-size: 30px; text-align: center ; color: brown; animation-duration: 0s; animation-delay: 0s; animation-iteration-count: 0;" title=" a small Quiz">
                 <b> Topic: </b> What do you know about Demenz ?
             </header>
         </div>
@@ -75,8 +75,14 @@ if (login_check($mysqli) == true) {
                 </h3>
                 <!-- "progress bar" -->
                 <div class="progress">
-                    <div class="progress-bar progress-bar-info progress-bar-striped active massive-font" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style=" width:5%">
-                        5%
+                    <?php
+
+                        $array = getProgressionData($mysqli, $_SESSION['type'], $_SESSION['user_id'], $_SESSION['quiz_id'], $_SESSION['player']);
+                        $currentQuestionNumber = $array[0]['countAnsweredQuestions'];
+                        $maximumQuestions = $array[0]['countQuestions'];
+                    ?>
+                    <div class="progress-bar progress-bar-info progress-bar-striped active massive-font" role="progressbar" aria-valuenow="<?php echo $currentQuestionNumber;?>" aria-valuemin="0" aria-valuemax="<?php echo $maximumQuestions;?>" style='<?php echo "width:".(($currentQuestionNumber / $maximumQuestions)*100)."%";?>'>
+                        <?php echo (($currentQuestionNumber / $maximumQuestions) *100)."%";?>
                     </div>
                 </div>
 

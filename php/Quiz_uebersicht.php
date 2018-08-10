@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_quiz.php';
@@ -63,7 +63,7 @@ if (login_check($mysqli) == true) {
 <!-- Multiplayer -->
 		<div class ="col-lg-6 col-md-6 col-sm-12">
 
-			<h3>Aktuelle Spieles</h3>
+			<h3>Aktuelle Spiele</h3>
 			<ul>
 				<?php
 					$array = showCurrentMPGames($mysqli, $_SESSION['user_id']);
@@ -76,10 +76,23 @@ if (login_check($mysqli) == true) {
 						$checkStarted = 0;
 						if(!is_null($user['startdatum']))
 						{
-							$message = "Mit ".$user['username']." weiterkämpfen<br>Spiel hat begonnen am ".$user['startdatum'];
-							$buttontext = "Quiz fortführen";
+							if($user['status_user_1'] == 0 && $playernumber == 1)
+							{
+								$message = "Mit ".$user['username']." weiterkämpfen<br>Spiel hat begonnen am ".$user['startdatum'];
+								$buttontext = "Quiz fortführen";
+							}
+							else if($user['status_user_2'] == 0 && $playernumber == 2)
+							{
+								$message = "Mit ".$user['username']." weiterkämpfen<br>Spiel hat begonnen am ".$user['startdatum'];
+								$buttontext = "Quiz fortführen";
+							}
+							else if($user['status_user_1'] == 0 || $user['status_user_2'] == 0)
+							{
+								$message = "Sie haben das Spiel mit ".$user['username']." bereits abgeschlossen";
+								$buttontext = "Zur Endseite";
+							}			
 						}
-						else 
+						else
 						{
 							$message = "Sie haben das Spiel gegen ".$user['username']." noch nicht begonnen";
 							$buttontext = "Quiz starten";
