@@ -22,6 +22,7 @@ if (login_check($mysqli) == true) {
     ?>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style_statistik.css" rel="stylesheet">
+    <link href="../css/table.css" rel="stylesheet">
 
 </head>
 
@@ -34,12 +35,12 @@ if (login_check($mysqli) == true) {
 	<div class="container">
 		<table style = "width: 100%;">
 		
-            <tr bgcolor = "#1a2732">
-                <td class="title">User Statistik</td>
-                <td class="title">Forum Statistik</td>
+            <tr class="title">
+                <td>User Statistik</td>
+                <td>Forum Statistik</td>
             </tr>
             
-            <tr bgcolor = "#2d4457">
+            <tr class="content">
                 <td>
     				<div class="charty">
     					<canvas id="Chart1" width="400" height="400"></canvas>
@@ -52,12 +53,12 @@ if (login_check($mysqli) == true) {
     			</td>
             </tr>
             
-            <tr bgcolor = "#1a2732">
-                <td class="title">Quiz Singleplayer Statistik</td>
-                <td class="title">Quiz Multiplayer Statistik</td>
+            <tr class="title">
+                <td>Quiz Singleplayer Statistik</td>
+                <td>Quiz Multiplayer Statistik</td>
             </tr>
             
-            <tr bgcolor = "#2d4457">
+            <tr class="content">
                 <td>
     				<div class="charty">
     					<canvas id="Chart3" width="400" height="400"></canvas>
