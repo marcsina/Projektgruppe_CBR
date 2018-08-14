@@ -50,7 +50,7 @@ if (login_check($mysqli) == true) {
 						</section>
         			</td>
                     <td>
-        				<section id="section_symptoms" class="tableau" style = "color: #ffffff;"></section>
+        				<section id="section_symptoms" class="tableau" style = "color: #ffffff"></section>
         			</td>
                 </tr>
     		</table> 
@@ -98,6 +98,37 @@ if (login_check($mysqli) == true) {
         $(document).ready(function () {
         	cbr.loadIncomingCase("no name", "no text");
         });
+
+        var ctx1 = document.getElementById("Chart").getContext('2d');
+        var myChart1 = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ["","","",""],
+                datasets: [{
+                    label: 'Results in %',
+                    data: [0,0,0,0],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
         
         function buildOutput() {
         	var ausgabe = "";
@@ -143,8 +174,8 @@ if (login_check($mysqli) == true) {
     			}
         	}
 
-        	var ctx1 = document.getElementById("Chart").getContext('2d');
-            var myChart1 = new Chart(ctx1, {
+        	myChart1.destroy();
+            myChart1 = new Chart(ctx1, {
                 type: 'bar',
                 data: {
                     labels: [t1,t2,t3,t4],
@@ -196,7 +227,7 @@ if (login_check($mysqli) == true) {
         	// Anzeigen der gefilterten Symptome
         	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
         		if (cbr.incomingCase.Symptoms[i].wert > 0) {
-        			$('#section_symptoms').append('<div id=' + 'div_impairment_' + i + ' class="row"><br><div class="col-md-7 col-sm-3">' + cbr.incomingCase.Symptoms[i].name + '</div > <div class=" col-md-offset-2 col-md-2 col-sm-offset-2 col-sm-2 ">' + cbr.incomingCase.Symptoms[i].wert + '</div></div>');
+        			$('#section_symptoms').append('<div id=' + 'div_impairment_' + i + ' class="row" style="max-width:90%"><br><div class="col-md-7 col-sm-3">' + cbr.incomingCase.Symptoms[i].name + '</div > <div class=" col-md-offset-2 col-md-2 col-sm-offset-2 col-sm-2 ">' + cbr.incomingCase.Symptoms[i].wert + '</div></div>');
         		}		
         	}
         	// Berechnung und Ausgabe des Ergebnisses

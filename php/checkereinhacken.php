@@ -22,7 +22,6 @@ if (login_check($mysqli) == true) {
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-
     <link href="../css/style3.css" rel="stylesheet">
     <link href="../css/style_autocomplete.css" rel="stylesheet">
     <link href="../css/table.css" rel="stylesheet">
@@ -58,7 +57,7 @@ if (login_check($mysqli) == true) {
                 <tr class="content">
                     <td>
 						<section class ="tableau">
-							<form id="form_symptoms" style = "color: #ffffff;"></form>
+							<form id="form_symptoms" style = "color: #ffffff;max-width:90%"></form>
 						</section>
         			</td>
                     <td>
@@ -111,13 +110,43 @@ if (login_check($mysqli) == true) {
 		});
 
 		var ergebnis = new Array();
-
+		var ctx1 = document.getElementById("Chart").getContext('2d');
+        var myChart1 = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ["","","",""],
+                datasets: [{
+                    label: 'Results in %',
+                    data: [0,0,0,0],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+        
 		function loadSymptoms() {
 			var i;
 
 			for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
 				//TO-DO: Beschreibungen der Symptome in Datenbank einf�gen
-				$('#form_symptoms').append('<div id=' + 'div_' + i + ' class="row symptom"><label class="col-md-11" style="word-wrap:break-word;max-width:70%">' + parseInt(i+1) + ': ' + cbr.incomingCase.Symptoms[i].name + '</label><input class="checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + i + '></div>');
+				$('#form_symptoms').append('<div id=' + 'div_' + i + ' class="row symptom"><label class="col-md-11" style="word-wrap:break-word;max-width:90%">' + parseInt(i+1) + ': ' + cbr.incomingCase.Symptoms[i].name + '</label><input class="checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + i + '></div>');
 			}
 		}
 
@@ -183,9 +212,8 @@ if (login_check($mysqli) == true) {
     				p5 = cbr.Similarities[i].similarity;
     			}
         	}
-
-        	var ctx1 = document.getElementById("Chart").getContext('2d');
-            var myChart1 = new Chart(ctx1, {
+			myChart1.destroy();
+            myChart1 = new Chart(ctx1, {
                 type: 'bar',
                 data: {
                     labels: [t1,t2,t3,t4],
@@ -239,7 +267,7 @@ if (login_check($mysqli) == true) {
 
 			if ($("#" + clickedBtnID).is(':checked')) {
 				// checked
-				$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="symptom row"><div class="col-md-6 col-sm-6">' + parseInt(idOhnePrefix * 1 + 1 * 1) + ': ' + cbr.incomingCase.Symptoms[idOhnePrefix].name + '</div > <div class="col-md-5 col-sm-5 btn-group" data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
+				$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="symptom row" style="max-width:90%"><div class="col-md-6 col-sm-6">' + parseInt(idOhnePrefix * 1 + 1 * 1) + ': ' + cbr.incomingCase.Symptoms[idOhnePrefix].name + '</div > <div class="col-md-5 col-sm-5 btn-group" data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
 				// Standardwerte setzen
 				$('#' + 'btn_klein_' + idOhnePrefix).click();
 			}

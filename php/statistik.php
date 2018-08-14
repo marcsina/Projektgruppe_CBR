@@ -90,6 +90,24 @@ $result3 = $value3->fetch_assoc();
 //anzahl eigene beiträge
 $value4 = $mysqli->query("SELECT COUNT(id) as n FROM Forum_Beitrag WHERE user = '$userid';");
 $result4 = $value4->fetch_assoc();
+
+//anzahl spquiz
+$value5 = $mysqli->query("SELECT COUNT(id) as n FROM SP_QUIZ;");
+$result5 = $value5->fetch_assoc();
+
+//eigene spquiz
+$value6 = $mysqli->query("SELECT COUNT(id) as n FROM SP_QUIZ WHERE User_ID = '$userid';");
+$result6 = $value6->fetch_assoc();
+
+//anzahl mpquiz
+$value7 = $mysqli->query("SELECT COUNT(id) as n FROM MP_QUIZ;");
+$result7 = $value7->fetch_assoc();
+
+//eigene mpquiz
+$value8 = $mysqli->query("SELECT COUNT(id) as n FROM MP_QUIZ WHERE User_ID_1 = '$userid' OR User_ID_2 = '$userid';");
+$result8 = $value8->fetch_assoc();
+
+
 ?>
 
 <script src="../js/Chart.js"></script>
@@ -159,10 +177,10 @@ var ctx3 = document.getElementById("Chart3").getContext('2d');
 var myChart3 = new Chart(ctx3, {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["All SP Quiz", "Your SP Quiz"],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [<?php echo $result5['n'] ?>, <?php echo $result6['n'] ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -197,10 +215,10 @@ var ctx4 = document.getElementById("Chart4").getContext('2d');
 var myChart4 = new Chart(ctx4, {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["All MP Quiz", "Your MP Quiz"],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [<?php echo $result7['n'] ?>, <?php echo $result8['n'] ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

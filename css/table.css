@@ -1,0 +1,21 @@
+/* Tabs einfärben*/
+
+.charty {
+    max-height: 500px;
+    max-width: 500px;
+}
+
+.title {
+	border: 1px solid black;
+	padding:5px;
+	color: #ffffff;
+	font-size: 20px;
+	border-right: none;
+	border-left: none;
+	text-align:center;
+	background-color: #1a2732;
+}
+
+.content {
+	background-color: #2d4457;
+}
