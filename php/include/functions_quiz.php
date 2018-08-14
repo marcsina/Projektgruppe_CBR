@@ -430,6 +430,22 @@ function generateMP_Quiz($mysqli, $userID1, $userID2)
     }
 }
 
+function declineChallenge ($mysqli, $userID1, $userID2)
+{
+	if($stmt = $mysqli->prepare("DELETE FROM PENDING_CHALLENGE WHERE User_ID_1 = ? AND User_ID_2 = ?;"))
+    {
+        $stmt->bind_param('ii', $userID1, $userID2);
+	    if($stmt->execute())
+		{
+			return true;
+		}
+    }
+    else
+    {
+        return false;
+    }
+}
+
 function showCurrentMPGames($mysqli, $currentUser)
 {
     if($stmt = $mysqli->prepare("SELECT members.username, members.id, MP_QUIZ.ID, IF(MP_QUIZ.User_ID_1 = ?, MP_QUIZ.startdatum_user_1, MP_QUIZ.startdatum_user_2) AS startdatum, status_user_1, status_user_2, User_ID_1, User_ID_2 FROM MP_QUIZ, members WHERE (MP_QUIZ.User_ID_1 = ? OR MP_QUIZ.User_ID_2 = ?) AND (MP_QUIZ.User_ID_1 = members.id OR MP_QUIZ.User_ID_2 = members.id) AND NOT members.id = ? AND NOT (status_user_1 = 1 AND status_user_2 = 1) ORDER BY startdatum ASC;"))
@@ -458,7 +474,7 @@ function showCurrentMPGames($mysqli, $currentUser)
 
 function checkCurrentMPGamesForChallenges($mysqli, $currentUser)
 {
-    if($stmt = $mysqli->prepare("SELECT members.id,  status_user_1, status_user_2 FROM MP_QUIZ, members WHERE (MP_QUIZ.User_ID_1 = ? OR MP_QUIZ.User_ID_2 = ?) AND (MP_QUIZ.User_ID_1 = members.id OR MP_QUIZ.User_ID_2 = members.id) AND NOT members.id = ? ORDER BY startdatum ASC;"))
+    if($stmt = $mysqli->prepare("SELECT members.id,  status_user_1, status_user_2, IF(MP_QUIZ.User_ID_1 = ?, startdatum_user_1, startdatum_user_2) as startdatum FROM MP_QUIZ, members WHERE (MP_QUIZ.User_ID_1 = ? OR MP_QUIZ.User_ID_2 = ?) AND (MP_QUIZ.User_ID_1 = members.id OR MP_QUIZ.User_ID_2 = members.id) AND NOT members.id = ? ORDER BY startdatum ASC;"))
     {
         $stmt->bind_param('iiii', $currentUser, $currentUser, $currentUser, $currentUser);
 	    if($stmt->execute())
@@ -466,7 +482,7 @@ function checkCurrentMPGamesForChallenges($mysqli, $currentUser)
 			$stmt->store_result();
 			$data = array();
 
-			$stmt->bind_result($membersid, $status_user_1, $status_user_2);
+			$stmt->bind_result($membersid, $status_user_1, $status_user_2, $startdatum);
 
 			while ($stmt->fetch())
 			{
@@ -1006,19 +1022,30 @@ if(isset($_POST['challengeUser'],$_POST['challengedUserID'],$_POST['challengerUs
 /*
  *	Nutzer wurde herausgefordert und nimmt Quiz an, wird in tabelle eingetragen. Start MP QUIZ (Challenged Perspektive)
  */
-if(isset($_POST['newQuiz'],$_POST['challengedUserID'],$_POST['challengerUserID']))
+if(isset($_POST['newQuiz'],$_POST['challengedUserID'],$_POST['challengerUserID'], $_POST['action']))
 {
 	$p1 = filter_input(INPUT_POST, 'challengerUserID', FILTER_SANITIZE_NUMBER_INT);
 	$p2 = filter_input(INPUT_POST, 'challengedUserID', FILTER_SANITIZE_NUMBER_INT);
-	$quiz_ID = generateMP_Quiz($mysqli, $p1, $p2);
 
-	genereateFourQuestionsMultiplayer($mysqli, $quiz_ID);
+	if ($_POST['action'] == 'annehmen')
+	{
+		// Anfrage angenommen	
+		$quiz_ID = generateMP_Quiz($mysqli, $p1, $p2);
+		genereateFourQuestionsMultiplayer($mysqli, $quiz_ID);
+		setQuizSession(2, $quiz_ID, "MP");
 
-	setQuizSession(2, $quiz_ID, "MP");
-
-	//Go to Quiz
-	header('Location: ../Quiz.php');
+		//Go to Quiz
+		header('Location: ../Quiz.php');
+	}
+	else
+	{
+		// Anfrage abgelehnt
+		declineChallenge($mysqli, $p1, $p2);
+		header('Location: Quiz.uebersicht.php');
+	}
+	
 }
+
 
 //MP fortführen oder starten
 if(isset($_POST['continueQuiz'],$_POST['quizID'], $_POST['playernumber'], $_POST['checkStarted']))

@@ -248,9 +248,6 @@ function deleteFriendByUserID($id1, $id2, $mysqli)
 
 function editProfile($mysqli, $firstName, $lastName, $email, $website, $pwd, $confirmpwd)
 {
-
-}
-/*
 //entgegennahme der form_POSTS
 if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['confirmpwd'], $_POST['website']))
 {
@@ -269,8 +266,10 @@ if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_PO
         $error_msg .= '<p class="error">The email address you entered is not valid</p>';
     }
 
+
+
 }
-*/
+
 if(isset($_POST['addFriend'], $_POST['id1'], $_POST['id2']))
 {
 	//Unnötiges abfangen
