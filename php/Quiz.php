@@ -64,24 +64,27 @@
             </div>
 
 <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center;">
-            <div class=" questionsection " id="1">
-                <h3 style=" color: blue;">
-                    <b>Frage</b> <span id="span_QuestionNumber" style=" color: red; ">1</span> of 12: <span class="animated fadeIn" style=" color: #ff7f00 ; animation-duration: 3s; animation-delay: 0s; animation-iteration-count: ;">(Wählen Sie bitte die richtige (<span class="glyphicon glyphicon-ok"></span>) Antwort)</span>
-                </h3>
-                <br>
-
-                <!-- "progress bar" -->
-                <div class="progress">
+            <div class=" questionsection " id="1">            
                     <?php
 
                     $array = getProgressionData($mysqli, $_SESSION['type'], $_SESSION['user_id'], $_SESSION['quiz_id'], $_SESSION['player']);
                     $currentQuestionNumber = $array[0]['countAnsweredQuestions'];
                     $maximumQuestions = $array[0]['countQuestions'];
                     ?>
-                    <div class="progress-bar progress-bar-info progress-bar-striped active massive-font" role="progressbar" aria-valuenow="<?php echo $currentQuestionNumber;?>" aria-valuemin="0" aria-valuemax="<?php echo $maximumQuestions;?>" style='<?php echo "width:".(($currentQuestionNumber / $maximumQuestions)*100)."%";?>'>
-                        <?php echo (($currentQuestionNumber / $maximumQuestions) *100)."%";?>
+                    <h3 style=" color: blue;">
+                        <b>Frage</b>
+                        <span id="span_QuestionNumber" style=" color: red; "><?php echo $currentQuestionNumber;?></span> of <?php echo $maximumQuestions;?>:
+                        <span class="animated fadeIn" style=" color: #ff7f00 ; animation-duration: 3s; animation-delay: 0s;">
+                            (Wählen Sie bitte die richtige (
+                            <span class="glyphicon glyphicon-ok"></span>) Antwort)
+                        </span>
+                    </h3>
+                    <br>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped active massive-font" role="progressbar" aria-valuenow="<?php echo $currentQuestionNumber;?>" aria-valuemin="0" aria-valuemax="<?php echo $maximumQuestions;?>" style='<?php echo "width:".(($currentQuestionNumber / $maximumQuestions)*100)."%";?>'>
+                            <?php echo (($currentQuestionNumber / $maximumQuestions) *100)."%";?>
+                        </div>
                     </div>
-                </div>
             </div>
 
         <!-- "" Question section" -->
