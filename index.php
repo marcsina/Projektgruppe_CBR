@@ -75,9 +75,6 @@ include ('php/include/navbar.php');
             }
             else
             {
-                echo "<p>Bist schon eingeloggt du f4660t<br></p>";
-                echo "<p>Deine Mudda schreit von der Toilette: 'Schaut mal Kinder, ich bin ein 3D Drucker.'</p>";
-
                 echo "
                 <h3>Neuigkeiten</h3>
                 <ul class='nav nav-tabs'>
@@ -93,13 +90,13 @@ include ('php/include/navbar.php');
                 </ul>
                 <div class='tab-content'>
                     <div class='tab-pane fade in active' id='quiz'>
-                        <img src='img/team/3.jpg' width='30%' height='30%'/>
+                        <a href='php/Quiz_uebersicht.php'><img src='img/team/3.jpg' width='30%' height='30%'/></a>
                     </div>
                     <div class='tab-pane fade in' id='forum'>
-                        <img src='img/team/1.jpg' width='30%' height='30%'/>
+                        <a href='php/forum.php'><img src='img/team/1.jpg' width='30%' height='30%'/></a>
                     </div>
                     <div class='tab-pane fade in' id='classroom'>
-                        <img src='img/team/4.jpg' width='30%' height='30%'/>
+                        <a href=''><img src='img/team/4.jpg' width='30%' height='30%'/></a>
                     </div>
                 </div>";
             }
