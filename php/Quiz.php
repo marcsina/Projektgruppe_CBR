@@ -1,4 +1,4 @@
-<?php
+﻿<?php
  include_once 'include/conn.php';
  include_once 'include/functions_login.php';
  include_once 'include/functions_quiz.php';
@@ -73,7 +73,7 @@
                     ?>
                     <h3 style=" color: blue;">
                         <b>Frage</b>
-                        <span id="span_QuestionNumber" style=" color: red; "><?php echo $currentQuestionNumber;?></span> of <?php echo $maximumQuestions;?>:
+                        <span id="span_QuestionNumber" style=" color: red; "><?php echo $currentQuestionNumber+1;?></span> of <?php echo $maximumQuestions;?>:
                         <span class="animated fadeIn" style=" color: #ff7f00 ; animation-duration: 3s; animation-delay: 0s;">
                             (Wählen Sie bitte die richtige (
                             <span class="glyphicon glyphicon-ok"></span>) Antwort)

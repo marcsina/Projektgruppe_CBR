@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once 'include/conn.php';
 include_once 'include/functions_quiz.php';
 
@@ -102,7 +102,7 @@ sec_session_start();
     <script>
         var ctx1 = document.getElementById( "Chart1" ).getContext( '2d' );
         var myChart1 = new Chart( ctx1, {
-            type: 'pie',
+            type: 'doughnut',
             data: {
                 labels: ["Falsche Antworten", "Richtige Antworten"],
                 datasets: [{
@@ -120,7 +120,7 @@ sec_session_start();
                     borderWidth: 1
                 }]
             },
-            options: {
+            /*options: {
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -128,7 +128,7 @@ sec_session_start();
                         }
                     }]
                 }
-            }
+            }*/
         } );
     </script>
 </body>
