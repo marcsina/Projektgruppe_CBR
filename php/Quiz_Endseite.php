@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'include/conn.php';
 include_once 'include/functions_quiz.php';
 
@@ -14,7 +14,7 @@ sec_session_start();
     ?>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
 
-    <link href="../css/style3.css" rel="stylesheet" />
+    <link href="../css/Quiz_Endseite.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -23,13 +23,15 @@ sec_session_start();
     ?>
 
     <div class="container" style="text-align: center">
-        <h2>Auswertung</h2>
-        <!--Linke Seite -- Textuelle Darstellung-->
-        <div class="col-md-6 col-sm-12">
-            <?php
+        <h2>Eigene Auswertung</h2>
+        <!--Player 1-->
+        <div class="row">
+            <!--Linke Seite -- Textuelle Darstellung-->
+            <div class="col-md-6 col-sm-12">
+                <?php
 				$array = getEndData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['player']);
 				echo "
-				<table>
+				<table class='QuizEndTable'>
 					<tr>
 						<th>Frage</th>
 						<th>Abgegebene Antwort</th>
@@ -80,20 +82,100 @@ sec_session_start();
 					";
 				}
 				echo "</table>";
-            ?>                    
-        </div>
-        <!-- Rechte Seite Visuelle Darstellung-->
-        <div class="col-md-6 col-sm-12">
+                ?>
+            </div>
 
-            <div class="charty">
-                <canvas id="Chart1"></canvas>
+            <!-- Rechte Seite Visuelle Darstellung-->
+            <div class="col-md-6 col-sm-12">
+
+                <div class="charty">
+                    <canvas id="Chart1"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!--Player 2 -->        
+        <?php $array = get2ndPlayerData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['player']);
+              echo"<h2>Antworten von ".$array[0]['opponentUsername']."</h2>";?>
+        <div class="row" <?php if (count($array)==0){ echo "style='display:none;'"; } ?>>
+			<div class="col-md-6 col-sm-12">
+                <?php
+				echo "
+               
+				<table class='QuizEndTable'>
+					<tr>
+						<th>Frage</th>
+						<th>Abgegebene Antwort</th>
+						<th>Richtige Antwort</th>
+					</tr>
+				";
+                $count = 0;
+                debug_to_console("COUNT ARRAY".count($array));
+				foreach($array as &$data)
+				{
+                    if($data['type'] == 0)
+                    {
+                        $questionString = "stark";
+                    }
+                    else if($data['type'] == 1)
+                    {
+                        $questionString = "schwach";
+                    }
+                    $Question = "Was ist ein ".$questionString." ausgeprägtes Symptom in dem Fall ".$data['casename']."?";
+
+                    debug_to_console("GIVEN A //  ".$data['givenA']);
+                    switch($data['givenA'])
+                    {
+                        case 1:
+                            $answer = $data['answer1'];
+                            $count++;
+                            break;
+                        case 2:
+                            $answer = $data['answer2'];
+                            break;
+                        case 3:
+                            $answer = $data['answer3'];
+                            break;
+                        case 4:
+                            $answer = $data['answer4'];
+                            break;
+                        default:
+                            $answer = "DB Fehler";
+                            break;
+                    }
+
+					echo "
+					<tr>
+						<td>".$Question."</td>
+						<td>".$answer."</td>
+						<td>".$data['answer1']."</td>
+					</tr>
+					";
+				}
+				echo "</table>";
+                ?>
+            </div>
+
+            <!-- Rechte Seite Visuelle Darstellung-->
+            <div class="col-md-6 col-sm-12">
+
+                <div class="charty">
+                    <canvas id="Chart1"></canvas>
+                </div>
             </div>
         </div>
+        
+        
 
         <a href="Quiz_uebersicht.php">
             <button class="btn">Zurück zur Quizübersicht</button>
         </a>
     </div>
+
+
+
 
     <!-- Scripts -->
     <script src="../js/jquery-2.2.2.min.js"></script>
@@ -102,7 +184,7 @@ sec_session_start();
     <script>
         var ctx1 = document.getElementById( "Chart1" ).getContext( '2d' );
         var myChart1 = new Chart( ctx1, {
-            type: 'doughnut',
+            type: 'polarArea',
             data: {
                 labels: ["Falsche Antworten", "Richtige Antworten"],
                 datasets: [{

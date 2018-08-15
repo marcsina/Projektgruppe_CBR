@@ -926,6 +926,46 @@ function getEndData($mysqli, $type, $quizID, $playernumber)
     }
 }
 
+function get2ndPlayerData($mysqli, $type, $quizID, $playernumber)
+{
+    $data = array();
+    if($playernumber == 1)
+    {
+        if($stmt = $mysqli->prepare("SELECT Type, Casename, Correct_A1, A2, A3, A4, Given_A2, members.username FROM `MP_FRAGE`, MP_QUIZ, members WHERE MP_FRAGE.MP_QUIZ_ID = ? AND MP_FRAGE.MP_QUIZ_ID = MP_QUIZ.ID AND MP_QUIZ.User_ID_2 = members.id AND Given_A2 != 0 ORDER BY MP_FRAGE.ID ASC"))
+        {
+            $stmt->bind_param('i',$quizID);
+	        $stmt->execute();
+
+			$stmt->store_result();
+
+            $stmt->bind_result($type, $casename, $answer1, $answer2, $answer3, $answer4, $givenA, $opponentUsername);
+            while($stmt->fetch())
+            {
+                array_push($data,array("type"=>$type, "casename"=>$casename, "answer1"=>$answer1, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "givenA"=>$givenA, "opponentUsername"=>$opponentUsername));
+            }
+
+            return $data;
+        }
+    }
+    else
+    {
+        if($stmt = $mysqli->prepare("SELECT Type, Casename, Correct_A1, A2, A3, A4, Given_A1, members.username FROM `MP_FRAGE`, MP_QUIZ, members WHERE MP_FRAGE.MP_QUIZ_ID = ? AND MP_FRAGE.MP_QUIZ_ID = MP_QUIZ.ID AND MP_QUIZ.User_ID_1 = members.id  AND Given_A1 != 0 ORDER BY MP_FRAGE.ID ASC"))
+        {
+            $stmt->bind_param('i',$quizID);
+	        $stmt->execute();
+
+			$stmt->store_result();
+
+            $stmt->bind_result($type, $casename, $answer1, $answer2, $answer3, $answer4, $givenA, $username);
+            while($stmt->fetch())
+            {
+                array_push($data,array("type"=>$type, "casename"=>$casename, "answer1"=>$answer1, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "givenA"=>$givenA, "opponentUsername"=>$opponentUsername));
+            }
+            return $data;
+        }
+    }
+}
+
 function getCurrentPlayerID($mysqli, $quiz_id, $user_id)
 {
 	if($stmt = $mysqli->prepare("SELECT IF (`User_ID_1`= ?, 1, 2) FROM MP_QUIZ WHERE ID=?;"))
