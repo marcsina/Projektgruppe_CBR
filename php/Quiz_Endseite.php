@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once 'include/conn.php';
 include_once 'include/functions_quiz.php';
 
@@ -98,7 +98,11 @@ sec_session_start();
 
         <!--Player 2 -->        
         <?php $secondPlayerArray = get2ndPlayerData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['player']);
-              echo"<h2>Antworten von ".$secondPlayerArray[0]['opponentUsername']."</h2>";?>
+			if (count($secondPlayerArray)>0)
+			{
+				echo"<h2>Antworten von ".$secondPlayerArray[0]['opponentUsername']."</h2>";
+			}    
+		?>      
         <div class="row" <?php if (count($secondPlayerArray)==0){ echo "style='display:none;'"; } ?>>
 			<div class="col-md-6 col-sm-12">
                 <?php
