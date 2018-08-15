@@ -956,7 +956,7 @@ function get2ndPlayerData($mysqli, $type, $quizID, $playernumber)
 
 			$stmt->store_result();
 
-            $stmt->bind_result($type, $casename, $answer1, $answer2, $answer3, $answer4, $givenA, $username);
+            $stmt->bind_result($type, $casename, $answer1, $answer2, $answer3, $answer4, $givenA, $opponentUsername);
             while($stmt->fetch())
             {
                 array_push($data,array("type"=>$type, "casename"=>$casename, "answer1"=>$answer1, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "givenA"=>$givenA, "opponentUsername"=>$opponentUsername));
@@ -1069,7 +1069,7 @@ if(isset($_POST['newQuiz'],$_POST['challengedUserID'],$_POST['challengerUserID']
 
 	if ($_POST['action'] == 'annehmen')
 	{
-		// Anfrage angenommen	
+		// Anfrage angenommen
 		$quiz_ID = generateMP_Quiz($mysqli, $p1, $p2);
 		genereateFourQuestionsMultiplayer($mysqli, $quiz_ID);
 		setQuizSession(2, $quiz_ID, "MP");
@@ -1083,7 +1083,7 @@ if(isset($_POST['newQuiz'],$_POST['challengedUserID'],$_POST['challengerUserID']
 		declineChallenge($mysqli, $p1, $p2);
 		header('Location: Quiz.uebersicht.php');
 	}
-	
+
 }
 
 

@@ -97,13 +97,13 @@ sec_session_start();
 
 
         <!--Player 2 -->        
-        <?php $array = get2ndPlayerData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['player']);
-              echo"<h2>Antworten von ".$array[0]['opponentUsername']."</h2>";?>
-        <div class="row" <?php if (count($array)==0){ echo "style='display:none;'"; } ?>>
+        <?php $secondPlayerArray = get2ndPlayerData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['player']);
+              echo"<h2>Antworten von ".$secondPlayerArray[0]['opponentUsername']."</h2>";?>
+        <div class="row" <?php if (count($secondPlayerArray)==0){ echo "style='display:none;'"; } ?>>
 			<div class="col-md-6 col-sm-12">
                 <?php
 				echo "
-               
+
 				<table class='QuizEndTable'>
 					<tr>
 						<th>Frage</th>
@@ -111,9 +111,9 @@ sec_session_start();
 						<th>Richtige Antwort</th>
 					</tr>
 				";
-                $count = 0;
-                debug_to_console("COUNT ARRAY".count($array));
-				foreach($array as &$data)
+                $countSecondPlayer = 0;
+                debug_to_console("COUNT ARRAY".count($secondPlayerArray));
+				foreach($secondPlayerArray as &$data)
 				{
                     if($data['type'] == 0)
                     {
@@ -130,7 +130,7 @@ sec_session_start();
                     {
                         case 1:
                             $answer = $data['answer1'];
-                            $count++;
+                            $countSecondPlayer++;
                             break;
                         case 2:
                             $answer = $data['answer2'];
@@ -162,7 +162,7 @@ sec_session_start();
             <div class="col-md-6 col-sm-12">
 
                 <div class="charty">
-                    <canvas id="Chart1"></canvas>
+                    <canvas id="Chart2"></canvas>
                 </div>
             </div>
         </div>
@@ -184,19 +184,19 @@ sec_session_start();
     <script>
         var ctx1 = document.getElementById( "Chart1" ).getContext( '2d' );
         var myChart1 = new Chart( ctx1, {
-            type: 'polarArea',
+            type: 'doughnut',
             data: {
-                labels: ["Falsche Antworten", "Richtige Antworten"],
+                labels: ["Richtige Antworten", "Falsche Antworten"],
                 datasets: [{
                     label: 'Grafische Auswertung',
-                    data: [<?php echo count($array)-$count;?>,<?php echo $count;?>],
+                    data: [<?php echo $count;?>,<?php echo count($array)-$count;?>],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
+                        'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 99, 132, 0.2)'
                     ],
                     borderColor: [
-                        'rgba(255,99,132,1)',
                         'rgba(54, 162, 235, 1)',
+						'rgba(255,99,132,1)',
                         'rgba(255, 206, 86, 1)'
                     ],
                     borderWidth: 1
@@ -212,6 +212,27 @@ sec_session_start();
                 }
             }*/
         } );
+
+        var ctx2 = document.getElementById( "Chart2" ).getContext( '2d' );
+        var myChart2 = new Chart( ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ["Richtige Antworten", "Falsche Antworten"],
+                datasets: [{
+                    label: 'Grafische Auswertung',
+                    data: [<?php echo $countSecondPlayer;?>, <?php echo count($secondPlayerArray)-$countSecondPlayer;?>],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+						'rgba(255,99,132,1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            }});
     </script>
 </body>
 </html>
