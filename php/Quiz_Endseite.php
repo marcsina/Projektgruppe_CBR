@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'include/conn.php';
 include_once 'include/functions_quiz.php';
 
@@ -14,7 +14,7 @@ sec_session_start();
     ?>
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
 
-    <link href="../css/style3.css" rel="stylesheet" />
+    <link href="../css/Quiz_Endseite.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -29,7 +29,7 @@ sec_session_start();
             <?php
 				$array = getEndData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['player']);
 				echo "
-				<table>
+				<table class='QuizEndTable'>
 					<tr>
 						<th>Frage</th>
 						<th>Abgegebene Antwort</th>
@@ -102,7 +102,7 @@ sec_session_start();
     <script>
         var ctx1 = document.getElementById( "Chart1" ).getContext( '2d' );
         var myChart1 = new Chart( ctx1, {
-            type: 'doughnut',
+            type: 'polarArea',
             data: {
                 labels: ["Falsche Antworten", "Richtige Antworten"],
                 datasets: [{
