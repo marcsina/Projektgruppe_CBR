@@ -1,0 +1,39 @@
+﻿body
+{
+    padding-top: 100px;
+}
+
+    body > .container {
+        background: rgb(26, 39, 50);
+    }
+
+        body > .container > h2 {
+            color: #fed189;
+        }
+.QuizEndTable > tbody > tr > th, .QuizEndTable > tbody > tr > td 
+{
+    margin: 10px;
+    padding: 10px;
+}
+
+.QuizEndTable > tbody > tr > th {
+    color: rgb(0, 122, 255);
+}
+
+.QuizEndTable > tbody > tr > td 
+{
+    color: white;
+}
+
+.QuizEndTable {
+    border: none;
+    border-collapse: collapse;
+}
+
+    .QuizEndTable > tbody > tr > td {
+        border-left: 1px solid rgb(0,122,255);
+    }
+
+    .QuizEndTable > tbody > tr > td:first-child {
+        border-left: none;
+    }
