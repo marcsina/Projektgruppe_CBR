@@ -1,4 +1,4 @@
- <?php
+﻿ <?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 
@@ -235,7 +235,7 @@ if (login_check($mysqli) == true)
 
                     <!--Liste der Category-->
                     <div class="col-md-6 col-sm-12 auto" id="div_edit_category">
-                        <h4>Symptom hinzufügen</h4>
+                        <h4 id="Category_H4">Symptom hinzufügen zu </h4>
                         <form class="myForm">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="add_new_symptom" placeholder="Symptomname">
