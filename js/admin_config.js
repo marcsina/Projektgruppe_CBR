@@ -432,7 +432,7 @@ $( "#btn_add_Case_to_DataBase" ).click( function ( event )
             {
                 console.log( "Name: " + array_CategoryName[i] + " ID: " + array_CategroyID[i] + " Wert: " + array_CategoryValue[i] + "\n" );
             }
-            $.post( 'php/include/AddCaseAdmin.php', {
+            $.post( 'include/AddCaseAdmin.php', {
                 caseName: $( "#add_New_Case_Name" ).val(),
                 name: JSON.stringify( array_CategoryName ),
                 id: JSON.stringify( array_CategroyID ),
@@ -535,7 +535,7 @@ $( "#btn_add_Category_to_DataBase" ).click( function ( event )
             {
                 array_of_keywords.push( stemm2( $( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText ) );
             }
-            $.post( 'php/include/AddNewKategorie.php', {
+            $.post( 'include/AddNewKategorie.php', {
                 katName: $( "#add_new_Category_Category_Name" ).val(),
                 keywords: JSON.stringify( array_of_keywords )
             } );
@@ -624,7 +624,7 @@ $( "#btn_edit_case_save_to_db" ).click( function ( event )
         i = c;
     }
 
-    var result = $.post( 'php/include/EditCaseAdmin.php', {
+    var result = $.post( 'include/EditCaseAdmin.php', {
         caseID: Edit_Case_Array[0].caseId,
         id: JSON.stringify( array_CategroyID ),
         value: JSON.stringify( array_CategoryValue )
@@ -639,7 +639,7 @@ $( "#btn_load_Category" ).click( function ( event )
     Edit_Category_Array = [];
     $( "#list_of_symptoms_category_edit" ).empty();
 
-    $.post( 'php/include/getCategoryAdmin.php', {
+    $.post( 'include/getCategoryAdmin.php', {
         categoryName: $( "#edit_Category_Name" ).val()
     } ).done( function ( data )
     {
@@ -672,7 +672,7 @@ $( "#btn_edit_category_save_to_db" ).click( function ( event )
         {
             symptom_array.push( stemm2( $( "#list_of_symptoms_category_edit>li>p.Category_Name_Edit" ).get( i ).innerText ) );
         }
-        $.post( 'php/include/EditCategoryAdmin.php', {
+        $.post( 'include/EditCategoryAdmin.php', {
             symptomname: JSON.stringify( symptom_array ),
             ICFid: Edit_Category_Array[0].ICFid
         } );
@@ -737,7 +737,7 @@ function add_Item_to_Category_list_category_edit( kategorie_name )
 $( "#btn_load_case_in_delete" ).click( function ( event ) 
 {
     Case_To_Delete_Array = [];
-    $.post( 'php/include/getCaseAdmin.php', {
+    $.post( 'include/getCaseAdmin.php', {
         caseName: $( "#delete_Case_Name" ).val()
     } ).done( function ( data )
     {
@@ -782,7 +782,7 @@ function add_Item_to_Category_list_case_delete( kategorie_name, sliderValue )
 
 $( "#btn_delet_case_from_db" ).click( function ( event )
 {
-    $.post( 'php/include/DeleteCaseAdmin.php', {
+    $.post( 'include/DeleteCaseAdmin.php', {
         CaseID: Case_To_Delete_Array[0].caseId
     } );
 } );

@@ -25,6 +25,7 @@
 
             .nav-tabs > li:nth-child(even) > a {
                 color: white;
+                outline-color: white;
             }
             .nav-tabs > li:nth-child(uneven) > a {
                 color: black;
