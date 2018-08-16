@@ -108,8 +108,8 @@ if (login_check($mysqli) == true) {
                        
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Checker <i class="icon_document_alt"></i><span class="caret"></span></a>
 							<ul class="dropdown-menu">
-							  <li><a href="/Projektgruppe/php/checkereinhacken.php">Symptom Checker</a></li>
-							  <li><a href="/Projektgruppe/php/checkertext.php">Fall Checker</a></li>
+							  <li><a href="/Projektgruppe/php/checker_symptom.php">Symptom Checker</a></li>
+							  <li><a href="/Projektgruppe/php/checker_text.php">Fall Checker</a></li>
 							</ul>
 						</li>
 

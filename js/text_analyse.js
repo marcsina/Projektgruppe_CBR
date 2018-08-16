@@ -1,7 +1,6 @@
 // Global Array for Textanalysis
 var final_Weight = new Array(); // all found keywords
 var absolute_final_array = new Array(); // all available categories to which the weight of the individual keywords is added up
-var highest_katID = 0;
 
 var string_keywordsTEXTFROMDB = "";
 var string_keywordsPASTFROMDB = "";
@@ -18,6 +17,8 @@ var weight_present = 0.25;
 var weight_present_negate = 1;
 var weight_present_reinforced = 0.125;
 var weight_present_negate_reinforced = 2;
+//weight for the magic formula
+var weight_highest = 2;
 
 //Classes
 class Weighted_Words
@@ -40,7 +41,6 @@ class Final_Weight
         this.katID = katID;
         this.katName = katName;
         this.count = 0;
-        
     }
 }
 
@@ -54,8 +54,6 @@ class KeywordList
     }
 }
 
-
-
 //Call functions on Page load
 $( document ).ready( function ()
 {
@@ -63,7 +61,6 @@ $( document ).ready( function ()
     getKeywordsFromDatabase( "cbr" );
     getKeywordsFromDatabase_Past( "cbr" );
 } );
-
 
 //get all Keywords from DB and save them in #txtHint
 //Method is called on page load
@@ -96,7 +93,6 @@ function getKeywordsFromDatabase( database )
         xmlhttp.send();
     }
 }
-
 
 //Get verbs in past tense from DB and write them into "pastHint"
 function getKeywordsFromDatabase_Past( database )
@@ -233,7 +229,6 @@ function checkWordsAroundGivenWord( arrayWhichContainsGivenWord, wordPosition, a
         }
         //---------------------------------------------------------------------
 
-
         //-------------All after third Word------------------------------
         else
         {
@@ -310,9 +305,6 @@ function createKeywords()
         array_keywords.push( new KeywordList( array_zweite_Stufe[i][0].toLowerCase(), array_zweite_Stufe[i][1], array_zweite_Stufe[i][2] ) );
     }
 
-    //save the highest KatID for later calculation
-
-    highest_katID = array_zweite_Stufe[array_zweite_Stufe.length - 1][1];
     return array_keywords;
 }
 
@@ -332,13 +324,10 @@ function createKeywordsArray_Past()
 
 function extractKeywords( inputText )
 {
-
     var i = 0;
     var j = 0;
     var k = 0;
     var z = 0;
-
-
 
     //get Keywords and Past words
     var keyWords = createKeywords();
@@ -370,17 +359,14 @@ function extractKeywords( inputText )
         words_in_sentences_array[i] = sentence_array[i].split( /\s/ );
     }
 
-
     //Make everything Lowercase and delete signs
     for ( i = 0; i < words_in_sentences_array.length; i++ )
     {
         for ( j = 0; j < words_in_sentences_array[i].length; j++ )
         {
-
             words_in_sentences_array[i][j] = words_in_sentences_array[i][j].toLowerCase();
             words_in_sentences_array[i][j] = words_in_sentences_array[i][j].replace( /[.!?;:,+0-9\-]/gm, "" ).replace( /\-/gm, " " );
         }
-
     }
 
     //All sentences
@@ -393,7 +379,7 @@ function extractKeywords( inputText )
             for ( k = 0; k < keyWords.length; k++ )
             {
                 //If the Word is one of the Keywords
-                if ( keyWords[k].word === stemm2( words_in_sentences_array[i][j] ) ) 
+                if ( keyWords[k].word === stemm2( words_in_sentences_array[i][j] ) )
                 {
                     //Check Past Words nearby --> Past
                     if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, pastWords ) )
@@ -412,7 +398,6 @@ function extractKeywords( inputText )
                                 //Todo Weight past negate NOT reinforced
                                 final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_past_negate, keyWords[k].katName ) );
                             }
-
                         }
                         else
                         {
@@ -425,9 +410,8 @@ function extractKeywords( inputText )
                             else
                             {
                                 //Todo Weight past NOT negate NOT reinforced
-                                final_Weight.push(new Final_Weight(keyWords[k].katID, weight_base * weight_past, keyWords[k].katName));
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_past, keyWords[k].katName ) );
                             }
-
                         }
                     }
                     //No Past Word detected --> Present
@@ -453,50 +437,46 @@ function extractKeywords( inputText )
                             if ( checkWordsAroundGivenWord( words_in_sentences_array[i], j, reinforing_words ) )
                             {
                                 //Todo Weight present NOT negate reinforced
-                                final_Weight.push(new Final_Weight(keyWords[k].katID, weight_base * weight_present_reinforced, keyWords[k].katName));
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_present_reinforced, keyWords[k].katName ) );
                             }
                             else
                             {
                                 //Todo Weight present NOT negate NOT reinforced
-                                final_Weight.push(new Final_Weight(keyWords[k].katID, weight_base * weight_present, keyWords[k].katName));
+                                final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_present, keyWords[k].katName ) );
                             }
-
                         }
                     }
                 }
                 words_in_sentences_array[i][j];
             }
         }
-
-
     }
 
-
-    absolute_final_array.length = highest_katID;
-    //Check all possible categories if Keywords were found in text
-    for ( i = 0; i < absolute_final_array.length; i++ )
+    for ( i = 0; i < final_Weight.length; i++ )
     {
-        //create blank class
-        absolute_final_array[i] = new Final_Weight( i + 1, 0.0, "" );
-
-        //Check all found Keywords
-        for ( j = 0; j < final_Weight.length; j++ )
+        checking = 0;
+        for ( j = 0; j < absolute_final_array.length; j++ )
         {
-            //if an katID exisist with a weight, add it up
-            //put katName too
-            if ( i + 1 === parseInt( final_Weight[j].katID ) )
+            if ( ( final_Weight[i].katID == absolute_final_array[j].katID ) && checking == 0 )
             {
-                absolute_final_array[i].katName = final_Weight[j].katName;
-                absolute_final_array[i].weight += final_Weight[j].weight;
-                absolute_final_array[i].count++;
+                absolute_final_array[j].katName = final_Weight[i].katName;
+                absolute_final_array[j].weight += final_Weight[i].weight;
+                absolute_final_array[j].count++;
+
+                checking = 1;
             }
+        }
+        if ( checking == 0 )
+        {
+            absolute_final_array.push( new Final_Weight( final_Weight[i].katID, final_Weight[i].weight, final_Weight[i].katName ) );
+            absolute_final_array[absolute_final_array.length-1].count++;
         }
     }
 
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
-        //MAGIC FORMULA
-        absolute_final_array[i].weight = absolute_final_array[i].weight / ( absolute_final_array[i].count * 2 * 2 * weight_base );
+        //MAGIC FORMULA                     Sum of category weight       /              highest possible value for this category               
+        absolute_final_array[i].weight = absolute_final_array[i].weight / ( absolute_final_array[i].count * weight_highest * weight_base );
 
         //Cut the number
         if ( absolute_final_array[i].weight > 1 )
