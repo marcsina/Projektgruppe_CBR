@@ -423,9 +423,14 @@ $( "#btn_add_Case_to_DataBase" ).click( function ( event )
                 var sliderValue = $( "#list_of_Category_admin>li>input.slider" ).get( i ).value;
                 array_of_categories.push( new Category_Word_ID( searchForIDOfCategory( string, Categories_From_DB ), string, sliderValue ) );
 
-                array_CategoryName.push( string );
-                array_CategroyID.push( searchForIDOfCategory( string, Categories_From_DB ) );
-                array_CategoryValue.push( sliderValue );
+                //Dont push if the value is 0
+                if (sliderValue > 0)
+                {
+                    array_CategoryName.push(string);
+                    array_CategroyID.push(searchForIDOfCategory(string, Categories_From_DB));
+                    array_CategoryValue.push(sliderValue);
+                }
+                
                 i = c;
             }
             for ( i = 0; i < array_CategoryName.length; i++ )

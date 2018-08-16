@@ -100,7 +100,7 @@ if (login_check($mysqli) == true) {
          <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                        
-                        <li class="menuItem"><a href="/Projektgruppe/php/Quiz_uebersicht.php">Quiz <i class="icon_table"></i><span class="badge bg-important"><?php echo $pendingChallenges; ?></span></a>
+                        <li class="menuItem"><a href="/Projektgruppe/php/Quiz_uebersicht.php">Quiz <i class="icon_table"></i><?php if($pendingChallenges > 0){ echo "<span class='badge bg-important'> $pendingChallenges </span>"; } ?></a>
                         </li>
 
                         <li class="menuItem"><a href="/Projektgruppe/php/forum.php">Forum  <i class="icon_genius"></i></a>
