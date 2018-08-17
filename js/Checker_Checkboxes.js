@@ -92,12 +92,30 @@ $('body').on('click', 'button.impairmentbutton', function () {
 	var idOhnePrefix = clickedBtnID.replace(/.*_/g, "");
 
 	if (clickedBtnID.includes("klein")) {
+		/*
+		 * Add appropriate CSS Data before removing Commentarea
+		$('#' + 'btn_klein_' + idOhnePrefix).addClass('CSSWhenButtonSelected');
+		$('#' + 'btn_mittel_' + idOhnePrefix).removeClass('CSSRemoveButtonSelected');
+		$('#' + 'btn_hoch_' + idOhnePrefix).removeClass('CSSRemoveButtonSelected');
+		*/
 		cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.3;
 	}
 	if (clickedBtnID.includes("mittel")) {
+		/*
+		 * Add appropriate CSS Data before removing Commentarea
+		$('#' + 'btn_mittel_' + idOhnePrefix).addClass('CSSWhenButtonSelected');
+		$('#' + 'btn_klein_' + idOhnePrefix).removeClass('CSSRemoveButtonSelected');
+		$('#' + 'btn_hoch_' + idOhnePrefix).removeClass('CSSRemoveButtonSelected');
+		*/
 		cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.6;
 	}
 	if (clickedBtnID.includes("hoch")) {
+		/*
+		 * Add appropriate CSS Data before removing Commentarea
+		$('#' + 'btn_hoch_' + idOhnePrefix).addClass('CSSWhenButtonSelected');
+		$('#' + 'btn_klein_' + idOhnePrefix).removeClass('CSSRemoveButtonSelected');
+		$('#' + 'btn_mittel_' + idOhnePrefix).removeClass('CSSRemoveButtonSelected');
+		*/
 		cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.9;
 	}
 

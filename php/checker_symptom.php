@@ -1,12 +1,14 @@
-﻿ <?php
+ <?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
+include     'include/functions_history.php';
 
- 
+
 sec_session_start();
- 
+
 if (login_check($mysqli) == true) {
     $logged = 'in';
+    insert_Activity_Checker($mysqli, $_SESSION['user_id'], "Symptom Checker");
 } else {
     $logged = 'out';
 }

@@ -100,7 +100,7 @@ if (login_check($mysqli) == true) {
          <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                        
-                        <li class="menuItem"><a href="/Projektgruppe/php/Quiz_uebersicht.php">Quiz <i class="icon_table"></i><span class="badge bg-important"><?php echo $pendingChallenges; ?></span></a>
+                        <li class="menuItem"><a href="/Projektgruppe/php/Quiz_uebersicht.php">Quiz <i class="icon_table"></i><?php if($pendingChallenges > 0){ echo "<span class='badge bg-important'> $pendingChallenges </span>"; } ?></a>
                         </li>
 
                         <li class="menuItem"><a href="/Projektgruppe/php/forum.php">Forum  <i class="icon_genius"></i></a>
@@ -108,8 +108,8 @@ if (login_check($mysqli) == true) {
                        
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Checker <i class="icon_document_alt"></i><span class="caret"></span></a>
 							<ul class="dropdown-menu">
-							  <li><a href="/Projektgruppe/php/checkereinhacken.php">Symptom Checker</a></li>
-							  <li><a href="/Projektgruppe/php/checkertext.php">Fall Checker</a></li>
+							  <li><a href="/Projektgruppe/php/checker_symptom.php">Symptom Checker</a></li>
+							  <li><a href="/Projektgruppe/php/checker_text.php">Fall Checker</a></li>
 							</ul>
 						</li>
 
