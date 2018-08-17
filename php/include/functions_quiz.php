@@ -1081,7 +1081,7 @@ if(isset($_POST['newQuiz'],$_POST['challengedUserID'],$_POST['challengerUserID']
 	{
 		// Anfrage abgelehnt
 		declineChallenge($mysqli, $p1, $p2);
-		header('Location: Quiz.uebersicht.php');
+		header('Location: ../Quiz_uebersicht.php');
 	}
 
 }
