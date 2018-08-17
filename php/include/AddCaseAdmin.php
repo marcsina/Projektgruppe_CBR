@@ -15,7 +15,6 @@ if (isset($_POST['caseName'], $_POST['name'], $_POST['id'], $_POST['value']))
 	$id = json_decode($_POST['id']);
 	$value = json_decode($_POST['value']);
 
-    debug_to_console("Value: ".$value[0]);
 	$sql = "INSERT INTO Cases (name) VALUES ('$caseName');";
 
 
@@ -34,6 +33,7 @@ if (isset($_POST['caseName'], $_POST['name'], $_POST['id'], $_POST['value']))
 	    {
             $numero1 = $id[$i];
             $numero2 = $value[$i];
+            $numero2 = $numero2/100;
 
             $sql = "INSERT INTO Cases_Kategorie_Values (caseid,kategorieid,value, wij) VALUES('$caseid', '$numero1', '$numero2', '0');";
             if (mysqli_query($connection,$sql))
