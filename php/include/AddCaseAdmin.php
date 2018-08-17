@@ -38,6 +38,7 @@ if (isset($_POST['caseName'], $_POST['name'], $_POST['id'], $_POST['value']))
             $sql = "INSERT INTO Cases_Kategorie_Values (caseid,kategorieid,value, wij) VALUES('$caseid', '$numero1', '$numero2', '0');";
             if (mysqli_query($connection,$sql))
             {
+                echo "<meta http-equiv='refresh' content='0'>";
                 echo "Kein Problem beim Hinzufügen der Werte";
             }
             else

@@ -837,8 +837,8 @@ function add_Item_to_Category_list_case_delete( kategorie_name, sliderValue )
             ( $( '<p>' ).attr( 'class', "Category_Name" ).attr( 'id', "Case_list_name_edit" + count_of_Sliders ).append
                 ( "<B>" + kategorie_name + "</B>" )
             ).append
-            ( $( '<p>' ).attr( 'id', "slider_value_edit_" + count_of_Sliders ).attr( 'class', "Slider_Value" ).append( "Gewicht: " + Math.round( sliderValue ) + "%" ) ).append
-            ( $( '<input>' ).attr( 'type', "range" ).attr( 'min', "0" ).attr( 'max', "100" ).attr( 'value', Math.round( sliderValue ) ).attr( 'class', "slider" ).attr( 'id', "slider" + count_of_Sliders ).attr( 'step', "10" ).attr('disabled', "true")
+            ( $( '<p>' ).attr( 'id', "slider_value_edit_" + count_of_Sliders ).attr( 'class', "Slider_Value" ).append( "Gewicht: " + Math.round( sliderValue*100 ) + "%" ) ).append
+            ( $( '<input>' ).attr( 'type', "range" ).attr( 'min', "0" ).attr( 'max', "100" ).attr( 'value', Math.round( sliderValue*100 ) ).attr( 'class', "slider" ).attr( 'id', "slider" + count_of_Sliders ).attr( 'step', "10" ).attr('disabled', "true")
             )
         );
     count_of_Sliders++;

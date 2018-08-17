@@ -7,18 +7,18 @@ include_once 'conf.php';
 
 function updateCaseToDB($connection)
 {
-	if (isset($_POST['CaseID'])) 
+	if (isset($_POST['CaseID']))
 	{
-		
+
 		$caseID = filter_input(INPUT_POST, 'CaseID');
-		
+
 		$sql ="DELETE FROM Cases WHERE id =('$caseID')";
 
 		if(mysqli_query($connection, $sql))
 		{
 			echo "Case gelöscht";
 		}
-		else	
+		else
 		{
 			echo "SQL Befehl 1 fehlerhaft";
 		}
@@ -26,13 +26,14 @@ function updateCaseToDB($connection)
 
 		if(mysqli_query($connection, $sql))
 		{
+            echo "<meta http-equiv='refresh' content='0'>";
 			echo "Values gelöscht";
 		}
-		else	
+		else
 		{
 			echo "SQL Befehl 2 fehlerhaft";
 		}
-		
+
 	}
 	else
 	{
