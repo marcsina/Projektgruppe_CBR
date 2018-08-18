@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'include/conn.php';
 include_once 'include/functions_quiz.php';
 
@@ -29,7 +29,20 @@ sec_session_start();
             <!--Linke Seite -- Textuelle Darstellung-->
             <div class="col-md-6 col-sm-12">
                 <?php
-				$array = getEndData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['player']);
+
+                //If endsite is called from profile
+                if(isset($_POST['Profil_Quiz_ID'],$_POST['Profil_Quiz_Type']))
+                {
+                    $array = getEndData($mysqli, $_POST['Profil_Quiz_Type'], $_POST['Profil_Quiz_ID'], $_SESSION['user_id']);
+                    debug_to_console("Quiz vom Profil aus: ".$array['type']);
+                }
+                //if endsite is called from a ending quiz
+                else
+                {
+                    $array = getEndData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['user_id']);
+                    debug_to_console("Quiz vom Quiz aus: ".$array[0]['type']);
+                }
+
 				echo "
 				<table class='QuizEndTable'>
 					<tr>
@@ -39,7 +52,7 @@ sec_session_start();
 					</tr>
 				";
                 $count = 0;
-                debug_to_console("COUNT ARRAY".count($array));
+                //debug_to_console("COUNT ARRAY".count($array));
 				foreach($array as &$data)
 				{
                     if($data['type'] == 0)
@@ -52,7 +65,7 @@ sec_session_start();
                     }
                     $Question = "Was ist ein ".$questionString." ausgeprägtes Symptom in dem Fall ".$data['casename']."?";
 
-                    debug_to_console("GIVEN A //  ".$data['givenA']);
+                    //debug_to_console("GIVEN A //  ".$data['givenA']);
                     switch($data['givenA'])
                     {
                         case 1:

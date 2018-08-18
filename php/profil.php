@@ -1,4 +1,4 @@
-﻿  <?php
+  <?php
   include_once 'include/conn.php';
   include_once 'include/functions_login.php';
   include_once 'include/functions_profile.php';
@@ -78,6 +78,8 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../css/style2.css" rel="stylesheet">
+
+    <link href="../css/style_profil.css" rel="stylesheet">
 </head>
 	 <!-- _______________________________________NavBar_____________________________________________________-->
 
@@ -403,24 +405,30 @@
                                                                     </a>
                                                                 </li>";
                                                 break;
-                                            case "MPQuiz":
+                                            case "MP":
                                                 $echoString ="
-                                                                <li class='media'>
+                                                                <li>
                                                                         <p>
-                                                                            <strong>".$_SESSION['username']."</strong> hat ".$msg." ein Multiplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.
-                                                                            <br>
+                                                                            <form class='history_form' action='Quiz_Endseite.php' method='post'>
+												                                <input type='hidden' name='Profil_Quiz_ID' value='".$activity['fk_id']."'>
+												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>												                                												                                
+												                                <input class='history_button' type='submit' value='".$_SESSION['username']." hat ".$msg." ein Multiplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
+											                                </form>                                                                           
                                                                             
                                                                         </p>
                                                                 </li>";
                                                 break;
-                                            case "SPQuiz":
+                                            case "SP":
                                                 $echoString ="
-                                                                <li class='media'>
-                                                                        <p>
-                                                                            <strong>".$_SESSION['username']."</strong> hat ".$msg." ein Singleplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.
-                                                                            <br>
+                                                                <li>
+                                                                        
+                                                                            <form class='history_form' action='Quiz_Endseite.php' method='post'>
+												                                <input type='hidden' name='Profil_Quiz_ID' value='".$activity['fk_id']."'>
+												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>												                                												                                
+												                                <input class='history_button' type='submit' value='".$_SESSION['username']." hat ".$msg." ein Singleplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
+											                                </form>                                                                           
                                                                             
-                                                                        </p>
+                                                                        
                                                                 </li>";
                                                 break;
                                         }

@@ -193,7 +193,7 @@ function combine_Historys($checker, $article, $forum, $mpquiz, $spquiz)
     {
         foreach($mpquiz as &$item)
         {
-            array_push($result, array("time"=>$item['time'], "page" => null, "fk_id" => $item['quiz_id'], "type" => 'MPQuiz'));
+            array_push($result, array("time"=>$item['time'], "page" => null, "fk_id" => $item['quiz_id'], "type" => 'MP'));
         }
     }
 
@@ -201,7 +201,7 @@ function combine_Historys($checker, $article, $forum, $mpquiz, $spquiz)
     {
         foreach($spquiz as &$item)
         {
-            array_push($result, array("time"=>$item['time'], "page" => null, "fk_id" => $item['quiz_id'], "type" => 'SPQuiz'));
+            array_push($result, array("time"=>$item['time'], "page" => null, "fk_id" => $item['quiz_id'], "type" => 'SP'));
         }
     }
 
