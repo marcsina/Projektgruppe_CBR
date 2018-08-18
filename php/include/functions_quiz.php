@@ -944,8 +944,11 @@ function getEndData($mysqli, $type, $quizID, $User_ID)
     }
 }
 
-function get2ndPlayerData($mysqli, $type, $quizID, $playernumber)
+function get2ndPlayerData($mysqli, $quizID)
 {
+
+    $playernumber = getCurrentPlayerID($mysqli,$quizID, $_SESSION['user_id']);
+
     $data = array();
     if($playernumber == 1)
     {
@@ -987,6 +990,9 @@ function get2ndPlayerData($mysqli, $type, $quizID, $playernumber)
 
 function getCurrentPlayerID($mysqli, $quiz_id, $user_id)
 {
+    debug_to_console("getcurrentplayerid");
+    debug_to_console("quizid".$quiz_id);
+    debug_to_console("userid".$user_id);
 	if($stmt = $mysqli->prepare("SELECT IF (`User_ID_1`= ?, 1, 2) FROM MP_QUIZ WHERE ID=?;"))
     {
 		$stmt->bind_param('ii', $user_id, $quiz_id);
@@ -995,6 +1001,7 @@ function getCurrentPlayerID($mysqli, $quiz_id, $user_id)
 			$stmt->store_result();
 			$stmt->bind_result($playernumber);
 			$stmt->fetch();
+            debug_to_console($playernumber);
 
 			return $playernumber;
 		}
