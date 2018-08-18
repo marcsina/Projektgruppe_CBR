@@ -374,7 +374,7 @@
                                                 $echoString ="
                                                              <li class='media'>
                                                                 <p>
-                                                                    <strong>".$_SESSION['username']."</strong> hat ".$msg." den ".$activity['page']." genutzt
+                                                                    <strong>".$_SESSION['username']."</strong> hat ".$msg." den ".$activity['page']." genutzt, mit dem Ergebnis ".$activity['fk_id']." bei ".$activity['percentage']." %
                                                                         <br>
                                                                 </p>
                                                              </li>

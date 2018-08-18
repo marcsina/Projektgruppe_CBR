@@ -8,7 +8,7 @@ sec_session_start();
 
 if (login_check($mysqli) == true) {
     $logged = 'in';
-    insert_Activity_Checker($mysqli, $_SESSION['user_id'], "Text Checker");
+    //insert_Activity_Checker($mysqli, $_SESSION['user_id'], "Text Checker");
 } else {
     $logged = 'out';
 }
@@ -152,7 +152,10 @@ if (login_check($mysqli) == true) {
         		if(i == 0)
     			{
         			t1 = cbr.Similarities[i].name;
-    				p1 = cbr.Similarities[i].similarity;
+                    p1 = cbr.Similarities[i].similarity;
+
+                    //Insert highest similarity into historyChecker
+                    insertCheckerHistory(t1, p1);
     			}
     			if(i == 1)
     			{
@@ -235,7 +238,23 @@ if (login_check($mysqli) == true) {
         	// Berechnung und Ausgabe des Ergebnisses
         	cbr.calculateSimilarityComplex();
         	$('#div_ausgabe').html(buildOutput());
-        });
+            });
+
+
+
+
+            //Function to insert Data to the CheckerHistory-----------------------------------------
+            function insertCheckerHistory(name1, value1)
+            {
+                $.post('include/functions_history.php',
+                {
+                    name: name1,
+                    type: "Text Checker",
+                    value: value1
+                });
+            }
+            //----------------------------------------------------------------------------------------
+
         </script> 	
 		</div>
 

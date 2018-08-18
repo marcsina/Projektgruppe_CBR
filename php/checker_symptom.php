@@ -1,14 +1,14 @@
  <?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
-include     'include/functions_history.php';
+//include_once 'include/functions_history.php';
 
 
 sec_session_start();
 
 if (login_check($mysqli) == true) {
     $logged = 'in';
-    insert_Activity_Checker($mysqli, $_SESSION['user_id'], "Symptom Checker");
+    //insert_Activity_Checker($mysqli, $_SESSION['user_id'], "Symptom Checker");
 } else {
     $logged = 'out';
 }
@@ -32,7 +32,7 @@ if (login_check($mysqli) == true) {
 	<!-- _______________________________________NavBar_____________________________________________________-->
 	 <?php
         include ("include/navbar.php");
-        ?>
+     ?>
 
     <body id="home">
        
@@ -104,6 +104,7 @@ if (login_check($mysqli) == true) {
         <script src="../js/jquery-2.2.2.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
 		<script src="../js/CBR.js"></script>
+        <script src="../js/jquery-2.2.2.min.js"></script>
 		<script>
 		$(document).ready(function () {
 			cbr.loadIncomingCase("no name", "no text");
@@ -191,7 +192,10 @@ if (login_check($mysqli) == true) {
         		if(i == 0)
     			{
         			t1 = cbr.Similarities[i].name;
-    				p1 = cbr.Similarities[i].similarity;
+                    p1 = cbr.Similarities[i].similarity;
+
+                    //Insert highest similarity into historyChecker
+                    insertCheckerHistory(t1, p1);
     			}
     			if(i == 1)
     			{
@@ -301,7 +305,8 @@ if (login_check($mysqli) == true) {
 		});
 
 		// X Button Rechte Seite
-		$('body').on('click', 'button.xbutton', function () {
+            $('body').on('click', 'button.xbutton', function ()
+            {
 			var clickedBtnID = $(this).attr('id');
 			var idOhnePrefix = clickedBtnID.replace(/.*_/g, "");
 			// Symtom aus Liste entfernen
@@ -311,9 +316,25 @@ if (login_check($mysqli) == true) {
 			// Symptom Wert auf 0 setzen
 			cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0;
 
-		});
+            });
+
+
+
+
+            //Function to insert Data to the CheckerHistory-----------------------------------------
+            function insertCheckerHistory(name1, value1)
+            {
+                $.post('include/functions_history.php',
+                {
+                    name: name1,
+                    type: "Symptom Checker",
+                    value: value1
+                });
+            }
+            //----------------------------------------------------------------------------------------
         </script> 	
         <script src="../js/Checker_Checkboxes_autocomplete.js"></script>
+        
 		</div>
     </body>
 

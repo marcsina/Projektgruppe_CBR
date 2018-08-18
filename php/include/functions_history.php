@@ -2,17 +2,18 @@
 header('Content-Type: text/html; charset=utf-8');
 
 include_once 'conn.php';
+include_once 'functions_login.php';
+
+sec_session_start();
 
 //Insert Activity into the Histoy_Checker table
 //$result can link to a future result table
-function insert_Activity_Checker($mysqli, $user_ID, $Page, $result = null)
+function insert_Activity_Checker($mysqli, $user_ID, $Page, $result = null, $case_id = null)
 {
-
-    if($stmt = $mysqli->prepare("INSERT INTO History_Checker(User_ID, Ergebnis, Page, Time) VALUES (?,?,?, CURRENT_TIMESTAMP)"))
+    if($stmt = $mysqli->prepare("INSERT INTO History_Checker(User_ID, Percentage, Page, Time, Case_ID) VALUES (?,?,?, CURRENT_TIMESTAMP,?)"))
 	{
-		$stmt->bind_param('iis', $user_ID,$result, $Page);
+		$stmt->bind_param('idss', $user_ID, $result, $Page, $case_id);
 		$stmt->execute();
-		$stmt->store_result();
 	}
 	else
 	{
@@ -46,17 +47,17 @@ function insert_Activity_Article($mysqli, $user_ID, $ArticleID)
 function getHistory_Checker($mysqli, $user_ID)
 {
     $data = array();
-    if($stmt = $mysqli->prepare("SELECT Page, Time, Ergebnis FROM History_Checker WHERE User_ID = ?"))
+    if($stmt = $mysqli->prepare("SELECT Page, Time, Percentage, Case_ID FROM History_Checker WHERE User_ID = ?"))
     {
         $stmt->bind_param('i',$user_ID);
         $stmt->execute();
 
         $stmt->store_result();
 
-        $stmt->bind_result($page, $time, $result);
+        $stmt->bind_result($page, $time, $result, $case_ID);
         while($stmt->fetch())
         {
-            array_push($data,array("page"=>$page, "time"=>$time, "result"=>$result));
+            array_push($data,array("page"=>$page, "time"=>$time, "result"=>$case_ID, "percentage"=>$result));
         }
 
         return $data;
@@ -169,7 +170,7 @@ function combine_Historys($checker, $article, $forum, $mpquiz, $spquiz)
     {
         foreach($checker as &$item)
         {
-            array_push($result, array("time"=>$item['time'], "page" => $item['page'], "fk_id" => $item['result'], "type" => 'Checker'));
+            array_push($result, array("time"=>$item['time'], "page" => $item['page'], "fk_id" => $item['result'], "type" => 'Checker',"percentage" => $item['percentage'] ));
         }
     }
 
@@ -220,6 +221,17 @@ function combine_Historys($checker, $article, $forum, $mpquiz, $spquiz)
     });
 
     return $result;
+}
+
+
+
+if(isset($_POST['name'],$_POST['type'],$_POST['value']))
+{
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
+
+    insert_Activity_Checker($mysqli, $_SESSION['user_id'], $type, $_POST['value'], $name);
+
 }
 
 //Show variable in console
