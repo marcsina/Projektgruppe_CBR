@@ -1,4 +1,4 @@
-﻿ <?php
+ <?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 
@@ -118,10 +118,10 @@ if (login_check($mysqli) == true)
                     <h3>Case Editieren</h3>
                     <!--Kategorienameneingeben-->
                     <div class="col-md-6 col-sm-12">                        
-                        <form class="myForm" autocomplete="off">
+                        <form class="myForm" autocomplete="off" action="<?php echo $_SERVER['PHP_SELF'];?>">
                             <div class="form-group autocomplete">
                                 <label for="delete_Case_Name ">Name des Cases</label>
-                                <input type="text" class="form-control" id="delete_Case_Name" placeholder="Casename">
+                                <input type="text" class="form-control" id="delete_Case_Name" placeholder="Casename" />
                             </div>
                             <button class="btn btn-primary" type="reset" id="btn_load_case_in_delete">Case laden</button>
                         </form>
@@ -138,7 +138,7 @@ if (login_check($mysqli) == true)
                 </div>
                 <div class="Adding_Category col-md-12 col-sm-12">
                     <hr>
-                    <form class="myForm">
+                    <form class="myForm" action="<?php echo $_SERVER['PHP_SELF'];?>">
                         <button class="btn btn-primary" type="submit" id="btn_delet_case_from_db">Case löschen</button>
                     </form>
                 </div>

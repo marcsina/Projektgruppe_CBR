@@ -881,10 +881,6 @@ function endSPQuiz($mysqli, $userid)
 function getEndData($mysqli, $type, $quizID, $User_ID)
 {
 
-
-
-
-
     $data = array();
     if($type == "SP")
     {
@@ -900,6 +896,7 @@ function getEndData($mysqli, $type, $quizID, $User_ID)
             {
                 array_push($data,array("type"=>$type, "casename"=>$casename, "answer1"=>$answer1, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "givenA"=>$givenA));
             }
+            clearQuizSession();
             return $data;
         }
     }
@@ -964,7 +961,7 @@ function get2ndPlayerData($mysqli, $type, $quizID, $playernumber)
             {
                 array_push($data,array("type"=>$type, "casename"=>$casename, "answer1"=>$answer1, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "givenA"=>$givenA, "opponentUsername"=>$opponentUsername));
             }
-
+            clearQuizSession();
             return $data;
         }
     }
@@ -982,6 +979,7 @@ function get2ndPlayerData($mysqli, $type, $quizID, $playernumber)
             {
                 array_push($data,array("type"=>$type, "casename"=>$casename, "answer1"=>$answer1, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "givenA"=>$givenA, "opponentUsername"=>$opponentUsername));
             }
+            clearQuizSession();
             return $data;
         }
     }
