@@ -109,13 +109,28 @@ sec_session_start();
         </div>
 
 
-        <!--Player 2 -->        
-        <?php $secondPlayerArray = get2ndPlayerData($mysqli, $_SESSION['type'], $_SESSION['quiz_id'], $_SESSION['player']);
-			if (count($secondPlayerArray)>0)
-			{
-				echo"<h2>Antworten von ".$secondPlayerArray[0]['opponentUsername']."</h2>";
-			}    
-		?>      
+        <!--Player 2 -->    
+        
+        <?php
+            //If endsite is called from profile
+            if(isset($_POST['Profil_Quiz_ID'],$_POST['Profil_Quiz_Type']))
+            {
+                $secondPlayerArray = get2ndPlayerData($mysqli, $_POST['Profil_Quiz_ID']);
+                if (count($secondPlayerArray)>0)
+                {
+                    echo"<h2>Antworten von ".$secondPlayerArray[0]['opponentUsername']."</h2>";
+                }
+            }
+            else
+            {
+                $secondPlayerArray = get2ndPlayerData($mysqli, $_SESSION['quiz_id']);
+                if (count($secondPlayerArray)>0)
+                {
+                    echo"<h2>Antworten von ".$secondPlayerArray[0]['opponentUsername']."</h2>";
+                }
+            }
+
+        ?>      
         <div class="row" <?php if (count($secondPlayerArray)==0){ echo "style='display:none;'"; } ?>>
 			<div class="col-md-6 col-sm-12">
                 <?php
