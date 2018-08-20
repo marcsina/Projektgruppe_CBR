@@ -835,7 +835,20 @@ function getQuizData($mysqli, $type, $quiz_ID, $player)
 
 function endMPQuiz($mysqli, $quizid, $userid)
 {
-	if($stmt = $mysqli->prepare("UPDATE MP_QUIZ set enddatum_user_1 = case when User_ID_1 = ? then CURRENT_TIMESTAMP else enddatum_user_1 end, status_user_1 = case when User_ID_1 = ? then 1 else status_user_1 end, enddatum_user_2 = case when User_ID_2 = ? then CURRENT_TIMESTAMP else enddatum_user_2 end, status_user_2 = case when User_ID_2 = ? then 1 else status_user_2 end WHERE ID = ?"))
+    //OLD
+    //"UPDATE MP_QUIZ set enddatum_user_1 = case when User_ID_1 = ? then CURRENT_TIMESTAMP else enddatum_user_1 end,
+                                                    //status_user_1 = case when User_ID_1 = ? then 1 else status_user_1 end,
+                                                    //enddatum_user_2 = case when User_ID_2 = ? then CURRENT_TIMESTAMP else enddatum_user_2 end,
+                                                    //status_user_2 = case when User_ID_2 = ? then 1 else status_user_2 end
+                                                    //WHERE ID = ?"
+
+    //New. If eingefügt damit das enddatum nicht überschrieben wird falls man auf die endseite geht während der andere noch nicht abgeschlossen hat--------------------------------------------------------------------------------------------------------------------------------------------------
+    //Noch genauer testen
+	if($stmt = $mysqli->prepare("UPDATE MP_QUIZ set enddatum_user_1 = case when User_ID_1 = ? then IF(enddatum_user_1 is null,CURRENT_TIMESTAMP,enddatum_user_1 ) else enddatum_user_1 end,
+                                                    status_user_1 = case when User_ID_1 = ? then 1 else status_user_1 end,
+                                                    enddatum_user_2 = case when User_ID_2 = ? then IF(enddatum_user_2 is null,CURRENT_TIMESTAMP,enddatum_user_2) else enddatum_user_2 end,
+                                                    status_user_2 = case when User_ID_2 = ? then 1 else status_user_2 end
+                                                    WHERE ID = ?"))
     {
         $stmt->bind_param('iiiii', $userid, $userid, $userid, $userid, $quizid);
 	    if($stmt->execute())
@@ -865,8 +878,9 @@ function endSPQuiz($mysqli, $userid)
     }
 }
 
-function getEndData($mysqli, $type, $quizID, $playernumber)
+function getEndData($mysqli, $type, $quizID, $User_ID)
 {
+
     $data = array();
     if($type == "SP")
     {
@@ -882,11 +896,15 @@ function getEndData($mysqli, $type, $quizID, $playernumber)
             {
                 array_push($data,array("type"=>$type, "casename"=>$casename, "answer1"=>$answer1, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "givenA"=>$givenA));
             }
+            clearQuizSession();
             return $data;
         }
     }
     else
     {
+        $playernumber = getCurrentPlayerID($mysqli, $quizID, $User_ID);
+        debug_to_console("PlayerNumber: ".$playernumber);
+
         if($playernumber == 1)
         {
             if($stmt = $mysqli->prepare("SELECT Type, Casename, Correct_A1, A2, A3, A4, Given_A1 FROM `MP_FRAGE` WHERE `MP_QUIZ_ID` = ?"))
@@ -926,8 +944,55 @@ function getEndData($mysqli, $type, $quizID, $playernumber)
     }
 }
 
+function get2ndPlayerData($mysqli, $quizID)
+{
+
+    $playernumber = getCurrentPlayerID($mysqli,$quizID, $_SESSION['user_id']);
+
+    $data = array();
+    if($playernumber == 1)
+    {
+        if($stmt = $mysqli->prepare("SELECT Type, Casename, Correct_A1, A2, A3, A4, Given_A2, members.username FROM `MP_FRAGE`, MP_QUIZ, members WHERE MP_FRAGE.MP_QUIZ_ID = ? AND MP_FRAGE.MP_QUIZ_ID = MP_QUIZ.ID AND MP_QUIZ.User_ID_2 = members.id AND Given_A2 != 0 ORDER BY MP_FRAGE.ID ASC"))
+        {
+            $stmt->bind_param('i',$quizID);
+	        $stmt->execute();
+
+			$stmt->store_result();
+
+            $stmt->bind_result($type, $casename, $answer1, $answer2, $answer3, $answer4, $givenA, $opponentUsername);
+            while($stmt->fetch())
+            {
+                array_push($data,array("type"=>$type, "casename"=>$casename, "answer1"=>$answer1, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "givenA"=>$givenA, "opponentUsername"=>$opponentUsername));
+            }
+            clearQuizSession();
+            return $data;
+        }
+    }
+    else
+    {
+        if($stmt = $mysqli->prepare("SELECT Type, Casename, Correct_A1, A2, A3, A4, Given_A1, members.username FROM `MP_FRAGE`, MP_QUIZ, members WHERE MP_FRAGE.MP_QUIZ_ID = ? AND MP_FRAGE.MP_QUIZ_ID = MP_QUIZ.ID AND MP_QUIZ.User_ID_1 = members.id  AND Given_A1 != 0 ORDER BY MP_FRAGE.ID ASC"))
+        {
+            $stmt->bind_param('i',$quizID);
+	        $stmt->execute();
+
+			$stmt->store_result();
+
+            $stmt->bind_result($type, $casename, $answer1, $answer2, $answer3, $answer4, $givenA, $opponentUsername);
+            while($stmt->fetch())
+            {
+                array_push($data,array("type"=>$type, "casename"=>$casename, "answer1"=>$answer1, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "givenA"=>$givenA, "opponentUsername"=>$opponentUsername));
+            }
+            clearQuizSession();
+            return $data;
+        }
+    }
+}
+
 function getCurrentPlayerID($mysqli, $quiz_id, $user_id)
 {
+    debug_to_console("getcurrentplayerid");
+    debug_to_console("quizid".$quiz_id);
+    debug_to_console("userid".$user_id);
 	if($stmt = $mysqli->prepare("SELECT IF (`User_ID_1`= ?, 1, 2) FROM MP_QUIZ WHERE ID=?;"))
     {
 		$stmt->bind_param('ii', $user_id, $quiz_id);
@@ -936,6 +1001,7 @@ function getCurrentPlayerID($mysqli, $quiz_id, $user_id)
 			$stmt->store_result();
 			$stmt->bind_result($playernumber);
 			$stmt->fetch();
+            debug_to_console($playernumber);
 
 			return $playernumber;
 		}
@@ -956,7 +1022,6 @@ function setQuizSession($player, $quiz_id, $type)
     $_SESSION["type"] = $type;
 
 }
-
 //clear the session
 function clearQuizSession()
 {
@@ -1029,7 +1094,7 @@ if(isset($_POST['newQuiz'],$_POST['challengedUserID'],$_POST['challengerUserID']
 
 	if ($_POST['action'] == 'annehmen')
 	{
-		// Anfrage angenommen	
+		// Anfrage angenommen
 		$quiz_ID = generateMP_Quiz($mysqli, $p1, $p2);
 		genereateFourQuestionsMultiplayer($mysqli, $quiz_ID);
 		setQuizSession(2, $quiz_ID, "MP");
@@ -1041,9 +1106,9 @@ if(isset($_POST['newQuiz'],$_POST['challengedUserID'],$_POST['challengerUserID']
 	{
 		// Anfrage abgelehnt
 		declineChallenge($mysqli, $p1, $p2);
-		header('Location: Quiz.uebersicht.php');
+		header('Location: ../Quiz_uebersicht.php');
 	}
-	
+
 }
 
 

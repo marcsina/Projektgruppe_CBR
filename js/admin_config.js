@@ -1,4 +1,4 @@
-var count_of_Sliders = 0;
+﻿var count_of_Sliders = 0;
 var i = 0;
 var Categories_From_DB = new Array();
 var Keywords_From_DB = new Array();
@@ -62,7 +62,8 @@ $( document ).ready( function ()
 autocomplete( document.getElementById( "add_new_Category" ), Categories_Name_Array );
 autocomplete( document.getElementById( "add_new_Category_Category_Name" ), Categories_Name_Array );
 autocomplete( document.getElementById( "edit_Category_Name" ), Categories_Name_Array );
-autocomplete( document.getElementById( "delete_Case_Name" ), Cases_Name_Array );
+autocomplete(document.getElementById("delete_Case_Name"), Cases_Name_Array);
+autocomplete(document.getElementById("edit_Case_Name"), Cases_Name_Array);
 
 //Update slider when page is loaded, due to the circumstance that forms, are not reseting
 updateSlider( $( "#add_new_Category_Slider" ).val(), "add_new_Category_Slider_Value" );
@@ -201,7 +202,8 @@ function getCasesFromDatabase( database, givenArray, givenArray2 )
                     Cases_Name_Array.push( array_zweite_Stufe[i][1] );
                 }
 
-                autocomplete( document.getElementById( "delete_Case_Name" ), Cases_Name_Array );
+                autocomplete(document.getElementById("delete_Case_Name"), Cases_Name_Array);
+                autocomplete(document.getElementById("edit_Case_Name"), Cases_Name_Array);
             }
         };
         xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getCases.php", false );
@@ -353,11 +355,20 @@ $( "#btn_search_Text" ).click( function ( event )
         }
     }
 
+    //Color all keywords 
+    showWordsinHTML();
 
 
+});
+
+function showWordsinHTML() {
     //-------------------------Show detected Words in HTML------------------------------------------
     //split the Text
-    var everyWordArray = $( "#text_admin" ).text().split( /\s/ );
+    var everyWordArray = $("#text_admin").text().replace(/[\s][a-zA-Z]{0,1}[.]/gm, "").replace(/[\s]{2,}/gmi, "\s").replace(/\n /gmi, "\n").replace(/[0-9]/, "\s").replace(/[.!?;:,+0-9\-]/gm, "").replace(/\-/gm, " ").split( /\s/ );
+
+    //negate and reinforced words
+    var negateWords = new Array("nicht", "kein", "keine", "keinem", "keinen", "keiner", "keines", "nichts", "nie");
+    var reinforing_words = new Array("absolut", "äußerst", "ausgesprochen", "besonders", "extrem", "heftig", "höchst", "sehr", "total", "überaus", "ungemein", "ungewöhnlich", "ohne probleme");
 
     var showEveryWord = "";
     var checked = 0;
@@ -365,41 +376,76 @@ $( "#btn_search_Text" ).click( function ( event )
     var keyWords = createKeywords();
 
     //Check every Word in the Text
-    for ( i = 0; i < everyWordArray.length; i++ )
+    for (i = 0; i < everyWordArray.length; i++)
     {
-        everyWordArray[i] = everyWordArray[i].replace( /[.!?;:,+0-9]/gm, "" ).replace( /\-/gm, " " );
+        //everyWordArray[i] = everyWordArray[i].replace(/[\s][a-zA-Z]{0,1}[.]/gm, "").replace(/[\s]{2,}/gmi, "\s").replace(/\n /gmi, "\n").replace(/[0-9]/, "\s").replace(/(?:\r\n|\r|\n)/g, " ");
 
         //Stemm the word 
         //variable so that it wont check twice and wont save the word twice
         checked = 0;
 
         //check every KeyWord
-        for ( j = 0; j < keyWords.length; j++ )
+        for (j = 0; j < keyWords.length; j++)
         {
             //if word = keyword highlight it
-            if ( stemm2( everyWordArray[i].toLowerCase() ) === keyWords[j].word && checked === 0 )
+
+
+            if (stemm2(everyWordArray[i].toLowerCase()) === keyWords[j].word && checked === 0)
             {
                 //make it bold and blue
                 showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
-
                 checked = 1;
+                break;
+
             }
+           
+            
 
         }
+        //Check every Negate word
+        if (checked === 0)
+        {
+            for (z = 0; z < reinforing_words.length; z++)
+            {
+                if (everyWordArray[i].toLowerCase() === negateWords[z])
+                {
+
+                    //make it bold and red
+                    showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
+                    checked = 1;
+                    break;
+
+
+                }
+            }
+        }
+        //Check reinforced word
+        if (checked === 0)
+        {
+            for (z = 0; z < reinforing_words.length; z++)
+            {
+                if (everyWordArray[i].toLowerCase() === reinforing_words[z]) {
+                    //make it bold and green
+                    showEveryWord = showEveryWord + " " + "<b><font color='green'>" + everyWordArray[i] + "</font></b>";
+                    checked = 1;
+                    break;
+                }
+            }
+        }
+        
 
         //if the word was not found in the array make it normal
-        if ( checked === 0 )
-        {
+        if (checked === 0) {
             //make it normal
             showEveryWord = showEveryWord + " " + everyWordArray[i];
         }
 
     }
 
-    $( "#text_admin" ).html( showEveryWord );
+    $("#text_admin").html(showEveryWord);
     //----------------------------------------------------------------------------------
+}
 
-} );
 //Btn to add Case to DB
 $( "#btn_add_Case_to_DataBase" ).click( function ( event )
 {
@@ -423,16 +469,21 @@ $( "#btn_add_Case_to_DataBase" ).click( function ( event )
                 var sliderValue = $( "#list_of_Category_admin>li>input.slider" ).get( i ).value;
                 array_of_categories.push( new Category_Word_ID( searchForIDOfCategory( string, Categories_From_DB ), string, sliderValue ) );
 
-                array_CategoryName.push( string );
-                array_CategroyID.push( searchForIDOfCategory( string, Categories_From_DB ) );
-                array_CategoryValue.push( sliderValue );
+                //Dont push if the value is 0
+                if (sliderValue > 0)
+                {
+                    array_CategoryName.push(string);
+                    array_CategroyID.push(searchForIDOfCategory(string, Categories_From_DB));
+                    array_CategoryValue.push(sliderValue);
+                }
+                
                 i = c;
             }
             for ( i = 0; i < array_CategoryName.length; i++ )
             {
                 console.log( "Name: " + array_CategoryName[i] + " ID: " + array_CategroyID[i] + " Wert: " + array_CategoryValue[i] + "\n" );
             }
-            $.post( 'php/include/AddCaseAdmin.php', {
+            $.post( 'include/AddCaseAdmin.php', {
                 caseName: $( "#add_New_Case_Name" ).val(),
                 name: JSON.stringify( array_CategoryName ),
                 id: JSON.stringify( array_CategroyID ),
@@ -535,7 +586,7 @@ $( "#btn_add_Category_to_DataBase" ).click( function ( event )
             {
                 array_of_keywords.push( stemm2( $( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText ) );
             }
-            $.post( 'php/include/AddNewKategorie.php', {
+            $.post( 'include/AddNewKategorie.php', {
                 katName: $( "#add_new_Category_Category_Name" ).val(),
                 keywords: JSON.stringify( array_of_keywords )
             } );
@@ -624,7 +675,7 @@ $( "#btn_edit_case_save_to_db" ).click( function ( event )
         i = c;
     }
 
-    var result = $.post( 'php/include/EditCaseAdmin.php', {
+    var result = $.post( 'include/EditCaseAdmin.php', {
         caseID: Edit_Case_Array[0].caseId,
         id: JSON.stringify( array_CategroyID ),
         value: JSON.stringify( array_CategoryValue )
@@ -635,11 +686,12 @@ $( "#btn_edit_case_save_to_db" ).click( function ( event )
 //----------------------Edit Category--------------------------------
 $( "#btn_load_Category" ).click( function ( event )
 {
+    var category_name = document.getElementById("edit_Category_Name").value;
     //reset
     Edit_Category_Array = [];
     $( "#list_of_symptoms_category_edit" ).empty();
 
-    $.post( 'php/include/getCategoryAdmin.php', {
+    $.post( 'include/getCategoryAdmin.php', {
         categoryName: $( "#edit_Category_Name" ).val()
     } ).done( function ( data )
     {
@@ -657,6 +709,11 @@ $( "#btn_load_Category" ).click( function ( event )
         //make the div visible
         document.getElementById( "div_edit_category" ).style.visibility = "visible";
 
+        document.getElementById("Category_H4").innerHTML = "Symptom hinzufügen zu "  + category_name;
+
+        //document.getElementById( "edit_Category_Name" ).readOnly = true;
+        //document.getElementById( "edit_Category_Name" ).value = document.getElementById( "edit_Category_Name" ).value;
+
     } );
 
 
@@ -672,13 +729,15 @@ $( "#btn_edit_category_save_to_db" ).click( function ( event )
         {
             symptom_array.push( stemm2( $( "#list_of_symptoms_category_edit>li>p.Category_Name_Edit" ).get( i ).innerText ) );
         }
-        $.post( 'php/include/EditCategoryAdmin.php', {
+        $.post( 'include/EditCategoryAdmin.php', {
             symptomname: JSON.stringify( symptom_array ),
             ICFid: Edit_Category_Array[0].ICFid
         } );
 
         //TODO ADD Category TO DB WITH KAt ID AND EVERYTHING ELSE
         alert( "YAY\n" + array_of_keywords );
+
+        //document.getElementById( "edit_Category_Name" ).readOnly = false;
     }
 
 } );
@@ -701,8 +760,13 @@ $( "#btn_add_new_symptom" ).click( function ( event )
     }
     if ( $( "#add_new_symptom" ).val() !== "" )
     {
-        if ( isAlreadyOnList === false )
-            add_Item_to_Category_list_category_edit( $( "#add_new_symptom" ).val() );
+        if (isAlreadyOnList === false)
+        {
+            add_Item_to_Category_list_category_edit($("#add_new_symptom").val());
+
+            //clear textbox
+            document.getElementById("add_new_symptom").value = "";
+        }            
         else
             alert( "Keyword schon auf der Liste" );
     } else
@@ -737,7 +801,7 @@ function add_Item_to_Category_list_category_edit( kategorie_name )
 $( "#btn_load_case_in_delete" ).click( function ( event ) 
 {
     Case_To_Delete_Array = [];
-    $.post( 'php/include/getCaseAdmin.php', {
+    $.post( 'include/getCaseAdmin.php', {
         caseName: $( "#delete_Case_Name" ).val()
     } ).done( function ( data )
     {
@@ -773,8 +837,8 @@ function add_Item_to_Category_list_case_delete( kategorie_name, sliderValue )
             ( $( '<p>' ).attr( 'class', "Category_Name" ).attr( 'id', "Case_list_name_edit" + count_of_Sliders ).append
                 ( "<B>" + kategorie_name + "</B>" )
             ).append
-            ( $( '<p>' ).attr( 'id', "slider_value_edit_" + count_of_Sliders ).attr( 'class', "Slider_Value" ).append( "Gewicht: " + Math.round( sliderValue ) + "%" ) ).append
-            ( $( '<input>' ).attr( 'type', "range" ).attr( 'min', "0" ).attr( 'max', "100" ).attr( 'value', Math.round( sliderValue ) ).attr( 'class', "slider" ).attr( 'id', "slider" + count_of_Sliders ).attr( 'step', "10" ).attr('disabled', "true")
+            ( $( '<p>' ).attr( 'id', "slider_value_edit_" + count_of_Sliders ).attr( 'class', "Slider_Value" ).append( "Gewicht: " + Math.round( sliderValue*100 ) + "%" ) ).append
+            ( $( '<input>' ).attr( 'type', "range" ).attr( 'min', "0" ).attr( 'max', "100" ).attr( 'value', Math.round( sliderValue*100 ) ).attr( 'class', "slider" ).attr( 'id', "slider" + count_of_Sliders ).attr( 'step', "10" ).attr('disabled', "true")
             )
         );
     count_of_Sliders++;
@@ -782,7 +846,7 @@ function add_Item_to_Category_list_case_delete( kategorie_name, sliderValue )
 
 $( "#btn_delet_case_from_db" ).click( function ( event )
 {
-    $.post( 'php/include/DeleteCaseAdmin.php', {
+    $.post( 'include/DeleteCaseAdmin.php', {
         CaseID: Case_To_Delete_Array[0].caseId
     } );
 } );

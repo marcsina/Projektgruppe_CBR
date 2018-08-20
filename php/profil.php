@@ -1,72 +1,71 @@
-﻿  <?php
-include_once 'include/conn.php';
-include_once 'include/functions_login.php';
-include_once 'include/functions_profile.php';
+  <?php
+  include_once 'include/conn.php';
+  include_once 'include/functions_login.php';
+  include_once 'include/functions_profile.php';
+  include_once 'include/functions_history.php';
 
+  $ownProfile = false;
 
-$ownProfile = false;
+  sec_session_start();
 
-sec_session_start();
+  if (login_check($mysqli) == true)
+  {
+      $logged = 'in';
+      //GET id, username, vorname, nachname, email, beschreibung, profilbild from DB
+      $userDataArray = getUserDataByUsername($_SESSION['username'], $mysqli);
+      //falls die ProfilSeite die eigene ist, setze Wert auf true
+      if($_SESSION['user_id'] == $userDataArray['id'])
+      {
+          $ownProfile = true;
+      }
+      //�berpr�fen ob URL auf Profil verweist
+      if(!empty($_GET["username"]))
+      {
+          //do something when url is pointing to specific profile
+          //GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
+          $userDataArray = getUserDataByUsernameGET($mysqli);
 
-
-if (login_check($mysqli) == true) 
-{
-    $logged = 'in';
-	//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB
-	$userDataArray = getUserDataByUsername($_SESSION['username'], $mysqli);
-	//falls die ProfilSeite die eigene ist, setze Wert auf true
-	if($_SESSION['user_id'] == $userDataArray['id'])
-	{
-		$ownProfile = true;
-	}
-	//�berpr�fen ob URL auf Profil verweist
-	if(!empty($_GET["username"]))
-	{
-		//do something when url is pointing to specific profile
-		//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
-		$userDataArray = getUserDataByUsernameGET($mysqli);
-
-		//�berpr�fen ob Nutzer exisitert, wenn nicht dann...
-		if($userDataArray == false)
-		{
-			//Weitergeleitet auf eigenes Profil, wenn gew�nschter Nutzer nicht vorhanden
-			header('Location: http://141.99.248.92/Projektgruppe/profil.php');	
-			exit;
-		}
-		// wenn er existiert
-		else
-		{
-			//TODO DO YOUR THING
-		}
-	}
-} else 
-{
-    $logged = 'out';
-	//�berpr�fen ob URL auf Profil verweist
-	if(!empty($_GET["username"]))
-	{
-		//GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
-		$userDataArray = getUserDataByUsernameGET($mysqli);
-		//�berpr�fen ob Nutzer exisitert, wenn nicht dann...
-		if($userDataArray == false)
-		{
-			//Weitergeleitet auf Startseite wenn Nutzer nicht vorhanden
-			header('Location: http://141.99.248.92/Projektgruppe');	
-			exit;
-		}
-		// wenn er existiert
-		else
-		{
-			//TODO DO YOUR THING
-		}
-	}
-	else
-	{
-		header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');	
-		exit;
-	}
-}
-?>
+          //�berpr�fen ob Nutzer exisitert, wenn nicht dann...
+          if($userDataArray == false)
+          {
+              //Weitergeleitet auf eigenes Profil, wenn gew�nschter Nutzer nicht vorhanden
+              header('Location: http://141.99.248.92/Projektgruppe/profil.php');
+              exit;
+          }
+          // wenn er existiert
+          else
+          {
+              //TODO DO YOUR THING
+          }
+      }
+  } else
+  {
+      $logged = 'out';
+      //�berpr�fen ob URL auf Profil verweist
+      if(!empty($_GET["username"]))
+      {
+          //GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
+          $userDataArray = getUserDataByUsernameGET($mysqli);
+          //�berpr�fen ob Nutzer exisitert, wenn nicht dann...
+          if($userDataArray == false)
+          {
+              //Weitergeleitet auf Startseite wenn Nutzer nicht vorhanden
+              header('Location: http://141.99.248.92/Projektgruppe');
+              exit;
+          }
+          // wenn er existiert
+          else
+          {
+              //TODO DO YOUR THING
+          }
+      }
+      else
+      {
+          header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');
+          exit;
+      }
+  }
+  ?>
 <html lang="en">
 
 <head>
@@ -78,9 +77,9 @@ if (login_check($mysqli) == true)
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
-
     <link href="../css/style2.css" rel="stylesheet">
 
+    <link href="../css/style_profil.css" rel="stylesheet">
 </head>
 	 <!-- _______________________________________NavBar_____________________________________________________-->
 
@@ -88,14 +87,11 @@ if (login_check($mysqli) == true)
         include ("include/navbar.php");
         ?>
     <body id="home" style="background-color:#e9ebee";>
-       
-
 
  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
 <div class="content-page">
     <div class="profile-banner" style="background-image: url(https://toulouseosteopathe.com/wp-content/uploads/2016/01/mon-osteo-medecine-etude.jpg);">
-
 
         <!-- style="background-image: url(http://hubancreative.com/projects/templates/coco/corporate/images/stock/1epgUO0.jpg);"-->
         <div class="col-sm-3 avatar-container">
@@ -129,9 +125,9 @@ if (login_check($mysqli) == true)
                       </li>
                       <li class="list-group-item">
                         <span class="badge">
-							<?php 
+							<?php
 							echo getCountOfForumPostByUserID($userDataArray['id'], $mysqli);
-							?>
+                            ?>
 						</span>
                         posts
                       </li>
@@ -148,19 +144,17 @@ if (login_check($mysqli) == true)
                         <span class="badge">78952</span>
                         Likes
                       </li>
-
-
                     </ul>
-                        
+
                         <!-- User button -->
                     <div class="user-button">
                         <div class="row">
                             <div class="col-lg-6">
 								<form action="" method="post">
-									<input type="submit" class="btn btn-primary btn-sm btn-block" value="Nachricht abschicken"/>
+									<input type="submit" class="btn btn-primary btn-sm btn-block" value="Nachricht abschicken" />
 								</form>
                             </div>
-							<?php 
+							<?php
 							if(checkIfFriendsOrOwnProfile($_SESSION['user_id'], $userDataArray['id'], $mysqli))
 							{
 								$s1 = $_SESSION['user_id'];
@@ -169,9 +163,9 @@ if (login_check($mysqli) == true)
 								//echo "<div class='col-lg-6'>Bereits befreundet</div>";
 							}?>
                             <div class="col-lg-6"<?php if(checkIfFriendsOrOwnProfile($_SESSION['user_id'], $userDataArray['id'], $mysqli))
-							{
-							echo "style='visibility: hidden'";
-							}?>>
+                                                       {
+                                                           echo "style='visibility: hidden'";
+                                                       }?>>
 								<form action="" method="post">
 									<input type="hidden" name='id1' value='<?php echo $_SESSION['user_id']; ?>'></input>
 									<input type="hidden" name='id2' value='<?php echo $userDataArray['id']; ?>'></input>
@@ -183,7 +177,7 @@ if (login_check($mysqli) == true)
                 </div><!-- End div .box-info -->
                 <!-- Begin user profile -->
             </div><!-- End div .col-sm-4 -->
-            
+
             <div class="col-sm-9">
                 <div class="widget widget-tabbed">
                     <!-- Nav tab -->
@@ -191,23 +185,22 @@ if (login_check($mysqli) == true)
                       <li class="active"><a href="#my-timeline" data-toggle="tab"><i class="fa fa-pencil"></i> Timeline</a></li>
                       <li><a href="#about" data-toggle="tab"><i class="fa fa-user"></i> About</a></li>
                       <li><a href="#user-activities" data-toggle="tab"><i class="fa fa-laptop"></i> Activities</a></li>
-                      <li><a href="#mymessage" data-toggle="tab"><i class="fa fa-envelope"></i> Message</a></li>	
+                      <li><a href="#mymessage" data-toggle="tab"><i class="fa fa-envelope"></i> Message</a></li>
 					  <?php
-						if($ownProfile)
-						{
-						echo "<li><a href='#edit_profil' data-toggle='tab'><i class='fa fa-edit'></i> edit profil</a></li>";
+                      if($ownProfile)
+                      {
+                          echo "<li><a href='#edit_profil' data-toggle='tab'><i class='fa fa-edit'></i> edit profil</a></li>";
 					  }?>
                     </ul>
                     <!-- End nav tab -->
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        
-                        
+
                         <!-- Tab timeline -->
                         <div class="tab-pane animated active fadeInRight" id="my-timeline">
                             <div class="user-profile-content">
-                                
+
                                 <!-- Begin timeline -->
                                 <div class="the-timeline">
                                     <form role="form" class="post-to-timeline">
@@ -231,7 +224,7 @@ if (login_check($mysqli) == true)
                                             </div>
                                             <h4>what is alzheimer test</h4>
                                             <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                                             </p>
                                         </li>
                                         <li>
@@ -244,7 +237,7 @@ if (login_check($mysqli) == true)
                                             <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
                                             </div>
                                             <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                                             </p>
                                         </li>
                                         <li>
@@ -258,12 +251,12 @@ if (login_check($mysqli) == true)
                                             -->
                                             <audio controls>
                                                     <source src="audio/abba.mp3" type="audio/ogg">
-  
+
                                                             Your browser does not support the audio element.
                                                             </audio>
 
                                             <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                                             </p>
                                         </li>
                                         <li class="the-year"><p>2013</p></li>
@@ -273,7 +266,7 @@ if (login_check($mysqli) == true)
                                                 <small>Dec</small>
                                             </div>
                                             <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                                             </p>
                                         </li>
                                         <li>
@@ -282,7 +275,7 @@ if (login_check($mysqli) == true)
                                                 <small>Nov</small>
                                             </div>
                                             <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                                             </p>
                                         </li>
                                     </ul>
@@ -291,7 +284,7 @@ if (login_check($mysqli) == true)
                             </div><!-- End div .user-profile-content -->
                         </div><!-- End div .tab-pane -->
                         <!-- End Tab timeline -->
-                        
+
                         <!-- Tab about -->
                         <div class="tab-pane animated fadeInRight" id="about">
                             <div class="user-profile-content">
@@ -327,12 +320,124 @@ if (login_check($mysqli) == true)
                             </div><!-- End div .user-profile-content -->
                         </div><!-- End div .tab-pane -->
                         <!-- End Tab about -->
-                        
-                        
+
                         <!-- Tab user activities -->
                         <div class="tab-pane animated fadeInRight" id="user-activities">
                             <div class="scroll-user-widget">
                                 <ul class="media-list">
+                                    <?php
+
+                                    $activitiesChecker = getHistory_Checker($mysqli, $_SESSION['user_id']);
+                                    $activitiesArticle = getHistory_Article($mysqli, $_SESSION['user_id']);
+                                    $activitiesForum = getHistory_Forum($mysqli, $_SESSION['user_id']);
+                                    $activitiesSPQuiz = getHistory_SP_Quiz($mysqli, $_SESSION['user_id']);
+                                    $activitiesMPQuiz = getHistory_MP_Quiz($mysqli, $_SESSION['user_id']);
+
+                                    $sortedHistoryArray = combine_Historys($activitiesChecker, $activitiesArticle, $activitiesForum, $activitiesMPQuiz, $activitiesSPQuiz);
+
+                                    debug_to_console("Article: ".$activitiesArticle[0]['time']."/// Forum: ".$activitiesForum[0]['time']."//SPQUIZ: ".$activitiesSPQuiz[0]['time']."///MPQUIZ: ".$activitiesMPQuiz[0]['time']);
+
+                                    foreach($sortedHistoryArray as &$activity)
+                                    {
+                                        //date_default_timezone_set('MESZ');
+                                        $t1 = strtotime("now");
+                                        $t2 = strtotime($activity['time']);
+
+                                        //Sommerzeit oder iwas anderes was die Zeit um 1 Stunde verschiebt
+                                        if(date('I') == 1)
+                                        {
+                                            $t1 = $t1 - 3600;
+                                        }
+                                        $diff = $t1-$t2;
+                                        //Tage
+                                        if($diff > 86400)
+                                        {
+                                            if($diff < 86400*1.5)
+                                            {
+                                                $msg = " vor einem Tag";
+                                            }
+                                            else
+                                            {
+                                                $msg = " vor ".round($diff / 86400)." Tagen";
+                                            }
+                                        }
+                                        //Stunde/Minuten/Sekunden
+                                        else
+                                        {
+                                            $msg = " vor ".date("H \h i \m s \s",$t1-$t2);
+                                        }
+
+                                        $echoString = "";
+                                        switch($activity['type'])
+                                        {
+                                            case "Checker":
+                                                $echoString ="
+                                                             <li class='media'>
+                                                                <p>
+                                                                    <strong>".$_SESSION['username']."</strong> hat ".$msg." den ".$activity['page']." genutzt, mit dem Ergebnis ".$activity['fk_id']." bei ".$activity['percentage']." %
+                                                                        <br>
+                                                                </p>
+                                                             </li>
+                                                              ";
+
+                                                break;
+                                            case "Article":
+                                                $echoString ="
+                                                                <li class='media'>
+                                                                    <a href='".$activity['fk_id']."'>
+                                                                        <p>
+                                                                            <strong>".$_SESSION['username']."</strong> hat sich einen ".$activity['type']." angesehen
+                                                                            <br>
+                                                                            ".$msg."
+                                                                        </p>
+                                                                    </a>
+                                                                </li>";
+                                                break;
+                                            case "Forum":
+                                                $echoString ="
+                                                                <li class='media'>
+                                                                    <a href='forum_demenz.php?topic=".$activity['fk_id']."'>
+                                                                        <p>
+                                                                            <strong>".$_SESSION['username']."</strong> hat ".$msg." im Forum den Topic ".$activity['fk_id']." kommentiert.
+                                                                            <br>
+                                                                            
+                                                                        </p>
+                                                                    </a>
+                                                                </li>";
+                                                break;
+                                            case "MP":
+                                                $echoString ="
+                                                                <li>
+                                                                        <p>
+                                                                            <form class='history_form' action='Quiz_Endseite.php' method='post'>
+												                                <input type='hidden' name='Profil_Quiz_ID' value='".$activity['fk_id']."'>
+												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>												                                												                                
+												                                <input class='history_button' type='submit' value='".$_SESSION['username']." hat ".$msg." ein Multiplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
+											                                </form>                                                                           
+                                                                            
+                                                                        </p>
+                                                                </li>";
+                                                break;
+                                            case "SP":
+                                                $echoString ="
+                                                                <li>
+                                                                        
+                                                                            <form class='history_form' action='Quiz_Endseite.php' method='post'>
+												                                <input type='hidden' name='Profil_Quiz_ID' value='".$activity['fk_id']."'>
+												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>												                                												                                
+												                                <input class='history_button' type='submit' value='".$_SESSION['username']." hat ".$msg." ein Singleplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
+											                                </form>                                                                           
+                                                                            
+                                                                        
+                                                                </li>";
+                                                break;
+                                        }
+
+                                        echo $echoString;
+                                    }
+
+                                    ?>
+                                    <!--
                                     <li class="media">
                                         <a href="#fakelink">
                                         <p><strong>Ben Balaye </strong> Uploaded a photo <strong>"DSC000254.jpg"</strong>
@@ -404,17 +509,18 @@ if (login_check($mysqli) == true)
                                         <p><strong>terance</strong> Updated his avatar
                                         <br><i>Yesterday</i></p>
                                         </a>
-                                    </li>
+                                    </li>-->
                                 </ul>
                             </div><!-- End div .scroll-user-widget -->
                         </div><!-- End div .tab-pane -->
                         <!-- End Tab user activities -->
-                        
+
                         <!-- Tab user messages -->
                         <div class="tab-pane animated fadeInRight" id="mymessage">
                             <div class="scroll-user-widget">
                                 <ul class="media-list">
-                                  <li class="media">
+                                 <!--
+                                    <li class="media">
                                     <a class="pull-left" href="#fakelink">
                                       <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar">
                                     </a>
@@ -503,7 +609,7 @@ if (login_check($mysqli) == true)
                                       <h4 class="media-heading"><a href="#fakelink">Dr Maria</a> <small>January 17, 2014 05:35 PM</small></h4>
                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                                     </div>
-                                  </li>
+                                  </li>-->
                                 </ul>
                             </div><!-- End div .scroll-user-widget -->
                         </div><!-- End div .tab-pane -->
@@ -512,8 +618,8 @@ if (login_check($mysqli) == true)
 						<?php
 						if($ownProfile)
 						{
-						 echo "<div class='tab-pane animated fadeInRight' id='edit_profil'>
-							
+                            echo "<div class='tab-pane animated fadeInRight' id='edit_profil'>
+
 							<form class='form' action='##' method='post' id='registrationForm'>
 
 								<div class='form-group'>
@@ -567,8 +673,6 @@ if (login_check($mysqli) == true)
 							</form>
 						</div>";
 						}?>
-						
-
                     </div><!-- End div .tab-content -->
                 </div><!-- End div .box-info -->
             </div>
@@ -576,22 +680,16 @@ if (login_check($mysqli) == true)
 
         <!--____________________________________________________________________________________________________-->
 
-
         <!-- Scripts -->
-        <script src="../js/german-porter-stemmer.js"></script>
-        <script src="../js/stopWords.js"></script>
         <script src="../js/jquery-2.2.2.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/script.js"></script>
-        <script src="../js/code.js"></script>
 
-    </body>
+            <script type="text/javascript">
 
-    <script type="text/javascript">
-        
-        $(function(){
-    $("[data-toggle='tooltip']").tooltip();
-}) 
+                $(function ()
+                {
+                    $("[data-toggle='tooltip']").tooltip();
+                })
     </script>
-
+    </body>
 </html>

@@ -25,6 +25,7 @@
 
             .nav-tabs > li:nth-child(even) > a {
                 color: white;
+                outline-color: white;
             }
             .nav-tabs > li:nth-child(uneven) > a {
                 color: black;
@@ -55,7 +56,7 @@
     overflow: auto;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
-    word-break: break-all;
+    word-break: normal;
     word-wrap: break-word;
 }
 

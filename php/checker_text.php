@@ -1,12 +1,14 @@
-﻿ <?php
+ <?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
+include     'include/functions_history.php';
 
- 
+
 sec_session_start();
- 
+
 if (login_check($mysqli) == true) {
     $logged = 'in';
+    //insert_Activity_Checker($mysqli, $_SESSION['user_id'], "Text Checker");
 } else {
     $logged = 'out';
 }
@@ -91,7 +93,7 @@ if (login_check($mysqli) == true) {
         <script src="../js/stopWords.js"></script>
         <script src="../js/jquery-2.2.2.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/script.js"></script>
+        <script src="../js/text_analyse.js"></script>
 		<script src="../js/CBR.js"></script>
 		<script src="../js/snowball-german.js"></script>
         <script>
@@ -150,7 +152,10 @@ if (login_check($mysqli) == true) {
         		if(i == 0)
     			{
         			t1 = cbr.Similarities[i].name;
-    				p1 = cbr.Similarities[i].similarity;
+                    p1 = cbr.Similarities[i].similarity;
+
+                    //Insert highest similarity into historyChecker
+                    insertCheckerHistory(t1, p1);
     			}
     			if(i == 1)
     			{
@@ -220,7 +225,12 @@ if (login_check($mysqli) == true) {
         			// mach nix
         		}
         		else {
-        			cbr.incomingCase.Symptoms[i].wert = kategorieAusTextArray[i].weight;
+        			
+					
+
+					let obj = cbr.incomingCase.Symptoms.find(o => o.id === kategorieAusTextArray[i].katID);
+					obj.wert = kategorieAusTextArray[i].weight;
+
         		}
         	}
 
@@ -234,6 +244,22 @@ if (login_check($mysqli) == true) {
         	cbr.calculateSimilarityComplex();
         	$('#div_ausgabe').html(buildOutput());
         });
+
+			
+
+
+        //Function to insert Data to the CheckerHistory-----------------------------------------
+        function insertCheckerHistory(name1, value1)
+        {
+            $.post('include/functions_history.php',
+            {
+                name: name1,
+                type: "Text Checker",
+                value: value1
+            });
+        }
+        //----------------------------------------------------------------------------------------
+
         </script> 	
 		</div>
 
