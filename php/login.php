@@ -48,7 +48,7 @@ if (login_check($mysqli) == true) {
 
 </head>
 
-<body class="login-img3-body">
+<body class="">
 
 
     <!-- include Navbar -->
@@ -63,7 +63,7 @@ if (login_check($mysqli) == true) {
         }
         ?>
 
-        <form action="include/login_process.php" method="post" name="login_form">
+        <form class="login-form"  action="include/login_process.php" method="post" name="login_form">
             <div class="login-wrap">
                 <p class="login-img"><i class="icon_lock_alt"></i></p>
                 <div class="input-group">
@@ -79,10 +79,10 @@ if (login_check($mysqli) == true) {
                     <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
                 </label>
                 <input class="btn btn-primary btn-lg btn-block" type="button" value="Login" onclick="formhash(this.form, this.form.password);"/>
-               
+               <button class="btn btn-info btn-lg btn-block" type="submit" onclick="window.location.href='register.php'">Signup</button>
             </div>
         </form>
-        <button class="btn btn-info btn-lg btn-block" type="submit" onclick="window.location.href='register.php'">Signup</button>
+        
 
     </div>
 
