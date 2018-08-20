@@ -225,7 +225,12 @@ if (login_check($mysqli) == true) {
         			// mach nix
         		}
         		else {
-        			cbr.incomingCase.Symptoms[i].wert = kategorieAusTextArray[i].weight;
+        			
+					
+
+					let obj = cbr.incomingCase.Symptoms.find(o => o.id === kategorieAusTextArray[i].katID);
+					obj.wert = kategorieAusTextArray[i].weight;
+
         		}
         	}
 
@@ -238,22 +243,22 @@ if (login_check($mysqli) == true) {
         	// Berechnung und Ausgabe des Ergebnisses
         	cbr.calculateSimilarityComplex();
         	$('#div_ausgabe').html(buildOutput());
-            });
+        });
+
+			
 
 
-
-
-            //Function to insert Data to the CheckerHistory-----------------------------------------
-            function insertCheckerHistory(name1, value1)
+        //Function to insert Data to the CheckerHistory-----------------------------------------
+        function insertCheckerHistory(name1, value1)
+        {
+            $.post('include/functions_history.php',
             {
-                $.post('include/functions_history.php',
-                {
-                    name: name1,
-                    type: "Text Checker",
-                    value: value1
-                });
-            }
-            //----------------------------------------------------------------------------------------
+                name: name1,
+                type: "Text Checker",
+                value: value1
+            });
+        }
+        //----------------------------------------------------------------------------------------
 
         </script> 	
 		</div>

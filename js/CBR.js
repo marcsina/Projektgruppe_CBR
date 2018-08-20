@@ -46,6 +46,7 @@
 			var zwischen = 0;
 			var result = 0;
 			var k;
+
 			const copyArrayCaseSymptoms = this.Cases[i].Symptoms.slice();
 			const copyArrayIncomingCaseSymptoms = this.incomingCase.Symptoms.slice();
 
@@ -56,9 +57,11 @@
 
 				//Symptom in eingehendem fall vorhanden, aber nicht in Fall aus CaseBase
 				if (index == -1) {
-					zwischen = 0;
-					numberSymptoms += 1;
-					percentageValue += zwischen * 1;
+					if (copyArrayIncomingCaseSymptoms[k].wert > 0) {
+						zwischen = 0;
+						numberSymptoms += 1;
+						percentageValue += zwischen * 1;
+					}
 				}
 				//Symptom in eingehendem Fall und in Fall aus Case Base vorhanden
 				else {
@@ -102,46 +105,7 @@
 		}
 		this.Similarities.sort((a, b) => parseFloat(b.similarity) - parseFloat(a.similarity));
 
-		///////////////////////////////////////////
-
-		/*this.ergebnisse = "";
-		var i;
-		for (i = 0; i < this.Cases.length; i++) {
-			var percentageValue = 0;
-			var numberSymptoms = 0;
-			var zwischen = 0 ;
-			var k;
-			for (k = 0; k < this.incomingCase.Symptoms.length; k++) {
-				var wij = 1;
-
-				if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert>0)
-				{
-					zwischen = this.incomingCase.Symptoms[k].wert/this.Cases[i].Symptoms[k].wert*1;
-					
-					if(zwischen > 1)
-					{
-						zwischen = 1/zwischen;
-					}
-					numberSymptoms += 1;
-					percentageValue += zwischen*1;
-				}
-				else if(this.incomingCase.Symptoms[k].wert>0&&this.Cases[i].Symptoms[k].wert==0)
-				{
-					zwischen = 0;
-					numberSymptoms += 1;
-					percentageValue += zwischen*1;
-				}
-				else if(this.incomingCase.Symptoms[k].wert==0&&this.Cases[i].Symptoms[k].wert>0)
-				{
-					zwischen = 0;
-					numberSymptoms += 1;
-					percentageValue += zwischen*1;
-				}
-			}
-			var factor = Math.pow(10, 2);
-			this.Similarities[i] = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
-			this.ergebnisse = this.ergebnisse + "" + "incomingCase: " + this.incomingCase.id + "          Case: " + this.Cases[i].id + "          Similarity: " + this.Similarities[i] +"%<br>";
-		}*/
+		
 	}
 	
 	calculateSimilaritySimple() {
