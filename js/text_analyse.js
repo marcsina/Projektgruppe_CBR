@@ -478,6 +478,11 @@ function extractKeywords( inputText )
         //MAGIC FORMULA                     Sum of category weight       /              highest possible value for this category               
         absolute_final_array[i].weight = absolute_final_array[i].weight / ( absolute_final_array[i].count * weight_highest * weight_base );
 
+
+        ///TESTING ROUNDING THE RESULT
+        absolute_final_array[i].weight = Math.round( absolute_final_array[i].weight * 10 ) / 10;
+
+
         //Cut the number
         if ( absolute_final_array[i].weight > 1 )
         {
