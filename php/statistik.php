@@ -16,21 +16,12 @@ if (login_check($mysqli) == true) {
 <!doctype html>
 <html lang="de">
 <head>
-    <!-- include Header -->
-    <?php
-    include('include/header.php');
-    ?>
+    <?php include('include/header.php'); ?>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style_statistik.css" rel="stylesheet">
     <link href="../css/table.css" rel="stylesheet">
-
 </head>
-
-<!-- include Navbar -->
-    <?php
-            include ("include/navbar.php");
-    ?>
-
+    <?php include ("include/navbar.php"); ?>
 <body>
 	<div class="container">
 		<table style = "width: 100%;">

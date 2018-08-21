@@ -38,46 +38,27 @@ if (login_check($mysqli) == true) {
         </div>
     
         <div class="row">
-            <section class=" col-md-offset-1 col-md-7 pour">
-                <h4><small style=" color: white">Recent Posts</small></h4>
+    
+            <section class=" col-md-offset-1">
+                <h4><small style=" color: white">Posts Found</small></h4>
                 <hr>
-                
                 <article>
-                    <a href="artikel_show.php"> <h3><strong>Olli verschwunden!</strong></h3></a>
+                    <a href="unarticle.html"> <h3><strong>Alzheimer in Deutschland</strong></h3></a>
                     <h6><span class="glyphicon glyphicon-time"></span> Post by Jane Dane,sep 27,2018</h6>
                     <p>lol</p>
                 </article>
-                
+    
                 <article>
                     <h3><strong>Demenz heutzutage</strong></h3>
                     <h6><span class="glyphicon glyphicon-time"></span> Post by juji Dane,sep 27,2018</h6>
                     <p>lol2</p>
                 </article>
-                
-                <article>
-                    <a href="unarticle.html"> <h3><strong>Alzheimer in Deutschland</strong></h3></a>
-                    <h6><span class="glyphicon glyphicon-time"></span> Post by Jane Dane,sep 27,2018</h6>
-                    <p>lol3</p>
-                </article>  
             </section>
-    
-            <aside class=" col-md-3 peno">
-                <h4><small style=" color: white">ALLE ARTIKEL</small></h4>
-                <hr>
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a>
-                                    Demenz
-                                </a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </aside>
         </div>
-    </div>
+	</div>
+
+
+
     <!-- Scripts -->
 
     <script src="../js/jquery-2.2.2.min.js"></script>

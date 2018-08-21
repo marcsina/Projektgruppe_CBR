@@ -46,22 +46,11 @@ if(isset($_POST["createbeitrag"]))
 <!doctype html>
 <html lang="de">
 <head>
-    <!-- include Header -->
-    <?php
-    include('include/header.php');
-    ?>
-
+    <?php include('include/header.php'); ?>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style2.css" rel="stylesheet">
     <link href="../css/style_forum.css" rel="stylesheet">
-
 </head>
-
-<!-- include Navbar -->
-    <?php
-            include ("include/navbar.php");
-    ?>
-
+    <?php include ("include/navbar.php"); ?>
 <body>
     <div class="container">
     	<ul class="nav top">
@@ -227,12 +216,13 @@ if(isset($_POST["createbeitrag"]))
         {
             ?>
             <br><br>
-            <a style="color: black;text-decoration: none;font-size: 25px;">Neuer Beitrag</a>
+            <a style="color: white;text-decoration: none;font-size: 25px;">Neuer Beitrag</a>
             <form action="forum_demenz.php" method="post">
-            <textarea rows="8" cols="175" onclick="this.value=''" name="inserttext" id="text" style="resize: none;border: 1px;border-style: solid;"> Enter text here...</textarea>
-            <br>
+            <textarea class="col-lg-12 col-md-12 col-sm-12" rows="8" cols="175" onclick="this.value=''" name="inserttext" id="text" style="resize: none;border: 1px;border-style: solid;resize: vertical"> Enter text here...</textarea>
             <input name="topic" style="display:none" value=<?php echo $_GET["topic"]?>></input>
-            <input type="submit" name="createbeitrag" value="Verschicken"/>
+            <br>
+            <br>
+            <input type="submit" name="createbeitrag" value="Verschicken" style=" color: black"/>
             </form>
             <?php
         }
