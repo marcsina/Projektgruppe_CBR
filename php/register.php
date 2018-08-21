@@ -27,9 +27,9 @@ include_once 'include/functions_login.php';
         <!-- Anmeldeformular für die Ausgabe, wenn die POST-Variablen nicht gesetzt sind
         oder wenn das Anmelde-Skript einen Fehler verursacht hat. -->
         <pre>
-            <h1 class="ok">
-                <strong>Register With Us</strong>
-            </h1>
+            <h3 class="ok">
+                Register With Us
+            </h3>
         </pre>
         <hr />
         <br />
