@@ -32,7 +32,7 @@
     
 
         <!-- page start-->
-        <div class="row">
+        <div class="container">
             <div class="col-lg-offset-1 col-lg-5">
                 <div class="recent">
                     <h3>Send us a Message</h3>

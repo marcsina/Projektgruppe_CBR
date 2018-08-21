@@ -248,26 +248,27 @@ function deleteFriendByUserID($id1, $id2, $mysqli)
 
 function editProfile($mysqli, $firstName, $lastName, $email, $website, $pwd, $confirmpwd)
 {
-//entgegennahme der form_POSTS
-if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['confirmpwd'], $_POST['website']))
-{
-	//Unnötiges abfangen
-	$p1 = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-	$p2 = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
-	$p4 = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-	$p5 = filter_input(INPUT_POST, 'confirmpwd', FILTER_SANITIZE_STRING);
-	$p6 = filter_input(INPUT_POST, 'website', FILTER_SANITIZE_URL);
+    //entgegennahme der form_POSTS
+    if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['confirmpwd'], $_POST['website']))
+    {
+        //Unnötiges abfangen
+        $p1 = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
+        $p2 = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+        $p4 = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $p5 = filter_input(INPUT_POST, 'confirmpwd', FILTER_SANITIZE_STRING);
+        $p6 = filter_input(INPUT_POST, 'website', FILTER_SANITIZE_URL);
 
-	$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
-	{
-        // keine gültige E-Mail
-        $error_msg .= '<p class="error">The email address you entered is not valid</p>';
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+        {
+            // keine gültige E-Mail
+            $error_msg .= '<p class="error">The email address you entered is not valid</p>';
+        }
+
+
+
     }
-
-
-
 }
 
 if(isset($_POST['addFriend'], $_POST['id1'], $_POST['id2']))

@@ -65,6 +65,8 @@ function shuffleAnswers($answer1, $answer2, $answer3, $answer4)
 //Returns a random Question with random answers and correct Answer Position for High Value
 function loadRandomQuestionHigh($mysqli)
 {
+    
+
 	if($stmt = $mysqli->prepare("SELECT Cases.id, Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value = 1 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
 	{
 		//$stmt->bind_param('i', 1);
@@ -276,11 +278,19 @@ function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
 		if(rand(0,1) == 0)
 		{
 			$question = loadRandomQuestionHigh($mysqli);
+            while($question == false)
+            {
+                $question = loadRandomQuestionHigh($mysqli);
+            }
 			$type = 0;
 		}
 		else
 		{
 			$question = loadRandomQuestionLow($mysqli);
+            while($question == false)
+            {
+                $question = loadRandomQuestionLow($mysqli);
+            }
 			$type = 1;
 		}
 
@@ -298,15 +308,24 @@ function genereateFourQuestionsSingleplayer($mysqli, $sp_quiz_ID)
 
 	for($questionCounter = 0; $questionCounter < 4; $questionCounter++)
 	{
+        debug_to_console("SP-QUESTIONS: ".$questionCounter);
         //Load random Question Type High with 50% probability and Low with 50% probability
 		if(rand(0,1) == 0)
 		{
 			$question = loadRandomQuestionHigh($mysqli);
+            while($question == false)
+            {
+                $question = loadRandomQuestionHigh($mysqli);
+            }
 			$type = 0;
 		}
 		else
 		{
 			$question = loadRandomQuestionLow($mysqli);
+            while($question == false)
+            {
+                $question = loadRandomQuestionLow($mysqli);
+            }
 			$type = 1;
 		}
 
@@ -389,7 +408,7 @@ function getPendingChallengesUsers($mysqli, $currentUser)
 
 function generateSP_Quiz($mysqli, $userID)
 {
-    if($stmt = $mysqli->prepare("INSERT INTO SP_QUIZ (User_ID) VALUES (?);"))
+    if($stmt = $mysqli->prepare("INSERT INTO SP_QUIZ (User_ID, startdatum) VALUES (?,CURRENT_TIMESTAMP);"))
     {
         $stmt->bind_param('i', $userID);
 	    if($stmt->execute())
@@ -410,7 +429,7 @@ function generateSP_Quiz($mysqli, $userID)
 
 function generateMP_Quiz($mysqli, $userID1, $userID2)
 {
-    if($stmt = $mysqli->prepare("INSERT INTO MP_QUIZ (User_ID_1, User_ID_2) VALUES (?,?);"))
+    if($stmt = $mysqli->prepare("INSERT INTO MP_QUIZ (User_ID_1, User_ID_2, startdatum_user_2) VALUES (?,?, CURRENT_TIMESTAMP);"))
     {
         $stmt->bind_param('ii', $userID1, $userID2);
 	    if($stmt->execute())

@@ -4,7 +4,6 @@
     border: none;
     padding: 0 !important;
     font: inherit;
-
     cursor: pointer;
 }
 
@@ -13,6 +12,14 @@
         border-bottom-color: #007aff;
     }
 
-.history_form{
+.history_form {
     margin-top: 0px;
+}
+
+.user-profile-2 > ul > .list-group-item, .user-profile-2 > ul > .list-group-item > h4, .user-profile-2 > ul > .list-group-item > h5 {
+    color: #007aff;
+}
+
+.user-profile-2 {
+    text-align: left;
 }

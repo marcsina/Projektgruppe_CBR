@@ -36,7 +36,8 @@
 }
 
 .btn-uebersicht-green {
-    background-color: #449d44;
-    border-color: green;
+    background-color: rgb(0, 122, 255);
+    border-color: rgb(0, 122, 255);
+    color: white;
 }
 

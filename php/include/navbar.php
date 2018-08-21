@@ -35,6 +35,8 @@ if (login_check($mysqli) == true) {
 
 	  <link href="/Projektgruppe/css/elegant-icons-style.css" rel="stylesheet" />
 
+       <link href="/Projektgruppe/css/style_basic.css" rel="stylesheet" />
+
 	  
 
       <!--logo start-->

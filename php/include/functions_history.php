@@ -223,8 +223,49 @@ function combine_Historys($checker, $article, $forum, $mpquiz, $spquiz)
     return $result;
 }
 
+//Get the newest Forum Post, Limit by input value
+function get_Recent_Forum($mysqli, $limit)
+{
+    $Recent_Forum = array();
+    if($stmt = $mysqli->prepare("SELECT Cases.name, Forum_Beitrag.topic, datum FROM Forum_Beitrag, Forum_Topic, Cases Where Forum_Beitrag.topic = Cases.id Order By datum desc LIMIT ?"))
+    {
+        $stmt->bind_param('i',$limit);
+        $stmt->execute();
 
+        $stmt->store_result();
 
+        $stmt->bind_result($topic_title,$topic_id, $date);
+        while($stmt->fetch())
+        {
+            array_push($Recent_Forum,array("topic_title"=>$topic_title,"topic_id"=>$topic_id, "date"=>$date));
+        }
+
+        return $Recent_Forum;
+    }
+}
+
+//Get the newest Article Post, Limit by input value
+function get_Recent_Article($mysqli, $limit)
+{
+    $Recent_Article = array();
+    if($stmt = $mysqli->prepare("SELECT id, Datum, Title, username FROM Artikel, members Where members.id = Artikel.UserID Order By datum desc LIMIT ?"))
+    {
+        $stmt->bind_param('i',$limit);
+        $stmt->execute();
+
+        $stmt->store_result();
+
+        $stmt->bind_result($article_id, $date, $title, $username);
+        while($stmt->fetch())
+        {
+            array_push($Recent_Forum,array("article_id"=>$article_id, "date"=>$date, "username"=>$username, "title"=>$title));
+        }
+
+        return $Recent_Article;
+    }
+}
+
+//Check if an activity was sent to functions history
 if(isset($_POST['name'],$_POST['type'],$_POST['value']))
 {
     $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);

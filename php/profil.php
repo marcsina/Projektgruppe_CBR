@@ -109,7 +109,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <!-- Begin user profile -->
-                <div class="text-center user-profile-2" style="margin-top:120px">
+                <div class="user-profile-2" style="margin-top:120px">
                     <ul class="list-group">
                       <li class="list-group-item">
                         <h4><?php echo $userDataArray["nachname"]; ?>, <b><?php echo $userDataArray["vorname"]; ?></b></h4>
@@ -400,7 +400,6 @@
                                                                         <p>
                                                                             <strong>".$_SESSION['username']."</strong> hat ".$msg." im Forum den Topic ".$activity['fk_id']." kommentiert.
                                                                             <br>
-                                                                            
                                                                         </p>
                                                                     </a>
                                                                 </li>";
@@ -411,24 +410,21 @@
                                                                         <p>
                                                                             <form class='history_form' action='Quiz_Endseite.php' method='post'>
 												                                <input type='hidden' name='Profil_Quiz_ID' value='".$activity['fk_id']."'>
-												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>												                                												                                
+												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>
 												                                <input class='history_button' type='submit' value='".$_SESSION['username']." hat ".$msg." ein Multiplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
-											                                </form>                                                                           
-                                                                            
+											                                </form>
                                                                         </p>
                                                                 </li>";
                                                 break;
                                             case "SP":
                                                 $echoString ="
                                                                 <li>
-                                                                        
+
                                                                             <form class='history_form' action='Quiz_Endseite.php' method='post'>
 												                                <input type='hidden' name='Profil_Quiz_ID' value='".$activity['fk_id']."'>
-												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>												                                												                                
+												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>
 												                                <input class='history_button' type='submit' value='".$_SESSION['username']." hat ".$msg." ein Singleplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
-											                                </form>                                                                           
-                                                                            
-                                                                        
+											                                </form>
                                                                 </li>";
                                                 break;
                                         }

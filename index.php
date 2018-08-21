@@ -1,11 +1,13 @@
-﻿<?php
+<?php
 //config file with all includes and variables we need
 include_once 'config.php';
+include_once 'php/include/functions_history.php';
 
 sec_session_start();
 
 if (login_check($mysqli) == true) {
     $logged = 'in';
+
 } else {
     $logged = 'out';
 
@@ -21,34 +23,34 @@ if (login_check($mysqli) == true) {
     include(ROOT_PATH.'Projektgruppe/php/include/header.php');
     ?>
 
- <!-- css -->
-  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="plugins/cubeportfolio/css/cubeportfolio.min.css">
-  <link href="css/nivo-lightbox.css" rel="stylesheet" />
-  <link href="css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
-  <link href="css/owl.carousel.css" rel="stylesheet" media="screen" />
-  <link href="css/owl.theme.css" rel="stylesheet" media="screen" />
-  <link href="css/animate.css" rel="stylesheet" />
-  <link href="css/style.css" rel="stylesheet">
+    <!-- css -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="plugins/cubeportfolio/css/cubeportfolio.min.css" />
+    <link href="css/nivo-lightbox.css" rel="stylesheet" />
+    <link href="css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="css/owl.carousel.css" rel="stylesheet" media="screen" />
+    <link href="css/owl.theme.css" rel="stylesheet" media="screen" />
+    <link href="css/animate.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
 
- <!-- Bootstrap CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- bootstrap theme -->
-  <link href="css/bootstrap-theme.css" rel="stylesheet">
-  <!--external css-->
-  <!-- font icon -->
-  <link href="css/elegant-icons-style.css" rel="stylesheet" />
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
-  
-  <!-- Custom styles -->
- 
-  <link href="css/style_home.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
-  
-  <link href="css/style-responsive.css" rel="stylesheet" />
-  
-  <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    <!--external css-->
+    <!-- font icon -->
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles -->
+
+    <link href="css/style_home.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+
+    <link href="css/style-responsive.css" rel="stylesheet" />
+
+    <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet" />
 </head>
 
 <!-- include Navbar -->
@@ -57,168 +59,217 @@ include ('php/include/navbar.php');
 ?>
 
 <body>
-     <section id="Updates" class="home-section bg-gray paddingbot-60">
-      <div class="container marginbot-50">
-<div class='container'>
-        <div class='col-sm-12 col-md-12 col-lg-12'>
-            <h4>
-                Willkommen auf der Webseite der Uni Siegen MedAusbild
-            </h4>
-            <p>
-                Sind Sie Student der Universität Siegen?
-                <br />
-                Möchten Sie sich im Bereich der Medizin fortbilden?
-                <br />
-                Zusammen mit Ihren Kommilitonen Spaß haben?
-                <br />
-                <br />
-                Dann sind Sie hier genau richtig!
-                <br />
-                <br />
-                Bestreiten Sie spannende und fordernde Quizduelle gegen ihre Kommilitonen und vergleichen Sie ihre Ergebnisse. Verfolgen Sie die letzten Vorlesungen Ihrer Professoren und Dozenten. Werden Sie zum MedDuell-Master!
-            </p>
-			
-			
-            <!-- login php 
-			
-			*
-			*
-			*
-			-->
-		
-                <div class='col-sm-6 col-md-6'>
+    <section id="Updates" class="home-section bg-gray paddingbot-60">
+        <div class="container marginbot-50">
+            <div class='col-sm-12 col-md-12 col-lg-12'>
+                <h2>
+                    Willkommen auf der Webseite der Uni Siegen MedAusbild
+                </h2>
+                <p>
+                    Sind Sie Student der Universität Siegen?
+                    <br />
+                    Möchten Sie sich im Bereich der Medizin fortbilden?
+                    <br />
+                    Zusammen mit Ihren Kommilitonen Spaß haben?
+                    <br />
+                    <br />
+                    Dann sind Sie hier genau richtig!
+                    <br />
+                    <br />
+                    Bestreiten Sie spannende und fordernde Quizduelle gegen ihre Kommilitonen und vergleichen Sie ihre Ergebnisse. Verfolgen Sie die letzten Vorlesungen Ihrer Professoren und Dozenten. Werden Sie zum MedDuell-Master!
+                </p>
+
+                <?php
+                if($logged == "out")
+                {
+                    echo "<div class='col-sm-6 col-md-6'>
                     <p>Sind Sie schon Mitglied? Dann loggen Sie sich hier ein!</p>
                     <a role ='button' class='btn btn-sm' href='php/login.php'>Login</a>
                 </div>
                 <div class='col-sm-6 col-md-6'>
                     <p>Werden Sie Mitglied! Registrieren Sie sich hier</p>
                     <a role ='button' class='btn btn-sm' href='php/register.php'>Registrieren</a>
+                </div>";
+                }
+                ?>
+
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="wow fadeInDown" data-wow-delay="0.1s">
+                            <div class="section-heading text-center">
+                                <h2 class="h-bold">
+                            </div>
+                        </div>
+                        <div class="divider-short"></div>
+                    </div>
                 </div>
-            
-           
-       <div class="row">
-          <div class="col-sm-8 col-sm-offset-2">
-            <div class="wow fadeInDown" data-wow-delay="0.1s">
-              <div class="section-heading text-center">
-                <h2 class="h-bold">
-              </div>
             </div>
-            <div class="divider-short"></div>
-          </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div id="filters-container" class="cbp-l-filters-alignLeft">
+                        <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">
+                            All (
+                            <div class="cbp-filter-counter"></div>)
+                        </div>
+                        <div data-filter=".forum" class="cbp-filter-item">
+                            forum (
+                            <div class="cbp-filter-counter"></div>)
+                        </div>
+                        <div data-filter=".article" class="cbp-filter-item">
+                            article (
+                            <div class="cbp-filter-counter"></div>)
+                        </div>
+                    </div>
+
+                    
+                   
+                    <div id="grid-container" class="cbp-l-grid-team">
+                        <ul>
+                            <?php
+                            debug_to_console('Hallo index');
+                            $recent_article = get_Recent_Article($mysqli, 1);
+                            $recent_forum = get_Recent_Forum($mysqli, 1);
+                            debug_to_console($recent_forum[0]['topic_id']);
+
+                            foreach($recent_forum as &$item )
+                            {
+
+                                echo"
+                                        <li class='cbp-item forum'>
+                                            <a href='http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=".$item['topic_id']."' class='cbp-caption cbp-singlePageI'>
+                                                <div class='cbp-caption-defaultWrap'>
+                                                    <img src='img/team/1.jpg' alt='' width='100%' />
+                                                </div>
+                                                <div class='cbp-caption-activeWrap'>
+                                                    <div class='cbp-l-caption-alignCenter'>
+                                                        <div class='cbp-l-caption-body'>
+                                                            <div class='cbp-l-caption-text'>Neues in ".$item['topic_title']."</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                            ";
+                            }
+
+                            foreach($recent_article as &$item )
+                            {
+
+                                echo"
+                                        <li class='cbp-item article'>
+                                            <a href='http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
+                                                <div class='cbp-caption-defaultWrap'>
+                                                    <img src='img/team/1.jpg' alt='' width='100%' />
+                                                </div>
+                                                <div class='cbp-caption-activeWrap'>
+                                                    <div class='cbp-l-caption-alignCenter'>
+                                                        <div class='cbp-l-caption-body'>
+                                                            <div class='cbp-l-caption-text'>Neuer Artikel: ".$item['title']."</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                            ";
+                            }
+
+
+                            ?>
+                            <li class="cbp-item forum">
+                                <a href="http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=14" class="cbp-caption cbp-singlePageI">
+                                    <div class="cbp-caption-defaultWrap">
+                                        <img src="img/team/1.jpg" alt="" width="100%" />
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="cbp-l-caption-alignCenter">
+                                            <div class="cbp-l-caption-body">
+                                                <div class="cbp-l-caption-text">read more</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=14" class="cbp-singlePageI cbp-l-grid-team-name">demenz</a>
+                                <div class="cbp-l-grid-team-position">forum</div>
+                            </li>
+                            <li class="cbp-item quiz">
+                                <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-caption cbp-singlePagei">
+                                    <div class="cbp-caption-defaultWrap">
+                                        <img src="img/team/3.jpg" alt="" width="100%" />
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="cbp-l-caption-alignCenter">
+                                            <div class="cbp-l-caption-body">
+                                                <div class="cbp-l-caption-text">read more</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-singlePage cbp-l-grid-team-name">demenz</a>
+                                <div class="cbp-l-grid-team-position">quiz</div>
+                            </li>
+                            <li class="cbp-item quiz">
+                                <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-caption cbp-singlePagei">
+                                    <div class="cbp-caption-defaultWrap">
+                                        <img src="img/team/3.jpg" alt="" width="100%" />
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="cbp-l-caption-alignCenter">
+                                            <div class="cbp-l-caption-body">
+                                                <div class="cbp-l-caption-text">read more</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-singlePage cbp-l-grid-team-name">Demenz</a>
+                                <div class="cbp-l-grid-team-position">quiz</div>
+                            </li>
+                            <li class="cbp-item fälle">
+                                <a href="http://141.99.248.92/Projektgruppe/php/checkereinhacken.php" class="cbp-caption cbp-singlePageI">
+                                    <div class="cbp-caption-defaultWrap">
+                                        <img src="img/team/4.jpg" alt="" width="100%" />
+                                    </div>
+                                    <div class="cbp-caption-activeWrap">
+                                        <div class="cbp-l-caption-alignCenter">
+                                            <div class="cbp-l-caption-body">
+                                                <div class="cbp-l-caption-text">read more</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="http://141.99.248.92/Projektgruppe/php/checkereinhacken.php" class="cbp-singlePageI cbp-l-grid-team-name">demenz</a>
+                                <div class="cbp-l-grid-team-position">fälle</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-
-            <div id="filters-container" class="cbp-l-filters-alignLeft">
-              <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">All (
-                <div class="cbp-filter-counter"></div>)</div>
-              <div data-filter=".quiz" class="cbp-filter-item">quiz (
-                <div class="cbp-filter-counter"></div>)</div>
-              <div data-filter=".forum" class="cbp-filter-item">forum (
-                <div class="cbp-filter-counter"></div>)</div>
-              <div data-filter=".fälle" class="cbp-filter-item">fälle (
-                <div class="cbp-filter-counter"></div>)</div>
-            </div>
-
-            <div id="grid-container" class="cbp-l-grid-team">
-              <ul>
-                <li class="cbp-item forum">
-                  <a href="http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=14"  class="cbp-caption cbp-singlePageI"  >
-                    nsdnjandjksandjksanjdk
-                    <div class="cbp-caption-defaultWrap">
-                      <img src="img/team/1.jpg" alt="" width="100%">
-                    </div>
-                    <div class="cbp-caption-activeWrap">
-                      <div class="cbp-l-caption-alignCenter">
-                        <div class="cbp-l-caption-body">
-                          <div class="cbp-l-caption-text">read more</div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=14" class="cbp-singlePageI cbp-l-grid-team-name">demenz</a>
-                  <div class="cbp-l-grid-team-position">forum</div>
-                </li>
-                <li class="cbp-item quiz">
-                  <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-caption cbp-singlePagei">
-                    <div class="cbp-caption-defaultWrap">
-                      <img src="img/team/3.jpg" alt="" width="100%">
-                    </div>
-                    <div class="cbp-caption-activeWrap">
-                      <div class="cbp-l-caption-alignCenter">
-                        <div class="cbp-l-caption-body">
-                          <div class="cbp-l-caption-text">read more</div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-singlePage cbp-l-grid-team-name">demenz</a>
-                  <div class="cbp-l-grid-team-position">quiz</div>
-                </li>
-                <li class="cbp-item quiz">
-                  <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-caption cbp-singlePagei">
-                    <div class="cbp-caption-defaultWrap">
-                      <img src="img/team/3.jpg" alt="" width="100%">
-                    </div>
-                    <div class="cbp-caption-activeWrap">
-                      <div class="cbp-l-caption-alignCenter">
-                        <div class="cbp-l-caption-body">
-                          <div class="cbp-l-caption-text">read more</div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-singlePage cbp-l-grid-team-name">Demenz</a>
-                  <div class="cbp-l-grid-team-position">quiz</div>
-                </li>
-                <li class="cbp-item fälle">
-                  <a href="http://141.99.248.92/Projektgruppe/php/checkereinhacken.php" class="cbp-caption cbp-singlePageI">
-                    <div class="cbp-caption-defaultWrap">
-                      <img src="img/team/4.jpg" alt="" width="100%">
-                    </div>
-                    <div class="cbp-caption-activeWrap">
-                      <div class="cbp-l-caption-alignCenter">
-                        <div class="cbp-l-caption-body">
-                          <div class="cbp-l-caption-text">read more</div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="http://141.99.248.92/Projektgruppe/php/checkereinhacken.php" class="cbp-singlePageI cbp-l-grid-team-name">demenz</a>
-                  <div class="cbp-l-grid-team-position">fälle</div>
-                </li>
-
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </section>
 
     <!-- _________________________Content________________________________-->
     <!-- Scripts -->
     <script src='js/snowball-german.js'></script>
     <script src='js/stopWords.js'></script>
-    
+
     <script type='text/JavaScript' src='js/sha512.js'></script>
     <script type='text/JavaScript' src='js/forms.js'></script>
-	 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+    <a href="#" class="scrollup">
+        <i class="fa fa-angle-up active"></i>
+    </a>
 
-  <!-- Core JavaScript Files -->
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.min.js"></script>
-  <script src="js/wow.min.js"></script>
-  <script src="js/jquery.scrollTo.js"></script>
-  <script src="js/jquery.appear.js"></script>
-  <script src="js/stellar.js"></script>
-  <script src="plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/nivo-lightbox.min.js"></script>
-  <script src="js/custom.js"></script>
+    <!-- Core JavaScript Files -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/jquery.scrollTo.js"></script>
+    <script src="js/jquery.appear.js"></script>
+    <script src="js/stellar.js"></script>
+    <script src="plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/nivo-lightbox.min.js"></script>
+    <script src="js/custom.js"></script>
 </body>
 </html>
