@@ -7,9 +7,9 @@
 
 body {
 
-  /*  color: #797979;
+  color: #797979;
 
-    background: #eeeeee; */
+    background: #eeeeee; 
 
     font-family: 'Lato', sans-serif;
 
@@ -21,11 +21,7 @@ body {
 
 }
 
-h1,h2,h3,h4,h5{
 
-    font-weight: 300;
-
-}
 
 label{
 
@@ -33,11 +29,7 @@ label{
 
 }
 
-ul li {
 
-    list-style: none;
-
-}
 
 
 
@@ -51,27 +43,9 @@ a, a:hover, a:focus {
 
 }
 
-input:focus, textarea:focus { outline: none; }
 
-table tr th { color: #688a7e;}
 
-*:focus {outline: none;}
 
-::selection {
-
-    background: #688a7e;
-
-    color: #fff;
-
-}
-
-::-moz-selection {
-
-    background: #688a7e;
-
-    color: #fff;
-
-}
 
 
 
@@ -85,33 +59,8 @@ table tr th { color: #688a7e;}
 
 
 
-.Creative-pro, .Creative-pro h3{
 
-    display: block;
 
-    position: fixed;
-
-    bottom:0;
-
-    z-index: 100000;
-
-    width: 100%;
-
-    overflow: hidden;
-
-    height: 50px;
-
-    margin:0px;
-
-}
-
-.Creative-pro h3{
-
-    padding-bottom: 10px;
-
-    padding-top: 10px;
-
-}
 
 .lite{
 
@@ -127,21 +76,6 @@ table tr th { color: #688a7e;}
 
 /*Modal Content*/
 
-.modal-content{
-
-    border-radius:0px;
-
-    background:rgba(255,255,255,0.9);
-
-}
-
-.modal-header .close{
-
-    font-weight: 300;
-
-    font-size: 30px;
-
-}
 
 
 
