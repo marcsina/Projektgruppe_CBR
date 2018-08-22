@@ -227,7 +227,11 @@ function combine_Historys($checker, $article, $forum, $mpquiz, $spquiz)
 function get_Recent_Forum($mysqli, $limit)
 {
     $Recent_Forum = array();
-    if($stmt = $mysqli->prepare("SELECT Cases.name, Forum_Beitrag.topic, datum FROM Forum_Beitrag, Forum_Topic, Cases Where Forum_Beitrag.topic = Cases.id Order By datum desc LIMIT ?"))
+    if($stmt = $mysqli->prepare(" SELECT Cases.name, Forum_Beitrag.topic, Max(Forum_Beitrag.datum) AS date1
+                                    FROM Forum_Beitrag, Cases
+                                    Where Forum_Beitrag.topic = Cases.id
+                                    Group By Forum_Beitrag.topic
+                                    Order By date1 desc LIMIT ?"))
     {
         $stmt->bind_param('i',$limit);
         $stmt->execute();
@@ -247,8 +251,9 @@ function get_Recent_Forum($mysqli, $limit)
 //Get the newest Article Post, Limit by input value
 function get_Recent_Article($mysqli, $limit)
 {
+    debug_to_console("Hallo Artikel");
     $Recent_Article = array();
-    if($stmt = $mysqli->prepare("SELECT id, Datum, Title, username FROM Artikel, members Where members.id = Artikel.UserID Order By datum desc LIMIT ?"))
+    if($stmt = $mysqli->prepare("SELECT Artikel.id, Datum, Titel, username FROM Artikel, members Where members.id = Artikel.UserID Order By datum desc LIMIT ?"))
     {
         $stmt->bind_param('i',$limit);
         $stmt->execute();
@@ -258,9 +263,9 @@ function get_Recent_Article($mysqli, $limit)
         $stmt->bind_result($article_id, $date, $title, $username);
         while($stmt->fetch())
         {
-            array_push($Recent_Forum,array("article_id"=>$article_id, "date"=>$date, "username"=>$username, "title"=>$title));
+            array_push($Recent_Article,array("article_id"=>$article_id, "date"=>$date, "username"=>$username, "title"=>$title));
         }
-
+        debug_to_console("Artikel in ".$Recent_Article[0]['title']);
         return $Recent_Article;
     }
 }
