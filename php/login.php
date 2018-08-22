@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <?php
 include_once 'include/conn.php';
@@ -78,8 +78,8 @@ if (login_check($mysqli) == true) {
                     <input type="checkbox" value="remember-me"> Remember me
                     <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
                 </label>
-                <input class="btn btn-primary btn-lg btn-block" type="button" value="Login" onclick="formhash(this.form, this.form.password);"/>
-               <button class="btn btn-info btn-lg btn-block" type="submit" onclick="window.location.href='register.php'">Signup</button>
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Login" onclick="formhash(this.form, this.form.password);"/>
+               <button class="btn btn-info btn-lg btn-block"type="button" onclick="window.location.href='register.php'">Signup</button>
             </div>
         </form>
         
