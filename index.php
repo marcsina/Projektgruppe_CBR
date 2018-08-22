@@ -158,7 +158,7 @@ include ('php/include/navbar.php');
 
                                 echo"
                                         <li class='cbp-item article'>
-                                            <a href='http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
+                                            <a href='http://141.99.248.92/Projektgruppe/php/artikel_show.php?id=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
                                                 <div class='cbp-caption-defaultWrap'>
                                                     <img src='img/index_book.jpg' alt='' width='100%' />
                                                 </div>
