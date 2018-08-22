@@ -43,7 +43,6 @@ table, th, td {
 body {
     /*background: #252525;*/
     font-family: 'Open Sans';
-    font-weight: 300;
 }
 .main {
     background: white url(machine_a_ecrire.jpg) right top no-repeat;
@@ -59,13 +58,11 @@ body {
 }
 h1 {
     font-family: 'Lato', sans-serif;
-    font-weight: 300;
     color: #555;
     margin-bottom: 0;
 }
 h2 {
     font-family: 'Lato', sans-serif;
-    font-weight: 300;
     color: #999;
     font-size: 18px;
     margin-top: 5px;

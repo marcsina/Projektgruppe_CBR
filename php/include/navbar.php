@@ -50,7 +50,7 @@ if (login_check($mysqli) == true) {
 		<?php
 		if($logged == 'out')
 		{
-			echo "<div class='nav pull-right top-menu'><a href = '/Projektgruppe/php/login.php'>Login</a></div>";
+			echo "<ul class='nav pull-right top-menu'><li><a href = '/Projektgruppe/php/login.php'>Login</a></li></ul>";
 		}?>
          <ul class="nav pull-right top-menu" <?php
 		if($logged == 'out')
@@ -93,41 +93,86 @@ if (login_check($mysqli) == true) {
 							echo "<li><a href='/Projektgruppe/php/admin_config.php'><i class='icon_key_alt'></i>Adminseite</a></li>";
 						}
 					}
-				  ?>
+                  ?>
 				</ul>
 			</li>  
         </ul>
        
 
-         <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                       
-                        <li class="menuItem"><a href="/Projektgruppe/php/Quiz_uebersicht.php">Quiz <i class="icon_table"></i><?php if($pendingChallenges > 0){ echo "<span class='badge bg-important'> $pendingChallenges </span>"; } ?></a>
-                        </li>
+          <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse"
+              <?php
+              if($logged == 'out')
+              {
+                  echo "style='visibility: hidden'";
+		}?>>
+              <ul class="nav navbar-nav">
 
-                        <li class="menuItem"><a href="/Projektgruppe/php/forum.php">Forum  <i class="icon_genius"></i></a>
-                        </li>
-                       
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Checker <i class="icon_document_alt"></i><span class="caret"></span></a>
-							<ul class="dropdown-menu">
-							  <li><a href="/Projektgruppe/php/checker_symptom.php">Symptom Checker</a></li>
-							  <li><a href="/Projektgruppe/php/checker_text.php">Fall Checker</a></li>
-							</ul>
-						</li>
+                  <li class="menuItem">
+                      <a href="/Projektgruppe/php/Quiz_uebersicht.php">
+                          Quiz
+                          <i class="icon_table"></i><?php if($pendingChallenges > 0){ echo "<span class='badge bg-important'> $pendingChallenges </span>"; } ?>
+                      </a>
+                  </li>
 
-						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Classroom <i class="icon_desktop"></i><span class="caret"></span></a>
-							<ul class="dropdown-menu">
-                                <li><a href="/Projektgruppe/php/artikel.php">Artikel</a></li>
-							  <li><a href="#section41">Scripts</a></li>
-							  <li><a href="#section42">Tutorials</a></li>
-							  <li><a href="#section42">videos</a></li>
-							</ul>
-						</li>
-						<li class="menuItem"><a href="/Projektgruppe/php/statistik.php">Statistik  <i class="icon_piechart"></i></a></li>
+                  <li class="menuItem">
+                      <a href="/Projektgruppe/php/forum.php">
+                          Forum
+                          <i class="icon_genius"></i>
+                      </a>
+                  </li>
 
-						<li class="menuItem"><a href="/Projektgruppe/php/contact_medausbild.php">Kontakt <i class="icon_documents_alt"></i></a></li>
-                    </ul>
-                </div>
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                          Checker
+                          <i class="icon_document_alt"></i>
+                          <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a href="/Projektgruppe/php/checker_symptom.php">Symptom Checker</a>
+                          </li>
+                          <li>
+                              <a href="/Projektgruppe/php/checker_text.php">Fall Checker</a>
+                          </li>
+                      </ul>
+                  </li>
+
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                          Classroom
+                          <i class="icon_desktop"></i>
+                          <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a href="/Projektgruppe/php/artikel.php">Artikel</a>
+                          </li>
+                          <li>
+                              <a href="#section41">Scripts</a>
+                          </li>
+                          <li>
+                              <a href="#section42">Tutorials</a>
+                          </li>
+                          <li>
+                              <a href="#section42">videos</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="menuItem">
+                      <a href="/Projektgruppe/php/statistik.php">
+                          Statistik
+                          <i class="icon_piechart"></i>
+                      </a>
+                  </li>
+
+                  <li class="menuItem">
+                      <a href="/Projektgruppe/php/contact_medausbild.php">
+                          Kontakt
+                          <i class="icon_documents_alt"></i>
+                      </a>
+                  </li>
+              </ul>
+          </div>
       </div>
     </header></div>
 

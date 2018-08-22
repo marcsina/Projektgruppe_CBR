@@ -105,37 +105,40 @@ include ('php/include/navbar.php');
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12">
+            <?php
+            if($logged == "in")
+            {
+                //get recent updates
+                $recent_article = get_Recent_Article($mysqli, 3);
+                $recent_forum = get_Recent_Forum($mysqli, 3);
 
-                    <div id="filters-container" class="cbp-l-filters-alignLeft">
-                        <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">
-                            All (
-                            <div class="cbp-filter-counter"></div>)
-                        </div>
-                        <div data-filter=".forum" class="cbp-filter-item">
-                            forum (
-                            <div class="cbp-filter-counter"></div>)
-                        </div>
-                        <div data-filter=".article" class="cbp-filter-item">
-                            article (
-                            <div class="cbp-filter-counter"></div>)
-                        </div>
-                    </div>
+                echo"
+                        <div class='row'>
+                            <div class='col-sm-12'>
+                                <div id='filters-container' class='cbp-l-filters-alignLeft'>
+                                    <div data-filter='*' class='cbp-filter-item-active cbp-filter-item'>
+                                        All (
+                                        <div class='cbp-filter-counter'></div> )
+                                    </div>
+                                    <div data-filter='.forum' class='cbp-filter-item'>
+                                        forum (
+                                        <div class='cbp-filter-counter'></div> )
+                                    </div>
+                                    <div data-filter='.article' class='cbp-filter-item'>
+                                        article (
+                                        <div class='cbp-filter-counter'></div> )
+                                    </div>
+                                </div>
 
-                    
-                   
-                    <div id="grid-container" class="cbp-l-grid-team">
-                        <ul>
-                            <?php
-                            $recent_article = get_Recent_Article($mysqli, 3);
-                            $recent_forum = get_Recent_Forum($mysqli, 3);
-                            debug_to_console("Article".$recent_article[0]['article_id']);
+                                <div id='grid-container' class='cbp-l-grid-team'>
+                                    <ul>";
 
-                            foreach($recent_forum as &$item )
-                            {
 
-                                echo"
+
+                foreach($recent_forum as &$item )
+                {
+
+                    echo"
                                         <li class='cbp-item forum'>
                                             <a href='http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=".$item['topic_id']."' class='cbp-caption cbp-singlePageI'>
                                                 <div class='cbp-caption-defaultWrap'>
@@ -151,12 +154,12 @@ include ('php/include/navbar.php');
                                             </a>
                                         </li>
                             ";
-                            }
+                }
 
-                            foreach($recent_article as &$item )
-                            {
+                foreach($recent_article as &$item )
+                {
 
-                                echo"
+                    echo"
                                         <li class='cbp-item article'>
                                             <a href='http://141.99.248.92/Projektgruppe/php/artikel_show.php?id=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
                                                 <div class='cbp-caption-defaultWrap'>
@@ -172,15 +175,18 @@ include ('php/include/navbar.php');
                                             </a>
                                         </li>
                             ";
-                            }
+                }
 
-
-                            ?>
-                            
-                        </ul>
+                echo"</ul>
                     </div>
                 </div>
-            </div>
+            </div>";
+
+            }
+
+
+            ?>
+                        
         </div>
     </section>
 
