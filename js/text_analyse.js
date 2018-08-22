@@ -20,6 +20,10 @@ var weight_present_negate_reinforced = 2;
 //weight for the magic formula
 var weight_highest = 2;
 
+//assumed text length
+var basic_text_length = 400;
+var text_length = 0;
+
 //Classes
 class Weighted_Words
 {
@@ -341,6 +345,9 @@ function extractKeywords( inputText )
     //remove unnecessary whitespace and write everything in lower case
     inputText = inputText.trim();
 
+    text_length_array = inputText.split( /\s/ );
+    text_length = text_length_array.length;
+
     //Delete abbrevations consist of maximum 1 letters, multiple whitespaces, and new lines starting with a space
     inputText = inputText.replace( /[\s][a-zA-Z]{0,1}[.]/gm, "" ).replace( /[\s]{2,}/gmi, "\s" ).replace( /\n /gmi, "\n" ).replace( /[0-9]/, "\s" );
 
@@ -469,19 +476,22 @@ function extractKeywords( inputText )
         if ( checking == 0 )
         {
             absolute_final_array.push( new Final_Weight( final_Weight[i].katID, final_Weight[i].weight, final_Weight[i].katName ) );
-            absolute_final_array[absolute_final_array.length-1].count++;
+            absolute_final_array[absolute_final_array.length - 1].count++;
         }
     }
 
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
-        //MAGIC FORMULA                     Sum of category weight       /              highest possible value for this category               
+        //MAGIC FORMULA                     Sum of category weight       /              highest possible value for this category
         absolute_final_array[i].weight = absolute_final_array[i].weight / ( absolute_final_array[i].count * weight_highest * weight_base );
 
+        //////calculate a factor based on the assumed text length
+        //So that a shorter text has higher rated values
+        factor = basic_text_length / text_length;
+        absolute_final_array[i].weight = absolute_final_array[i].weight * factor;
 
-        ///TESTING ROUNDING THE RESULT
+        ///ROUNDING THE RESULT
         absolute_final_array[i].weight = Math.round( absolute_final_array[i].weight * 10 ) / 10;
-
 
         //Cut the number
         if ( absolute_final_array[i].weight > 1 )
@@ -493,6 +503,7 @@ function extractKeywords( inputText )
             absolute_final_array[i].weight = 0;
         }
     }
+
     console.timeEnd( 'test2' );
     return absolute_final_array;
 }

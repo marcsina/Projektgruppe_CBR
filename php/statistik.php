@@ -1,15 +1,17 @@
-﻿<?php
+<?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 
 sec_session_start();
- 
+
 if (login_check($mysqli) == true) {
     $logged = 'in';
     $userid = $_SESSION['user_id'];
 } else {
     $logged = 'out';
     $username = 'anonymous';
+    header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');
+    exit;
 }
 
 ?>

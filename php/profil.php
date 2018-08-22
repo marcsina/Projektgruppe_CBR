@@ -14,17 +14,16 @@
       //GET id, username, vorname, nachname, email, beschreibung, profilbild from DB
       $userDataArray = getUserDataByUsername($_SESSION['username'], $mysqli);
       //falls die ProfilSeite die eigene ist, setze Wert auf true
-      if($_SESSION['user_id'] == $userDataArray['id'])
-      {
-          $ownProfile = true;
-      }
+
+      $ownProfile = true;
+      
       //�berpr�fen ob URL auf Profil verweist
       if(!empty($_GET["username"]))
       {
           //do something when url is pointing to specific profile
           //GET id, username, vorname, nachname, email, beschreibung, profilbild from DB from user in URL
           $userDataArray = getUserDataByUsernameGET($mysqli);
-
+          $ownProfile = false;
           //�berpr�fen ob Nutzer exisitert, wenn nicht dann...
           if($userDataArray == false)
           {

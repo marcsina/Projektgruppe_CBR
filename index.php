@@ -105,38 +105,40 @@ include ('php/include/navbar.php');
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12">
+            <?php
+            if($logged == "in")
+            {
+                //get recent updates
+                $recent_article = get_Recent_Article($mysqli, 3);
+                $recent_forum = get_Recent_Forum($mysqli, 3);
 
-                    <div id="filters-container" class="cbp-l-filters-alignLeft">
-                        <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">
-                            All (
-                            <div class="cbp-filter-counter"></div>)
-                        </div>
-                        <div data-filter=".forum" class="cbp-filter-item">
-                            forum (
-                            <div class="cbp-filter-counter"></div>)
-                        </div>
-                        <div data-filter=".article" class="cbp-filter-item">
-                            article (
-                            <div class="cbp-filter-counter"></div>)
-                        </div>
-                    </div>
+                echo"
+                        <div class='row'>
+                            <div class='col-sm-12'>
+                                <div id='filters-container' class='cbp-l-filters-alignLeft'>
+                                    <div data-filter='*' class='cbp-filter-item-active cbp-filter-item'>
+                                        All (
+                                        <div class='cbp-filter-counter'></div> )
+                                    </div>
+                                    <div data-filter='.forum' class='cbp-filter-item'>
+                                        forum (
+                                        <div class='cbp-filter-counter'></div> )
+                                    </div>
+                                    <div data-filter='.article' class='cbp-filter-item'>
+                                        article (
+                                        <div class='cbp-filter-counter'></div> )
+                                    </div>
+                                </div>
 
-                    
-                   
-                    <div id="grid-container" class="cbp-l-grid-team">
-                        <ul>
-                            <?php
-                            debug_to_console('Hallo index');
-                            $recent_article = get_Recent_Article($mysqli, 1);
-                            $recent_forum = get_Recent_Forum($mysqli, 1);
-                            debug_to_console($recent_forum[0]['topic_id']);
+                                <div id='grid-container' class='cbp-l-grid-team'>
+                                    <ul>";
 
-                            foreach($recent_forum as &$item )
-                            {
 
-                                echo"
+
+                foreach($recent_forum as &$item )
+                {
+
+                    echo"
                                         <li class='cbp-item forum'>
                                             <a href='http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=".$item['topic_id']."' class='cbp-caption cbp-singlePageI'>
                                                 <div class='cbp-caption-defaultWrap'>
@@ -152,16 +154,16 @@ include ('php/include/navbar.php');
                                             </a>
                                         </li>
                             ";
-                            }
+                }
 
-                            foreach($recent_article as &$item )
-                            {
+                foreach($recent_article as &$item )
+                {
 
-                                echo"
+                    echo"
                                         <li class='cbp-item article'>
-                                            <a href='http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
+                                            <a href='http://141.99.248.92/Projektgruppe/php/artikel_show.php?id=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
                                                 <div class='cbp-caption-defaultWrap'>
-                                                    <img src='img/team/1.jpg' alt='' width='100%' />
+                                                    <img src='img/index_book.jpg' alt='' width='100%' />
                                                 </div>
                                                 <div class='cbp-caption-activeWrap'>
                                                     <div class='cbp-l-caption-alignCenter'>
@@ -173,78 +175,18 @@ include ('php/include/navbar.php');
                                             </a>
                                         </li>
                             ";
-                            }
+                }
 
-
-                            ?>
-                            <li class="cbp-item forum">
-                                <a href="http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=14" class="cbp-caption cbp-singlePageI">
-                                    <div class="cbp-caption-defaultWrap">
-                                        <img src="img/team/1.jpg" alt="" width="100%" />
-                                    </div>
-                                    <div class="cbp-caption-activeWrap">
-                                        <div class="cbp-l-caption-alignCenter">
-                                            <div class="cbp-l-caption-body">
-                                                <div class="cbp-l-caption-text">read more</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=14" class="cbp-singlePageI cbp-l-grid-team-name">demenz</a>
-                                <div class="cbp-l-grid-team-position">forum</div>
-                            </li>
-                            <li class="cbp-item quiz">
-                                <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-caption cbp-singlePagei">
-                                    <div class="cbp-caption-defaultWrap">
-                                        <img src="img/team/3.jpg" alt="" width="100%" />
-                                    </div>
-                                    <div class="cbp-caption-activeWrap">
-                                        <div class="cbp-l-caption-alignCenter">
-                                            <div class="cbp-l-caption-body">
-                                                <div class="cbp-l-caption-text">read more</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-singlePage cbp-l-grid-team-name">demenz</a>
-                                <div class="cbp-l-grid-team-position">quiz</div>
-                            </li>
-                            <li class="cbp-item quiz">
-                                <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-caption cbp-singlePagei">
-                                    <div class="cbp-caption-defaultWrap">
-                                        <img src="img/team/3.jpg" alt="" width="100%" />
-                                    </div>
-                                    <div class="cbp-caption-activeWrap">
-                                        <div class="cbp-l-caption-alignCenter">
-                                            <div class="cbp-l-caption-body">
-                                                <div class="cbp-l-caption-text">read more</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="http://141.99.248.92/Projektgruppe/php/Quiz_uebersicht.php" class="cbp-singlePage cbp-l-grid-team-name">Demenz</a>
-                                <div class="cbp-l-grid-team-position">quiz</div>
-                            </li>
-                            <li class="cbp-item fälle">
-                                <a href="http://141.99.248.92/Projektgruppe/php/checkereinhacken.php" class="cbp-caption cbp-singlePageI">
-                                    <div class="cbp-caption-defaultWrap">
-                                        <img src="img/team/4.jpg" alt="" width="100%" />
-                                    </div>
-                                    <div class="cbp-caption-activeWrap">
-                                        <div class="cbp-l-caption-alignCenter">
-                                            <div class="cbp-l-caption-body">
-                                                <div class="cbp-l-caption-text">read more</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="http://141.99.248.92/Projektgruppe/php/checkereinhacken.php" class="cbp-singlePageI cbp-l-grid-team-name">demenz</a>
-                                <div class="cbp-l-grid-team-position">fälle</div>
-                            </li>
-                        </ul>
+                echo"</ul>
                     </div>
                 </div>
-            </div>
+            </div>";
+
+            }
+
+
+            ?>
+                        
         </div>
     </section>
 
