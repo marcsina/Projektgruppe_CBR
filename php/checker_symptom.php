@@ -107,9 +107,23 @@ if (login_check($mysqli) == true) {
         <script src="../js/jquery-2.2.2.min.js"></script>
 		<script>
 		$(document).ready(function () {
+			var textSymptoms = JSON.parse(window.localStorage.getItem("ICSymptoms")); // Retrieving
 			cbr.loadIncomingCase("no name", "no text");
+			setAnzeigeNummern();
 			loadSymptoms();
 			autocomplete(document.getElementById("input_category"), makeCategoryNamesArray());
+			
+			if(textSymptoms !== null) {
+				var i;
+				var testyo = "";
+				for (i = 0; i < textSymptoms.length; i++) {
+					const index = cbr.incomingCase.Symptoms.map(e => e.id).indexOf(textSymptoms[i].id);
+					cbr.incomingCase.Symptoms[index].wert = textSymptoms[i].wert;
+					testyo = testyo + "kat id: " + textSymptoms[i].id + " --- wert: " + textSymptoms[i].wert + "\n";
+					$('#' + 'checkbox_' + cbr.incomingCase.Symptoms[index].anzeigeNummer).click();
+				}
+				localStorage.clear();
+			}
 		});
 
 		var ergebnis = new Array();
@@ -143,13 +157,20 @@ if (login_check($mysqli) == true) {
                 }
             }
         });
-        
-		function loadSymptoms() {
-			var i;
 
+		function setAnzeigeNummern() {
+			var i;
 			for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
 				//TO-DO: Beschreibungen der Symptome in Datenbank einf�gen
-				$('#form_symptoms').append('<div id=' + 'div_' + i + ' class="row symptom"><label class="col-md-11" style="word-wrap:break-word;max-width:90%">' + parseInt(i+1) + ': ' + cbr.incomingCase.Symptoms[i].name + '</label><input class="checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + i + '></div>');
+				cbr.incomingCase.Symptoms[i].anzeigeNummer = i+1;
+			}
+		}
+        
+		function loadSymptoms() {		
+			var i;
+			for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
+				//TO-DO: Beschreibungen der Symptome in Datenbank einf�gen
+				$('#form_symptoms').append('<div id=' + 'div_' + cbr.incomingCase.Symptoms[i].anzeigeNummer + ' class="row symptom"><label class="col-md-11" style="word-wrap:break-word;max-width:90%">' + cbr.incomingCase.Symptoms[i].anzeigeNummer + ': ' + cbr.incomingCase.Symptoms[i].name + '</label><input class="checkboxes" type="checkbox" name="1" id=' + 'checkbox_' + cbr.incomingCase.Symptoms[i].anzeigeNummer + '></div>');
 			}
 		}
 
@@ -253,6 +274,12 @@ if (login_check($mysqli) == true) {
         }
 
 		$('#btn_submit').click(function () {	
+			var i;
+			var ausgabe = "";
+			for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
+				ausgabe = ausgabe + "Symptom " + parseInt(i * 1 + 1*1) + ": " + cbr.incomingCase.Symptoms[i].name + " Wert: " + cbr.incomingCase.Symptoms[i].wert + "\n";
+			}
+			alert(ausgabe);
 			cbr.calculateSimilarityComplex();
 			$('#div_ausgabe').html(buildOutput());
 		});
@@ -271,16 +298,44 @@ if (login_check($mysqli) == true) {
 			var clickedBtnID = $(this).attr('id');
 			var idOhnePrefix = clickedBtnID.replace(/.*_/g, "");
 
+
+
 			if ($("#" + clickedBtnID).is(':checked')) {
 				// checked
-				$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="symptom row" style="max-width:90%"><div class="col-md-6 col-sm-6">' + parseInt(idOhnePrefix * 1 + 1 * 1) + ': ' + cbr.incomingCase.Symptoms[idOhnePrefix].name + '</div > <div class="col-md-5 col-sm-5 btn-group" data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
+
+
+				$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="symptom row" style="max-width:90%"><div class="col-md-6 col-sm-6">' + idOhnePrefix + ': ' + cbr.incomingCase.Symptoms[idOhnePrefix-1].name + '</div > <div class="col-md-5 col-sm-5 btn-group" data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
 				// Standardwerte setzen
-				$('#' + 'btn_klein_' + idOhnePrefix).click();
+				
+				if(cbr.incomingCase.Symptoms[idOhnePrefix-1].wert > 0) {
+					/*
+
+					BRAUCHT UNBEDINGT ÜBERARBEITUNG DA FEHLERHAFT
+					AKTUELL WERTE VON TEXT ÜBERSCHRIEBEN MIT STANDARDWERTEN
+
+					TO-DO:
+					ANZEIGEN DER GEDRÜCKTEN BUTTON VIA CSS KLASSEN
+
+					*/
+					if(cbr.incomingCase.Symptoms[idOhnePrefix-1].wert > 0.8) {
+						$('#' + 'btn_hoch_' + idOhnePrefix).click();
+					}
+					else if(cbr.incomingCase.Symptoms[idOhnePrefix-1].wert > 0.3 && cbr.incomingCase.Symptoms[idOhnePrefix-1].wert < 0.8) {
+						$('#' + 'btn_mittel_' + idOhnePrefix).click();
+					}
+					else {
+						$('#' + 'btn_klein_' + idOhnePrefix).click();
+					}
+				}
+				else {
+					$('#' + 'btn_klein_' + idOhnePrefix).click();
+				}
+				
 			}
 			else {
 				// unchecked
 				$('#' + 'div_impairment_' + idOhnePrefix).remove();
-				cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0;
+				cbr.incomingCase.Symptoms[idOhnePrefix-1].wert = 0;
 			}	
 
 
@@ -292,13 +347,13 @@ if (login_check($mysqli) == true) {
 			var idOhnePrefix = clickedBtnID.replace(/.*_/g, "");
 
 			if (clickedBtnID.includes("klein")) {
-				cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.3;
+				cbr.incomingCase.Symptoms[idOhnePrefix-1].wert = 0.3;
 			}
 			if (clickedBtnID.includes("mittel")) {
-				cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.6;
+				cbr.incomingCase.Symptoms[idOhnePrefix-1].wert = 0.6;
 			}
 			if (clickedBtnID.includes("hoch")) {
-				cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0.9;
+				cbr.incomingCase.Symptoms[idOhnePrefix-1].wert = 0.9;
 			}
 
 			// TO-DO: Buttondesign anpassen
@@ -314,7 +369,7 @@ if (login_check($mysqli) == true) {
 			// Entsprechende Checkbox auf "unchecked" setzen
 			$("#checkbox_" + idOhnePrefix).prop("checked", false);
 			// Symptom Wert auf 0 setzen
-			cbr.incomingCase.Symptoms[idOhnePrefix].wert = 0;
+			cbr.incomingCase.Symptoms[idOhnePrefix-1].wert = 0;
 
             });
 

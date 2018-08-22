@@ -60,6 +60,7 @@ if (login_check($mysqli) == true) {
     		<!-- Button row -->
 			<div class="col-md-offset-5 col-xs-offset-right-5 col-md-2 col-sm-12">
 				<button id="btn_submit" class=" btn btn-success" type="submit" style="background-color: #1a2732;">Submit</button>
+				<button id="btn_anpassen" class=" btn btn-success" style="display:none" type="submit" style="background-color: #1a2732;">Anpassen</button>
 			</div>
 			
     		<br>
@@ -99,10 +100,14 @@ if (login_check($mysqli) == true) {
         <script>
         $(document).ready(function () {
         	cbr.loadIncomingCase("no name", "no text");
+			setVisualLayout();
         });
 
         var ctx1 = document.getElementById("Chart").getContext('2d');
-        var myChart1 = new Chart(ctx1, {
+		var myChart1;       
+
+		function setVisualLayout() {
+			myChart1 = new Chart(ctx1, {
             type: 'bar',
             data: {
                 labels: ["","","",""],
@@ -130,7 +135,8 @@ if (login_check($mysqli) == true) {
                     }]
                 }
             }
-        });
+			});
+		}
         
         function buildOutput() {
         	var ausgabe = "";
@@ -215,35 +221,92 @@ if (login_check($mysqli) == true) {
 
         $('#btn_submit').click(function () {
         	// Filtern der Symptome und �bergabe an CBR
+			$('#section_symptoms').html("");
         	var text = $('#textarea_eingabe').val();
         	var kategorieAusTextArray = new Array();
-        	kategorieAusTextArray = extractKeywords(text);
 
+        	try {
+				kategorieAusTextArray = extractKeywords(text);
+			}
+			catch(error) {
+				if($('#btn_anpassen').is(":visible")) {
+					$('#btn_anpassen').hide();
+				}
+				alert("Bitte geben sie einen korrekten Text ein.\n\n" + "Fehlermeldung: " + error);
+				myChart1.destroy();
+				setVisualLayout();
+				return;
+			}
+			
         	var i;
         	for (i = 0; i < kategorieAusTextArray.length; i++) {
         		if (isNaN(kategorieAusTextArray[i].weight)) {
         			// mach nix
+					//
+					if($('#btn_anpassen').is(":visible")) {
+						$('#btn_anpassen').hide();						
+					}
         		}
         		else {
         			
 					
-
-					let obj = cbr.incomingCase.Symptoms.find(o => o.id === kategorieAusTextArray[i].katID);
-					obj.wert = kategorieAusTextArray[i].weight;
+					const index = cbr.incomingCase.Symptoms.map(e => e.id).indexOf(kategorieAusTextArray[i].katID);
+					cbr.incomingCase.Symptoms[index].wert = kategorieAusTextArray[i].weight;
+				
+					
+					if($('#btn_anpassen').is(":hidden")) {
+						$('#btn_anpassen').show();
+					}  
 
         		}
         	}
+		
 
+			
         	// Anzeigen der gefilterten Symptome
-        	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
-        		if (cbr.incomingCase.Symptoms[i].wert > 0) {
-        			$('#section_symptoms').append('<div id=' + 'div_impairment_' + i + ' class="row" style="max-width:90%"><br><div class="col-md-7 col-sm-3">' + cbr.incomingCase.Symptoms[i].name + '</div > <div class=" col-md-offset-2 col-md-2 col-sm-offset-2 col-sm-2 ">' + cbr.incomingCase.Symptoms[i].wert + '</div></div>');
-        		}		
+        	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {   		
+				if (cbr.incomingCase.Symptoms[i].wert > 0) {
+					if(cbr.incomingCase.Symptoms[i].wert > 0.3 && cbr.incomingCase.Symptoms[i].wert < 0.8) {
+						$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5"><label id=' + 'lbl_mittel_' + cbr.incomingCase.Symptoms[i].id + ' class="btn-warning btn-sm">Mittel</label></div>');
+					}
+					else if(cbr.incomingCase.Symptoms[i].wert >= 0.8) {
+						$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5"><label id=' + 'lbl_hoch_' + cbr.incomingCase.Symptoms[i].id + ' class="btn-danger btn-sm">Hoch</label></div>');
+					}
+					else {
+						$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5"><label id=' + 'lbl_klein_' + cbr.incomingCase.Symptoms[i].id + ' class="btn-info btn-sm">Niedrig</label></div>');
+					}
+					//$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + parseInt(cbr.incomingCase.Symptoms[i].id * 1 + 1 * 1) + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5 btn-group" data-toggle="buttons"><button id=' + 'btn_klein_' + cbr.incomingCase.Symptoms[i].id + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + cbr.incomingCase.Symptoms[i].id + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + cbr.incomingCase.Symptoms[i].id + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + cbr.incomingCase.Symptoms[i].id + ' class="close btn btn-info xbutton">x</button></div></div>');
+        			//$('#section_symptoms').append('<div id=' + 'div_impairment_' + i + ' class="row" style="max-width:90%"><br><div class="col-md-7 col-sm-3">' + cbr.incomingCase.Symptoms[i].name + '</div > <div class=" col-md-offset-2 col-md-2 col-sm-offset-2 col-sm-2 ">' + cbr.incomingCase.Symptoms[i].wert + '</div></div>');
+        		}	
+				
         	}
+				
         	// Berechnung und Ausgabe des Ergebnisses
         	cbr.calculateSimilarityComplex();
         	$('#div_ausgabe').html(buildOutput());
         });
+
+
+		$('#btn_anpassen').click(function () {	
+			var symptomArray = [];
+			var i;
+			for(i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
+				if(cbr.incomingCase.Symptoms[i].wert > 0) {
+					symptomArray.push(cbr.incomingCase.Symptoms[i]);
+					
+				}
+			}
+			
+			if(symptomArray.length > 0) {
+				window.localStorage.setItem("ICSymptoms", JSON.stringify(symptomArray));
+				window.location.href = "http://141.99.248.92/Projektgruppe/php/checker_symptom.php";
+			}
+			else {
+				alert("Mindestens ein Symptom muss gefunden werden");
+			}
+			alert("yo?\n");
+		});
+		
 
 			
 

@@ -224,6 +224,7 @@ class Symptom {
 		this.id = pid;
 		this.name = pname;
 		this.wert = pwert;
+		this.anzeigeNummer = 0;
 		//       this.wij = pwij;
 		//       this.Keyword = [];
 	}
