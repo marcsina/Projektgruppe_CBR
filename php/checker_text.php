@@ -306,7 +306,6 @@ if (login_check($mysqli) == true) {
 			else {
 				alert("Mindestens ein Symptom muss gefunden werden");
 			}
-			alert("yo?\n");
 		});
 		
 

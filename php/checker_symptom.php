@@ -117,16 +117,16 @@ if (login_check($mysqli) == true) {
 			
 			if(textSymptoms !== null) {
 				var i;
-				var testyo = "";
 				for (i = 0; i < textSymptoms.length; i++) {
 					const index = cbr.incomingCase.Symptoms.map(e => e.id).indexOf(textSymptoms[i].id);
 					cbr.incomingCase.Symptoms[index].wert = textSymptoms[i].wert;
-					testyo = testyo + "kat id: " + textSymptoms[i].id + " --- wert: " + textSymptoms[i].wert + "\n";
 					$('#' + 'checkbox_' + cbr.incomingCase.Symptoms[index].anzeigeNummer).click();
 				}
 				localStorage.clear();
 			}
 		});
+
+		var autocompleteVariableCheck = 0;
 
 		var ergebnis = new Array();
 		var ctx1 = document.getElementById("Chart").getContext('2d');
@@ -277,13 +277,8 @@ if (login_check($mysqli) == true) {
 
 		$('#btn_submit').click(function () {	
 			var i;
-			var ausgabe = "";
-			for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
-				ausgabe = ausgabe + "Symptom " + parseInt(i * 1 + 1*1) + ": " + cbr.incomingCase.Symptoms[i].name + " Wert: " + cbr.incomingCase.Symptoms[i].wert + "\n";
-			}
-			alert(ausgabe);
 			cbr.calculateSimilarityComplex();
-			$('#div_ausgabe').html(buildOutput());
+			$('#div_ausgabe').html(buildOutput());			
 		});
 
 		$('#btn_start').click(function () {
@@ -299,8 +294,10 @@ if (login_check($mysqli) == true) {
 		$('body').on('click', '.checkboxes', function () {
 			var clickedBtnID = $(this).attr('id');
 			var idOhnePrefix = clickedBtnID.replace(/.*_/g, "");
-
-
+			
+			if(autocompleteVariableCheck == 1) {
+				return;
+			}
 
 			if ($("#" + clickedBtnID).is(':checked')) {
 				// checked
@@ -342,6 +339,8 @@ if (login_check($mysqli) == true) {
 
 
 		});
+
+
 
 		// Wird ausgef�hrt beim anklicken eines Buttons zur Angabe der St�rke eines Symptoms
 		$('body').on('click', 'button.impairmentbutton', function () {
