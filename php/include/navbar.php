@@ -148,13 +148,13 @@ if (login_check($mysqli) == true) {
                               <a href="/Projektgruppe/php/artikel.php">Artikel</a>
                           </li>
                           <li>
-                              <a href="#section41">Scripts</a>
+                              <a href="/Projektgruppe/php/scripts.php">Scripts</a>
                           </li>
                           <li>
-                              <a href="#section42">Tutorials</a>
+                              <a href="/Projektgruppe/php/tutorials.php">Tutorials</a>
                           </li>
                           <li>
-                              <a href="#section42">videos</a>
+                              <a href="/Projektgruppe/php/videos.php">videos</a>
                           </li>
                       </ul>
                   </li>

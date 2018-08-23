@@ -26,7 +26,7 @@ if (login_check($mysqli) == true) {
     
 <body id="home">
 	<div class="container">
-        <div class="row text-center">
+        <div class="row text-center col-md-offset-1 col-md-10">
         	<?php
         	$sqlStmt = "SELECT * FROM Artikel WHERE id = '".$_GET["id"]."';";
             $result =  mysqli_query($mysqli,$sqlStmt);

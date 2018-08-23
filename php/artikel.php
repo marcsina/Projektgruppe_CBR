@@ -72,21 +72,6 @@ if (login_check($mysqli) == true) {
                 $result->free();
                 } 
                 ?>
-               
-                
- <!--           <article>
-                    <a href="artikel_show.php"><h3><strong>Demenz heutzutage</strong></h3></a>
-                    <h6><span class="glyphicon glyphicon-time"></span> Post by juji Dane,sep 27,2018</h6>
-                    <p>lol2</p>
-                </article>
-                
-                <article>
-                    <a href="artikel_show.php"><h3><strong>Alzheimer in Deutschland</strong></h3></a>
-                    <h6><span class="glyphicon glyphicon-time"></span> Post by Jane Dane,sep 27,2018</h6>
-                    <p>lol3</p>
-                </article>  
-                
-                -->
             </section>
     
             <aside class=" col-md-3 peno">

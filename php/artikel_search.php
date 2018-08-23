@@ -44,17 +44,35 @@ if (login_check($mysqli) == true) {
             <section class=" col-md-offset-1">
                 <h4><small style=" color: white">Posts Found</small></h4>
                 <hr>
-                <article>
-                    <a href="unarticle.html"> <h3><strong>Alzheimer in Deutschland</strong></h3></a>
-                    <h6><span class="glyphicon glyphicon-time"></span> Post by Jane Dane,sep 27,2018</h6>
-                    <p>lol</p>
-                </article>
-    
-                <article>
-                    <h3><strong>Demenz heutzutage</strong></h3>
-                    <h6><span class="glyphicon glyphicon-time"></span> Post by juji Dane,sep 27,2018</h6>
-                    <p>lol2</p>
-                </article>
+                <?php
+                $sqlStmt = "SELECT * FROM Artikel WHERE Inhalt LIKE '%".$_GET["searchtitel"]."%' OR Titel LIKE '%".$_GET["searchtitel"]."%' ORDER BY Datum DESC;";
+                $result =  mysqli_query($mysqli,$sqlStmt);
+                $data = array();
+                if ($result = $mysqli->query($sqlStmt))
+                {
+                    $i=0;
+                    while ($row = $result->fetch_assoc())
+                    {
+                        ?>
+                        <article>
+                    	<a href="artikel_show.php?id=<?php echo $row['id']?>"><h3><strong><?php echo $row['Titel']?></strong></h3></a>
+                    	
+                    	<?php
+                    	$value = $mysqli->query("SELECT username as nn FROM members WHERE id = '".$row['UserID']."';");
+        				$result2 = $value->fetch_assoc();
+        				?>
+        				
+                    	<h6><span class="glyphicon glyphicon-time"></span> Post by <?php echo $result2['nn']?>, <?php echo $row['Datum']?></h6>
+                    	<p><?php echo substr($row['Inhalt'], 0, 500)?>...</p>
+                		</article>
+                    	<?php
+                    	$i++;
+                    }
+                
+                // Objekt freigeben
+                $result->free();
+                } 
+                ?>
             </section>
         </div>
 	</div>
