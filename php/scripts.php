@@ -9,7 +9,7 @@ if (login_check($mysqli) == true) {
 } else {
     $logged = 'out';
     header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');
-	exit;
+    exit;
 }
 ?>
 
@@ -27,8 +27,8 @@ if (login_check($mysqli) == true) {
 <body id="home">
 	<div class="container">
         <div class="row text-center">
-            <h1 style=" color: white">Artikel</h1>
-            <form class=" form-inline  " class=" form-control" action="artikel_search.php" method="get">
+            <h1 style=" color: white">Scripts</h1>
+            <form class=" form-inline  " class=" form-control" action="scripts_search.php" method="get">
                 <h2 style="text-align: center; font-size: 30px; color: white"> </h2>
                 <div class=" col-md-offset-1 col-md-10">
                     <button type="submit" class="btn btn-sucess" class="form-control" style=" color: black">
@@ -40,12 +40,11 @@ if (login_check($mysqli) == true) {
         </div>
     
         <div class="row">
-    
-            <section class=" col-md-offset-1">
-                <h4><small style=" color: white">Gefundene Artikel</small></h4>
+            <section class=" col-md-offset-1 col-md-7 pour">
+                <h4><small style=" color: white">Aktuelle Scripts</small></h4>
                 <hr>
                 <?php
-                $sqlStmt = "SELECT * FROM Artikel WHERE Inhalt LIKE '%".$_GET["searchtitel"]."%' OR Titel LIKE '%".$_GET["searchtitel"]."%' ORDER BY Datum DESC;";
+                $sqlStmt = "SELECT * FROM Scripts ORDER BY Datum DESC;";
                 $result =  mysqli_query($mysqli,$sqlStmt);
                 $data = array();
                 if ($result = $mysqli->query($sqlStmt))
@@ -55,7 +54,7 @@ if (login_check($mysqli) == true) {
                     {
                         ?>
                         <article>
-                    	<a href="artikel_show.php?id=<?php echo $row['id']?>"><h3><strong><?php echo $row['Titel']?></strong></h3></a>
+                    	<a href="../pdf/<?php echo $row['id']?>.pdf" target="_blank"><h3><strong><?php echo $row['Titel']?></strong></h3></a>
                     	
                     	<?php
                     	$value = $mysqli->query("SELECT username as nn FROM members WHERE id = '".$row['UserID']."';");
@@ -63,7 +62,6 @@ if (login_check($mysqli) == true) {
         				?>
         				
                     	<h6><span class="glyphicon glyphicon-time"></span> Post by <?php echo $result2['nn']?>, <?php echo $row['Datum']?></h6>
-                    	<p><?php echo substr($row['Inhalt'], 0, 500)?>...</p>
                 		</article>
                     	<?php
                     	$i++;
@@ -74,11 +72,22 @@ if (login_check($mysqli) == true) {
                 } 
                 ?>
             </section>
+    
+            <aside class=" col-md-3 peno">
+                <h4><small style=" color: white">ALLE SCRIPTS</small></h4>
+                <hr>
+            	<form class=" form-inline  " class=" form-control" action="scripts_search.php" method="get">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">                                                        
+                            <a>
+                                <button title="Demenz" type="submit" name="searchtitel" value="Demenz" style="width:100%;text-align:left;color: black">Demenz</button>
+                            </a>                                                         
+                        </div>
+                    </div>
+                </form>
+            </aside>
         </div>
-	</div>
-
-
-
+    </div>
     <!-- Scripts -->
 
     <script src="../js/jquery-2.2.2.min.js"></script>

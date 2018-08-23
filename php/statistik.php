@@ -114,8 +114,8 @@ var myChart1 = new Chart(ctx1, {
             label: 'Number of Users',
             data: [<?php echo $result1['n'] ?>, <?php echo $result2['n'] ?>],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)'
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
@@ -145,8 +145,8 @@ var myChart2 = new Chart(ctx2, {
             label: 'Number of Replies',
             data: [<?php echo $result3['n'] ?>, <?php echo $result4['n'] ?>],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)'
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)'
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
@@ -175,12 +175,12 @@ var myChart3 = new Chart(ctx3, {
             label: '# of Votes',
             data: [<?php echo $result5['n'] ?>, <?php echo $result6['n'] ?>],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)'
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
@@ -213,12 +213,12 @@ var myChart4 = new Chart(ctx4, {
             label: '# of Votes',
             data: [<?php echo $result7['n'] ?>, <?php echo $result8['n'] ?>],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)'
             ],
             borderColor: [
                 'rgba(255,99,132,1)',

@@ -183,7 +183,7 @@ if(isset($_POST["createbeitrag"]))
                 $value = $mysqli->query("SELECT MAX(datum) as max FROM Forum_Beitrag WHERE topic = '".$row['id']."';");
                 $result2 = $value->fetch_assoc();
 				?>
-                <td><?php echo date("d-m-Y ", strtotime($result2['max'])) ," at ", date(" H:i", strtotime($result2['max']))?></td>
+                <td><?php echo date("d.m.Y ", strtotime($result2['max'])) ," um ", date(" H:i", strtotime($result2['max']))?> Uhr</td>
                 </tr>
                 </form>
             	<?php

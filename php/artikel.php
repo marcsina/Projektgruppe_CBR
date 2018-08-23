@@ -41,7 +41,7 @@ if (login_check($mysqli) == true) {
     
         <div class="row">
             <section class=" col-md-offset-1 col-md-7 pour">
-                <h4><small style=" color: white">Recent Posts</small></h4>
+                <h4><small style=" color: white">Aktuelle Artikel</small></h4>
                 <hr>
                 <?php
                 $sqlStmt = "SELECT * FROM Artikel ORDER BY Datum DESC;";
