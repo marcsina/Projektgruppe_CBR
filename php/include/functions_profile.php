@@ -243,11 +243,11 @@ function deleteFriendByUserID($id1, $id2, $mysqli)
 	}
 }
 
-function editProfile($mysqli, $vorname, $nachname, $website, $email)
+function editProfile($mysqli, $vorname, $nachname, $beschreibung, $website, $email)
 {
-    if($stmt = $mysqli->prepare("UPDATE members SET vorname = ?, nachname = ?, website = ?, email = ?  WHERE id = ?"))
+    if($stmt = $mysqli->prepare("UPDATE members SET vorname = ?, nachname = ?, beschreibung = ?, website = ?, email = ?  WHERE id = ?"))
     {
-        $stmt->bind_param('ssssi', $vorname, $nachname, $website, $email, $_SESSION['user_id']);
+        $stmt->bind_param('sssssi', $vorname, $nachname, $beschreibung, $website, $email, $_SESSION['user_id']);
         if($stmt->execute())
         {
             return true;
@@ -262,12 +262,13 @@ function editProfile($mysqli, $vorname, $nachname, $website, $email)
 }
 
 //entgegennahme der form_POSTS
-if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['website']))
+if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['website'], $_POST['beschreibung']))
 {
     //Unnötiges abfangen
 
     $p1 = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
     $p2 = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+    $p3 = filter_input(INPUT_POST, 'beschreibung', FILTER_SANITIZE_STRING);
     $p6 = filter_input(INPUT_POST, 'website', FILTER_SANITIZE_URL);
 
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -278,7 +279,7 @@ if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_PO
     $error_msg .= '<p class="error">The email address you entered is not valid</p>';
     }
 
-    editProfile($mysqli, $p1, $p2, $p6, $email);
+    editProfile($mysqli, $p1, $p2,$p3, $p6, $email);
 }
 
 if(isset($_POST['addFriend'], $_POST['id1'], $_POST['id2']))

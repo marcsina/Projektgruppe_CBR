@@ -16,7 +16,7 @@
       //falls die ProfilSeite die eigene ist, setze Wert auf true
 
       $ownProfile = true;
-      
+
       //�berpr�fen ob URL auf Profil verweist
       if(!empty($_GET["username"]))
       {
@@ -321,7 +321,6 @@
                                     }
 
                                     ?>
-                                   
                                 </ul>
                             </div><!-- End div .scroll-user-widget -->
                         </div><!-- End div .tab-pane -->
@@ -331,36 +330,38 @@
 						if($ownProfile)
 						{
                             echo "<div class='tab-pane animated fadeInRight' id='edit_profil'>
-
-							<form class='form' action='' method='post' id='registrationForm'>
+                                    
+							<form class='form' action='' method='post' id='editForm'>
 
 								<div class='form-group'>
-
 									<div class='col-xs-6'>Vorname</label>
 										<input type='text' class='form-control' name='first_name' id='first_name' placeholder='first name' title='Vornamen eingeben' value='". $userDataArray['vorname'] . "'>
 									</div>
 								</div>
 								<div class='form-group'>
-
 									<div class='col-xs-6'>
 										<label for='last_name'>Nachname</label>
 										<input type='text' class='form-control' name='last_name' id='last_name' placeholder='last name' title='Nachnamen eingeben' value='". $userDataArray['nachname'] . "'>
 									</div>
 								</div>
 								<div class='form-group'>
-
 									<div class='col-xs-6'>
 										<label for='email'>Email</label>
 										<input type='email' class='form-control' name='email' id='email' placeholder='you@email.com' title='Emailadresse eingeben' value='". $userDataArray['email'] . "'>
 									</div>
 								</div>
 								<div class='form-group'>
-
 									<div class='col-xs-6'>
 										<label for='website'>Webseite</label>
 										<input type='text' class='form-control' name='website' id='website' placeholder='enter your website' title='Eigene Webseite eingeben' value='". $userDataArray['website'] . "'>
 									</div>
 								</div>
+                                <div class='form-group'>
+									    <div class='col-xs-12'>
+										<label for='beschreibung'>Beschreibung</label>
+										    <textarea form='editForm' class='form-control' name='beschreibung' id='beschreibung' style='resize: vertical;'>". $userDataArray['beschreibung'] . "</textarea>
+									    </div>
+                                    </div>
 								<div class='form-group'>
 									<div class='col-xs-6'>
 										<br>
