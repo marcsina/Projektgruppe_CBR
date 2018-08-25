@@ -176,4 +176,10 @@ if (login_check($mysqli) == true) {
       </div>
     </header></div>
 
+<?php
+
+
+include_once('chat.php');
+?>
+
 
