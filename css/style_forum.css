@@ -1,25 +1,26 @@
 /* Tabs einfärben*/
 
 .top {
-    background: #615A7F;
+    background: #2d4457;
     margin-top: 25px;
-    border-color: #615A7F;
+    border-color: #000000;
     border-width: 1px;
     border-style: solid;
-    border-bottom: none;
+   
 }
 
 .top > li{
-    margin: -5px -5px -5px -5px;
-    background: #c7c3d5;
+    margin: -5px -5px -5px -1px;
+    background: #1a2732;
     border-radius: 0px;
     border: 1px solid black;
     float: left;
 }
 
 .top > li > a{
-    color: black;
-    font-size: 30px;
+    color: #007aff;
+    font-size: 20px;
+    padding-left: 0px;
 }
 
 table, th, td {
@@ -28,10 +29,12 @@ table, th, td {
 	border-left: none;
 }
 
+
+
 table > tbody > tr > th {
 	border: 1px solid black;
 	padding:5px;
-	color: black;
+	color: #007aff;
 	font-size: 20px;
 	border-right: none;
 	border-left: none;
@@ -40,7 +43,7 @@ table > tbody > tr > th {
 table > tbody > tr > td {
 	border: 1px solid black;
 	padding:5px;
-	color: black;
+	color: #ffffff;
 	font-size: 20px;
 	border-right: none;
 	border-left: none;
@@ -53,7 +56,7 @@ body {
 }
 
 button {
-     background:none!important;
+     background:none;
      color:inherit;
      border:none; 
      padding:0!important;
@@ -62,3 +65,8 @@ button {
      border-bottom:0px solid #444; 
      cursor: pointer;
 }
+
+.nicehover:hover {
+    background: black;
+} 
+

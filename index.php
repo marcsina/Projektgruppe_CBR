@@ -1,189 +1,217 @@
 <?php
-include_once 'php/include/conn.php';
-include_once 'php/include/functions_login.php';
+//config file with all includes and variables we need
+include_once 'config.php';
+include_once 'php/include/functions_history.php';
 
- 
 sec_session_start();
- 
+
 if (login_check($mysqli) == true) {
     $logged = 'in';
+
 } else {
     $logged = 'out';
+
 }
 ?>
 <!doctype html>
-<html lang="de">
+<html lang='de'>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-        <!-- user-scalable für mobile devices -->
-        <meta name="description" content="...">
-        <meta name="author" content="...">
-        <title>MedAusbild</title>
+<head>
 
+    <!-- include Header -->
+    <?php
+    include(ROOT_PATH.'Projektgruppe/php/include/header.php');
+    ?>
 
+    <!-- css -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="plugins/cubeportfolio/css/cubeportfolio.min.css" />
+    <link href="css/nivo-lightbox.css" rel="stylesheet" />
+    <link href="css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="css/owl.carousel.css" rel="stylesheet" media="screen" />
+    <link href="css/owl.theme.css" rel="stylesheet" media="screen" />
+    <link href="css/animate.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
 
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    <!--external css-->
+    <!-- font icon -->
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
 
+    <!-- Custom styles -->
 
-        <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style_home.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
 
+    <link href="css/style-responsive.css" rel="stylesheet" />
 
-        <link href="css/style.css" rel="stylesheet">
+    <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet" />
+</head>
 
+<!-- include Navbar -->
+<?php
+include ('php/include/navbar.php');
+?>
 
-    </head>
+<body>
+    <section id="Updates" class="home-section bg-gray paddingbot-60">
+        <div class="container marginbot-50">
+            <div class='col-sm-12 col-md-12 col-lg-12'>
+                <h2>
+                    Willkommen auf der Webseite der Uni Siegen MedAusbild
+                </h2>
+                <p>
+                    Sind Sie Student der Universität Siegen?
+                    <br />
+                    Möchten Sie sich im Bereich der Medizin fortbilden?
+                    <br />
+                    Zusammen mit Ihren Kommilitonen Spaß haben?
+                    <br />
+                    <br />
+                    Dann sind Sie hier genau richtig!
+                    <br />
+                    <br />
+                    Bestreiten Sie spannende und fordernde Quizduelle gegen ihre Kommilitonen und vergleichen Sie ihre Ergebnisse. Verfolgen Sie die letzten Vorlesungen Ihrer Professoren und Dozenten. Werden Sie zum MedDuell-Master!
+                </p>
 
-    <body id="home">
-		
-		<!-- include Navbar -->
-		<?php
-			include ("php/include/navbar.php");
-		?>
-
-		
-
-
-        <!-- _________________________Content________________________________-->
-        <br>
-        <br>
-        <br>
-        <br>
-
-        <!-- every content should be nested in a way like the example below   -->
-
-        <!-- nested columns -->
-        <div class="row first-after-navbar">
-            <form>
-                <!-- first nested column -->
-                <div class="col-md-12">
-                    <p id="input-textarea">                                                                                                               
-					66-jähriger Patient, geschieden, lebte bislang alleine in eigener Paterrewohnung in unmittelbarer
-Nachbarschaft zur Familie des Sohnes, in ländlicher Umgebung. Der Patient versorgte sich alleine,
-kaufte ein, machte sich sein Essen. Es gibt einen Aldi und einen Bäcker in der Nähe. Es gibt eine
-Arztpraxis mit drei Ärztinnen/Ärzten, die den ländlichen Bereich versorgen. Für größere Erledigungen
-muss er in den nächst größeren Ort, z. B. mit dem Auto oder mit den öffentlichen Verkehrsmitteln,
-fahren.
-
-Der Patient ist in der Sprechstunde/Klinik schon seit 2004 bekannt. Er kam ursprünglich mit einem Mini-
-Mental-Status (MMSE) von 30 Punkten, jedoch schon Hinweisen auf eine sehr initiale Demenz. Im
-
-Frühjahr 2009, nach nunmehr 4 1⁄2 Jahren, ist der MMSE auf 21 Punkte gefallen. Im MRT von 2004
-bestand bereits eine auffallende, eindeutig die Altersnorm überschreitende cortical betonte Hirnatrophie.
-Im HMPAO-SPECT fand sich eine diffus herabgesetzte Aktivitätsbelegung bds., insbesondere links,
-vereinbar mit einer neurodegenerativen Grunderkrankung, am ehesten im Sinne einer
-Alzheimer-Demenz.
-Der Patient ist sehr sportlich, machte zum Beispiel Krafttraining, fand aber aufgrund der Demenz in der
-letzten Zeit nicht immer das richtige Maß. So kam es kürzlich zu einem Sturz vom Fahrrad mit einer
-fraglichen kurzen Bewusstlosigkeit.
-Er wurde daraufhin stationär untersucht, wobei keine fassbare Ursache gefunden wurde.
-Der Sohn verunglückte vor vier Wochen mit dem Motorrad schwer und steht als unmittelbarer
-Ansprechpartner nicht mehr zur Verfügung. Die Schwiegertochter ist berufstätig, muss die Kinder
-versorgen und nun auch den verunglückten Ehemann. Der Patient konnte die Verletzung des Sohnes
-nicht einschätzen und geriet in Panik. Er ging zum Hausarzt mit einem akuten Angstzustand und dem
-Bild einer Progression der Demenz, wurde daraufhin eingewiesen, wobei die Aufnahme nach einem
-längeren Gespräch aber nicht als sinnvoll erschien. Der Patient klagt augenblicklich über Schlaflosigkeit
-und Ängste.
-Der Patient wird nun wöchentlich in die Selbsthilfe- und Trainingsgruppe eingeladen. Dort kann er auch
-über seine Probleme sprechen und ggf. Problemlösungen erfahren. Die Fahrt dahin fällt ihm
-zunehmend schwerer.
-
-Der Patient kann augenblicklich die Mahlzeiten nicht mehr ausreichend zubereiten; Anziehen, Ausziehen, Waschen
-kann er noch selbst. Er kann sich im Dorf noch bewegen, größere Wege, z. B. in die nächst größere Stadt, sind nun
-kaum mehr möglich. Der Patient kommt immer häufiger mit Zetteln in die Klinik. Die Bewältigung von Post,
-Arztterminen usw. ist schwierig geworden, zumal die Anbindung an den Sohn nun nicht mehr so möglich ist. Er ist
-im Begriff seine Selbständigkeit zur verlieren. Er zieht sich verstärkt zurück, geht nicht mehr häufig zum Einkaufen,
-ist depressiv und verzweifelt geworden, weint häufig, auch weil er seine Demenz bemerkt und nun den Unfall
-seines Sohnes betrauert.
-Ganz akut klagt er über Kniebeschwerden bei Gonarthrose. In der Vergangenheit wurde schon einmal eine
-Arthroskopie veranlasst. Der Patient kann nun kaum mehr Treppen steigen und plant in der nächsten Zeit einen
-chirurgischen Eingriff.
-					</p>
+                <?php
+                if($logged == "out")
+                {
+                    echo "<div class='col-sm-6 col-md-6'>
+                    <p>Sind Sie schon Mitglied? Dann loggen Sie sich hier ein!</p>
+                    <a role ='button' class='btn btn-sm' href='php/login.php'>Login</a>
                 </div>
+                <div class='col-sm-6 col-md-6'>
+                    <p>Werden Sie Mitglied! Registrieren Sie sich hier</p>
+                    <a role ='button' class='btn btn-sm' href='php/register.php'>Registrieren</a>
+                </div>";
+                }
+                ?>
 
-                <!-- second nested column -->
-                <div class="col-md-12">
-                    <!-- column content -->
-                    <button type="button" id="berechnen">GetKeywords</button>
-					<button type="button" id="berechnen2">GetKeywords_New_Version</button>
-                    <button type="button" id="cbr">CBR Auswertung</button>
-
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="wow fadeInDown" data-wow-delay="0.1s">
+                            <div class="section-heading text-center">
+                                <h2 class="h-bold">
+                            </div>
+                        </div>
+                        <div class="divider-short"></div>
+                    </div>
                 </div>
+            </div>
 
-                <!-- third nested column -->
-                <div class="col-md-12">
-                    <label>
-                        <output id="output-textarea"></output>
-                    </label>
-                </div>
+            <?php
+            if($logged == "in")
+            {
+                //get recent updates
+                $recent_article = get_Recent_Article($mysqli, 3);
+                $recent_forum = get_Recent_Forum($mysqli, 3);
 
-                <div class="col-md-12">
-                    <label>
-                        <output id="CBRtestfeld"></output>
-                    </label>
+                echo"
+                        <div class='row'>
+                            <div class='col-sm-12'>
+                                <div id='filters-container' class='cbp-l-filters-alignLeft'>
+                                    <div data-filter='*' class='cbp-filter-item-active cbp-filter-item'>
+                                        All (
+                                        <div class='cbp-filter-counter'></div> )
+                                    </div>
+                                    <div data-filter='.forum' class='cbp-filter-item'>
+                                        forum (
+                                        <div class='cbp-filter-counter'></div> )
+                                    </div>
+                                    <div data-filter='.article' class='cbp-filter-item'>
+                                        article (
+                                        <div class='cbp-filter-counter'></div> )
+                                    </div>
+                                </div>
+
+                                <div id='grid-container' class='cbp-l-grid-team'>
+                                    <ul>";
+
+
+
+                foreach($recent_forum as &$item )
+                {
+
+                    echo"
+                                        <li class='cbp-item forum'>
+                                            <a href='http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=".$item['topic_id']."' class='cbp-caption cbp-singlePageI'>
+                                                <div class='cbp-caption-defaultWrap'>
+                                                    <img src='img/team/1.jpg' alt='' width='100%' />
+                                                </div>
+                                                <div class='cbp-caption-activeWrap'>
+                                                    <div class='cbp-l-caption-alignCenter'>
+                                                        <div class='cbp-l-caption-body'>
+                                                            <div class='cbp-l-caption-text'>Neues in ".$item['topic_title']."</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                            ";
+                }
+
+                foreach($recent_article as &$item )
+                {
+
+                    echo"
+                                        <li class='cbp-item article'>
+                                            <a href='http://141.99.248.92/Projektgruppe/php/artikel_show.php?id=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
+                                                <div class='cbp-caption-defaultWrap'>
+                                                    <img src='img/index_book.jpg' alt='' width='100%' />
+                                                </div>
+                                                <div class='cbp-caption-activeWrap'>
+                                                    <div class='cbp-l-caption-alignCenter'>
+                                                        <div class='cbp-l-caption-body'>
+                                                            <div class='cbp-l-caption-text'>Neuer Artikel: ".$item['title']."</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                            ";
+                }
+
+                echo"</ul>
+                    </div>
                 </div>
-                
-                       </form>
+            </div>";
+
+            }
+
+
+            ?>
+                        
         </div>
-		<div><b>Keywords from Database:</b></div>
-        <div id="txtHint" style="display:none"><b>Person info will be listed here...</b></div>
-		<div id="pastHint" style="display:none"><b>Person info will be listed here...</b></div>
-		<div id="cbrhint" style="display:none"><b>CaseBase Data will be displayed here</b></div>
+    </section>
 
-		<br> <br>
-		<div><b>Keywords found in Text</b></div>
-		<div id="txtKeywords"><b></b></div>
-		<br> <br>
-        <!--____________________________________________________________________________________________________-->
-		 <?php
-        if (isset($_GET['error'])) {
-            echo '<p class="error">Error Logging In!</p>';
-        }
-        ?> 
-        <form action="php/include/login_process.php" method="post" name="login_form">                      
-            Email: <input type="text" name="email" />
-            Password: <input type="password" 
-                             name="password" 
-                             id="password"/>
-            <input type="button" 
-                   value="Login" 
-                   onclick="formhash(this.form, this.form.password);" /> 
-        </form>
-        <p>If you don't have a login, please <a href="php/register.php">register</a></p>
-        <p>If you are done, please <a href="php/include/logout.php">log out</a>.</p>
-        <p>You are currently logged <?php echo $logged ?>.</p>
+    <!-- _________________________Content________________________________-->
+    <!-- Scripts -->
+    <script src='js/snowball-german.js'></script>
+    <script src='js/stopWords.js'></script>
 
-		<br>
-		<form action="php/include/AddCase.php"
-				method="post" 
-				name="addCase_form">
-            Name der Krankheit: <input type='text' 
-                name='krankheit' 
-                id='krankheit' /><br>
-			Beschreibung: <input type='text' 
-                name='beschreibung' 
-                id='beschreibung' /><br>	
-			<input type='hidden' 
-                name='hiddenkat' 
-                id='hiddenkat' />
-            <input type="button" 
-                   value="addCase" 
-                   onclick="return AddCase_Check(addCase_form,addCase_form.krankheit,addCase_form.beschreibung,addCase_form.hiddenkat);" /> 
-        </form>
+    <script type='text/JavaScript' src='js/sha512.js'></script>
+    <script type='text/JavaScript' src='js/forms.js'></script>
+    <a href="#" class="scrollup">
+        <i class="fa fa-angle-up active"></i>
+    </a>
 
-        <!-- Scripts -->
-        <!--<script src="js/german-porter-stemmer.js"></script>-->
-		<script src="js/snowball-german.js"></script>
-        <script src="js/stopWords.js"></script>
-        <script src="js/jquery-2.2.2.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/script.js"></script>
-		<script src="js/CBR.js"></script>
-		<script type="text/JavaScript" src="js/sha512.js"></script> 
-        <script type="text/JavaScript" src="js/forms.js"></script> 
-		
-
-    </body>
-
+    <!-- Core JavaScript Files -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/jquery.scrollTo.js"></script>
+    <script src="js/jquery.appear.js"></script>
+    <script src="js/stellar.js"></script>
+    <script src="plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/nivo-lightbox.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
 </html>

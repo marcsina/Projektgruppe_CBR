@@ -1,44 +1,10 @@
-﻿/*------------------------------------------/
-/----------------Navbar---------------------/
-/------------------------------------------*/
-.navbar-fixed-top {
-    background-color: #615A7F;
-	min-height: 50px;
-	width: 100%;
-	z-index: 999;
-    margin-bottom: 100px;
-}
-
-.first-after-navbar{
-    margin-top: 50px;
-}
-.navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav > li > a:hover{ 
-    /*hintergrund bei hover
-    schriftfarbe bei focus
-    
-    '>' bezieht sich auf direkten nachfolger (child)*/
-    background-color: #EAE6FC;
-    color: #543B67; /*schrift*/
-}
-
-.menuItem a, .navbar-brand{
-    font-weight: 600;
-    font-size: 20px;
-    color: #E2D8DE;
-}
-
-.navbar-brand{
-    color: #D1CCD5;
-    font-size: 45px;
-}
-
-.navbar-header .navbar-brand:hover, .navbar-header .navbar-brand:focus{ /*schriftfarbe ändern bei hover*/
-    color: #EAE6FC;
+﻿#btn_submit {
+    width: 100px;
 }
 
 /* code pour checker1*/
 body{
-    padding-top: 10px;
+    padding-top: 70px;
 }
 
 .checken{
@@ -67,12 +33,30 @@ body{
      height: 200px;
      overflow: auto;
 }
-.textar{
-    height: 300px;
-    width: 500px;
-    border: 1px solid black;
-     overflow: auto;
-     text-align: justify;
+.textar {
+    height: 100%;
+    width: 100%;
+    border: 0px;
+    overflow: auto;
+    text-align: justify;
+    resize: none;
+}
+.close {
+    color: black;
+}
+
+.newRow {
+    padding-top: 25px;
+}
+
+.symptom {
+    padding-top: 10px;
+    margin-left: -15px;
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 /*FORUM*/
 table{
@@ -85,7 +69,6 @@ table{
    
 }
 li{
-    text-align:;
     padding-bottom: 6px;
     color: red;
 }
@@ -103,4 +86,95 @@ li{
 .text3{
     height: 100px;
     width: 500px;
+}
+
+/*     Genereates Right Side Offset     */
+.col-xs-offset-right-12 {
+    margin-right: 100%;
+}
+
+.col-xs-offset-right-11 {
+    margin-right: 91.66666667%;
+}
+
+.col-xs-offset-right-10 {
+    margin-right: 83.33333333%;
+}
+
+.col-xs-offset-right-9 {
+    margin-right: 75%;
+}
+
+.col-xs-offset-right-8 {
+    margin-right: 66.66666667%;
+}
+
+.col-xs-offset-right-7 {
+    margin-right: 58.33333333%;
+}
+
+.col-xs-offset-right-6 {
+    margin-right: 50%;
+}
+
+
+.col-xs-offset-right-5 {
+    margin-right: 41.66666667%;
+}
+
+.col-xs-offset-right-4 {
+    margin-right: 33.33333333%;
+}
+
+.col-xs-offset-right-3 {
+    margin-right: 25%;
+}
+
+.col-xs-offset-right-2 {
+    margin-right: 16.66666667%;
+}
+
+.col-xs-offset-right-1 {
+    margin-right: 8.33333333%;
+}
+
+/* classroom*/
+.oui li{
+  background-color: #EAE6FC;
+}
+.lehre,.video{
+  text-align: center;
+}
+.pour{
+  border-right: 2px solid black;
+  padding-right: 5px;
+}
+.op{
+  color: red;
+}
+.noir{
+  
+   height: 300px;
+ 
+     background-color: #474e5d;
+}
+.prune{
+    background-color: #f6f6f6;
+}
+.peno{
+  background-color: #f6f6f6;
+  height: 600px;
+
+}
+.pe{
+  height: 100px;
+}
+.sene{
+   background-color: #474e5d;
+  height: 500px;
+  color: white;
+}
+/* REGISTER*/
+.ok{
+  text-align: center;
 }

@@ -1,38 +1,4 @@
 /*------------------------------------------/
-/----------------Navbar---------------------/
-/------------------------------------------*/
-.navbar-fixed-top {
-    background-color: #615A7F;
-	min-height: 50px;
-	width: 100%;
-	z-index: 999;
-}
-
-.navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav > li > a:hover{ 
-    /*hintergrund bei hover
-    schriftfarbe bei focus
-    
-    '>' bezieht sich auf direkten nachfolger (child)*/
-    background-color: #EAE6FC;
-    color: #543B67; /*schrift*/
-}
-
-.menuItem a, .navbar-brand{
-    font-weight: 600;
-    font-size: 20px;
-    color: #E2D8DE;
-}
-
-.navbar-brand{
-    color: #D1CCD5;
-    font-size: 45px;
-}
-
-.navbar-header .navbar-brand:hover, .navbar-header .navbar-brand:focus{ /*schriftfarbe ändern bei hover*/
-    color: #EAE6FC;
-}
-
-/*------------------------------------------/
 /------------Platz für Navbar---------------/
 /------------------------------------------*/
 #aboutme, #skills, #lebenslauf, #contact, #works{

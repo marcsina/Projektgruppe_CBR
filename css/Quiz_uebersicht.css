@@ -1,0 +1,43 @@
+
+/*
+    Table
+*/
+
+.table_style_uebersicht {
+    text-align: center;
+}
+
+/*
+    Buttons
+*/
+.btn-uebersicht {
+    
+    border-radius: 8px;
+    height:40px;
+    width: 140px;
+    text-align: center;
+    font-size: 14px;
+    margin: 5px; /* Außenabstand als Platzhalter für die Animation */
+    transition: all 0.4s;
+}
+
+.btn-uebersicht:hover {
+    margin: 0px; /* Der Außenabstand verschwindet */
+    font-size: 16px; /* Neue Schriftgröße */
+    height: 50px; /* Neue Höhe des Buttons */
+    width: 150px; /* Neue Breite des Buttons */
+}
+
+
+.btn-uebersicht-red {
+    background-color: #d9534f;
+    border-color: red;
+
+}
+
+.btn-uebersicht-green {
+    background-color: rgb(0, 122, 255);
+    border-color: rgb(0, 122, 255);
+    color: white;
+}
+

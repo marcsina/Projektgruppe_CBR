@@ -1,0 +1,267 @@
+ <!doctype html>
+<html lang="en">
+
+    <!--Muss später am server eine php datei sein damit das geht -->
+    <?php include('conn.php'); ?>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <!-- user-scalable für mobile devices -->
+        <meta name="description" content="...">
+        <meta name="author" content="...">
+        <title>MedAusbild</title>
+
+
+
+
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+        <link href="css/style3.css" rel="stylesheet">
+
+    </head>
+
+    <body id="home">
+        <!-- _______________________________________NavBar_____________________________________________________-->
+
+        <nav class="navbar-default navbar-fixed-top" role="navigation">
+            <!-- role für browser zur                                                                            erkennung-->
+            <div class="container">
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                         <span class="sr-only">Toggle navigation</span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                        <!-- erzeugen die 3 striche-->
+                    </button>
+                     <a class="navbar-brand" href="#home">MedAusbild</a> 
+                    <!-- Titel der Navbar-->
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="menuItem"><a href="#...">Diagnose</a>
+                        </li>
+                        <li class="menuItem"><a href="#...">Quiz</a>
+                        </li>
+                        <li class="menuItem"><a href="#...">Checker</a>
+                        </li>
+
+                         <li class=" menuItem dropdown "><a data-toggle="dropdown"  href="#...">Classroom<b class="caret"></b></a>
+                        <ul class="dropdown-menu oui">
+                        <li><a href="lehre.html">Lehre</a></li>
+                        <li><a href="video.html">Video</a></li>
+                        <li><a href="artikel.html">Artikel</a></li>
+                        
+                            
+                        </ul>
+                        </li>
+                        <li class="menuItem"><a href="#...">Forum</a>
+                        </li>
+                        <li class="menuItem"><a href="#contact">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--container-->
+        </nav>
+       
+        <!-- ________________________________________________________________________________________________________ -->
+
+        <!-- _________________________Content________________________________-->
+        
+        <!-- every content should be nested in a way like the example below  -->
+
+        <!-- nested columns -->
+       <br>
+       <br>
+
+         
+
+           <div class="row  noir jumbotron text-center">
+           <h1 style=" color: white">Videothek</h1>
+
+          
+                <form  class=" form-inline  " class=" form-control" >
+                        
+                        
+                        <h1 style="text-align: center; font-size: 30px; color: white"> </h1>
+                    <div class=" col-md-offset-1 col-md-10">
+                        <button type="button" class="btn btn-sucess" class="form-control">
+                         <span class="glyphicon glyphicon-search"></span> Search</button>
+                      <input class="form-control" type="search" placeholder="video suchen..." aria-label="Search" style="width: 400px;">
+                     
+                       <button data-toggle="modal" data-backdrop="false" href="#formulaire" class="btn btn-primary BTN " id="html"> Erweitere Suche</button>
+                     
+                 </div>
+
+                 </form>
+
+                   <div >
+                  
+          <div class="modal fade" id="formulaire">
+
+          <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">x</button>
+              <h4 class="modal-title">suche :</h4>
+            </div>
+            <div class="modal-body">
+              <form action="test.php">
+                <div class="form-group">
+                  <label for="titel">Titel</label>
+                  <input type="text" class="form-control" name ="titel" id="titel" placeholder="titel ">
+                </div>
+                <div class="form-group">
+                  <label for="thema">Beschreibung</label>
+                  <input type="text" class="form-control" name ="frage" id="frage" placeholder="titel ">
+                 
+                </div>
+
+                 <div class="form-group">
+                  <label for="date">Erscheinunsdatum</label>
+                  <input type="date" class="form-control" name ="date" id="date" placeholder="titel ">
+                 
+                </div>
+
+                <button type="submit" class="btn btn-info">Senden</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-info" data-dismiss="modal">Abbrechen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        </div>
+        </div>
+
+<section class="prune">
+<div class="row ">
+
+</br>
+</br>
+
+<h3 class="col-md-offset-1 col-md-2"><strong>Alzheimer</strong></h3></br>
+
+                 
+</div>
+              
+     <div class="row">          
+              <div class="col-md-offset-1">
+                                    <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/gqFo2EYGtIo" width="250" height="150" allowfullscreen frameborder="3" > </iframe> <h4> was ist Alzheimer </h4></div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/paquj8hSdpc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4>  Alzheimer </h4> </div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/r8rw9W80iBc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Alzheimer bein uns </h4></div>
+                                    <div class="col-md-3">  <iframe src="https://www.youtube.com/embed/ZNA3a_8YEjk" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Start der Krankheit </h4></div>
+                                            
+                                           
+
+                                            </div>
+                                            </br>
+                                            </br>
+                                           
+                                        <button class="col-md-offset-1" data-toggle="collapse" data-target="#demo">Mehr anzeigen <span class="glyphicon glyphicon-chevron-down"></span></button>
+
+                                           <div id="demo" class="collapse">
+                                           <div class=" col-md-offset-1">
+                                          
+                                            <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/gqFo2EYGtIo" width="250" height="150" allowfullscreen frameborder="3" > </iframe> <h4> was ist Alzheimer </h4></div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/paquj8hSdpc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4>  Alzheimer </h4> </div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/r8rw9W80iBc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Alzheimer bein uns </h4></div>
+                                    <div class="col-md-3">  <iframe src="https://www.youtube.com/embed/ZNA3a_8YEjk" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Start der Krankheit </h4></div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/gqFo2EYGtIo" width="250" height="150" allowfullscreen frameborder="3" > </iframe> <h4> was ist Alzheimer </h4></div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/paquj8hSdpc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4>  Alzheimer </h4> </div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/r8rw9W80iBc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Alzheimer bein uns </h4></div>
+                                    <div class="col-md-3">  <iframe src="https://www.youtube.com/embed/ZNA3a_8YEjk" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Start der Krankheit </h4></div>
+
+                                            </div>
+                                             </div> 
+
+             </div>
+
+                          
+<div class="row">
+</br>
+</br>
+
+<h3 class="col-md-offset-1"><strong>Parkinson</strong></h3>
+</div>
+
+<div class="row">
+                 <div class="col-md-offset-1">
+                                             <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/gqFo2EYGtIo" width="250" height="150" allowfullscreen frameborder="3" > </iframe> <h4> was ist Alzheimer </h4></div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/paquj8hSdpc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4>  Alzheimer </h4> </div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/r8rw9W80iBc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Alzheimer bein uns </h4></div>
+                                    <div class="col-md-3">  <iframe src="https://www.youtube.com/embed/ZNA3a_8YEjk" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Start der Krankheit </h4></div>
+                                            
+                                            
+                                            </div>
+                                            </br>
+                            <button class="col-md-offset-1" data-toggle="collapse" data-target="#non">Mehr anzeigen <span class="glyphicon glyphicon-chevron-down"></span></button>    
+
+                             <div id="non" class="collapse">
+                                           <div class=" col-md-offset-1">
+                                           <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/gqFo2EYGtIo" width="250" height="150" allowfullscreen frameborder="3" > </iframe> <h4> was ist Alzheimer </h4></div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/paquj8hSdpc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4>  Alzheimer </h4> </div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/r8rw9W80iBc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Alzheimer bein uns </h4></div>
+                                    <div class="col-md-3">  <iframe src="https://www.youtube.com/embed/ZNA3a_8YEjk" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Start der Krankheit </h4></div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/gqFo2EYGtIo" width="250" height="150" allowfullscreen frameborder="3" > </iframe> <h4> was ist Alzheimer </h4></div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/paquj8hSdpc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4>  Alzheimer </h4> </div>
+                                     <div class="col-md-3"> <iframe src="https://www.youtube.com/embed/r8rw9W80iBc" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Alzheimer bein uns </h4></div>
+                                    <div class="col-md-3">  <iframe src="https://www.youtube.com/embed/ZNA3a_8YEjk" width="250" height="150" allowfullscreen frameborder="3"></iframe> <h4> Start der Krankheit </h4></div>
+                                            
+                                           
+
+                                            </div>
+                                             </div>    
+                                           
+             </div>
+  
+                 
+
+
+            
+            
+          
+        
+</section>
+
+
+        
+
+
+        <!--____________________________________________________________________________________________________-->
+
+
+        <!-- Scripts -->
+        <script src="js/german-porter-stemmer.js"></script>
+        <script src="js/stopWords.js"></script>
+        <script src="js/jquery-2.2.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/code.js"></script>
+         <script>
+      $(function(){
+        $("form").submit(function(e) {
+          e.preventDefault();
+          var $form = $(this);
+          $.post($form.attr("action"), $form.serialize())
+          .done(function(data) {
+            $("#html").html(data);
+            $("#formulaire").modal("hide"); 
+          })
+          
+          
+        });
+      });
+    </script>
+
+    </body>
+
+</html>

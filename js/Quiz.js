@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	loadRandomQuestion();
+	//loadRandomQuestion();
 	/*var allWells = $('.questionsection');
         var allWellsExceptFirst = $('.questionsection:not(:first)');
         allWellsExceptFirst.hide();

@@ -1,0 +1,25 @@
+.history_button {
+    background: none !important;
+    color: #007aff;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    cursor: pointer;
+}
+
+    .history_button:hover {
+        border-bottom: 0.5px solid;
+        border-bottom-color: #007aff;
+    }
+
+.history_form {
+    margin-top: 0px;
+}
+
+.user-profile-2 > ul > .list-group-item, .user-profile-2 > ul > .list-group-item > h4, .user-profile-2 > ul > .list-group-item > h5 {
+    color: #007aff;
+}
+
+.user-profile-2 {
+    text-align: left;
+}
