@@ -3,17 +3,20 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 header("Access-Control-Allow-Origin: *");
 //Verbindung aufbauen
 include_once'conf.php';
-include 'conn.php';
+include_once 'include/conn.php';
+include_once 'include/functions_login.php';
+
+sec_session_start();
 
 function getUserDataByEmail($email, $mysqli)
 {
-	if ($stmt = $mysqli->prepare("SELECT id, username, vorname, nachname, beschreibung, profilbild, website FROM members WHERE email = ?")) 
+	if ($stmt = $mysqli->prepare("SELECT id, username, vorname, nachname, beschreibung, profilbild, website FROM members WHERE email = ?"))
 	{
 		$stmt->bind_param('s', $email);
         $stmt->execute();   // Execute the prepared query.
         $stmt->store_result();
 
-		if ($stmt->num_rows == 1) 
+		if ($stmt->num_rows == 1)
 		{
 			$stmt->bind_result($id, $username, $vorname, $nachname, $beschreibung ,$profilbild, $website);
 			$stmt->fetch();
@@ -50,13 +53,13 @@ function getUserDataByEmail($email, $mysqli)
 
 function getUserDataByUsername($username, $mysqli)
 {
-	if ($stmt = $mysqli->prepare("SELECT id, email, vorname, nachname, beschreibung, profilbild, website FROM members WHERE username = ?")) 
+	if ($stmt = $mysqli->prepare("SELECT id, email, vorname, nachname, beschreibung, profilbild, website FROM members WHERE username = ?"))
 	{
 		$stmt->bind_param('s', $username);
         $stmt->execute();   // Execute the prepared query.
         $stmt->store_result();
 
-		if ($stmt->num_rows == 1) 
+		if ($stmt->num_rows == 1)
 		{
 			$stmt->bind_result($id, $email, $vorname, $nachname, $beschreibung ,$profilbild, $website);
 			$stmt->fetch();
@@ -86,13 +89,13 @@ function getUserDataByUsernameGET($mysqli)
 	{
 		$username = filter_input(INPUT_GET, 'username', FILTER_SANITIZE_STRING);
 
-		if ($stmt = $mysqli->prepare("SELECT id, email, vorname, nachname, beschreibung, profilbild, website FROM members WHERE username = ?")) 
+		if ($stmt = $mysqli->prepare("SELECT id, email, vorname, nachname, beschreibung, profilbild, website FROM members WHERE username = ?"))
 		{
 			$stmt->bind_param('s', $username);
 			$stmt->execute();   // Execute the prepared query.
 			$stmt->store_result();
 
-			if ($stmt->num_rows == 1) 
+			if ($stmt->num_rows == 1)
 			{
 				$stmt->bind_result($id, $email, $vorname, $nachname, $beschreibung ,$profilbild, $website);
 				$stmt->fetch();
@@ -102,7 +105,7 @@ function getUserDataByUsernameGET($mysqli)
 						"vorname"=>$vorname,
 						"nachname"=>$nachname,
 						"beschreibung"=>$beschreibung,
-						"profilbild"=>$profilbild, 
+						"profilbild"=>$profilbild,
 						"website"=>$website];
 				return $res;
 			}
@@ -122,17 +125,17 @@ function getUserDataByUsernameGET($mysqli)
 
 function getCountOfForumPostByUserID($id, $mysqli)
 {
-	if ($stmt = $mysqli->prepare("SELECT COUNT(id) FROM Forum_Beitrag WHERE user = ?")) 
+	if ($stmt = $mysqli->prepare("SELECT COUNT(id) FROM Forum_Beitrag WHERE user = ?"))
 	{
 		$stmt->bind_param('i', $id);
 		$stmt->execute();   // Execute the prepared query.
 		$stmt->store_result();
 
-		if ($stmt->num_rows == 1) 
+		if ($stmt->num_rows == 1)
 		{
 			$stmt->bind_result($count);
 			$stmt->fetch();
-			
+
 			return $count;
 		}
 		else
@@ -142,7 +145,7 @@ function getCountOfForumPostByUserID($id, $mysqli)
 	}else
 	{
 		return false;
-	}	
+	}
 }
 
 function checkIfFriendsOrOwnProfile($id1, $id2, $mysqli)
@@ -169,9 +172,9 @@ function checkIfFriendsOrOwnProfile($id1, $id2, $mysqli)
 			return false;
 		}
 	}
-	else 
+	else
 	{
-		return false;	
+		return false;
 	}
 }
 
@@ -199,76 +202,84 @@ function addFriendByUserID($id1, $id2, $mysqli)
 		if($stmt->num_rows == 1)
 		{
 			return false;
-		}		
+		}
 	}*/
 	//nicht mit einander befreundet --> Eintrag wird erstellt
-	if ($stmt = $mysqli->prepare("INSERT INTO friends_member (userID_1, userID_2) VALUES (?,?)")) 
+	if ($stmt = $mysqli->prepare("INSERT INTO friends_member (userID_1, userID_2) VALUES (?,?)"))
 	{
 		$stmt->bind_param('ii', $id1,$id2);
 		if($stmt->execute())   // Execute the prepared query.
 		{
-			echo "success";
 			return true;
 		}
-		else 
+		else
 		{
-			echo "failure1";
 			return false;
 		}
 	}
 	else
 	{
-		echo "failure2";
 		return false;
-	}	
+	}
 }
 
 function deleteFriendByUserID($id1, $id2, $mysqli)
 {
-	if ($stmt = $mysqli->prepare("DELETE FROM friends_member WHERE userID_1 = ? AND userID_2 = ?")) 
+	if ($stmt = $mysqli->prepare("DELETE FROM friends_member WHERE userID_1 = ? AND userID_2 = ?"))
 	{
 		$stmt->bind_param('ii', $id1,$id2);
 		if($stmt->execute())   // Execute the prepared query.
 		{
-			echo "success";
 			return true;
 		}
-		else 
+		else
 		{
-			echo "failure1";
 			return false;
 		}
 	}
 	else
 	{
-		echo "failure2";
 		return false;
-	}	
+	}
 }
 
-function editProfile($mysqli, $firstName, $lastName, $email, $website, $pwd, $confirmpwd)
+function editProfile($mysqli, $vorname, $nachname, $beschreibung, $website, $email)
 {
-    //entgegennahme der form_POSTS
-    if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['confirmpwd'], $_POST['website']))
+    if($stmt = $mysqli->prepare("UPDATE members SET vorname = ?, nachname = ?, beschreibung = ?, website = ?, email = ?  WHERE id = ?"))
     {
-        //Unnötiges abfangen
-        $p1 = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-        $p2 = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
-        $p4 = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        $p5 = filter_input(INPUT_POST, 'confirmpwd', FILTER_SANITIZE_STRING);
-        $p6 = filter_input(INPUT_POST, 'website', FILTER_SANITIZE_URL);
-
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+        $stmt->bind_param('sssssi', $vorname, $nachname, $beschreibung, $website, $email, $_SESSION['user_id']);
+        if($stmt->execute())
         {
-            // keine gültige E-Mail
-            $error_msg .= '<p class="error">The email address you entered is not valid</p>';
+            return true;
         }
-
-
-
+        else
+        {
+            return false;
+        }
+    }else{
+        return false;
     }
+}
+
+//entgegennahme der form_POSTS
+if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['website'], $_POST['beschreibung']))
+{
+    //Unnötiges abfangen
+
+    $p1 = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
+    $p2 = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+    $p3 = filter_input(INPUT_POST, 'beschreibung', FILTER_SANITIZE_STRING);
+    $p6 = filter_input(INPUT_POST, 'website', FILTER_SANITIZE_URL);
+
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+    {
+    // keine gültige E-Mail
+    $error_msg .= '<p class="error">The email address you entered is not valid</p>';
+    }
+
+    editProfile($mysqli, $p1, $p2,$p3, $p6, $email);
 }
 
 if(isset($_POST['addFriend'], $_POST['id1'], $_POST['id2']))
@@ -288,4 +299,5 @@ if(isset($_POST['deleteFriend'], $_POST['id1'], $_POST['id2']))
 	//aufruf der eigentlichen methode
 	deleteFriendByUserID($p1, $p2, $mysqli);
 }
+
 ?>

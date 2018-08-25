@@ -16,7 +16,7 @@
       //falls die ProfilSeite die eigene ist, setze Wert auf true
 
       $ownProfile = true;
-      
+
       //�berpr�fen ob URL auf Profil verweist
       if(!empty($_GET["username"]))
       {
@@ -130,19 +130,6 @@
 						</span>
                         posts
                       </li>
-
-                      <li class="list-group-item">
-                        <span class="badge">7845</span>
-                        shares
-                      </li>
-                      <li class="list-group-item">
-                        <span class="badge">6253</span>
-                        Karma
-                      </li>
-                      <li class="list-group-item">
-                        <span class="badge">78952</span>
-                        Likes
-                      </li>
                     </ul>
 
                         <!-- User button -->
@@ -181,10 +168,8 @@
                 <div class="widget widget-tabbed">
                     <!-- Nav tab -->
                     <ul class="nav nav-tabs nav-justified">
-                      <li class="active"><a href="#my-timeline" data-toggle="tab"><i class="fa fa-pencil"></i> Timeline</a></li>
-                      <li><a href="#about" data-toggle="tab"><i class="fa fa-user"></i> About</a></li>
+                      <li class="active"><a href="#about" data-toggle="tab"><i class="fa fa-user"></i> About</a></li>
                       <li><a href="#user-activities" data-toggle="tab"><i class="fa fa-laptop"></i> Activities</a></li>
-                      <li><a href="#mymessage" data-toggle="tab"><i class="fa fa-envelope"></i> Message</a></li>
 					  <?php
                       if($ownProfile)
                       {
@@ -196,96 +181,8 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
 
-                        <!-- Tab timeline -->
-                        <div class="tab-pane animated active fadeInRight" id="my-timeline">
-                            <div class="user-profile-content">
-
-                                <!-- Begin timeline -->
-                                <div class="the-timeline">
-                                    <form role="form" class="post-to-timeline">
-                                        <textarea class="form-control" style="height: 70px;margin-bottom:10px;" placeholder="Was neues..."></textarea> <!-- placeholder="Whats on your mind..."> -->
-                                        <div class="row">
-                                        <div class="col-sm-6">
-                                            <a class="btn btn-sm btn-default"><i class="fa fa-camera"></i></a>
-                                            <a class="btn btn-sm btn-default"><i class="fa fa-video-camera"></i></a>
-                                            <a class="btn btn-sm btn-default"><i class="fa fa-map-marker"></i></a>
-                                        </div>
-                                        <div class="col-sm-6 text-right"><button type="submit" class="btn btn-primary">Post</button></div>
-                                        </div>
-                                    </form>
-                                    <br><br>
-                                    <ul>
-                                        <li>
-                                            <div class="the-date">
-                                                <span>13</span>
-                                                <small>juin</small>
-                                                <small>2018</small>
-                                            </div>
-                                            <h4>what is alzheimer test</h4>
-                                            <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <div class="the-date">
-                                                <span>31</span>
-                                                <small>Jan</small>
-                                            </div>
-                                            <h4>video Vorlesung von Prof Hofmann about what is alzheimer test </h4>
-                                            <div class="videoWrapper">
-                                            <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
-                                            </div>
-                                            <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <div class="the-date">
-                                                <span>25</span>
-                                                <small>juin</small>
-                                                <small>2018</small>
-                                            </div>
-                                            <h4>Audio Vorlesung von Prof Rainer about what is alzheimer test</h4>
-                                            <!--<iframe src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/132890481&amp;color=ff9900&amp;auto_play=false&amp;hide_related=false&amp;show_artwork=true"></iframe>
-                                            -->
-                                            <audio controls>
-                                                    <source src="audio/abba.mp3" type="audio/ogg">
-
-                                                            Your browser does not support the audio element.
-                                                            </audio>
-
-                                            <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                            </p>
-                                        </li>
-                                        <li class="the-year"><p>2013</p></li>
-                                        <li>
-                                            <div class="the-date">
-                                                <span>20</span>
-                                                <small>Dec</small>
-                                            </div>
-                                            <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <div class="the-date">
-                                                <span>27</span>
-                                                <small>Nov</small>
-                                            </div>
-                                            <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div><!-- End div .the-timeline -->
-                                <!-- End timeline -->
-                            </div><!-- End div .user-profile-content -->
-                        </div><!-- End div .tab-pane -->
-                        <!-- End Tab timeline -->
-
                         <!-- Tab about -->
-                        <div class="tab-pane animated fadeInRight" id="about">
+                        <div class="tab-pane animated fadeInRight active" id="about">
                             <div class="user-profile-content">
                                 <h5><strong>ABOUT</strong> ME</h5>
                                 <p>
@@ -307,14 +204,6 @@
                                                 <a href="http://<?php echo $userDataArray['website']; ?>"><?php echo $userDataArray["website"]; ?></a>
                                             </address>
                                     </div>
-									<!--
-                                    <div class="col-sm-6">
-                                        <h5><strong>MY</strong> SKILLS</h5>
-                                        <p>UI Design</p>
-                                        <p>java Programming</p>
-                                        <p>Java Programming</p>
-                                        <p>Java Programming</p>
-                                    </div>-->
                                 </div><!-- End div .row -->
                             </div><!-- End div .user-profile-content -->
                         </div><!-- End div .tab-pane -->
@@ -432,232 +321,47 @@
                                     }
 
                                     ?>
-                                    <!--
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Ben Balaye </strong> Uploaded a photo <strong>"DSC000254.jpg"</strong>
-                                        <br><i>2 minutes ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Francis Kenne Wesba</strong> Created an photo album  <strong>" what is alzheimer disease"</strong>
-                                        <br><i>8 minutes ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Johnson Momo</strong> Posted an article  <strong>"Ywhat is alzheimer disease"</strong>
-                                        <br><i>an hour ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Kris</strong> Added 3 products
-                                        <br><i>3 hours ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Marcsina</strong> Send you a message  <strong>"Lorem ipsum dolor..."</strong>
-                                        <br><i>12 hours ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Johnny Depp</strong> Updated his avatar
-                                        <br><i>Yesterday</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Ben Balaye</strong> Uploaded a photo <strong>"DSC000254.jpg"</strong>
-                                        <br><i>2 minutes ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Ben Balaye</strong> Created an photo album  <strong>"what is alzheimer disease"</strong>
-                                        <br><i>8 minutes ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Ben Balaye</strong> Posted an article  <strong>"what is alzheimer disease"</strong>
-                                        <br><i>an hour ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>Ben Balaye</strong> Added 3 products
-                                        <br><i>3 hours ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>jakie</strong> Send you a message  <strong>"Lorem ipsum dolor..."</strong>
-                                        <br><i>12 hours ago</i></p>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#fakelink">
-                                        <p><strong>terance</strong> Updated his avatar
-                                        <br><i>Yesterday</i></p>
-                                        </a>
-                                    </li>-->
                                 </ul>
                             </div><!-- End div .scroll-user-widget -->
                         </div><!-- End div .tab-pane -->
                         <!-- End Tab user activities -->
 
-                        <!-- Tab user messages -->
-                        <div class="tab-pane animated fadeInRight" id="mymessage">
-                            <div class="scroll-user-widget">
-                                <ul class="media-list">
-                                 <!--
-                                    <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">Johnson Momo</a> <small>Just now</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                    </div>
-                                  </li>
-                                  <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">Francis Kenne Wesba</a> <small>Yesterday at 04:00 AM</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus</p>
-                                    </div>
-                                  </li>
-                                  <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">Marcsina</a> <small>January 17, 2014 05:35 PM</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                    </div>
-                                  </li>
-                                  <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">chris</a> <small>January 17, 2014 05:35 PM</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                    </div>
-                                  </li>
-                                  <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">chris</a> <small>January 17, 2014 05:35 PM</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                    </div>
-                                  </li>
-                                  <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">chris</a> <small>Just now</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                    </div>
-                                  </li>
-                                  <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">marco</a> <small>Yesterday at 04:00 AM</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus</p>
-                                    </div>
-                                  </li>
-                                  <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">marco</a> <small>January 17, 2014 05:35 PM</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                    </div>
-                                  </li>
-                                  <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">prof danis</a> <small>January 17, 2014 05:35 PM</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                    </div>
-                                  </li>
-                                  <li class="media">
-                                    <a class="pull-left" href="#fakelink">
-                                      <img class="media-object user-message" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Avatar">
-                                    </a>
-                                    <div class="media-body">
-                                      <h4 class="media-heading"><a href="#fakelink">Dr Maria</a> <small>January 17, 2014 05:35 PM</small></h4>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                    </div>
-                                  </li>-->
-                                </ul>
-                            </div><!-- End div .scroll-user-widget -->
-                        </div><!-- End div .tab-pane -->
-                        <!-- End Tab user messages -->
-
 						<?php
 						if($ownProfile)
 						{
                             echo "<div class='tab-pane animated fadeInRight' id='edit_profil'>
-
-							<form class='form' action='##' method='post' id='registrationForm'>
+                                    
+							<form class='form' action='' method='post' id='editForm'>
 
 								<div class='form-group'>
-
 									<div class='col-xs-6'>Vorname</label>
 										<input type='text' class='form-control' name='first_name' id='first_name' placeholder='first name' title='Vornamen eingeben' value='". $userDataArray['vorname'] . "'>
 									</div>
 								</div>
 								<div class='form-group'>
-
 									<div class='col-xs-6'>
 										<label for='last_name'>Nachname</label>
 										<input type='text' class='form-control' name='last_name' id='last_name' placeholder='last name' title='Nachnamen eingeben' value='". $userDataArray['nachname'] . "'>
 									</div>
 								</div>
 								<div class='form-group'>
-
 									<div class='col-xs-6'>
 										<label for='email'>Email</label>
 										<input type='email' class='form-control' name='email' id='email' placeholder='you@email.com' title='Emailadresse eingeben' value='". $userDataArray['email'] . "'>
 									</div>
 								</div>
 								<div class='form-group'>
-
-									<div class='col-xs-6'>
-										<label for='password'>Password</label>
-										<input type='password' class='form-control' name='password' id='password' placeholder='enter your password' title='enter your password.'>
-									</div>
-								</div>
-								<div class='form-group'>
-
-									<div class='col-xs-6'>
-										<label for='confirmpwd'>Verify</label>
-										<input type='password' class='form-control' name='confirmpwd' id='confirmpwd' placeholder='enter your password' title='enter your password.'>
-									</div>
-								</div>
-								<div class='form-group'>
-
 									<div class='col-xs-6'>
 										<label for='website'>Webseite</label>
 										<input type='text' class='form-control' name='website' id='website' placeholder='enter your website' title='Eigene Webseite eingeben' value='". $userDataArray['website'] . "'>
 									</div>
 								</div>
+                                <div class='form-group'>
+									    <div class='col-xs-12'>
+										<label for='beschreibung'>Beschreibung</label>
+										    <textarea form='editForm' class='form-control' name='beschreibung' id='beschreibung' style='resize: vertical;'>". $userDataArray['beschreibung'] . "</textarea>
+									    </div>
+                                    </div>
 								<div class='form-group'>
 									<div class='col-xs-6'>
 										<br>
