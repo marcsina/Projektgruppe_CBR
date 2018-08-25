@@ -1,6 +1,7 @@
 body {
     padding-top: 70px;
-    background-color: #e9ebee;
+   /* background-color: #e9ebee; */
+    background-color: #7b8088;
 }
 
 input.input-box, textarea {
@@ -38,5 +39,5 @@ h4 {
 }
 
 .nav > li > a {
-    color: #007aff;
+    color: #1babee; /*#007aff;*/
 }
