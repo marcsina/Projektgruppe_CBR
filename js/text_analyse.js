@@ -454,7 +454,6 @@ function extractKeywords( inputText )
                         }
                     }
                 }
-                words_in_sentences_array[i][j];
             }
         }
     }

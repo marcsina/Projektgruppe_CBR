@@ -2,7 +2,7 @@
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 
-
+sec_session_start(); 
 if (login_check($mysqli) == true) {
     $logged = 'in';
 } else {
