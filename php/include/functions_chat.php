@@ -13,7 +13,23 @@ switch($function) {
         $log['state'] = count($lines);
         break;
 
+    case ('getAll'):
+        $state = $_POST['state'];
+        if(file_exists('chat.txt')){
+            $lines = file('chat.txt');
+        }
+        $count =  count($lines);
+        $text= array();
+        $log['state'] = $state + count($lines) - $state;
+        foreach ($lines as $line_num => $line)
+        {
+                $text[] =  $line = str_replace("\n", "", $line);
+        }
+        $log['text'] = $text;
+        break;
+
     case('update'):
+
         $state = $_POST['state'];
         if(file_exists('chat.txt')){
             $lines = file('chat.txt');

@@ -9,6 +9,7 @@ function Chat()
     this.update = updateChat;
     this.send = sendChat;
     this.getState = getStateOfChat;
+    this.delete = deleteChat;
 }
 
 //gets the state of the chat
@@ -38,6 +39,9 @@ function getStateOfChat()
 //Updates the chat
 function updateChat()
 {
+    //intended function to delete chat, to prevent the file becoming to big
+    deleteChat();
+
     if ( !instanse )
     {
         instanse = true;
@@ -102,4 +106,35 @@ function sendChat( message, nickname )
             updateChat();
         },
     } );
+}
+
+function deleteChat()
+{
+    $.ajax( {
+        type: "POST",
+        url: "/Projektgruppe/php/include/functions_chat.php",
+        data: {
+            'function': 'getAll',
+            'state': state,
+            'file': file
+        },
+        dataType: "json",
+        success: function ( data )
+        {
+            if ( data.text.length > 10 )
+            {
+                data.text.splice( 0, data.text.length - 10 );
+            }
+
+
+            /*----------------------------------------------------------------------------------------------------------
+             * TODO
+             * data.text now contains the last 10 messages
+             * need to wipe the whole file and refill it with data.text
+             */
+            //console.log( data.text );
+        },
+    } );
+    
+    
 }
