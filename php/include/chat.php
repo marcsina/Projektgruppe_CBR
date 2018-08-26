@@ -18,19 +18,85 @@ if (login_check($mysqli) == true) {
 <html>
 
 <head>
-
-
-    <title>Chat</title>
-
     <link rel="stylesheet" href="/Projektgruppe/css/style_chat.css" type="text/css" />
+</head>
+
+<!--chat.start()-->
+
+<body onload="setInterval('chat.update()', 1000);">
+
+
+    <span class="Chat_Button" onclick="openNav()">Chat &#9776; </span>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <div id="page-wrap">
+
+            <div id="chat-wrap">
+                <div id="chat-area"></div>
+            </div>
+
+            <form id="send-message-area">
+                <p>Schreibe eine Nachricht: </p>
+                <textarea id="sendie" maxlength='100'></textarea>
+            </form>
+
+        </div>
+
+    </div>
 
 
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src="/Projektgruppe/js/chat.js"></script>
-    <script type="text/javascript">
+</body>
 
-        // ask user for name with popup prompt
+</html>
+
+<script>
+
+    //store the chat-show status
+    var opened = 0;
+
+    //If the Chat was opened before than this method will be called
+    function showChatStart() {
+        document.getElementById("mySidenav").style.height = "55%";
+        //store the status in a local variable
+        opened = 1;
+    }
+
+    //Show the chat and store it in a local and a session variable
+    function openNav() {
+        if (opened == 0) {
+            document.getElementById("mySidenav").style.height = "55%";
+            opened = 1;
+            sessionStorage.setItem('ChatShow', '1');
+        }
+        else {
+            closeNav();
+        }
+    }
+
+    //Close the chat and store it in session and local
+    function closeNav() {
+        document.getElementById("mySidenav").style.height = "0%";
+        opened = 0;
+        sessionStorage.setItem('ChatShow', '0');
+    }
+
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="/Projektgruppe/js/chat.js"></script>
+
+<script type="text/javascript">
+
+        //If the Chat was shown on the previous site than show it again
+        if(sessionStorage.getItem('ChatShow') == 1)
+        {
+            showChatStart();
+        }
+
+
+        // set username
         var name="<?php echo $_SESSION['username']; ?>";
 
         // strip tags
@@ -38,7 +104,8 @@ if (login_check($mysqli) == true) {
 
         // kick off chat
         var chat = new Chat();
-        $(function () {
+        $(function ()
+        {
 
             chat.getState();
 
@@ -85,59 +152,4 @@ if (login_check($mysqli) == true) {
             });
 
         });
-    </script>
-
-
-    <script>
-
-        var opened = 0;
-
-        function openNav() {
-            if (opened == 0) {
-                document.getElementById("mySidenav").style.height = "55%";
-                opened = 2;
-            }
-            else
-            {
-                closeNav();
-            }
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.height = "0%";
-            opened = 0;
-        }
-    </script>
-
-</head>
-
-<!--chat.start()-->
-
-<body onload="setInterval('chat.update()', 1000);">
-
-
-    <span class="Chat_Button" onclick="openNav()">Chat &#9776; </span>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-        <div id="page-wrap">
-
-            <div id="chat-wrap">
-                <div id="chat-area"></div>
-            </div>
-
-            <form id="send-message-area">
-                <p>Schreibe eine Nachricht: </p>
-                <textarea id="sendie" maxlength='100'></textarea>
-            </form>
-
-        </div>
-
-    </div>
-
-
-
-</body>
-
-</html>
+</script>
