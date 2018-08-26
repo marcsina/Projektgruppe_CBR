@@ -66,7 +66,7 @@ if (login_check($mysqli) == true) {
             
             <tr class="title">
                 <td>Quiz Singleplayer richtige Antworten</td>
-                <td>Meist Gefundene Ergebnisse im Checker</td>
+                <td>Meist gefundene Ergebnisse im Checker</td>
             </tr>
             
             <tr class="content">
