@@ -25,11 +25,9 @@ body {
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
-    display: block;
+    color: #768ef5;
     transition: 0.3s;
 }
 
@@ -40,9 +38,13 @@ body {
 .sidenav .closebtn {
     position: absolute;
     top: 0;
-    right: 5px;
+    right: 15px;
     font-size: 30px;
     margin-left: 50px;
+}
+
+.sidenav #Label_Header {
+    padding-left: 20px;
 }
 
 @media screen and (max-height: 450px) {
@@ -56,7 +58,7 @@ body {
 }
 
 #page-wrap {
-    margin-top: 60px;
+    margin-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
     position: relative;

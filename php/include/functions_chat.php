@@ -94,8 +94,12 @@ switch($function) {
                 $message = preg_replace($reg_exUrl, '<a href="'.$url[0].'" target="_blank">'.$url[0].'</a>', $message);
             }
 
+            //get the current time
+            $date = date('h:i', time());
+            //replace break with space
+            $message = str_replace("\n", " ", $message);
 
-            fwrite(fopen('chat.txt', 'a'), "<span>". $nickname . "</span>" . $message = str_replace("\n", " ", $message) . "\n");
+            fwrite(fopen('chat.txt', 'a'), "<span> <a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$nickname."'>". $nickname . "</a>  um ".$date."<br></span>" . $message . "\n");
         }
         break;
 

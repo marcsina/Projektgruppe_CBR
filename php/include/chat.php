@@ -29,6 +29,9 @@ if (login_check($mysqli) == true) {
     <span class="Chat_Button" onclick="openNav()">Chat &#9776; </span>
 
     <div id="mySidenav" class="sidenav">
+        <label id="Label_Header">
+            MedChat
+        </label>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
         <div id="page-wrap">
