@@ -163,7 +163,7 @@ if (login_check($mysqli) == true) {
                     p1 = cbr.Similarities[i].similarity;
 
                     //Insert highest similarity into historyChecker
-                    insertCheckerHistory(t1, p1);
+                    insertCheckerHistory(cbr.Similarities[i].id, p1);
     			}
     			if(i == 1)
     			{
@@ -316,11 +316,11 @@ if (login_check($mysqli) == true) {
 
 
         //Function to insert Data to the CheckerHistory-----------------------------------------
-        function insertCheckerHistory(name1, value1)
+        function insertCheckerHistory(id1, value1)
         {
             $.post('include/functions_history.php',
             {
-                name: name1,
+                id: id1,
                 type: "Text Checker",
                 value: value1
             });

@@ -12,7 +12,7 @@ function insert_Activity_Checker($mysqli, $user_ID, $Page, $result = null, $case
 {
     if($stmt = $mysqli->prepare("INSERT INTO History_Checker(User_ID, Percentage, Page, Time, Case_ID) VALUES (?,?,?, CURRENT_TIMESTAMP,?)"))
 	{
-		$stmt->bind_param('idss', $user_ID, $result, $Page, $case_id);
+		$stmt->bind_param('idsi', $user_ID, $result, $Page, $case_id);
 		$stmt->execute();
 	}
 	else
@@ -271,12 +271,11 @@ function get_Recent_Article($mysqli, $limit)
 }
 
 //Check if an activity was sent to functions history
-if(isset($_POST['name'],$_POST['type'],$_POST['value']))
+if(isset($_POST['id'],$_POST['type'],$_POST['value']))
 {
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
     $type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
 
-    insert_Activity_Checker($mysqli, $_SESSION['user_id'], $type, $_POST['value'], $name);
+    insert_Activity_Checker($mysqli, $_SESSION['user_id'], $type, $_POST['value'], $_POST['id']);
 
 }
 
