@@ -65,7 +65,7 @@ function shuffleAnswers($answer1, $answer2, $answer3, $answer4)
 //Returns a random Question with random answers and correct Answer Position for High Value
 function loadRandomQuestionHigh($mysqli)
 {
-    
+
 
 	if($stmt = $mysqli->prepare("SELECT Cases.id, Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value = 1 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
 	{
@@ -787,7 +787,7 @@ function getQuizData($mysqli, $type, $quiz_ID, $player)
 				{
 					$questionString = "schwach";
 				}
-				$finalQuestion = "Was ist ein ".$questionString." ausgeprägtes Symptom in dem Fall ".$casename."?";
+				$finalQuestion = "Welche Funktion ist im Fall ".$casename." ".$questionString." beeinträchtigt?";
 
 				array_push($data,array("casename"=>$casename, "questiontype"=>$questionType, "answer1"=>$correctA, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "questionString"=>$finalQuestion));
 
@@ -840,7 +840,7 @@ function getQuizData($mysqli, $type, $quiz_ID, $player)
 					$questionString = "schwach";
 				}
 
-				$finalQuestion = "Was ist ein ".$questionString." ausgerägtes Symptom in dem Fall ".$casename."?";
+				$finalQuestion = "Welche Funktion ist im Fall ".$casename." ".$questionString." beeinträchtigt?";
 				array_push($data,array("casename"=>$casename, "questiontype"=>$questionType, "answer1"=>$correctA, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "questionString"=>$finalQuestion));
                 return $data;
 			}
