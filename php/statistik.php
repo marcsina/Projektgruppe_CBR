@@ -63,6 +63,24 @@ if (login_check($mysqli) == true) {
     				</div>
     			</td>
             </tr>
+            
+            <tr class="title">
+                <td>Quiz Singleplayer richtige Antworten</td>
+                <td>Meist Gefundene Ergebnisse im Checker</td>
+            </tr>
+            
+            <tr class="content">
+                <td>
+    				<div class="charty">
+    					<canvas id="Chart5" width="400" height="400"></canvas>
+    				</div>
+    			</td>
+                <td>
+    				<div class="charty">
+    					<canvas id="Chart6" width="400" height="400"></canvas>
+    				</div>
+    			</td>
+            </tr>
         
     	</table>    
 	</div>
@@ -100,6 +118,33 @@ $result7 = $value7->fetch_assoc();
 $value8 = $mysqli->query("SELECT COUNT(id) as n FROM MP_QUIZ WHERE User_ID_1 = '$userid' OR User_ID_2 = '$userid';");
 $result8 = $value8->fetch_assoc();
 
+//4richtige
+$value11 = $mysqli->query("Select count(A.SP_QUIZ_ID) as n FROM( SELECT SP_QUIZ_ID, count(*) as anzahl_richtig FROM `SP_FRAGE` Where given_a = 1 group by SP_QUIZ_ID) AS A Where anzahl_richtig = 4");
+$result11 = $value11->fetch_assoc();
+
+//3richtige
+$value12 = $mysqli->query("Select count(A.SP_QUIZ_ID) as n FROM( SELECT SP_QUIZ_ID, count(*) as anzahl_richtig FROM `SP_FRAGE` Where given_a = 1 group by SP_QUIZ_ID) AS A Where anzahl_richtig = 3");
+$result12 = $value12->fetch_assoc();
+
+//2richtige
+$value13 = $mysqli->query("Select count(A.SP_QUIZ_ID) as n FROM( SELECT SP_QUIZ_ID, count(*) as anzahl_richtig FROM `SP_FRAGE` Where given_a = 1 group by SP_QUIZ_ID) AS A Where anzahl_richtig = 2");
+$result13 = $value13->fetch_assoc();
+
+//1richtige
+$value14 = $mysqli->query("Select count(A.SP_QUIZ_ID) as n FROM( SELECT SP_QUIZ_ID, count(*) as anzahl_richtig FROM `SP_FRAGE` Where given_a = 1 group by SP_QUIZ_ID) AS A Where anzahl_richtig = 1");
+$result14 = $value14->fetch_assoc();
+
+//0richtige
+$value15 = $mysqli->query("SELECT count(DISTINCT SP_QUIZ_ID) as n FROM `SP_FRAGE` ");
+$result15 = $value15->fetch_assoc();
+
+//5meist
+$value16 = $mysqli->query("select Case_ID,Cases.name as n, count(History_Checker.ID) as c from `History_Checker`, `Cases` WHERE History_Checker.Case_ID = Cases.id group by `Case_ID` order by c desc ");
+$result16 = $value16->fetch_assoc();
+$result162 = $value16->fetch_assoc();
+$result163 = $value16->fetch_assoc();
+$result164 = $value16->fetch_assoc();
+$result165 = $value16->fetch_assoc();
 
 ?>
 
@@ -212,6 +257,82 @@ var myChart4 = new Chart(ctx4, {
         datasets: [{
             label: '# of Votes',
             data: [<?php echo $result7['n'] ?>, <?php echo $result8['n'] ?>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+var ctx5 = document.getElementById("Chart5").getContext('2d');
+var myChart5 = new Chart(ctx5, {
+    type: 'pie',
+    data: {
+        labels: ["4 richtig","3 richtig","2 richtig","1 richtig","0 richtig"],
+        datasets: [{
+            label: '# of Votes',
+            data: [<?php echo $result11['n'] ?>, <?php echo $result12['n'] ?>, <?php echo $result13['n'] ?>, <?php echo $result14['n'] ?>, <?php echo $result15['n']-$result14['n']-$result13['n']-$result12['n']-$result11['n'] ?>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+var ctx6 = document.getElementById("Chart6").getContext('2d');
+var myChart6 = new Chart(ctx6, {
+    type: 'pie',
+    data: {
+        labels: ["<?php echo $result16['n'] ?>","<?php echo $result162['n'] ?>","<?php echo $result163['n'] ?>","<?php echo $result164['n'] ?>","<?php echo $result165['n'] ?>"],
+        datasets: [{
+            label: '# of Votes',
+            data: [<?php echo $result16['c'] ?>, <?php echo $result162['c'] ?>, <?php echo $result163['c'] ?>, <?php echo $result164['c'] ?>, <?php echo $result165['c'] ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.6)',
                 'rgba(54, 162, 235, 0.6)',
