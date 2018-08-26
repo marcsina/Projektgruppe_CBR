@@ -223,7 +223,6 @@
 
                                     $sortedHistoryArray = combine_Historys($activitiesChecker, $activitiesArticle, $activitiesForum, $activitiesMPQuiz, $activitiesSPQuiz);
 
-                                    debug_to_console("Article: ".$activitiesArticle[0]['time']."/// Forum: ".$activitiesForum[0]['time']."//SPQUIZ: ".$activitiesSPQuiz[0]['time']."///MPQUIZ: ".$activitiesMPQuiz[0]['time']);
 
                                     foreach($sortedHistoryArray as &$activity)
                                     {
@@ -262,7 +261,7 @@
                                                 $echoString ="
                                                              <li class='media'>
                                                                 <p>
-                                                                    <strong>".$_SESSION['username']."</strong> hat ".$msg." den ".$activity['page']." genutzt, mit dem Ergebnis ".$activity['fk_id']." bei ".$activity['percentage']." %
+                                                                    <strong>".$_SESSION['username']."</strong> hat ".$msg." den ".$activity['page']." genutzt, mit dem Ergebnis ".$activity['case_name']." bei ".$activity['percentage']." %
                                                                         <br>
                                                                 </p>
                                                              </li>

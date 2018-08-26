@@ -47,17 +47,17 @@ function insert_Activity_Article($mysqli, $user_ID, $ArticleID)
 function getHistory_Checker($mysqli, $user_ID)
 {
     $data = array();
-    if($stmt = $mysqli->prepare("SELECT Page, Time, Percentage, Case_ID FROM History_Checker WHERE User_ID = ?"))
+    if($stmt = $mysqli->prepare("SELECT Page, Time, Percentage, Case_ID, name FROM History_Checker, Cases WHERE User_ID = ? AND History_Checker.Case_ID = Cases.id"))
     {
         $stmt->bind_param('i',$user_ID);
         $stmt->execute();
 
         $stmt->store_result();
 
-        $stmt->bind_result($page, $time, $result, $case_ID);
+        $stmt->bind_result($page, $time, $result, $case_ID, $case_name);
         while($stmt->fetch())
         {
-            array_push($data,array("page"=>$page, "time"=>$time, "result"=>$case_ID, "percentage"=>$result));
+            array_push($data,array("page"=>$page, "time"=>$time, "result"=>$case_ID, "percentage"=>$result,"case_name"=>$case_name));
         }
 
         return $data;
@@ -170,7 +170,7 @@ function combine_Historys($checker, $article, $forum, $mpquiz, $spquiz)
     {
         foreach($checker as &$item)
         {
-            array_push($result, array("time"=>$item['time'], "page" => $item['page'], "fk_id" => $item['result'], "type" => 'Checker',"percentage" => $item['percentage'] ));
+            array_push($result, array("time"=>$item['time'], "page" => $item['page'], "fk_id" => $item['result'], "type" => 'Checker',"percentage" => $item['percentage'], "case_name" => $item['case_name'] ));
         }
     }
 
