@@ -123,6 +123,58 @@ function getUserDataByUsernameGET($mysqli)
 	}
 }
 
+function getCountOfPeopleFollowing($mysqli, $id)
+{
+    if($stmt = $mysqli->prepare("SELECT COUNT(ID) FROM Follower WHERE USER_ID1 = ? "))
+	{
+		$stmt->bind_param('i', $id);
+		$stmt->execute();
+		$stmt->store_result();
+
+		$stmt->bind_result($count);
+        $stmt->fetch();
+
+		if($stmt->num_rows >= 1)
+		{
+			return $count;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function getCountOfPeopleFollowingME($mysqli, $id)
+{
+    if($stmt = $mysqli->prepare("SELECT COUNT(ID) FROM Follower WHERE USER_ID2 = ? "))
+	{
+		$stmt->bind_param('i', $id);
+		$stmt->execute();
+		$stmt->store_result();
+
+		$stmt->bind_result($count);
+        $stmt->fetch();
+
+		if($stmt->num_rows >= 1)
+		{
+			return $count;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
+
 function getCountOfForumPostByUserID($id, $mysqli)
 {
 	if ($stmt = $mysqli->prepare("SELECT COUNT(id) FROM Forum_Beitrag WHERE user = ?"))
@@ -266,7 +318,7 @@ if(isset($_POST['addFollowing'], $_POST['id1'], $_POST['id2']))
     $p2 = filter_input(INPUT_POST, 'id2', FILTER_SANITIZE_NUMBER_INT);
     //aufruf der eigentlichen methode
     addFollowing( $mysqli, $p1, $p2);
-  
+
 }
 
 if(isset($_POST['deleteFollowing'], $_POST['id1'], $_POST['id2']))
