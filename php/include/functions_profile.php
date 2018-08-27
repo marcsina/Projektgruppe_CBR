@@ -148,13 +148,9 @@ function getCountOfForumPostByUserID($id, $mysqli)
 	}
 }
 
-function checkIfFriendsOrOwnProfile($id1, $id2, $mysqli)
+function checkIFAlreadyFollowing( $mysqli, $id1, $id2)
 {
-	if($id1 == $id2)
-	{
-		return true;
-	}
-	if($stmt = $mysqli->prepare("SELECT * FROM friends_member WHERE userID_1 = ? AND userID_2 = ?"))
+    if($stmt = $mysqli->prepare("SELECT * FROM Follower WHERE USER_ID1 = ? AND USER_ID2 = ?"))
 	{
 		$stmt->bind_param('ii', $id1, $id2);
 		$stmt->execute();
@@ -178,34 +174,15 @@ function checkIfFriendsOrOwnProfile($id1, $id2, $mysqli)
 	}
 }
 
-function addFriendByUserID($id1, $id2, $mysqli)
+
+function addFollowing( $mysqli, $id1, $id2)
 {
-	if(checkIfFriendsOrOwnProfile($id1, $id2, $mysqli))
+	if(checkIFAlreadyFollowing($mysqli, $id1, $id2))
 	{
 		return false;
 	}
-	//mit sich selbst befrundet
-	/*if($id1 == $id2)
-	{
-		return false;
-	}
-	//schon mit einander befreundet
-	else if($stmt = $mysqli->prepare("SELECT * FROM friends_member WHERE userID_1 = ? AND userID_2 = ?"))
-	{
-		$stmt->bind_param('ii', $id1, $id2);
-		$stmt->execute();
-		$stmt->store_result();
-
-		$stmt->bind_result($userID_1, $userID_2);
-        $stmt->fetch();
-
-		if($stmt->num_rows == 1)
-		{
-			return false;
-		}
-	}*/
 	//nicht mit einander befreundet --> Eintrag wird erstellt
-	if ($stmt = $mysqli->prepare("INSERT INTO friends_member (userID_1, userID_2) VALUES (?,?)"))
+	if ($stmt = $mysqli->prepare("INSERT INTO Follower (USER_ID1, USER_ID2) VALUES (?,?)"))
 	{
 		$stmt->bind_param('ii', $id1,$id2);
 		if($stmt->execute())   // Execute the prepared query.
@@ -223,11 +200,11 @@ function addFriendByUserID($id1, $id2, $mysqli)
 	}
 }
 
-function deleteFriendByUserID($id1, $id2, $mysqli)
+function deleteFollowing($mysqli, $id1, $id2)
 {
-	if ($stmt = $mysqli->prepare("DELETE FROM friends_member WHERE userID_1 = ? AND userID_2 = ?"))
+	if ($stmt = $mysqli->prepare("DELETE FROM Follower WHERE USER_ID1 = ? AND USER_ID2 = ?"))
 	{
-		$stmt->bind_param('ii', $id1,$id2);
+		$stmt->bind_param('ii', $id1, $id2);
 		if($stmt->execute())   // Execute the prepared query.
 		{
 			return true;
@@ -282,22 +259,23 @@ if( isset($_POST['editProfile'], $_POST['first_name'], $_POST['last_name'], $_PO
     editProfile($mysqli, $p1, $p2,$p3, $p6, $email);
 }
 
-if(isset($_POST['addFriend'], $_POST['id1'], $_POST['id2']))
+if(isset($_POST['addFollowing'], $_POST['id1'], $_POST['id2']))
 {
-	//Unnötiges abfangen
-	$p1 = filter_input(INPUT_POST, 'id1', FILTER_SANITIZE_NUMBER_INT);
-	$p2 = filter_input(INPUT_POST, 'id2', FILTER_SANITIZE_NUMBER_INT);
-	//aufruf der eigentlichen methode
-	addFriendByUserID($p1, $p2, $mysqli);
+    //Unnötiges abfangen
+    $p1 = filter_input(INPUT_POST, 'id1', FILTER_SANITIZE_NUMBER_INT);
+    $p2 = filter_input(INPUT_POST, 'id2', FILTER_SANITIZE_NUMBER_INT);
+    //aufruf der eigentlichen methode
+    addFollowing( $mysqli, $p1, $p2);
+  
 }
 
-if(isset($_POST['deleteFriend'], $_POST['id1'], $_POST['id2']))
+if(isset($_POST['deleteFollowing'], $_POST['id1'], $_POST['id2']))
 {
 	//Unnötiges abfangen
 	$p1 = filter_input(INPUT_POST, 'id1', FILTER_SANITIZE_NUMBER_INT);
 	$p2 = filter_input(INPUT_POST, 'id2', FILTER_SANITIZE_NUMBER_INT);
 	//aufruf der eigentlichen methode
-	deleteFriendByUserID($p1, $p2, $mysqli);
+	deleteFollowing( $mysqli, $p1, $p2);
 }
 
 ?>

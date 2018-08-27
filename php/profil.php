@@ -64,7 +64,7 @@
           exit;
       }
   }
-  ?>
+?>
 <html lang="en">
 
 <head>
@@ -98,10 +98,6 @@
         </div>
 
         <!-- <img src="https://bootdey.com/img/Content/avatar/avatar6.png" -->
-        <div class="col-sm-12 profile-actions text-right">
-            <button type="button" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Friends</button>
-            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-envelope"></i> Send Message</button>
-        </div>
     </div>
     <div class="content">
 
@@ -141,27 +137,41 @@
 								</form>
                             </div>
 							<?php
-							if(checkIfFriendsOrOwnProfile($_SESSION['user_id'], $userDataArray['id'], $mysqli))
-							{
-								$s1 = $_SESSION['user_id'];
-								$s2 = $userDataArray['id'];
-								echo "<div class='col-lg-6'><form action='' method='post'><input type='hidden' name='id1' value='$s1'><input type='hidden' name='id2' value='$s2'><input type='submit' class='btn btn-default btn-sm btn-block' name='deleteFriend' value='Freund entfernen'></div>";
-								//echo "<div class='col-lg-6'>Bereits befreundet</div>";
-							}?>
-                            <div class="col-lg-6"<?php if(checkIfFriendsOrOwnProfile($_SESSION['user_id'], $userDataArray['id'], $mysqli))
-                                                       {
-                                                           echo "style='visibility: hidden'";
-                                                       }?>>
-								<form action="" method="post">
-									<input type="hidden" name='id1' value='<?php echo $_SESSION['user_id']; ?>'></input>
-									<input type="hidden" name='id2' value='<?php echo $userDataArray['id']; ?>'></input>
-									<input type="submit" class="btn btn-default btn-sm btn-block" name="addFriend" value="Freund hinzuf�gen"></input>
-								</form>
-                            </div>
+
+                            if(checkIFAlreadyFollowing($mysqli, $_SESSION['user_id'], $userDataArray['id']))
+                            {
+                                if(!$ownProfile)
+                                {
+                                    $s1 = $_SESSION['user_id'];
+                                    $s2 = $userDataArray['id'];
+                                    echo "<div class='col-lg-6'>
+                                            <form action='' method='post'>
+                                                <input type='hidden' name='id1' value='".$s1."'>
+                                                <input type='hidden' name='id2' value='".$s2."'>
+                                                <input type='submit' class='btn btn-default btn-sm btn-block' name='deleteFollowing' value='Nicht mehr folgen'>
+                                            </form>
+                                         </div>";
+                                }
+                            }
+                            else
+                            {
+                                if(!$ownProfile)
+                                {
+                                    $s1 = $_SESSION['user_id'];
+                                    $s2 = $userDataArray['id'];
+                                    echo "<div class='col-lg-6'>
+								                <form action='' method='post'>
+									                <input type='hidden' name='id1' value='".$s1."'>
+									                <input type='hidden' name='id2' value='".$s2."'>
+									                <input type='submit' class='btn btn-default btn-sm btn-block' name='addFollowing' value='Folgen'>
+								                </form>
+                                            </div>";   
+                                }
+                            }
+                            ?>
                         </div>
                     </div><!-- End div .user-button -->
                 </div><!-- End div .box-info -->
-                <!-- Begin user profile -->
             </div><!-- End div .col-sm-4 -->
 
             <div class="col-sm-9">
