@@ -3,6 +3,8 @@ header('Content-Type: text/html; charset=utf-8');
 
 include_once 'conn.php';
 include_once 'functions_login.php';
+//ini_set ("display_errors", "1");
+//error_reporting(E_ALL);
 
 sec_session_start();
 
