@@ -300,11 +300,11 @@ include ("include/navbar.php");
                                         <ul class="media-list">
                                             <?php
 
-                                            $activitiesChecker = getHistory_Checker($mysqli, $_SESSION['user_id']);
-                                            $activitiesArticle = getHistory_Article($mysqli, $_SESSION['user_id']);
-                                            $activitiesForum = getHistory_Forum($mysqli, $_SESSION['user_id']);
-                                            $activitiesSPQuiz = getHistory_SP_Quiz($mysqli, $_SESSION['user_id']);
-                                            $activitiesMPQuiz = getHistory_MP_Quiz($mysqli, $_SESSION['user_id']);
+                                            $activitiesChecker = getHistory_Checker($mysqli, $userDataArray["id"]);
+                                            $activitiesArticle = getHistory_Article($mysqli, $userDataArray["id"]);
+                                            $activitiesForum = getHistory_Forum($mysqli, $userDataArray["id"]);
+                                            $activitiesSPQuiz = getHistory_SP_Quiz($mysqli, $userDataArray["id"]);
+                                            $activitiesMPQuiz = getHistory_MP_Quiz($mysqli, $userDataArray["id"]);
 
                                             $sortedHistoryArray = combine_Historys($activitiesChecker, $activitiesArticle, $activitiesForum, $activitiesMPQuiz, $activitiesSPQuiz);
 
@@ -345,7 +345,7 @@ include ("include/navbar.php");
                                                         $echoString ="
                                                              <li class='media'>
                                                                 <p>
-                                                                    <strong>".$_SESSION['username']."</strong> hat ".$msg." den ".$activity['page']." genutzt, mit dem Ergebnis ".$activity['case_name']." bei ".$activity['percentage']." %
+                                                                    <strong>".$userDataArray['username']."</strong> hat ".$msg." den ".$activity['page']." genutzt, mit dem Ergebnis ".$activity['case_name']." bei ".$activity['percentage']." %
                                                                         <br>
                                                                 </p>
                                                              </li>
@@ -357,7 +357,7 @@ include ("include/navbar.php");
                                                                 <li class='media'>
                                                                     <a href='".$activity['fk_id']."'>
                                                                         <p>
-                                                                            <strong>".$_SESSION['username']."</strong> hat sich einen ".$activity['type']." angesehen
+                                                                            <strong>".$userDataArray["username"]."</strong> hat sich einen ".$activity['type']." angesehen
                                                                             <br>
                                                                             ".$msg."
                                                                         </p>
@@ -369,7 +369,7 @@ include ("include/navbar.php");
                                                                 <li class='media'>
                                                                     <a href='forum_demenz.php?topic=".$activity['fk_id']."'>
                                                                         <p>
-                                                                            <strong>".$_SESSION['username']."</strong> hat ".$msg." im Forum den Topic ".$activity['fk_id']." kommentiert.
+                                                                            <strong>".$userDataArray["username"]."</strong> hat ".$msg." im Forum den Topic ".$activity['fk_id']." kommentiert.
                                                                             <br>
                                                                         </p>
                                                                     </a>
@@ -382,7 +382,7 @@ include ("include/navbar.php");
                                                                             <form class='history_form' action='Quiz_Endseite.php' method='post'>
 												                                <input type='hidden' name='Profil_Quiz_ID' value='".$activity['fk_id']."'>
 												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>
-												                                <input class='history_button' type='submit' value='".$_SESSION['username']." hat ".$msg." ein Multiplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
+												                                <input class='history_button' type='submit' value='".$userDataArray["username"]." hat ".$msg." ein Multiplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
 											                                </form>
                                                                         </p>
                                                                 </li>";
@@ -394,7 +394,7 @@ include ("include/navbar.php");
                                                                             <form class='history_form' action='Quiz_Endseite.php' method='post'>
 												                                <input type='hidden' name='Profil_Quiz_ID' value='".$activity['fk_id']."'>
 												                                <input type='hidden' name='Profil_Quiz_Type' value='".$activity['type']."'>
-												                                <input class='history_button' type='submit' value='".$_SESSION['username']." hat ".$msg." ein Singleplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
+												                                <input class='history_button' type='submit' value='".$userDataArray["username"]." hat ".$msg." ein Singleplayer Quiz mit der ID ".$activity['fk_id']." abgeschlossen.'>
 											                                </form>
                                                                 </li>";
                                                         break;
