@@ -110,24 +110,46 @@ include ("include/navbar.php");
                         <div class="user-profile-2" style="margin-top:120px">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <h4>
-                                        <?php echo $userDataArray["nachname"]; ?>,
-                                        <b>
-                                            <?php echo $userDataArray["vorname"]; ?>
-                                        </b>
-                                    </h4>
+                                    <?php
+                                    $nameString ="<h4>";
+                                    if($userDataArray["nachname"] != "")
+                                    {
+                                        $nameString =$nameString.$userDataArray["nachname"];
+                                    }
+                                    if($userDataArray["vorname"] != "")
+                                    {
+                                        if($userDataArray["nachname"] != "")
+                                        {
+
+                                            $nameString =$nameString.", <b>".$userDataArray["vorname"]."</b>";
+                                        }else{
+
+                                            $nameString =$nameString."<b>".$userDataArray["vorname"]."</b>";
+                                        }
+                                    }
+                                    else if(($userDataArray["nachname"] == "" )&& ($userDataArray["vorname"] == ""))
+                                    {
+                                        $nameString =$nameString.$userDataArray["username"];
+                                    }
+                                    $nameString =$nameString."</h4>";
+                                    echo $nameString;
+                                    ?>
                                     <h5>Student, Medical science</h5>
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="badge"><?php
-                                                        echo getCountOfPeopleFollowingME($mysqli, $userDataArray['id']);
-                                                        ?></span>
+                                    <span class="badge">
+                                        <?php
+                                        echo getCountOfPeopleFollowingME($mysqli, $userDataArray['id']);
+                                        ?>
+                                    </span>
                                     Followers
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="badge"><?php
-                                                        echo getCountOfPeopleFollowing($mysqli, $userDataArray['id']);
-                                                        ?></span>
+                                    <span class="badge">
+                                        <?php
+                                        echo getCountOfPeopleFollowing($mysqli, $userDataArray['id']);
+                                        ?>
+                                    </span>
                                     Following
                                 </li>
                                 <li class="list-group-item">
@@ -143,11 +165,7 @@ include ("include/navbar.php");
                             <!-- User button -->
                             <div class="user-button">
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <form action="" method="post">
-                                            <input type="submit" class="btn btn-primary btn-sm btn-block" value="Nachricht abschicken" />
-                                        </form>
-                                    </div>
+                                    
                                     <?php
 
                                     if(checkIFAlreadyFollowing($mysqli, $_SESSION['user_id'], $userDataArray['id']))
@@ -218,7 +236,14 @@ include ("include/navbar.php");
                                             <strong>ABOUT</strong> ME
                                         </h5>
                                         <p>
-                                            <?php echo $userDataArray["beschreibung"]; ?>
+                                            <?php
+                                            if($userDataArray["beschreibung"] !="")
+                                            {
+                                                echo $userDataArray["beschreibung"];
+                                            }
+                                            else{
+                                                echo "Keine Beschreibung vorhanden";
+                                            }?>
                                         </p>
                                         <hr />
                                         <div class="row">
@@ -226,24 +251,43 @@ include ("include/navbar.php");
                                                 <h5>
                                                     <strong>CONTACT</strong> ME
                                                 </h5>
-                                                <!--<address>
-                                                <strong>Phone</strong><br>
-                                                <abbr title="Phone">+49 123 456 789 </abbr>
-                                            </address>-->
-                                                <address>
-                                                    <strong>Email</strong>
-                                                    <br />
-                                                    <a href="mailto:<?php echo $userDataArray["email"]; ?>">
-                                                        <?php echo $userDataArray["email"]; ?>
-                                                    </a>
-                                                </address>
-                                                <address>
-                                                    <strong>Website</strong>
-                                                    <br />
-                                                    <a href="http://<?php echo $userDataArray['website']; ?>">
-                                                        <?php echo $userDataArray["website"]; ?>
-                                                    </a>
-                                                </address>
+                                                <?php
+                                                if($userDataArray['email'] != ""){
+                                                    echo " <address>
+                                                            <strong>Email</strong>
+                                                            <br />
+                                                            <a href='mailto:".$userDataArray['email']."'>".
+                                                    $userDataArray["email"]."
+                                                            </a>
+                                                        </address>";
+                                                }
+                                                else
+                                                {
+                                                    echo " <address>
+                                                            <strong>Email</strong>
+                                                            <br />
+                                                            <p>Keine Email hinterlegt</p>
+                                                        </address>";
+                                                }
+                                                if($userDataArray['website'] != "")
+                                                {
+                                                    echo"<address>
+                                                        <strong>Website</strong>
+                                                        <br />
+                                                        <a href='http://".$userDataArray['website']."'>".
+                                                    $userDataArray["website"]."
+                                                        </a>
+                                                    </address>";
+                                                }
+                                                else
+                                                {
+                                                    echo " <address>
+                                                            <strong>Website</strong>
+                                                            <br />
+                                                            <p>Keine Website hinterlegt</p>
+                                                        </address>";
+                                                }
+                                                ?>
                                             </div>
                                         </div><!-- End div .row -->
                                     </div><!-- End div .user-profile-content -->
