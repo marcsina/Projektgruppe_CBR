@@ -320,6 +320,7 @@ if (login_check($mysqli) == true) {
         {
             $.post('include/functions_history.php',
             {
+                function: "Insert_Activity_Checker",
                 id: id1,
                 type: "Text Checker",
                 value: value1

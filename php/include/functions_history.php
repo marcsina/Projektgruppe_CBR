@@ -272,14 +272,34 @@ function get_Recent_Article($mysqli, $limit)
     }
 }
 
-//Check if an activity was sent to functions history
-if(isset($_POST['id'],$_POST['type'],$_POST['value']))
+//Main Method. Checks which function to call
+if(isset($_POST['function']))
 {
-    $type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
+    $funtion = filter_input(INPUT_POST, 'function', FILTER_SANITIZE_STRING);
+    switch($funtion)
+    {
+        case "Insert_Activity_Checker":
+        {
+            if(isset($_POST['id'],$_POST['type'],$_POST['value']))
+            {
+                $type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
 
-    insert_Activity_Checker($mysqli, $_SESSION['user_id'], $type, $_POST['value'], $_POST['id']);
+                insert_Activity_Checker($mysqli, $_SESSION['user_id'], $type, $_POST['value'], $_POST['id']);
 
+            }
+            break;
+        }
+        case "Insert_Activity_Article":
+        {
+            if(isset($_POST['user_id'],$_POST['article_id']))
+            {
+                insert_Activity_Article($mysqli, $_POST['user_id'], $_POST['article_id']);
+            }
+            break;
+        }
+    }
 }
+
 
 //Show variable in console
 function debug_to_console( $data )
