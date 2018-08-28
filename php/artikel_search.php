@@ -1,18 +1,37 @@
 <?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
+include_once 'include/functions_classroom.php';
 
 sec_session_start();
 
 if (login_check($mysqli) == true) {
     $logged = 'in';
+    $userid = $_SESSION['user_id'];
 } else {
     $logged = 'out';
     header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');
-	exit;
+    exit;
+    $username = 'anonymous';
+}
+
+if(isset($_POST["rate"]))
+{
+    $value = $mysqli->query("SELECT id FROM Artikel_Rating WHERE User_id = '".$userid."' AND Artikel_id = '".$_POST["artikelid"]."';");
+    $result = $value->fetch_assoc();
+    if (mysqli_num_rows($value) > 0) {
+        UpdateRatingArtikel($userid,$_POST["artikelid"],$_POST["rate"],$mysqli);
+        echo "updated";
+    }
+    else {
+        CreateRatingArtikel($userid,$_POST["artikelid"],$_POST["rate"],$mysqli);
+        echo "inserted";
+    }
+    
+    header("Location: artikel_search.php?searchtitel=".$_GET["searchtitel"]."");
+    exit();
 }
 ?>
-
 <html lang="en">
 
 
@@ -64,8 +83,57 @@ if (login_check($mysqli) == true) {
         				
                     	<h6><span class="glyphicon glyphicon-time"></span> Post by <?php echo $result2['nn']?>, <?php echo $row['Datum']?></h6>
                     	<p><?php echo substr($row['Inhalt'], 0, 500)?>...</p>
+                    	
+                    	<form action="artikel_search.php?searchtitel=<?php echo $_GET["searchtitel"]?>" method="post">
+                		<?php
+                    	$value = $mysqli->query("SELECT COUNT(id) as i FROM Artikel_Rating WHERE Artikel_id = '".$row['id']."' AND value = 1;");
+        				$result2 = $value->fetch_assoc();
+        				$value = $mysqli->query("SELECT COUNT(id) as i FROM Artikel_Rating WHERE Artikel_id = '".$row['id']."' AND value = -1;");
+        				$result3 = $value->fetch_assoc();
+        				$value = $mysqli->query("SELECT value as v FROM Artikel_Rating WHERE User_id = '".$userid."' AND Artikel_id = '".$row['id']."';");
+        				if (mysqli_num_rows($value) > 0)
+        				{
+        				    $result4 = $value->fetch_assoc();
+        				    $found = $result4['v'];
+        				    
+        				}
+        				else
+        				{
+        				    $found = 0;
+        				}
+        				
+        				if($found == 0)
+        				{
+        				?>
+                    	<input type="hidden" name="artikelid" value=<?php echo $row['id']?>/>
+                    	<button type="submit" name="rate" value="1" style="background:none;color:inherit;"> &#128077; </button> <?php echo $result2['i']?> 
+                    	<button type="submit" name="rate" value="-1" style="background:none;color:inherit;">&#128078; </button> <?php echo $result3['i']?> 
+                    	</form>
                 		</article>
                     	<?php
+        				}
+        				
+        				if($found == 1)
+        				{
+        				    ?>
+                    	<input type="hidden" name="artikelid" value=<?php echo $row['id']?>/>
+                    	<button type="submit" name="rate" value="1" style="background:green;color:inherit;"> &#128077; </button> <?php echo $result2['i']?> 
+                    	<button type="submit" name="rate" value="-1" style="background:none;color:inherit;">&#128078; </button> <?php echo $result3['i']?> 
+                    	</form>
+                		</article>
+                    	<?php
+        				}
+        				
+        				if($found == -1)
+        				{
+        				    ?>                  	
+                    	<input type="hidden" name="artikelid" value=<?php echo $row['id']?>/>
+                    	<button type="submit" name="rate" value="1" style="background:none;color:inherit;"> &#128077; </button> <?php echo $result2['i']?> 
+                    	<button type="submit" name="rate" value="-1" style="background:red;color:inherit;">&#128078; </button> <?php echo $result3['i']?> 
+                    	</form>
+                		</article>
+                    	<?php
+        				}
                     	$i++;
                     }
                 

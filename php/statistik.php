@@ -313,15 +313,6 @@ var myChart5 = new Chart(ctx5, {
             ],
             borderWidth: 1
         }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
     }
 });
 
@@ -351,15 +342,6 @@ var myChart6 = new Chart(ctx6, {
             ],
             borderWidth: 1
         }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
     }
 });
 </script> 	
