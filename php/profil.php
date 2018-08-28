@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_profile.php';
@@ -221,12 +221,12 @@ include ("include/navbar.php");
                             <ul class="nav nav-tabs nav-justified">
                                 <li class="active">
                                     <a href="#about" data-toggle="tab">
-                                        <i class="fa fa-user"></i> About
+                                        <i class="fa fa-user"></i> Über
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#user-activities" data-toggle="tab">
-                                        <i class="fa fa-laptop"></i> Activities
+                                        <i class="fa fa-laptop"></i> Aktivitäten
                                     </a>
                                 </li>
                                 <li>
@@ -237,7 +237,7 @@ include ("include/navbar.php");
                                 <?php
                                 if($ownProfile)
                                 {
-                                    echo "<li><a href='#edit_profil' data-toggle='tab'><i class='fa fa-edit'></i> edit profil</a></li>";
+                                    echo "<li><a href='#edit_profil' data-toggle='tab'><i class='fa fa-edit'></i>Profil bearbeiten</a></li>";
                                 }?>
 
                             </ul>
@@ -314,8 +314,13 @@ include ("include/navbar.php");
                                 <div class="tab-pane animated fadeInRight" id="user-achievements">
 
                                     <h5>
-                                        <strong>Tolle Erfolge hast du</strong>
+                                        <strong>Erfolge:</strong>
                                     </h5>
+
+                                    <?php
+                                    $percentage = get_Achievements_Article($mysqli,$_SESSION['user_id'], 1);
+                                    echo "Du hast diese Woche ".$percentage." % aller Artikel gelesen";
+                                    ?>
                                 </div>
                                 <!-- Tab user activities -->
                                 <div class="tab-pane animated fadeInRight" id="user-activities">
@@ -378,9 +383,9 @@ include ("include/navbar.php");
                                                     case "Article":
                                                         $echoString ="
                                                                 <li class='media'>
-                                                                    <a href='".$activity['fk_id']."'>
+                                                                    <a href='artikel_show.php?id=".$activity['fk_id']."'>
                                                                         <p>
-                                                                            <strong>".$userDataArray["username"]."</strong> hat sich einen ".$activity['type']." angesehen
+                                                                            <strong>".$userDataArray["username"]."</strong> hat ".$activity['title']." gelesen
                                                                             <br>
                                                                             ".$msg."
                                                                         </p>

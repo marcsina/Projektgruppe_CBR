@@ -8,6 +8,8 @@ include_once 'functions_login.php';
 
 sec_session_start();
 
+//----------------------------------------------HISTORY----------------------------------------------
+
 //Insert Activity into the Histoy_Checker table
 //$result can link to a future result table
 function insert_Activity_Checker($mysqli, $user_ID, $Page, $result = null, $case_id = null)
@@ -71,17 +73,17 @@ function getHistory_Checker($mysqli, $user_ID)
 function getHistory_Article($mysqli, $user_ID)
 {
     $data = array();
-    if($stmt = $mysqli->prepare("SELECT Time, ArticleID FROM History_Article WHERE User_ID = ?"))
+    if($stmt = $mysqli->prepare("SELECT Time, Article_ID, Artikel.Titel FROM History_Article, Artikel WHERE History_Article.Article_ID = Artikel.id AND User_ID = ?"))
     {
         $stmt->bind_param('i',$user_ID);
         $stmt->execute();
 
         $stmt->store_result();
 
-        $stmt->bind_result($time, $article);
+        $stmt->bind_result($time, $article,$title);
         while($stmt->fetch())
         {
-            array_push($data,array("time"=>$time, "article"=>$article));
+            array_push($data,array("time"=>$time, "article"=>$article, "title" => $title));
         }
 
         return $data;
@@ -180,7 +182,7 @@ function combine_Historys($checker, $article, $forum, $mpquiz, $spquiz)
     {
         foreach($article as &$item)
         {
-            array_push($result, array("time"=>$item['time'], "page" => null, "fk_id" => $item['article'], "type" => 'Article'));
+            array_push($result, array("time"=>$item['time'], "page" => null, "fk_id" => $item['article'], "type" => 'Article', "title" => $item['title']));
         }
     }
 
@@ -253,7 +255,7 @@ function get_Recent_Forum($mysqli, $limit)
 //Get the newest Article Post, Limit by input value
 function get_Recent_Article($mysqli, $limit)
 {
-    debug_to_console("Hallo Artikel");
+
     $Recent_Article = array();
     if($stmt = $mysqli->prepare("SELECT Artikel.id, Datum, Titel, username FROM Artikel, members Where members.id = Artikel.UserID Order By datum desc LIMIT ?"))
     {
@@ -267,10 +269,57 @@ function get_Recent_Article($mysqli, $limit)
         {
             array_push($Recent_Article,array("article_id"=>$article_id, "date"=>$date, "username"=>$username, "title"=>$title));
         }
-        debug_to_console("Artikel in ".$Recent_Article[0]['title']);
+
         return $Recent_Article;
     }
 }
+
+
+
+
+
+
+//------------------------------------------------Achievements-----------------------------
+
+//return a percentage value that show how much of all articles were read. based on the given time period in weeks
+function get_Achievements_Article($mysqli, $user_id, $time_period)
+{
+    $result;
+    //Get all articles in the first sub query.
+    //Get all read article distinct, by the user in the second query
+    //Calculate a percentage value
+    if($stmt = $mysqli->prepare("Select ((count(B.Article_ID) * 100) / A.all_article) AS percentage
+                                FROM (Select count(*) AS all_article FROM Artikel) AS A,
+                                    (SELECT Distinct User_ID, Article_ID
+                                        FROM History_Article, Artikel
+                                        WHERE Artikel.id = History_Article.Article_ID AND User_ID = ?
+                                            AND Time between date_sub(now(),INTERVAL ? WEEK) and now()) AS B
+                                                                                                                "))
+    {
+        $stmt->bind_param('ii',$user_id, $time_period);
+        $stmt->execute();
+
+        $stmt->store_result();
+
+        $stmt->bind_result($percentage);
+
+
+        while($stmt->fetch())
+        {
+            $result = $percentage;
+        }
+        return intval($result);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 //Main Method. Checks which function to call
 if(isset($_POST['function']))
