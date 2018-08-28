@@ -85,21 +85,6 @@ if (login_check($mysqli) == true) {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="icon_mail_alt"></i> My Inbox
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon_clock_alt"></i> Timeline
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon_chat_alt"></i> Chats
-                            </a>
-                        </li>
-                        <li>
                             <a href="/Projektgruppe/php/include/logout.php">
                                 <i class="icon_key_alt"></i> Log Out
                             </a>
@@ -172,12 +157,6 @@ if (login_check($mysqli) == true) {
                             </li>
                             <li>
                                 <a href="/Projektgruppe/php/scripts.php">Scripts</a>
-                            </li>
-                            <li>
-                                <a href="/Projektgruppe/php/tutorials.php">Tutorials</a>
-                            </li>
-                            <li>
-                                <a href="/Projektgruppe/php/videos.php">videos</a>
                             </li>
                         </ul>
                     </li>

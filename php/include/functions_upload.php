@@ -5,6 +5,8 @@ header('Content-Type: text/html; charset=utf-8');
 
 include_once 'conn.php';
 
+sec_session_start();
+
 $mysqli = $mysqli;
 
 if(isset($_FILES["fileToUpload"]["name"]))
@@ -31,13 +33,14 @@ if(isset($_FILES["fileToUpload"]["name"]))
         }
 
     }
+    /*
     // Check if file already exists
     if (file_exists($target_file)) {
         echo '<script language="javascript">';
         echo 'alert("Dateiname existiert bereits")';
         echo '</script>';
         $uploadOk = 0;
-    }
+    }*/
     // Check file size <=500kb
     if ($_FILES["fileToUpload"]["size"] > 500000) {
         echo '<script language="javascript">';
@@ -82,6 +85,7 @@ function changeProfileImage($mysqli, $path)
         $stmt->bind_param('si',$path ,$_SESSION['user_id']);
         if($stmt->execute())
         {
+            $_SESSION['profilbild'] = $path;
             return true;
         }
         else
