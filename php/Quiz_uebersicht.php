@@ -144,7 +144,7 @@ include ("include/navbar.php");
 										<td scope='row'>".++$count."</td>
 										<td>
 
-											<label>".$user['username']."</label>
+											<label><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$user['username']."'>".$user['username']."</a></label>
 
 										</td>
 										<td>
@@ -201,7 +201,7 @@ include ("include/navbar.php");
                                     <tr>
                                     <td scope='row'>".++$count."</td>
                                     <td>
-                                        <label>".$user['username']."</label>
+                                        <label><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$user['username']."'>".$user['username']."</a></label>
                                     </td>
                                     <td>
 										    <form class='form-inline' action='include/functions_quiz.php' method='post'>
@@ -234,7 +234,7 @@ include ("include/navbar.php");
 
                 <div class=" col-lg-12 col-md-12 col-sm-12" >
                     
-                    <?php					
+                    <?php
                         $array = getAllFriends($mysqli, $_SESSION['user_id']);
                         $array2 = getAlreadyChallengedUsers($mysqli, $_SESSION['user_id']);
                         $array3 = getPendingChallengesUsers($mysqli, $_SESSION['user_id']);
@@ -264,12 +264,12 @@ include ("include/navbar.php");
                                 <tbody>";
 
 						//Convert data for autocomplete to javascript
-						
+
 						$js_array = json_encode($array);
 						$js_getAlreadyChallengedUsers = json_encode($array2);
 						$js_getPendingChallengesUsers = json_encode($array3);
 						$js_checkCurrentMPGamesForChallenges = json_encode($array4);
-						$js_sessionID = json_encode($_SESSION['user_id']);			
+						$js_sessionID = json_encode($_SESSION['user_id']);
 
 						echo "
 						<script type='text/javascript'>
@@ -279,7 +279,7 @@ include ("include/navbar.php");
 						var pendingChallengesUsers_array = ".$js_getPendingChallengesUsers.";
 						var currentMPGamesForChallenges_array = ".$js_checkCurrentMPGamesForChallenges.";
 						var sessionID = ".$js_sessionID.";
-						
+
 						</script>
 						";
 
@@ -308,7 +308,9 @@ include ("include/navbar.php");
 														".++$count."
 													</td>
 													<td>
-														".$user['username']."
+                                                        <a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$user['username']."'>"
+														.$user['username']."
+                                                           </a>
 													</td>
 													<td class='table_style_uebersicht'>
 														Warte auf Annahme
@@ -367,7 +369,9 @@ include ("include/navbar.php");
 											".++$count."
 										</td>
 										<td>
-											".$user['username']."
+                                            <a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$user['username']."'>"
+                                            .$user['username']."
+                                            </a>
 										</td>
 										<td class='table_style_uebersicht'>
 											<form class='form-inline' action='include/functions_quiz.php' method='post'>
