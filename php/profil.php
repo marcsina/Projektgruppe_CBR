@@ -3,6 +3,7 @@ include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_profile.php';
 include_once 'include/functions_history.php';
+include_once 'include/functions_upload.php';
 
 $ownProfile = false;
 
@@ -88,7 +89,7 @@ if (login_check($mysqli) == true)
 <?php
 include ("include/navbar.php");
 ?>
-<body id="home" style="background-color:#e9ebee" ;>
+<body id="home">
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <div class="container">
@@ -97,7 +98,17 @@ include ("include/navbar.php");
 
                 <!-- style="background-image: url(http://hubancreative.com/projects/templates/coco/corporate/images/stock/1epgUO0.jpg);"-->
                 <div class="col-sm-3 avatar-container">
-                    <img src="http://cdn.tictacdoc.ma/assets/images/doc/avatar-female-doc.png" class="img-circle profile-avatar" alt="User avatar" />
+                    <?php
+                    if(strlen($userDataArray['profilbild']) > 5)
+                    {
+                        echo "<img src='..".$userDataArray['profilbild']."' class='img-circle profile-avatar' alt='User avatar' />";
+                    }
+                    else
+                    {
+
+                    echo "<img src='http://cdn.tictacdoc.ma/assets/images/doc/avatar-female-doc.png' class='img-circle profile-avatar' alt='User avatar' />";
+                    }
+                    ?>
                 </div>
 
                 <!-- <img src="https://bootdey.com/img/Content/avatar/avatar6.png" -->
@@ -453,6 +464,12 @@ include ("include/navbar.php");
 									</div>
 								</div>
 							</form>
+
+                            <form class='form col-xs-12' action='' method='post' enctype='multipart/form-data'>
+                                Wähle ein Bild zum Hochladen als Profilbild aus:
+                                <input type='file' name='fileToUpload' id='fileToUpload' value='Durchsuchen'>
+                                <input class='btn btn-md btn-success' type='submit' value='Ausgewähltes Bild hochladen' name='submit'>
+                            </form>
 						</div>";
                                 }?>
                             </div><!-- End div .tab-content -->
