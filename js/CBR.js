@@ -52,7 +52,6 @@
 
 			//Symptome in eingehendem Fall überprüfen
 			for (k = copyArrayIncomingCaseSymptoms.length - 1; k >= 0; k--) {
-				var wij = 1;
 				const index = copyArrayCaseSymptoms.map(e => e.id).indexOf(copyArrayIncomingCaseSymptoms[k].id);
 
 				//Symptom in eingehendem fall vorhanden, aber nicht in Fall aus CaseBase
@@ -101,13 +100,10 @@
 			var factor = Math.pow(10, 2);
 			this.Cases[i].similarity = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
 			this.Similarities.push(this.Cases[i]);
-			//this.ergebnisse = this.ergebnisse + "" + "incomingCase: " + this.incomingCase.id + "          Case: " + this.Cases[i].id + "          Similarity: " + this.Similarities[i] + "%<br>";			
 		}
-		this.Similarities.sort((a, b) => parseFloat(b.similarity) - parseFloat(a.similarity));
-
-		
+		this.Similarities.sort((a, b) => parseFloat(b.similarity) - parseFloat(a.similarity));		
 	}
-	
+
 	calculateSimilaritySimple() {
 		this.Similarities = [];
 		this.ergebnisse = "";
@@ -191,18 +187,14 @@ class Case {
 		this.Symptoms = [];
 		this.Referenzen = [];
 	}
+}
 
-	initiateSymptoms(){
-		var i;
-		for (i = 0; i < 110; i++) {
-			this.Symptoms[i] = 0;
-		}
-	}
-	
-	loadAllArrays() {
-		//Symptons
-
-		//References
+class Symptom {
+	constructor(pid, pname, pwert) {
+		this.id = pid;
+		this.name = pname;
+		this.wert = pwert;
+		this.anzeigeNummer = 0;
 	}
 }
 
@@ -219,20 +211,7 @@ class Referenz {
 	}
 }
 
-class Symptom {
-	constructor(pid, pname, pwert) {
-		this.id = pid;
-		this.name = pname;
-		this.wert = pwert;
-		this.anzeigeNummer = 0;
-		//       this.wij = pwij;
-		//       this.Keyword = [];
-	}
 
-	loadAllArrays() {
-
-	}
-}
 
 var cbr = new CBR();
 

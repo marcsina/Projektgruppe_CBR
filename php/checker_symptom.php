@@ -29,6 +29,7 @@ if (login_check($mysqli) == true) {
     <link href="../css/style3.css" rel="stylesheet">
     <link href="../css/style_autocomplete.css" rel="stylesheet">
     <link href="../css/table.css" rel="stylesheet">
+	<link href="../css/style_checker.css" rel="stylesheet">
 
 </head>
 	<!-- _______________________________________NavBar_____________________________________________________-->
@@ -306,7 +307,7 @@ if (login_check($mysqli) == true) {
 				// checked
 
 
-				$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="symptom row" style="max-width:90%"><div class="col-md-6 col-sm-6">' + idOhnePrefix + ': ' + cbr.incomingCase.Symptoms[idOhnePrefix-1].name + '</div > <div class="col-md-5 col-sm-5 btn-group" data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
+				$('#section_symptoms').append('<div id=' + 'div_impairment_' + idOhnePrefix + ' class="symptom row" style="max-width:90%"><div class="col-md-6 col-sm-6">' + idOhnePrefix + ': ' + cbr.incomingCase.Symptoms[idOhnePrefix-1].name + '</div > <div class="col-md-5 col-sm-5 btn-group" data-toggle="buttons"><button id=' + 'btn_klein_' + idOhnePrefix + ' class="impairmentbutton">klein</button><button id=' + 'btn_mittel_' + idOhnePrefix + ' class="impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + idOhnePrefix + ' class="impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + idOhnePrefix + ' class="close btn btn-info xbutton">x</button></div></div>');
 				// Standardwerte setzen
 				
 				if(cbr.incomingCase.Symptoms[idOhnePrefix-1].wert > 0) {
@@ -318,15 +319,26 @@ if (login_check($mysqli) == true) {
 					TO-DO:
 					ANZEIGEN DER GEDRÜCKTEN BUTTON VIA CSS KLASSEN
 
+					
+		$('#' + 'btn_mittel_' + idOhnePrefix).removeClass('CSSRemoveButtonSelected');
+		$('#' + 'btn_hoch_' + idOhnePrefix).removeClass('CSSRemoveButtonSelected');
+
 					*/
+
 					if(cbr.incomingCase.Symptoms[idOhnePrefix-1].wert > 0.8) {
-						$('#' + 'btn_hoch_' + idOhnePrefix).click();
+						$('#' + 'btn_klein_' + idOhnePrefix).addClass('niedrigUnchecked');
+						$('#' + 'btn_mittel_' + idOhnePrefix).addClass('mittelUnChecked');
+						$('#' + 'btn_hoch_' + idOhnePrefix).addClass('hochChecked');
 					}
 					else if(cbr.incomingCase.Symptoms[idOhnePrefix-1].wert > 0.3 && cbr.incomingCase.Symptoms[idOhnePrefix-1].wert < 0.8) {
-						$('#' + 'btn_mittel_' + idOhnePrefix).click();
+						$('#' + 'btn_klein_' + idOhnePrefix).addClass('niedrigUnchecked');
+						$('#' + 'btn_mittel_' + idOhnePrefix).addClass('mittelChecked');
+						$('#' + 'btn_hoch_' + idOhnePrefix).addClass('hochUnchecked');
 					}
 					else {
-						$('#' + 'btn_klein_' + idOhnePrefix).click();
+						$('#' + 'btn_klein_' + idOhnePrefix).addClass('niedrigChecked');
+						$('#' + 'btn_mittel_' + idOhnePrefix).addClass('mittelUnchecked');
+						$('#' + 'btn_hoch_' + idOhnePrefix).addClass('hochUnchecked');
 					}
 				}
 				else {
@@ -352,12 +364,36 @@ if (login_check($mysqli) == true) {
 
 			if (clickedBtnID.includes("klein")) {
 				cbr.incomingCase.Symptoms[idOhnePrefix-1].wert = 0.3;
+
+				$('#' + 'btn_klein_' + idOhnePrefix).removeClass('niedrigUnchecked');
+				$('#' + 'btn_mittel_' + idOhnePrefix).removeClass('mittelChecked');
+				$('#' + 'btn_hoch_' + idOhnePrefix).removeClass('hochChecked');
+
+				$('#' + 'btn_klein_' + idOhnePrefix).addClass('niedrigChecked');
+				$('#' + 'btn_mittel_' + idOhnePrefix).addClass('mittelUnchecked');
+				$('#' + 'btn_hoch_' + idOhnePrefix).addClass('hochUnchecked');
 			}
 			if (clickedBtnID.includes("mittel")) {
 				cbr.incomingCase.Symptoms[idOhnePrefix-1].wert = 0.6;
+
+				$('#' + 'btn_klein_' + idOhnePrefix).removeClass('niedrigChecked');
+				$('#' + 'btn_mittel_' + idOhnePrefix).removeClass('mittelUnchecked');
+				$('#' + 'btn_hoch_' + idOhnePrefix).removeClass('hochChecked');
+
+				$('#' + 'btn_klein_' + idOhnePrefix).addClass('niedrigUnchecked');
+				$('#' + 'btn_mittel_' + idOhnePrefix).addClass('mittelChecked');
+				$('#' + 'btn_hoch_' + idOhnePrefix).addClass('hochUnchecked');
 			}
 			if (clickedBtnID.includes("hoch")) {
 				cbr.incomingCase.Symptoms[idOhnePrefix-1].wert = 0.9;
+
+				$('#' + 'btn_klein_' + idOhnePrefix).removeClass('niedrigChecked');
+				$('#' + 'btn_mittel_' + idOhnePrefix).removeClass('mittelChecked');
+				$('#' + 'btn_hoch_' + idOhnePrefix).removeClass('hochUnchecked');
+
+				$('#' + 'btn_klein_' + idOhnePrefix).addClass('niedrigUnchecked');
+				$('#' + 'btn_mittel_' + idOhnePrefix).addClass('mittelUnchecked');
+				$('#' + 'btn_hoch_' + idOhnePrefix).addClass('hochChecked');
 			}
 
 			// TO-DO: Buttondesign anpassen

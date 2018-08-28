@@ -2,7 +2,7 @@
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_quiz.php';
-include_once 'include/getAllMembers.php';
+include_once 'include/getAllFriends.php';
 
 sec_session_start();
 
@@ -235,7 +235,7 @@ include ("include/navbar.php");
                 <div class=" col-lg-12 col-md-12 col-sm-12" >
                     
                     <?php					
-                        $array = getAllMembers($mysqli);
+                        $array = getAllFriends($mysqli, $_SESSION['user_id']);
                         $array2 = getAlreadyChallengedUsers($mysqli, $_SESSION['user_id']);
                         $array3 = getPendingChallengesUsers($mysqli, $_SESSION['user_id']);
                         $array4 = checkCurrentMPGamesForChallenges($mysqli, $_SESSION['user_id']);
