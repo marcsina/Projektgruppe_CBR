@@ -106,7 +106,7 @@ include ("include/navbar.php");
                     else
                     {
 
-                    echo "<img src='http://cdn.tictacdoc.ma/assets/images/doc/avatar-female-doc.png' class='img-circle profile-avatar' alt='User avatar' />";
+                        echo "<img src='http://cdn.tictacdoc.ma/assets/images/doc/avatar-female-doc.png' class='img-circle profile-avatar' alt='User avatar' />";
                     }
                     ?>
                 </div>
@@ -176,7 +176,7 @@ include ("include/navbar.php");
                             <!-- User button -->
                             <div class="user-button">
                                 <div class="row">
-                                    
+
                                     <?php
 
                                     if(checkIFAlreadyFollowing($mysqli, $_SESSION['user_id'], $userDataArray['id']))
@@ -229,11 +229,17 @@ include ("include/navbar.php");
                                         <i class="fa fa-laptop"></i> Activities
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="#user-achievements" data-toggle="tab">
+                                        <i class="fa fa-trophy"></i> Erfolge
+                                    </a>
+                                </li>
                                 <?php
                                 if($ownProfile)
                                 {
                                     echo "<li><a href='#edit_profil' data-toggle='tab'><i class='fa fa-edit'></i> edit profil</a></li>";
                                 }?>
+
                             </ul>
                             <!-- End nav tab -->
 
@@ -305,6 +311,12 @@ include ("include/navbar.php");
                                 </div><!-- End div .tab-pane -->
                                 <!-- End Tab about -->
 
+                                <div class="tab-pane animated fadeInRight" id="user-achievements">
+
+                                    <h5>
+                                        <strong>Tolle Erfolge hast du</strong>
+                                    </h5>
+                                </div>
                                 <!-- Tab user activities -->
                                 <div class="tab-pane animated fadeInRight" id="user-activities">
                                     <div class="scroll-user-widget">
@@ -485,10 +497,9 @@ include ("include/navbar.php");
 
                 <script type="text/javascript">
 
-                    $( function ()
-                    {
-                        $( "[data-toggle='tooltip']" ).tooltip();
-                    } )
+                    $(function () {
+                        $("[data-toggle='tooltip']").tooltip();
+                    })
                 </script>
 </body>
 </html>
