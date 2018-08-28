@@ -23,3 +23,16 @@
 .user-profile-2 {
     text-align: left;
 }
+
+div #user-activities {
+    overflow-y: scroll;
+    /*height: 500px*/
+}
+
+.tab-pane{
+    height:500px;
+}
+
+.form{
+    margin-top: 10px;
+}

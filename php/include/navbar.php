@@ -60,7 +60,17 @@ if (login_check($mysqli) == true) {
                 <li class='dropdown'>
                     <a data-toggle='dropdown' class='dropdown-toggle' href='/Projektgruppe/php/profil.php'>
                         <span class='profile-ava'>
-                            <img alt='' src='/Projektgruppe/Fotos/avatar1_small.png' />
+                            <!--Profilbild-->
+                            <?php
+                            if(strlen($_SESSION['profilbild']) > 5)
+                            {
+                                echo "<img alt='' src='/Projektgruppe".$_SESSION['profilbild']."' style='max-height: 51px; max-width: 51px;' />";
+                            }
+                            else
+                            {
+                                echo "<img alt='' src='http://cdn.tictacdoc.ma/assets/images/doc/avatar-female-doc.png' style='max-height: 51px; max-width: 51px;' />";
+                            }
+                            ?>
                         </span>
                         <span class="username">
                             <?php echo $_SESSION['username']; ?>

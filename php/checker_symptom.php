@@ -421,6 +421,7 @@ if (login_check($mysqli) == true) {
             {
                 $.post('include/functions_history.php',
                 {
+                    function: "Insert_Activity_Checker",
                     id: id1,
                     type: "Symptom Checker",
                     value: value1
