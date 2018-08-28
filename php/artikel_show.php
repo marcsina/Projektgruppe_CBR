@@ -136,5 +136,17 @@ if(isset($_POST["rate"]))
 
     <script src="../js/jquery-2.2.2.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script>
+    function insertArticleHistory(id1, id2)
+    {
+        $.post('include/functions_history.php',
+        {
+        function: "Insert_Activity_Article",
+        user_id: id1,
+        article_id: id2
+        });
+    }
+    insertArticleHistory(<?php echo $userid ?>, <?php echo $_GET["id"] ?>);
+    </script>
 </body>
 </html>
