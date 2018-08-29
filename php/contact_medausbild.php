@@ -2,7 +2,11 @@
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 
-sec_session_start(); 
+include_once 'include/functions_contact.php';
+//ini_set ("display_errors", "1");
+//error_reporting(E_ALL);
+
+sec_session_start();
 if (login_check($mysqli) == true) {
     $logged = 'in';
 } else {
