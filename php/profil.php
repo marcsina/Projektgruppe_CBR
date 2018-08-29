@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_profile.php';
@@ -83,6 +83,7 @@ if (login_check($mysqli) == true)
     <link href="../css/style2.css" rel="stylesheet" />
 
     <link href="../css/style_profil.css" rel="stylesheet" />
+    <link href="../css/style_button.css" rel="stylesheet" />
 </head>
 <!-- _______________________________________NavBar_____________________________________________________-->
 
@@ -229,16 +230,27 @@ include ("include/navbar.php");
                                         <i class="fa fa-laptop"></i> Aktivitäten
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#user-achievements" data-toggle="tab">
-                                        <i class="fa fa-trophy"></i> Erfolge
-                                    </a>
-                                </li>
+                                
                                 <?php
-                                if($ownProfile)
-                                {
-                                    echo "<li><a href='#edit_profil' data-toggle='tab'><i class='fa fa-edit'></i>Profil bearbeiten</a></li>";
-                                }?>
+                                    if($ownProfile)
+                                    {
+                                        //achievements
+                                        echo "<li>
+                                                <a href='#user-achievements' data-toggle='tab'>
+                                                    <i class='fa fa-trophy'></i> Erfolge
+                                                </a>
+
+                                            </li>";
+
+                                        //Edit profile
+                                        echo "<li>
+                                                <a href='#edit_profil' data-toggle='tab'>
+                                                    <i class='fa fa-edit'></i>Profil bearbeiten
+                                                </a>
+                                            </li>";
+
+                                    }
+                                ?>
 
                             </ul>
                             <!-- End nav tab -->
@@ -311,30 +323,38 @@ include ("include/navbar.php");
                                 </div><!-- End div .tab-pane -->
                                 <!-- End Tab about -->
 
-                                <div class="tab-pane animated fadeInRight" id="user-achievements">
-
-                                    <h5>
-                                        <strong>Erfolge:</strong>
-                                    </h5>
-
-                                    <?php
-                                    $percentage = get_Achievements_Article($mysqli,$_SESSION['user_id'], 1);
-                                    echo "Du hast diese Woche ".$percentage." % aller Artikel gelesen";
-                                    ?>
-                                </div>
                                 <!-- Tab user activities -->
                                 <div class="tab-pane animated fadeInRight" id="user-activities">
                                     <div class="scroll-user-widget">
                                         <ul class="media-list">
                                             <?php
 
+                                            //get all history arrays
                                             $activitiesChecker = getHistory_Checker($mysqli, $userDataArray["id"]);
                                             $activitiesArticle = getHistory_Article($mysqli, $userDataArray["id"]);
                                             $activitiesForum = getHistory_Forum($mysqli, $userDataArray["id"]);
                                             $activitiesSPQuiz = getHistory_SP_Quiz($mysqli, $userDataArray["id"]);
                                             $activitiesMPQuiz = getHistory_MP_Quiz($mysqli, $userDataArray["id"]);
 
+                                            //combine and sort them
                                             $sortedHistoryArray = combine_Historys($activitiesChecker, $activitiesArticle, $activitiesForum, $activitiesMPQuiz, $activitiesSPQuiz);
+
+                                            $count_week_forum =0;
+                                            $count_month_forum =0;
+                                            $count_all_forum =0;
+
+                                            $count_week_artikel =0;
+                                            $count_month_artikel =0;
+                                            $count_all_artikel =0;
+
+                                            $count_week_quiz =0;
+                                            $count_month_quiz =0;
+                                            $count_all_quiz =0;
+
+                                            $count_week_checker =0;
+                                            $count_month_checker =0;
+                                            $count_all_checker =0;
+                                            $nextWeek = 604800;
 
                                             foreach($sortedHistoryArray as &$activity)
                                             {
@@ -369,7 +389,25 @@ include ("include/navbar.php");
                                                 $echoString = "";
                                                 switch($activity['type'])
                                                 {
+
+
+
                                                     case "Checker":
+
+                                                        //----Insert Achievements
+                                                        //All Time
+                                                        $count_all_checker++;
+                                                        //Month
+                                                        if((strtotime($activity['time'])+abs(strtotime("-1 month")-strtotime("now"))) >= time())
+                                                        {
+                                                            $count_month_checker++;
+                                                        }
+                                                        //Week
+                                                        if((strtotime($activity['time'])+$nextWeek) >= time())
+                                                        {
+                                                            $count_week_checker++;
+                                                        }
+                                                        //-------------------------------------------------------------
                                                         $echoString ="
                                                              <li class='media'>
                                                                 <p>
@@ -381,6 +419,22 @@ include ("include/navbar.php");
 
                                                         break;
                                                     case "Article":
+
+                                                        //----Insert Achievements
+                                                        //All Time
+                                                        $count_all_artikel++;
+                                                        //Month
+                                                        if((strtotime($activity['time'])+abs(strtotime("-1 month")-strtotime("now"))) >= time())
+                                                        {
+                                                            $count_month_artikel++;
+                                                        }
+                                                        //Week
+                                                        if((strtotime($activity['time'])+$nextWeek) >= time())
+                                                        {
+                                                            $count_week_artikel++;
+                                                        }
+                                                        //-------------------------------------------------------------
+
                                                         $echoString ="
                                                                 <li class='media'>
                                                                     <a href='artikel_show.php?id=".$activity['fk_id']."'>
@@ -393,6 +447,22 @@ include ("include/navbar.php");
                                                                 </li>";
                                                         break;
                                                     case "Forum":
+
+                                                        //----Insert Achievements
+                                                        //All Time
+                                                        $count_all_forum++;
+                                                        //Month
+                                                        if((strtotime($activity['time'])+abs(strtotime("-1 month")-strtotime("now"))) >= time())
+                                                        {
+                                                            $count_month_forum++;
+                                                        }
+                                                        //Week
+                                                        if((strtotime($activity['time'])+$nextWeek) >= time())
+                                                        {
+                                                            $count_week_forum++;
+                                                        }
+                                                        //-------------------------------------------------------------
+
                                                         $echoString ="
                                                                 <li class='media'>
                                                                     <a href='forum_demenz.php?topic=".$activity['fk_id']."'>
@@ -404,6 +474,19 @@ include ("include/navbar.php");
                                                                 </li>";
                                                         break;
                                                     case "MP":
+                                                        //----Insert Achievements
+                                                        //All Time
+                                                        $count_all_quiz++;
+                                                        //Month
+                                                        if((strtotime($activity['time'])+abs(strtotime("-1 month")-strtotime("now"))) >= time())
+                                                        {
+                                                            $count_month_quiz++;
+                                                        }
+                                                        //Week
+                                                        if((strtotime($activity['time'])+$nextWeek) >= time())
+                                                        {
+                                                            $count_week_quiz++;
+                                                        }
                                                         $echoString ="
                                                                 <li>
                                                                         <p>
@@ -416,6 +499,19 @@ include ("include/navbar.php");
                                                                 </li>";
                                                         break;
                                                     case "SP":
+                                                        //----Insert Achievements
+                                                        //All Time
+                                                        $count_all_quiz++;
+                                                        //Month
+                                                        if((strtotime($activity['time'])+(strtotime("-1 month")-strtotime("now"))) >= time())
+                                                        {
+                                                            $count_month_quiz++;
+                                                        }
+                                                        //Week
+                                                        if((strtotime($activity['time'])+$nextWeek) >= time())
+                                                        {
+                                                            $count_week_quiz++;
+                                                        }
                                                         $echoString ="
                                                                 <li>
 
@@ -436,6 +532,64 @@ include ("include/navbar.php");
                                     </div><!-- End div .scroll-user-widget -->
                                 </div><!-- End div .tab-pane -->
                                 <!-- End Tab user activities -->
+
+
+
+
+                                <?php
+                                if($ownProfile)
+                                {
+                                    //$article_week_percent = get_Article_TimePeriod($mysqli,$_SESSION['user_id'], 1);
+                                    //$article_month_percent = get_Article_TimePeriod($mysqli,$_SESSION['user_id'], 4);
+                                    //$article_all_percent = get_Article_TimePeriod($mysqli,$_SESSION['user_id'], 1000);
+
+
+                                    echo "<div class='tab-pane animated fadeInRight' id='user-achievements'>
+
+                                                <div id='Achieve_Buttons'>
+
+                                                        <button id='Achieve-Week-Button' type='button' onclick='Achieve_Week_func()' class='btn-basic btn-basic-blue btn-basic-m' >Woche</button>
+                                                        <button id='Achieve-Month-Button' type='button' onclick='Achieve_Month_func()' class='btn-basic btn-basic-blue btn-basic-m'>Monat</button>
+                                                        <button id='Achieve-Perm-Button' type='button' onclick='Achieve_Perm_func()' class='btn-basic btn-basic-blue btn-basic-m'>Gesamte Zeit</button>
+
+                                                </div>
+
+
+                                                <div id='Achieve-Week'>
+                                                    Du hast diese Woche insgesamt ".$count_week_checker." mal den Checker benutzt.
+                                                    <br>
+                                                    Du hast diese Woche insgesamt ".$count_week_forum." mal im Forum gepostet.
+                                                    <br>
+                                                    Du hast diese Woche insgesamt ".$count_week_quiz." mal Quiz gespielt.
+                                                    <br>
+                                                    Du hast diese Woche insgesamt ".$count_week_artikel." Artikel gelesen.
+                                                </div>
+
+                                                <div id='Achieve-Month' >
+                                                    Du hast diesen Monat insgesamt ".$count_month_checker." mal den Checker benutzt.
+                                                    <br>
+                                                    Du hast diesen Monat insgesamt ".$count_month_forum." mal im Forum geschrieben.
+                                                    <br>
+                                                    Du hast diesen Monat insgesamt ".$count_month_quiz." mal Quiz gespielt.
+                                                    <br>
+                                                    Du hast diesen Monat insgesamt ".$count_month_artikel." Artikel gelesen.
+                                                </div>
+
+                                                <div id='Achieve-Perm' >
+                                                    Du hast insgesamt ".$count_all_checker." mal den Checker benutzt.
+                                                    <br>
+                                                    Du hast insgesamt ".$count_all_forum." mal im Forum gepostet.
+                                                    <br>
+                                                    Du hast insgesamt ".$count_all_quiz." mal Quiz gespielt.
+                                                    <br>
+                                                    Du hast insgesamt ".$count_all_artikel." Artikel gelesen.
+                                                </div>
+                                          </div>";
+                                }
+
+                                ?>
+                                    
+                                
 
                                 <?php
                                 if($ownProfile)
@@ -505,6 +659,42 @@ include ("include/navbar.php");
                     $(function () {
                         $("[data-toggle='tooltip']").tooltip();
                     })
+                </script>
+                <script>
+
+                    function Achieve_Week_func()
+                    {
+                        clear_Achieve();
+                        document.getElementById("Achieve-Week").style.display = 'block';
+                        document.getElementById("Achieve-Week-Button").style.borderColor = '#fff200';
+                    }
+
+                    function Achieve_Month_func()
+                    {
+                        clear_Achieve();
+                        document.getElementById("Achieve-Month").style.display = 'block';
+                        document.getElementById("Achieve-Month-Button").style.borderColor = '#fff200';
+                    }
+
+                    function Achieve_Perm_func()
+                    {
+                        clear_Achieve();
+                        document.getElementById("Achieve-Perm").style.display = 'block';
+                        document.getElementById("Achieve-Perm-Button").style.borderColor = '#fff200';
+                    }
+
+                    function clear_Achieve()
+                    {
+                        document.getElementById("Achieve-Week").style.display = 'none';
+                        document.getElementById("Achieve-Month").style.display = 'none';
+                        document.getElementById("Achieve-Perm").style.display = 'none';
+
+                        document.getElementById("Achieve-Week-Button").style.borderColor = 'white';
+                        document.getElementById("Achieve-Month-Button").style.borderColor = 'white';
+                        document.getElementById("Achieve-Perm-Button").style.borderColor = 'white';
+
+
+                    }
                 </script>
 </body>
 </html>

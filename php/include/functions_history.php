@@ -275,52 +275,6 @@ function get_Recent_Article($mysqli, $limit)
 }
 
 
-
-
-
-
-//------------------------------------------------Achievements-----------------------------
-
-//return a percentage value that show how much of all articles were read. based on the given time period in weeks
-function get_Achievements_Article($mysqli, $user_id, $time_period)
-{
-    $result;
-    //Get all articles in the first sub query.
-    //Get all read article distinct, by the user in the second query
-    //Calculate a percentage value
-    if($stmt = $mysqli->prepare("Select ((count(B.Article_ID) * 100) / A.all_article) AS percentage
-                                FROM (Select count(*) AS all_article FROM Artikel) AS A,
-                                    (SELECT Distinct User_ID, Article_ID
-                                        FROM History_Article, Artikel
-                                        WHERE Artikel.id = History_Article.Article_ID AND User_ID = ?
-                                            AND Time between date_sub(now(),INTERVAL ? WEEK) and now()) AS B
-                                                                                                                "))
-    {
-        $stmt->bind_param('ii',$user_id, $time_period);
-        $stmt->execute();
-
-        $stmt->store_result();
-
-        $stmt->bind_result($percentage);
-
-
-        while($stmt->fetch())
-        {
-            $result = $percentage;
-        }
-        return intval($result);
-    }
-}
-
-
-
-
-
-
-
-
-
-
 //Main Method. Checks which function to call
 if(isset($_POST['function']))
 {

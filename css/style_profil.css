@@ -36,3 +36,29 @@ div #user-activities {
 .form{
     margin-top: 10px;
 }
+
+
+
+/*Achievements*/
+
+#Achieve_Buttons {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+#Achieve-Week-Button {
+    border-color: #fff200;
+}
+
+#Achieve-Week {
+    display: block;
+}
+
+#Achieve-Month {
+    display: none;
+}
+
+#Achieve-Perm {
+    display: none;
+}

@@ -1,0 +1,24 @@
+/*
+    Buttons
+*/
+.btn-basic {
+    border-radius: 8px;
+    border-width: 3px;
+    text-align: center;
+    height: 40px;
+    width: 140px;
+    font-size: 14px;
+    margin: 5px; /* Außenabstand als Platzhalter für die Animation */
+}
+
+
+.btn-basic-red {
+    background-color: #d9534f;
+    border-color: red;
+}
+
+.btn-basic-blue {
+    background-color: DodgerBlue;
+    border-color: white;
+    color: white;
+}
