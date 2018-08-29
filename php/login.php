@@ -74,10 +74,10 @@ if (login_check($mysqli) == true) {
                     <span class="input-group-addon"><i class="icon_key_alt"></i></span>
                     <input type="password" class="form-control" name ="password" id="password" placeholder="Passwort">
                 </div>
-                <label class="checkbox">
+                <!--<label class="checkbox">
                     <input type="checkbox" value="remember-me"> Remember me
                     <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
-                </label>
+                </label>-->
                 <input class="btn btn-primary btn-lg btn-block" type="submit" value="Login" onclick="formhash(this.form, this.form.password);"/>
                <button class="btn btn-info btn-lg btn-block"type="button" onclick="window.location.href='register.php'">Signup</button>
             </div>

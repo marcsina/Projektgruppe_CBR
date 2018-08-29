@@ -95,7 +95,7 @@ switch($function) {
             }
 
             //get the current time
-            $date = date('h:i', time());
+            $date = date('H:i', time());
             //replace break with space
             $message = str_replace("\n", " ", $message);
 
