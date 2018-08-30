@@ -27,9 +27,10 @@ if (login_check($mysqli) == true) {
         </div>
 
         <!-- Style -->
-        <link href="/Projektgruppe/css/style_home.css" rel="stylesheet" />
+        <!--<link href="/Projektgruppe/css/style_home.css" rel="stylesheet" />-->
+        <link href="/Projektgruppe/css/style_navbar.css" rel="stylesheet" />
         <!-- bootstrap theme -->
-        <link href="/Projektgruppe/css/bootstrap-theme.css" rel="stylesheet" />
+        <!--<link href="/Projektgruppe/css/bootstrap-theme.css" rel="stylesheet" />-->
 
         <link href="/Projektgruppe/css/style-responsive.css" rel="stylesheet" />
 

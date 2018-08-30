@@ -1,0 +1,19 @@
+.dark-bg {
+    background: rgb(26, 39, 50);
+}
+
+body {
+    padding-top: 70px;
+}
+
+.logo {
+    color: rgb(254, 209, 137);
+}
+
+.lite {
+    color: rgb(0, 160, 223);
+}
+
+icon_house_alt:before {
+    content: "\e009";
+}
