@@ -53,12 +53,33 @@ div #user-activities {
 
 #Achieve-Week {
     display: block;
+    padding-top: 10px;
+    text-align: center;
 }
 
 #Achieve-Month {
     display: none;
+    padding-top: 10px;
+    text-align: center;
 }
 
 #Achieve-Perm {
     display: none;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.Achievement_Img {
+    max-height: 100px;
+    max-width: 100px;
+    min-height: 100px;
+    min-width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Achievement_div
+{
+    padding: 20px;
 }
