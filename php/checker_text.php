@@ -28,6 +28,7 @@ if (login_check($mysqli) == true) {
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style3.css" rel="stylesheet">
     <link href="../css/table.css" rel="stylesheet">
+	<link href="../css/style_checker.css" rel="stylesheet">
 
 </head>
 
@@ -61,8 +62,8 @@ if (login_check($mysqli) == true) {
     		
     		<!-- Button row -->
 			<div class="col-md-offset-5 col-xs-offset-right-5 col-md-2 col-sm-12">
-				<button id="btn_submit" class=" btn btn-success" type="submit" style="background-color: #1a2732;">Submit</button>
-				<button id="btn_anpassen" class=" btn btn-success" style="display:none" type="submit" style="background-color: #1a2732;">Anpassen</button>
+				<button id="btn_submit" class="btn_text btn btn-success" type="submit" style="background-color: #1a2732;">Submit</button>
+				<button id="btn_anpassen" class="btn_text btn btn-success" style="display:none" type="submit" style="background-color: #1a2732;">Anpassen</button>
 			</div>
 			
     		<br>

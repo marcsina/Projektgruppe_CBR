@@ -104,7 +104,7 @@
     border-top-width: 1px;
     box-shadow: rgba(0, 0, 0, 0.125) 0px 3px 5px 0px inset;
     box-sizing: border-box;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     cursor: pointer;
     display: block;
     float: left;
@@ -258,7 +258,7 @@
     border-top-style: solid;
     border-top-width: 1px;
     box-sizing: border-box;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     cursor: pointer;
     display: block;
     float: left;
@@ -412,7 +412,7 @@
     border-top-style: solid;
     border-top-width: 1px;
     box-sizing: border-box;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     cursor: pointer;
     display: block;
     float: left;
@@ -460,4 +460,16 @@
     white-space: nowrap;
     z-index: 2;
     -moz-user-select: none;
+}
+
+.btn_text {
+    margin-bottom: 10px;
+}
+
+#btn_submit {
+    margin-bottom: 10px;
+}
+
+#btn_anpassen {
+    margin-bottom: 10px;
 }
