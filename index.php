@@ -34,19 +34,12 @@ if (login_check($mysqli) == true) {
     <link href="css/animate.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
 
-    <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <!-- bootstrap theme -->
-    <link href="css/bootstrap-theme.css" rel="stylesheet" />
-    <!--external css-->
     <!-- font icon -->
     <link href="css/elegant-icons-style.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
 
     <!-- Custom styles -->
 
-    <!--<link href="css/style_home.css" rel="stylesheet" />-->
-    <link href="css/style.css" rel="stylesheet" />
 
     <link href="css/style-responsive.css" rel="stylesheet" />
 
@@ -192,11 +185,7 @@ include ('php/include/navbar.php');
 
     <!-- _________________________Content________________________________-->
     <!-- Scripts -->
-    <script src='js/snowball-german.js'></script>
-    <script src='js/stopWords.js'></script>
 
-    <script type='text/JavaScript' src='js/sha512.js'></script>
-    <script type='text/JavaScript' src='js/forms.js'></script>
     <a href="#" class="scrollup">
         <i class="fa fa-angle-up active"></i>
     </a>

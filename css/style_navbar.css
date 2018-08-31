@@ -51,3 +51,7 @@ icon_house_alt:before {
         .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
             color: #ffffff;
         }
+
+.navbar-collapse .navbar-nav.navbar-right:last-child{
+    margin-right: 15px;
+}

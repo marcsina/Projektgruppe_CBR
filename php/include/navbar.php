@@ -42,9 +42,11 @@ if (login_check($mysqli) == true) {
         </a>
     </div>
     <div id="navbar" class="navbar-collapse collapse navbar-right">
-        <ul class="nav navbar-nav">
 
-            <?php
+        <?php
+        echo "<ul class='nav navbar-nav'>";
+        if($logged == "in")
+        {
             echo"
                     <li class='menuItem'>
                         <a href='/Projektgruppe/php/Quiz_uebersicht.php'>
@@ -109,15 +111,18 @@ if (login_check($mysqli) == true) {
                             Kontakt
                             <i class='icon_documents_alt'></i>
                         </a>
-                    </li>";
-            ?>
-        </ul>
+                    </li></ul>";
+
+        }
+
+        ?>
+       
         <ul class="nav navbar-nav navbar-right login">
             <?php
 
             if($logged == 'out')
             {
-                echo "<ul class='top-menu'><li><a href = '/Projektgruppe/php/login.php'>Login</a></li></ul>";
+                echo "<li class='top-menu'><a href = '/Projektgruppe/php/login.php'>Login</a></li>";
             }
             else{
                 echo "<li class='dropdown'>
