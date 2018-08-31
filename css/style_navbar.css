@@ -6,14 +6,48 @@ body {
     padding-top: 70px;
 }
 
-.logo {
+.navbar .navbar-header > a > .logo {
     color: rgb(254, 209, 137);
+    font-size: 27px;
 }
 
 .lite {
     color: rgb(0, 160, 223);
+    font-size: 27px;
 }
 
 icon_house_alt:before {
     content: "\e009";
 }
+
+.profile-ava {
+    display: inherit;
+    margin: 0px;
+}
+
+    .profile-ava img {
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border: 2px solid #688a7e;
+        display: inline-block;
+    }
+
+.login {
+    display: block;
+}
+
+.navbar-nav.navbar-right:last-child {
+    margin: 0px;
+}
+
+.navbar-default {
+    background-color: rgb(26, 39, 50);
+    border-color: transparent;
+}
+
+    .navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a {
+        color: #1babee;
+    }
+        .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+            color: #ffffff;
+        }

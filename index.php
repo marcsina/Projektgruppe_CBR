@@ -45,7 +45,7 @@ if (login_check($mysqli) == true) {
 
     <!-- Custom styles -->
 
-    <link href="css/style_home.css" rel="stylesheet" />
+    <!--<link href="css/style_home.css" rel="stylesheet" />-->
     <link href="css/style.css" rel="stylesheet" />
 
     <link href="css/style-responsive.css" rel="stylesheet" />
