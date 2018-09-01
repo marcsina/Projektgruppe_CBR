@@ -1,0 +1,69 @@
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenavHelp {
+    height: 0px;
+    width: 400px;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    bottom: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+.Help_Button {
+    font-size: 30px;
+    cursor: pointer;
+    position: fixed;
+    left: 0;
+    bottom:0;
+    padding-left: 10px;
+}
+
+.sidenavHelp a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #768ef5;
+    transition: 0.3s;
+}
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+.sidenavHelp .closebtn {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+.sidenavHelp #Label_Header {
+    padding-left: 20px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenavHelp {
+        padding-top: 15px;
+    }
+
+        .sidenavHelp a {
+            font-size: 18px;
+        }
+}
+
+#page-wrap {
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+}
+
+#help-wrap {
+    border: 1px solid #eee;
+}

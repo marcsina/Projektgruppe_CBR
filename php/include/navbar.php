@@ -179,5 +179,6 @@ if (login_check($mysqli) == true) {
 if($logged == "in")
 {
     include_once('chat.php');
+    include_once('help.php');
 }
 ?>
