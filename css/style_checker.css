@@ -461,3 +461,26 @@
     z-index: 2;
     -moz-user-select: none;
 }
+
+textarea#textarea_eingabe {
+    color: rgb(26, 39, 50);
+}
+
+.tableau {
+    height: 300px;
+    overflow: auto;
+}
+
+.tableau {
+    border: 1px solid black;
+}
+
+div.symptom{
+    margin: 0px;
+}
+
+div#btn_submit_div, div#div_h4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
