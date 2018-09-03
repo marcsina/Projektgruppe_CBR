@@ -4,7 +4,8 @@ body {
 
 .sidenavHelp {
     height: 0px;
-    width: 400px;
+    width: 20%;
+    min-width: 400px;
     position: fixed;
     z-index: 99;
     left: 0;
