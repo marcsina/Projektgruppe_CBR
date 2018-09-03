@@ -548,50 +548,31 @@ include ("include/navbar.php");
                                 <div class="tab-pane animated fadeInRight" id="user-statistic">
                                     <div class="user-profile-content">
                                         <?php
-                                        echo "  <div id='Achieve_Buttons'>
+                                        echo "  <div class='row' id='Achieve_Buttons'>
 
-                                                        <button id='Achieve-Week-Button' type='button' onclick='Achieve_Week_func()' class='btn-basic btn-basic-blue btn-basic-m' >Woche</button>
-                                                        <button id='Achieve-Month-Button' type='button' onclick='Achieve_Month_func()' class='btn-basic btn-basic-blue btn-basic-m'>Monat</button>
+                                                        <div class='col-md-6 col-xs-6 center_button'><button id='Achieve-Week-Button' type='button' onclick='Achieve_Week_func()' class='btn-basic btn-basic-blue btn-basic-m' >Woche</button></div>
+                                                        <div class='col-md-6 col-xs-6 center_button'><button  id='Achieve-Month-Button' type='button' onclick='Achieve_Month_func()' class='btn-basic btn-basic-blue btn-basic-m'>Monat</button></div>
                                                 </div>
 
                                                 <div id='Achieve-Week'>";
-                                        $red = 50;
-                                        $gold = 25;
-                                        $grey = 5;
+                                        $gold = 10;
                                         //--------------------------------------Checker--------------------------------------------------------
-                                        //Gold Checker
 
-                                        if($count_all_checker >= $red)
+
+                                        //Gold Checker
+                                        if($count_week_checker >= $gold)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/ascending_red.png' class='Achievement_Img' >";
-                                            echo "Du bist der Checker Gott mit ".$count_all_checker." Durchläufen in dieser Woche";
+                                            echo "<img src='../img/achievements/thumb-up.png' class='Achievement_Img' >";
+                                            echo "Du hast diese Woche viel mit dem Checker gelernt. Insgesamt ".$count_week_checker." Durchläufe";
                                             echo "<br>";
                                             echo "</div>";
                                         }
-                                        //Silber Checker
-                                        else if($count_all_checker >= $gold)
+                                        else if($count_week_checker > 0)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/ascending_gold.png' class='Achievement_Img' >";
-                                            echo "Du bist ein Checker Experte mit ".$count_all_checker." Durchläufen in dieser Woche";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        //Bronze Checker
-                                        else if($count_all_checker >= $grey)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/ascending_grey.png' class='Achievement_Img' >";
-                                            echo "Du hast dich schon mit dem Checker vertraut gemacht mit ".$count_all_checker." Durchläufen in dieser Woche";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        else if($count_all_checker > 0)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<div class='Achievement_Img'></div>";
-                                            echo "Du hast die ersten Versuche mit dem Checker gemacht mit ".$count_all_checker." Durchläufen in dieser Woche";
+                                            echo "<img src='../img/achievements/thumb-left.png' class='Achievement_Img' >";
+                                            echo "Du hast den Checker diese Woche noch nicht so oft genutzt. Insgesamt ".$count_week_checker." Durchläufe";
                                             echo "<br>";
                                             echo "</div>";
                                         }
@@ -608,37 +589,20 @@ include ("include/navbar.php");
 
                                         //--------------------------------------Forum--------------------------------------------------------
                                         //Gold Forum
-                                        if($count_all_forum >= $red)
+
+                                        if($count_week_forum >= $gold)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Conversation_red.png' class='Achievement_Img' >";
-                                            echo "Du bist der Forum Gott mit ".$count_all_forum." Nachrichten in dieser Woche";
+                                            echo "<img src='../img/achievements/thumb-up.png' class='Achievement_Img' >";
+                                            echo "Du hast diese Woche viel im Forum geschrieben. Insgesamt ".$count_week_forum." Nachrichten.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
-                                        //Silber Forum
-                                        else if($count_all_forum >= $gold)
+                                        else if($count_week_forum > 0)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Conversation_gold.png' class='Achievement_Img' >";
-                                            echo "Du bist ein Forum Experte mit ".$count_all_forum." Nachrichten in dieser Woche";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        //Bronze Forum
-                                        else if($count_all_forum >= $grey)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Conversation_grey.png' class='Achievement_Img' >";
-                                            echo "Du hast dich schon mit dem Forum vertraut gemacht mit ".$count_all_forum." Nachrichten in dieser Woche";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        else if($count_all_forum > 0)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<div class='Achievement_Img'></div>";
-                                            echo "Du hast die ersten Versuche mit dem Forum gemacht mit ".$count_all_forum." Nachrichten in dieser Woche";
+                                            echo "<img src='../img/achievements/thumb-left.png' class='Achievement_Img' >";
+                                            echo "Du hast das Forum diese Woche noch nicht so oft genutzt. Insgesamt ".$count_week_forum." Nachrichten.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
@@ -654,37 +618,19 @@ include ("include/navbar.php");
 
                                         //--------------------------------------Quiz--------------------------------------------------------
                                         //Gold Quiz
-                                        if($count_all_quiz >= $red)
+                                        if($count_week_quiz >= $gold)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Dice_red.png' class='Achievement_Img' >";
-                                            echo "Du bist der Quiz Gott mit ".$count_all_quiz." Spielen in dieser Woche";
+                                            echo "<img src='../img/achievements/thumb-up.png' class='Achievement_Img' >";
+                                            echo "Du hast diese Woche viele Quiz Matches gespielt. Insgesamt ".$count_week_quiz." Spiele.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
-                                        //Silber Quiz
-                                        else if($count_all_quiz >= $gold)
+                                        else if($count_week_quiz > 0)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Dice_gold.png' class='Achievement_Img' >";
-                                            echo "Du bist ein Quiz Experte mit ".$count_all_quiz." Spielen in dieser Woche";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        //Bronze Quiz
-                                        else if($count_all_quiz >= $grey)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Dice_grey.png' class='Achievement_Img' >";
-                                            echo "Du hast dich schon mit dem Quiz vertraut gemacht mit ".$count_all_quiz." Spielen in dieser Woche";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        else if($count_all_quiz > 0)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<div class='Achievement_Img'></div>";
-                                            echo "Du hast die ersten Versuche mit dem Quiz gemacht mit ".$count_all_quiz." Spielen in dieser Woche";
+                                            echo "<img src='../img/achievements/thumb-left.png' class='Achievement_Img' >";
+                                            echo "Du hast diese Woche noch nicht viele Quiz Matches gespielt. Insgesamt ".$count_week_quiz." Spiele.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
@@ -699,38 +645,19 @@ include ("include/navbar.php");
                                         //----------------------------------------------------------------------------------------------------------
 
                                         //--------------------------------------Artikel--------------------------------------------------------
-                                        //Artikel
-                                        if($count_all_artikel > $red)
+                                        if($count_week_artikel > $gold)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/bookmark_red.png' class='Achievement_Img' >";
-                                            echo "Du bist der Classroom Gott mit ".$count_all_artikel." gelesenen Texten in dieser Woche";
+                                            echo "<img src='../img/achievements/thumb-up.png' class='Achievement_Img' >";
+                                            echo "Du hast diese Woche schon viel im Classroom gelesen. Insgesamt ".$count_week_artikel." Texte.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
-                                        //Artikel
-                                        else if($count_all_artikel > $gold)
+                                        else if($count_week_artikel > 0)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/bookmark_gold.png' class='Achievement_Img' >";
-                                            echo "Du bist ein Classroom Experte mit ".$count_all_artikel." gelesenen Texten in dieser Woche";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        //Artikel
-                                        else if($count_all_artikel > $grey)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/bookmark_grey.png' class='Achievement_Img' >";
-                                            echo "Du hast dich schon mit dem Classroom vertraut gemacht mit ".$count_all_artikel." gelesenen Texten in dieser Woche";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        else if($count_all_artikel > 0)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<div class='Achievement_Img'></div>";
-                                            echo "Du hast die ersten Versuche mit dem Classroom gemacht mit ".$count_all_artikel." gelesenen Texten in dieser Woche";
+                                            echo "<img src='../img/achievements/thumb-left.png' class='Achievement_Img' >";
+                                            echo "Du hast diese Woche nur wenig im Classroom gelesen. Insgesamt ".$count_week_artikel." Texte.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
@@ -746,43 +673,25 @@ include ("include/navbar.php");
                                         echo"</div>
 
                                                 <div id='Achieve-Month' >";
-                                        $red = $red*2;
-                                        $gold =$gold*2;
-                                        $grey = $grey*2;
+                                        $gold =30;
                                         //--------------------------------------Checker--------------------------------------------------------
                                         //Gold Checker
 
-                                        if($count_all_checker >= $red)
+
+
+                                        if($count_month_checker >= $gold)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/ascending_red.png' class='Achievement_Img' >";
-                                            echo "Du bist der Checker Gott mit ".$count_all_checker." Durchläufen in diesem Monat";
+                                            echo "<img src='../img/achievements/thumb-up.png' class='Achievement_Img' >";
+                                            echo "Du hast diesen Monat viel mit dem Checker gelernt. Insgesamt ".$count_month_checker." Durchläufe";
                                             echo "<br>";
                                             echo "</div>";
                                         }
-                                        //Silber Checker
-                                        else if($count_all_checker >= $gold)
+                                        else if($count_month_checker > 0)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/ascending_gold.png' class='Achievement_Img' >";
-                                            echo "Du bist ein Checker Experte mit ".$count_all_checker." Durchläufen in diesem Monat";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        //Bronze Checker
-                                        else if($count_all_checker >= $grey)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/ascending_grey.png' class='Achievement_Img' >";
-                                            echo "Du hast dich schon mit dem Checker vertraut gemacht mit ".$count_all_checker." Durchläufen in diesem Monat";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        else if($count_all_checker > 0)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<div class='Achievement_Img'></div>";
-                                            echo "Du hast die ersten Versuche mit dem Checker gemacht mit ".$count_all_checker." Durchläufen in diesem Monat";
+                                            echo "<img src='../img/achievements/thumb-left.png' class='Achievement_Img' >";
+                                            echo "Du hast den Checker diesen Monat noch nicht so oft genutzt. Insgesamt ".$count_week_checker." Durchläufe";
                                             echo "<br>";
                                             echo "</div>";
                                         }
@@ -799,37 +708,19 @@ include ("include/navbar.php");
 
                                         //--------------------------------------Forum--------------------------------------------------------
                                         //Gold Forum
-                                        if($count_all_forum >= $red)
+                                        if($count_month_forum >= $gold)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Conversation_red.png' class='Achievement_Img' >";
-                                            echo "Du bist der Forum Gott mit ".$count_all_forum." Nachrichten in diesem Monat";
+                                            echo "<img src='../img/achievements/thumb-up.png' class='Achievement_Img' >";
+                                            echo "Du hast diesen Monat viel im Forum geschrieben. Insgesamt ".$count_week_forum." Nachrichten.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
-                                        //Silber Forum
-                                        else if($count_all_forum >= $gold)
+                                        else if($count_month_forum > 0)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Conversation_gold.png' class='Achievement_Img' >";
-                                            echo "Du bist ein Forum Experte mit ".$count_all_forum." Nachrichten in diesem Monat";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        //Bronze Forum
-                                        else if($count_all_forum >= $grey)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Conversation_grey.png' class='Achievement_Img' >";
-                                            echo "Du hast dich schon mit dem Forum vertraut gemacht mit ".$count_all_forum." Nachrichten in diesem Monat";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        else if($count_all_forum > 0)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<div class='Achievement_Img'></div>";
-                                            echo "Du hast die ersten Versuche mit dem Forum gemacht mit ".$count_all_forum." Nachrichten in diesem Monat";
+                                            echo "<img src='../img/achievements/thumb-left.png' class='Achievement_Img' >";
+                                            echo "Du hast das Forum diesen Monat noch nicht so oft genutzt. Insgesamt ".$count_week_forum." Nachrichten.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
@@ -844,38 +735,20 @@ include ("include/navbar.php");
                                         //----------------------------------------------------------------------------------------------------------
 
                                         //--------------------------------------Quiz--------------------------------------------------------
-                                        //Gold Quiz
-                                        if($count_all_quiz >= $red)
+
+                                        if($count_month_quiz >= $gold)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Dice_red.png' class='Achievement_Img' >";
-                                            echo "Du bist der Quiz Gott mit ".$count_all_quiz." Spielen in diesem Monat";
+                                            echo "<img src='../img/achievements/thumb-up.png' class='Achievement_Img' >";
+                                            echo "Du hast diesen Monat viele Quiz Matches gespielt. Insgesamt ".$count_week_quiz." Spiele.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
-                                        //Silber Quiz
-                                        else if($count_all_quiz >= $gold)
+                                        else if($count_month_quiz > 0)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Dice_gold.png' class='Achievement_Img' >";
-                                            echo "Du bist ein Quiz Experte mit ".$count_all_quiz." Spielen in diesem Monat";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        //Bronze Quiz
-                                        else if($count_all_quiz >= $grey)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/Dice_grey.png' class='Achievement_Img' >";
-                                            echo "Du hast dich schon mit dem Quiz vertraut gemacht mit ".$count_all_quiz." Spielen in diesem Monat";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        else if($count_all_quiz > 0)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<div class='Achievement_Img'></div>";
-                                            echo "Du hast die ersten Versuche mit dem Quiz gemacht mit ".$count_all_quiz." Spielen in diesem Monat";
+                                            echo "<img src='../img/achievements/thumb-left.png' class='Achievement_Img' >";
+                                            echo "Du hast diesen Monat noch nicht viele Quiz Matches gespielt. Insgesamt ".$count_week_quiz." Spiele.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
@@ -890,38 +763,20 @@ include ("include/navbar.php");
                                         //----------------------------------------------------------------------------------------------------------
 
                                         //--------------------------------------Artikel--------------------------------------------------------
-                                        //Artikel
-                                        if($count_all_artikel > $red)
+
+                                        if($count_month_artikel > $gold)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/bookmark_red.png' class='Achievement_Img' >";
-                                            echo "Du bist der Classroom Gott mit ".$count_all_artikel." gelesenen Texten in diesem Monat";
+                                            echo "<img src='../img/achievements/thumb-up.png' class='Achievement_Img' >";
+                                            echo "Du hast diesen Monat schon viel im Classroom gelesen. Insgesamt ".$count_week_artikel." Texte.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
-                                        //Artikel
-                                        else if($count_all_artikel > $gold)
+                                        else if($count_month_artikel > 0)
                                         {
                                             echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/bookmark_gold.png' class='Achievement_Img' >";
-                                            echo "Du bist ein Classroom Experte mit ".$count_all_artikel." gelesenen Texten in diesem Monat";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        //Artikel
-                                        else if($count_all_artikel > $grey)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<img src='../img/achievements/bookmark_grey.png' class='Achievement_Img' >";
-                                            echo "Du hast dich schon mit dem Classroom vertraut gemacht mit ".$count_all_artikel." gelesenen Texten in diesem Monat";
-                                            echo "<br>";
-                                            echo "</div>";
-                                        }
-                                        else if($count_all_artikel > 0)
-                                        {
-                                            echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                            echo "<div class='Achievement_Img'></div>";
-                                            echo "Du hast die ersten Versuche mit dem Classroom gemacht mit ".$count_all_artikel." gelesenen Texten in diesem Monat";
+                                            echo "<img src='../img/achievements/thumb-left.png' class='Achievement_Img' >";
+                                            echo "Du hast diesen Monat nur wenig im Classroom gelesen. Insgesamt ".$count_week_artikel." Texte.";
                                             echo "<br>";
                                             echo "</div>";
                                         }
@@ -956,9 +811,9 @@ include ("include/navbar.php");
 
                                     <div class='row' >";
 
-                                    $red = $red*2;
-                                    $gold = $gold*2;
-                                    $grey = $grey*2;
+                                    $red = 80;
+                                    $gold = 60;
+                                    $grey = 30;
                                     //--------------------------------------Checker--------------------------------------------------------
                                     //Gold Checker
 
@@ -991,7 +846,7 @@ include ("include/navbar.php");
                                     else if($count_all_checker > 0)
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                        echo "<div class='Achievement_Img'></div>";
+                                        echo "<img src='../img/achievements/questionmark.png' class='Achievement_Img' >";
                                         echo "Du hast die ersten Versuche mit dem Checker gemacht mit ".$count_all_checker." Durchläufen";
                                         echo "<br>";
                                         echo "</div>";
@@ -999,7 +854,7 @@ include ("include/navbar.php");
                                     else
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                        echo "<div class='Achievement_Img'></div>";
+                                        echo "<img src='../img/achievements/questionmark.png' class='Achievement_Img' >";
                                         echo "Benutz doch mal den Checker ;)";
                                         echo "<br>";
                                         echo "</div>";
@@ -1038,7 +893,7 @@ include ("include/navbar.php");
                                     else if($count_all_forum > 0)
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                        echo "<div class='Achievement_Img'></div>";
+                                        echo "<img src='../img/achievements/questionmark.png' class='Achievement_Img' >";
                                         echo "Du hast die ersten Versuche mit dem Forum gemacht mit ".$count_all_forum." Nachrichten";
                                         echo "<br>";
                                         echo "</div>";
@@ -1046,7 +901,7 @@ include ("include/navbar.php");
                                     else
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                        echo "<div class='Achievement_Img'></div>";
+                                        echo "<img src='../img/achievements/questionmark.png' class='Achievement_Img' >";
                                         echo "Benutz doch mal das Forum ;)";
                                         echo "<br>";
                                         echo "</div>";
@@ -1084,7 +939,7 @@ include ("include/navbar.php");
                                     else if($count_all_quiz > 0)
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                        echo "<div class='Achievement_Img'></div>";
+                                        echo "<img src='../img/achievements/questionmark.png' class='Achievement_Img' >";
                                         echo "Du hast die ersten Versuche mit dem Quiz gemacht mit ".$count_all_quiz." Spielen";
                                         echo "<br>";
                                         echo "</div>";
@@ -1092,7 +947,7 @@ include ("include/navbar.php");
                                     else
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                        echo "<div class='Achievement_Img'></div>";
+                                        echo "<img src='../img/achievements/questionmark.png' class='Achievement_Img' >";
                                         echo "Benutz doch mal das Quiz ;)";
                                         echo "<br>";
                                         echo "</div>";
@@ -1130,7 +985,7 @@ include ("include/navbar.php");
                                     else if($count_all_artikel > 0)
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                        echo "<div class='Achievement_Img'></div>";
+                                        echo "<img src='../img/achievements/questionmark.png' class='Achievement_Img' >";
                                         echo "Du hast die ersten Versuche mit dem Classroom gemacht mit ".$count_all_artikel." gelesenen Texten";
                                         echo "<br>";
                                         echo "</div>";
@@ -1138,7 +993,7 @@ include ("include/navbar.php");
                                     else
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
-                                        echo "<div class='Achievement_Img'></div>";
+                                        echo "<img src='../img/achievements/questionmark.png' class='Achievement_Img' >";
                                         echo "Benutz doch mal den Classroom ;)";
                                         echo "<br>";
                                         echo "</div>";
