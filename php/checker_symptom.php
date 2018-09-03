@@ -61,7 +61,7 @@ if (login_check($mysqli) == true) {
                 <tr class="content">
                     <td>
 						<section class ="tableau">
-							<form id="form_symptoms" style = "color: #ffffff;max-width:90%"></form>
+							<form id="form_symptoms" style = "color: #ffffff;"></form>
 						</section>
         			</td>
                     <td>
@@ -71,8 +71,8 @@ if (login_check($mysqli) == true) {
     		</table> 
     		
     		<!-- Button row -->
-			<div class="col-md-offset-5 col-xs-offset-right-5 col-md-2 col-sm-12">
-				<button id="btn_submit" class=" btn btn-success" type="submit" style="background-color: #1a2732;">Submit</button>
+			<div id="btn_submit_div">
+				<button id="btn_submit" class=" btn btn-success" type="submit">Submit</button>
 			</div>
 			
     		<br>
@@ -90,8 +90,8 @@ if (login_check($mysqli) == true) {
     		</table>  
 
 			<!-- 2nd Header Row -->
-			<div class="row newRow">
-				<h4 class="col-md-offset-3 col-md-1 col-sm-1">Resultat</h4>		
+			<div class="row" id="div_h4">
+				<h4>Resultat</h4>		
 			</div>
 			<!-- Result row -->
 			<div class="row">
