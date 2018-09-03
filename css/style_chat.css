@@ -4,7 +4,7 @@ body {
 
 .sidenav {
     height: 0px;
-    width: 400px;
+    width: 20%;
     position: fixed;
     z-index: 99;
     right: 0;
@@ -69,7 +69,8 @@ body {
 }
 
 #chat-area {
-    height: 300px;
+    max-height: 300px;
+    height: 20%;
     overflow: auto;
     border: 1px solid #666;
     padding: 20px;
