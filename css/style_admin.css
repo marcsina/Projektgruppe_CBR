@@ -1,39 +1,31 @@
 /* Tabs einfärben*/
 
-.nav-tabs {
-    background: #615A7F;
+.container .nav-tabs {
+    background: rgb(26, 39, 50);
     margin-top: 25px;
-    border-color: #615A7F;
-    border-width: 5px;
-    border-style: solid;
-    border-bottom: none;
 }
 
-    .nav-tabs > li {
-        margin: 0px 5px 0px 5px;
+.nav-tabs > li {
+    margin: 0px 5px 0px 5px !important;
+    background: rgb(26, 39, 50);
+}
+/*
+        .nav-tabs > li:nth-child(even) > a {
+            color: white;
+        }
+
+    .nav-tabs > li:nth-child(uneven) > a {
+        color: black;
     }
 
-        .nav-tabs > li:nth-child(odd) {
-            background: #c7c3d5;
-            border-radius: 3px;
-        }
+    .nav-tabs > li.active > a {
+        color: black;
+    }
 
-        .nav-tabs > li:nth-child(even) {
-            background: #615A7F;
-            border-radius: 3px;
-        }
-
-            .nav-tabs > li:nth-child(even) > a {
-                color: white;
-                outline-color: white;
-            }
-            .nav-tabs > li:nth-child(uneven) > a {
-                color: black;
-            }
-        .nav-tabs > li.active > a {
-            color: black;
-        }
-
+.nav > li > a {
+    color: white;
+}
+*/
 .admin_main {
     margin-top: 2.5em;
 }
@@ -55,13 +47,9 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: auto;
     white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
     word-break: normal;
     word-wrap: break-word;
 }
-
-
-
 
 /*Slider*/
 
@@ -96,7 +84,7 @@ body {
     min-height: 150px;
     list-style: disc inside;
     padding: 15px 15px 15px;
-    border: 1px solid #615A7F;
+    border: 1px solid rgb(26, 39, 50);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -118,7 +106,6 @@ hr {
     border-style: inset;
     border-width: 1px;
 }
-
 
 /*AUTOCOMPLETION*/
 .autocomplete {
@@ -160,7 +147,6 @@ autocomplete-items div {
 .btn-primary {
     border-radius: 3px;
 }
-
 
 #div_edit_case {
     visibility: hidden;
