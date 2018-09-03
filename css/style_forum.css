@@ -6,48 +6,45 @@
     border-color: #000000;
     border-width: 1px;
     border-style: solid;
-   
 }
 
-.top > li{
-    margin: -5px -5px -5px -1px;
-    background: #1a2732;
-    border-radius: 0px;
-    border: 1px solid black;
-    float: left;
-}
+    .top > li {
+        margin: -5px -5px -5px -1px;
+        background: #1a2732;
+        border-radius: 0px;
+        border: 1px solid black;
+        float: left;
+    }
 
-.top > li > a{
-    color: #007aff;
-    font-size: 20px;
-    padding-left: 0px;
-}
+        .top > li > a {
+            color: #007aff;
+            font-size: 20px;
+            padding-left: 0px;
+        }
 
 table, th, td {
     border: 1px solid black;
     border-right: none;
-	border-left: none;
+    border-left: none;
 }
 
+    table > tbody > tr > th {
+        border: 1px solid black;
+        padding: 5px;
+        color: #007aff;
+        font-size: 20px;
+        border-right: none;
+        border-left: none;
+    }
 
-
-table > tbody > tr > th {
-	border: 1px solid black;
-	padding:5px;
-	color: #007aff;
-	font-size: 20px;
-	border-right: none;
-	border-left: none;
-}
-
-table > tbody > tr > td {
-	border: 1px solid black;
-	padding:5px;
-	color: #ffffff;
-	font-size: 20px;
-	border-right: none;
-	border-left: none;
-}
+    table > tbody > tr > td {
+        border: 1px solid black;
+        padding: 5px;
+        color: #ffffff;
+        font-size: 20px;
+        border-right: none;
+        border-left: none;
+    }
 
 body {
     margin-bottom: 50px;
@@ -56,17 +53,20 @@ body {
 }
 
 button {
-     background:none;
-     color:inherit;
-     border:none; 
-     padding:0!important;
-     font: inherit;
-     /*border is optional*/
-     border-bottom:0px solid #444; 
-     cursor: pointer;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    /*border is optional*/
+    border-bottom: 0px solid #444;
+    cursor: pointer;
 }
 
 .nicehover:hover {
     background: black;
-} 
+}
 
+form>textarea#text {
+    color: rgb(26, 39, 50);
+}
