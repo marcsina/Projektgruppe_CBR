@@ -25,16 +25,8 @@ if (login_check($mysqli) == true) {
 
         <!-- Bootstrap CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <!-- bootstrap theme -->
-        <link href="../css/bootstrap-theme.css" rel="stylesheet">
-        <!--external css-->
-        <!-- font icon -->
-        <link href="../css/elegant-icons-style.css" rel="stylesheet" />
-        <link href="../css/font-awesome.min.css" rel="stylesheet" />
 
         <!-- Custom styles -->
-        <link href="../css/style_home.css" rel="stylesheet">
-        <link href="../css/style.css" rel="stylesheet">
         <link href="../css/style-responsive.css" rel="stylesheet" />
         <link href="../css/jquery-ui-1.10.4.min.css" rel="stylesheet">
 
@@ -50,6 +42,7 @@ if (login_check($mysqli) == true) {
 
         <!-- page start-->
         <div class="container">
+            <!--
             <div class="col-lg-offset-1 col-lg-5">
                 <div class="recent">
                     <h3>Send us a Message</h3>
@@ -76,9 +69,9 @@ if (login_check($mysqli) == true) {
 
                     <div class="text-center"><button type="submit" class="btn btn-primary btn-lg">Send message</button></div>
                 </form>
-            </div>
+            </div>-->
 
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="recent">
                     <h3>Contact</h3>
                 </div>

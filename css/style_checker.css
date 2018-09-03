@@ -461,3 +461,7 @@
     z-index: 2;
     -moz-user-select: none;
 }
+
+textarea#textarea_eingabe {
+    color: rgb(26, 39, 50);
+}

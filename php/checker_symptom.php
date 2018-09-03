@@ -44,16 +44,16 @@ if (login_check($mysqli) == true) {
 
 		<table style = "width: 100%;">		
                 <tr >
-                    <td style = "width: 50%" bgcolor = "#1a2732">
-                    	<br>
-                        <div class="col-md-3 title"> 
-    						Symptome
-    					</div>
-    					<div class="col-md-9">
-        					<form autocomplete="off">
-        						<input type="text" name="suche" id="input_category" placeholder="Suchen" class="form-control " value="">
-        					</form>
-    					</div>
+                    <td class="title" style="width: 50%" bgcolor="#1a2732">
+                        <br />
+                        <div class="col-md-3">
+                            Symptome
+                        </div>
+                        <div class="col-md-9">
+                            <form autocomplete="off">
+                                <input type="text" name="suche" id="input_category" placeholder="Suchen" class="form-control " value="" />
+                            </form>
+                        </div>
                     </td>
                     <td style = "width: 50%" class="title">Gewählte Symptome</td>
                 </tr>
