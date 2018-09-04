@@ -428,7 +428,6 @@ include ("include/navbar.php");
 
 					var count = 0;
 					var check = 0;
-
 					userarray.forEach(user => {
 						if (user.username.toUpperCase().includes(val.toUpperCase())) {
 							if(sessionID != user.id) {
@@ -436,7 +435,7 @@ include ("include/navbar.php");
 									if(user.id == alreadyChallengedUser.userID2) {
 										if(check == 0) {
 											count++;
-											$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td>"+ user.username+"</td><td class='table_style_uebersicht'>Warte auf Annahme</td></tr>");
+											$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'>Warte auf Annahme</td></tr>");
 											check = 1;
 										}
 									}
@@ -460,7 +459,7 @@ include ("include/navbar.php");
 
 								if(check == 0) {
 									count++;
-									$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td>"+user.username+"</td><td class='table_style_uebersicht'><form class='form-inline' action='include/functions_quiz.php' method='post'><input type='hidden' name='challengeUser' value='true'><input type='hidden' name='challengerUserID' value='"+sessionID+"'><input type='hidden' name='challengedUserID' value='"+user.id+"'><input  class='btn-uebersicht btn-uebersicht-green' type='submit' value='Fordere ihn heraus!'></form></td></tr>");
+									$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'><form class='form-inline' action='include/functions_quiz.php' method='post'><input type='hidden' name='challengeUser' value='true'><input type='hidden' name='challengerUserID' value='"+sessionID+"'><input type='hidden' name='challengedUserID' value='"+user.id+"'><input  class='btn-uebersicht btn-uebersicht-green' type='submit' value='Fordere ihn heraus!'></form></td></tr>");
 								}
 								else {
 									check = 0;
@@ -475,7 +474,7 @@ include ("include/navbar.php");
 
 				function closeAllLists(elmnt) {
 					//resets shown List
-					$("#table_user tbody tr").remove()
+					$("#table_user tbody tr").remove();
 				}
 
 				function resetList() {
@@ -488,7 +487,7 @@ include ("include/navbar.php");
 								if(user.id == alreadyChallengedUser.userID2) {
 									if(check == 0) {
 										count++;
-										$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td>"+ user.username+"</td><td class='table_style_uebersicht'>Warte auf Annahme</td></tr>");
+										$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'>Warte auf Annahme</td></tr>");
 										check = 1;
 									}
 								}
@@ -512,7 +511,7 @@ include ("include/navbar.php");
 
 							if(check == 0) {
 								count++;
-								$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td>"+user.username+"</td><td class='table_style_uebersicht'><form class='form-inline' action='include/functions_quiz.php' method='post'><input type='hidden' name='challengeUser' value='true'><input type='hidden' name='challengerUserID' value='"+sessionID+"'><input type='hidden' name='challengedUserID' value='"+user.id+"'><input  class='btn-uebersicht btn-uebersicht-green' type='submit' value='Fordere ihn heraus!'></form></td></tr>");
+								$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'><form class='form-inline' action='include/functions_quiz.php' method='post'><input type='hidden' name='challengeUser' value='true'><input type='hidden' name='challengerUserID' value='"+sessionID+"'><input type='hidden' name='challengedUserID' value='"+user.id+"'><input  class='btn-uebersicht btn-uebersicht-green' type='submit' value='Fordere ihn heraus!'></form></td></tr>");
 							}
 							else {
 								check = 0;

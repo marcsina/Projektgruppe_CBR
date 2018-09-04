@@ -475,12 +475,25 @@ textarea#textarea_eingabe {
     border: 1px solid black;
 }
 
-div.symptom{
+div.symptom {
     margin: 0px;
+    margin-top: 5px;
 }
 
 div#btn_submit_div, div#div_h4 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+button.btn_text {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#buttonrow {
+    justify-content: center;
+    align-content: center;
+    display: grid;
 }

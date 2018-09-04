@@ -52,8 +52,15 @@ if (login_check($mysqli) == true) {
                 $hilfeTextForum = "Hilfe Text für die Forum seite";
                 $hilfeTextForumDemenz = "Hilfe Text für die Forum Demenz seite";
                 $hilfeTextForumDemenzTopic = "Hilfe Text für Forum Topic Seite";
-                $hilfeTextCheckerSymptom = "Hilfe Text für Symptom Checker Seite";
-                $hilfeTextCheckerText = "Hilfe Text für Text Checker Seite";
+                $hilfeTextCheckerSymptom = "Auf dieser Seite können sie verschiedene Symptome auswählen und ihre Stärke bestimmen, um am Ende das System die passende Krankheit finden zu lassen.<br><br>
+				Auf der linken Seite befindet sich eine Liste allen möglichen Symptomen. Ein Suchfeld direkt dort drüber kann beim Finden eines bestimmten Symptoms helfen. Möchten sie ein Symptom auswählen, klicken sie auf die entsprechende weiße Box. Dieses Symptom erscheint nun auf der rechten Seite<br><br>
+				Mithilfe der rechten Seite können sie die Stärke des von ihnen gewählten Symptoms bestimmen: Klein, Mittel und hoch. Als standard bekommt jedes neue Symptome eine kleine Stärke. Möchten sie ein Symptom entfernen, drücken sie auf das weiße X oder klicken sie erneut auf die weiße Box im linken Fenster (dort ist nun ein Häkchen drin).<br><br>
+				Haben sie ihre Auswahl beendet, klicken sie auf den 'Submit' Button. Im Anschluss sehen sie weiter unten ein Diagramm, welches ihnen das Ergebnis anzeigt. Berühren sie mit ihrem Cursor einen Balken, um die genaue Übereinstimmung festzustellen.<br><br>
+				Sie können jederzeit neue Symptome hinzufügen oder entfernen und anschließend das Ergebnis neu berechnen lassen.";
+                $hilfeTextCheckerText = "Auf dieser Seite können sie eine Krankheitsbeschreibung eingeben um das System die passende Krankheit finden zu lassen.<br><br>
+				Auf der linken Seite befindet sich eine Textbox, in der sie einen beliebig langen Text eingeben können. Lassen sie bei der Beschreibung möglichst keine Details aus, um ein genaues Ergebnis zu erhalten.<br><br>
+				Haben sie ihre Beschreibung abgeschlossen, klicken sie auf den Submit Button. Das System filtert nun ihren Text nach Symptomen, die gefundenen werden ihnen zusammen mit der Stärke auf der rechten Seite angezeigt. Weiter unten befindet sich ein Diagramm, welches ihnen das Ergebnis anzeigt. Berühren sie mit ihrem Cursor einen Balken, um die genaue Übereinstimmung festzustellen.<br><br>
+				Falls sie weitere Symptome hinzufügen oder vorhandene entfernen möchten, klicken sie auf den 'Anpassen' Button.";
                 $hilfeTextArtikel ="Hilfe Text für Artikel Seite";
                 $hilfeTextArtikelShow ="Hilfe Text für Artikel Show Seite";
                 $hilfeTextScripts ="Hilfe Text für Scripts Seite";

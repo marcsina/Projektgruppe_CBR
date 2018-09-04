@@ -72,7 +72,7 @@ if (login_check($mysqli) == true) {
     		
     		<!-- Button row -->
 			<div id="btn_submit_div">
-				<button id="btn_submit" class=" btn btn-success" type="submit">Submit</button>
+				<button id="btn_submit" class="btn_text btn btn-success" type="submit">Submit</button>
 			</div>
 			
     		<br>

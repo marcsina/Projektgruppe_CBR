@@ -61,9 +61,9 @@ if (login_check($mysqli) == true) {
     		</table> 
     		
     		<!-- Button row -->
-			<div class="col-md-offset-5 col-xs-offset-right-5 col-md-2 col-sm-12">
-				<button id="btn_submit" class="btn_text btn btn-success" type="submit" style="background-color: #1a2732;">Submit</button>
-				<button id="btn_anpassen" class="btn_text btn btn-success" style="display:none" type="submit" style="background-color: #1a2732;">Anpassen</button>
+			<div id="buttonrow" class="col-sm-12">
+				<button id="btn_submit" class="btn btn-success btn_text" type="submit" >Submit</button>
+				<button id="btn_anpassen" class="btn btn-success btn_text" style="display:none" type="submit" >Anpassen</button>
 			</div>
 			
     		<br>
@@ -273,13 +273,13 @@ if (login_check($mysqli) == true) {
         	for (i = 0; i < cbr.incomingCase.Symptoms.length; i++) {   		
 				if (cbr.incomingCase.Symptoms[i].wert > 0) {
 					if(cbr.incomingCase.Symptoms[i].wert > 0.3 && cbr.incomingCase.Symptoms[i].wert < 0.8) {
-						$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5"><label id=' + 'lbl_mittel_' + cbr.incomingCase.Symptoms[i].id + ' class="btn-warning btn-sm">Mittel</label></div>');
+						$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5"><label id=' + 'lbl_mittel_' + cbr.incomingCase.Symptoms[i].id + ' class="mittelChecked">Mittel</label></div></div>');
 					}
 					else if(cbr.incomingCase.Symptoms[i].wert >= 0.8) {
-						$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5"><label id=' + 'lbl_hoch_' + cbr.incomingCase.Symptoms[i].id + ' class="btn-danger btn-sm">Hoch</label></div>');
+						$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5"><label id=' + 'lbl_hoch_' + cbr.incomingCase.Symptoms[i].id + ' class="hochChecked">Hoch</label></div></div>');
 					}
 					else {
-						$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5"><label id=' + 'lbl_klein_' + cbr.incomingCase.Symptoms[i].id + ' class="btn-info btn-sm">Niedrig</label></div>');
+						$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + cbr.incomingCase.Symptoms[i].id + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5"><label id=' + 'lbl_klein_' + cbr.incomingCase.Symptoms[i].id + ' class="niedrigChecked">Niedrig</label></div></div>');
 					}
 					//$('#section_symptoms').append('<div id=' + 'div_impairment_' + cbr.incomingCase.Symptoms[i].id + ' class="symptom row"><div class="col-md-6 col-sm-6">' + parseInt(cbr.incomingCase.Symptoms[i].id * 1 + 1 * 1) + ': ' + cbr.incomingCase.Symptoms[i].name + '</div > <div class="col-md-5 col-sm-5 btn-group" data-toggle="buttons"><button id=' + 'btn_klein_' + cbr.incomingCase.Symptoms[i].id + ' class="btn btn-info btn-sm impairmentbutton">klein</button><button id=' + 'btn_mittel_' + cbr.incomingCase.Symptoms[i].id + ' class="btn btn-warning btn-sm impairmentbutton">mittel</button><button id=' + 'btn_hoch_' + cbr.incomingCase.Symptoms[i].id + ' class="btn btn-danger btn-sm impairmentbutton">hoch</button></div> <div class=" col-md-1"> <button type="button" id=' + 'btn_close_' + cbr.incomingCase.Symptoms[i].id + ' class="close btn btn-info xbutton">x</button></div></div>');
         			//$('#section_symptoms').append('<div id=' + 'div_impairment_' + i + ' class="row" style="max-width:90%"><br><div class="col-md-7 col-sm-3">' + cbr.incomingCase.Symptoms[i].name + '</div > <div class=" col-md-offset-2 col-md-2 col-sm-offset-2 col-sm-2 ">' + cbr.incomingCase.Symptoms[i].wert + '</div></div>');

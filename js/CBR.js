@@ -237,8 +237,9 @@ function getCaseValuesFromDatabase(database, arrayCases) {
 					var split_mid = split_end[i].split(',');
 
 					const index = cbr.Cases.map(e => e.id).indexOf(split_mid[0]);
-					
-					cbr.GiveCaseSymptom(index, new Symptom(split_mid[1], "name", split_mid[2]));
+					if (index != -1) {
+						cbr.GiveCaseSymptom(index, new Symptom(split_mid[1], "name", split_mid[2]));
+					} 
 				}
 				
 			}
