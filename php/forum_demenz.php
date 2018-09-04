@@ -148,7 +148,7 @@ if(isset($_POST["createbeitrag"]))
         <tr bgcolor = "#1a2732">
             <th style = "min-width: 50px">Nr</th>
             <th style = "min-width: 200px">Topic</th>
-            <th style = "min-width: 200px">Beiträge</th>
+            <th style = "min-width: 100px">Beiträge</th>
             <th style = "min-width: 200px">Letzter Beitrag</th>
         </tr>
         <?php

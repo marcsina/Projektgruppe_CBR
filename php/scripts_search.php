@@ -17,11 +17,19 @@ if (login_check($mysqli) == true) {
 
 if(isset($_POST["rate"]))
 {
-    $value = $mysqli->query("SELECT id FROM Scripts_Rating WHERE User_id = '".$userid."' AND Script_id = '".$_POST["scriptid"]."';");
+    $value = $mysqli->query("SELECT value as i FROM Scripts_Rating WHERE User_id = '".$userid."' AND Script_id = '".$_POST["scriptid"]."';");
     $result = $value->fetch_assoc();
     if (mysqli_num_rows($value) > 0) {
-        UpdateRatingScript($userid,$_POST["scriptid"],$_POST["rate"],$mysqli);
-        echo "updated";
+        if($result['i']!=$_POST["rate"])
+        {
+            UpdateRatingScript($userid,$_POST["scriptid"],$_POST["rate"],$mysqli);
+            echo "updated";
+        }
+        else
+        {
+            DeleteRatingScript($userid,$_POST["scriptid"],$mysqli);
+            echo "deleted";
+        }
     }
     else {
         CreateRatingScript($userid,$_POST["scriptid"],$_POST["rate"],$mysqli);

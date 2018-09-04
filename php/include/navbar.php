@@ -41,10 +41,10 @@ if (login_check($mysqli) == true) {
             </div>
         </a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse navbar-right">
+    <div id="navbar" class=" collapse navbar-collapse navbar-right ">
 
         <?php
-        echo "<ul class='nav navbar-nav'>";
+        echo "<ul class='nav navbar-nav '>";
         if($logged == "in")
         {
             echo"

@@ -17,11 +17,20 @@ if (login_check($mysqli) == true) {
 
 if(isset($_POST["rate"]))
 {
-    $value = $mysqli->query("SELECT id FROM Artikel_Rating WHERE User_id = '".$userid."' AND Artikel_id = '".$_POST["artikelid"]."';");
+    $value = $mysqli->query("SELECT value as i FROM Artikel_Rating WHERE User_id = '".$userid."' AND Artikel_id = '".$_POST["artikelid"]."';");
     $result = $value->fetch_assoc();
     if (mysqli_num_rows($value) > 0) {
-        UpdateRatingArtikel($userid,$_POST["artikelid"],$_POST["rate"],$mysqli);
-        echo "updated";
+        if($result['i']!=$_POST["rate"])
+        {
+            UpdateRatingArtikel($userid,$_POST["artikelid"],$_POST["rate"],$mysqli);
+            echo "updated";
+        }
+        else
+        {
+            DeleteRatingArtikel($userid,$_POST["artikelid"],$mysqli);
+            echo "deleted";
+        }
+        
     }
     else {
         CreateRatingArtikel($userid,$_POST["artikelid"],$_POST["rate"],$mysqli);

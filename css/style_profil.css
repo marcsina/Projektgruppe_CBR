@@ -45,6 +45,7 @@ div #user-activities {
     min-height: 60px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid white;
 }
 
 #Achieve-Week-Button {
@@ -82,4 +83,9 @@ div #user-activities {
 .Achievement_div
 {
     padding: 20px;
+}
+
+.center_button {
+    display: flex;
+    justify-content: center;
 }

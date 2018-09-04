@@ -41,10 +41,12 @@ if (login_check($mysqli) == true) {
                 <!--TODODODODOD-->
                 <?php
 
-                $hilfeTextIndex = "Hilfe Text für die Index seite";
+                $hilfeTextIndex = "Der Beginn deines großen Abenteuers auf der MedAsubild.de Seite.
+                                   <br>
+                                   <br>
+                                   Hier siehst du welche neuen Artikel und Forumsposts es in dieser Woche gab und kannst dich direkt zu Ihnen begeben.";
 
                 $hilfeTextQuizUebersicht = "Hilfe Text für die Quiz_ueberischt seite";
-
                 $hilfeTextQuiz = "Hilfe Text für die Quiz_ueberischt seite";
                 $hilfeTextQuizEndseite = "Hilfe Text für die Quiz_Endseite seite";
                 $hilfeTextForum = "Hilfe Text für die Forum seite";

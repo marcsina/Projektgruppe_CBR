@@ -462,14 +462,25 @@
     -moz-user-select: none;
 }
 
-.btn_text {
-    margin-bottom: 10px;
+textarea#textarea_eingabe {
+    color: rgb(26, 39, 50);
 }
 
-#btn_submit {
-    margin-bottom: 10px;
+.tableau {
+    height: 300px;
+    overflow: auto;
 }
 
-#btn_anpassen {
-    margin-bottom: 10px;
+.tableau {
+    border: 1px solid black;
+}
+
+div.symptom{
+    margin: 0px;
+}
+
+div#btn_submit_div, div#div_h4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
