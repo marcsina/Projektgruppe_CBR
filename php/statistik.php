@@ -66,7 +66,7 @@ if (login_check($mysqli) == true) {
             
             <tr class="title">
                 <td>Quiz Singleplayer richtige Antworten</td>
-                <td>Meist gefundene Ergebnisse im Checker</td>
+                <td>Quiz Multiplayer richtige Antworten</td>
             </tr>
             
             <tr class="content">
@@ -77,7 +77,25 @@ if (login_check($mysqli) == true) {
     			</td>
                 <td>
     				<div class="charty">
+    					<canvas id="Chart7" width="400" height="400"></canvas>
+    				</div>
+    			</td>
+            </tr>
+            
+            <tr class="title">
+                <td>Meist gefundene Ergebnisse im Checker</td>
+                <td>-</td>
+            </tr>
+            
+            <tr class="content">
+                <td>
+    				<div class="charty">
     					<canvas id="Chart6" width="400" height="400"></canvas>
+    				</div>
+    			</td>
+                <td>
+    				<div class="charty">
+    					
     				</div>
     			</td>
             </tr>
@@ -145,6 +163,26 @@ $result162 = $value16->fetch_assoc();
 $result163 = $value16->fetch_assoc();
 $result164 = $value16->fetch_assoc();
 $result165 = $value16->fetch_assoc();
+
+//4richtige
+$value17 = $mysqli->query("Select count(A.MP_QUIZ_ID) as n FROM( SELECT MP_QUIZ_ID, count(*) as anzahl_richtig FROM `MP_FRAGE` Where Given_A1 = 1 or Given_A2 = 1 group by MP_QUIZ_ID) AS A Where anzahl_richtig = 4");
+$result17 = $value17->fetch_assoc();
+
+//3richtige
+$value18 = $mysqli->query("Select count(A.MP_QUIZ_ID) as n FROM( SELECT MP_QUIZ_ID, count(*) as anzahl_richtig FROM `MP_FRAGE` Where Given_A1 = 1 or Given_A2 = 1 group by MP_QUIZ_ID) AS A Where anzahl_richtig = 3");
+$result18 = $value18->fetch_assoc();
+
+//2richtige
+$value19 = $mysqli->query("Select count(A.MP_QUIZ_ID) as n FROM( SELECT MP_QUIZ_ID, count(*) as anzahl_richtig FROM `MP_FRAGE` Where Given_A1 = 1 or Given_A2 = 1 group by MP_QUIZ_ID) AS A Where anzahl_richtig = 2");
+$result19 = $value19->fetch_assoc();
+
+//1richtige
+$value20 = $mysqli->query("Select count(A.MP_QUIZ_ID) as n FROM( SELECT MP_QUIZ_ID, count(*) as anzahl_richtig FROM `MP_FRAGE` Where Given_A1 = 1 or Given_A2 = 1 group by MP_QUIZ_ID) AS A Where anzahl_richtig = 1");
+$result20 = $value20->fetch_assoc();
+
+//0richtige
+$value21 = $mysqli->query("SELECT count(DISTINCT MP_QUIZ_ID) as n FROM `MP_FRAGE` ");
+$result21 = $value21->fetch_assoc();
 
 ?>
 
@@ -295,6 +333,35 @@ var myChart5 = new Chart(ctx5, {
         datasets: [{
             label: '# of Votes',
             data: [<?php echo $result11['n'] ?>, <?php echo $result12['n'] ?>, <?php echo $result13['n'] ?>, <?php echo $result14['n'] ?>, <?php echo $result15['n']-$result14['n']-$result13['n']-$result12['n']-$result11['n'] ?>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    }
+});
+
+var ctx7 = document.getElementById("Chart7").getContext('2d');
+var myChart7 = new Chart(ctx7, {
+    type: 'pie',
+    data: {
+        labels: ["4 richtig","3 richtig","2 richtig","1 richtig","0 richtig"],
+        datasets: [{
+            label: '# of Votes',
+            data: [<?php echo $result17['n'] ?>, <?php echo $result18['n'] ?>, <?php echo $result19['n'] ?>, <?php echo $result20['n'] ?>, <?php echo $result21['n']-$result20['n']-$result19['n']-$result18['n']-$result17['n'] ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.6)',
                 'rgba(54, 162, 235, 0.6)',

@@ -16,6 +16,14 @@ function UpdateRatingArtikel($userid,$artikelid,$value, $connection)
     }
 }
 
+function DeleteRatingArtikel($userid,$artikelid,$connection)
+{
+    if ($stmt = $connection->prepare("DELETE FROM Artikel_Rating WHERE Artikel_id = '$artikelid' AND User_id = '$userid';"))
+    {
+        $stmt->execute();
+    }
+}
+
 function CreateRatingScript($userid,$scriptid,$value, $connection)
 {
     if ($stmt = $connection->prepare("INSERT INTO Scripts_Rating(Script_id,value,User_id) VALUES('$scriptid','$value','$userid');"))
@@ -27,6 +35,14 @@ function CreateRatingScript($userid,$scriptid,$value, $connection)
 function UpdateRatingScript($userid,$scriptid,$value, $connection)
 {
     if ($stmt = $connection->prepare("UPDATE Scripts_Rating SET value = '$value' WHERE Script_id = '$scriptid' AND User_id = '$userid';"))
+    {
+        $stmt->execute();
+    }
+}
+
+function DeleteRatingScript($userid,$scriptid, $connection)
+{
+    if ($stmt = $connection->prepare("DELETE FROM Scripts_Rating WHERE Script_id = '$scriptid' AND User_id = '$userid';"))
     {
         $stmt->execute();
     }
