@@ -142,7 +142,8 @@ if (login_check($mysqli) == true) {
 		}
         
         function buildOutput() {
-        	var ausgabe = "";
+        	/*var ausgabe = $("#div_ausgabe").text();*/
+            var ausgabe ="<p>";
         	var ausgabe = ausgabe + "Ergebnisse des Vergleichs mit der Datenbank:<br><br>";
         	var i;
         	var t1 = "";
@@ -222,6 +223,7 @@ if (login_check($mysqli) == true) {
                 }
             });
         	
+            ausgabe =ausgabe+"</p>";
         	return ausgabe;
         }
 
@@ -289,7 +291,7 @@ if (login_check($mysqli) == true) {
 				
         	// Berechnung und Ausgabe des Ergebnisses
         	cbr.calculateSimilarityComplex();
-        	$('#div_ausgabe').html(buildOutput());
+        	$('#div_ausgabe').append(buildOutput());
         });
 
 
