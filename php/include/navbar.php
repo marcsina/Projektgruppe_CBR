@@ -19,10 +19,10 @@ if (login_check($mysqli) == true) {
 <head>
 
     <!-- Bootstrap core CSS -->
-    <link href="/Projektgruppe/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/Projektgruppe/css/style_navbar.css" rel="stylesheet" />
-    <link href="/Projektgruppe/css/style_basic.css" rel="stylesheet" />
-    <link href="/Projektgruppe/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/style_navbar.css" rel="stylesheet" />
+    <link href="/css/style_basic.css" rel="stylesheet" />
+    <link href="/css/elegant-icons-style.css" rel="stylesheet" />
 </head>
 
 <!-- Fixed navbar -->
@@ -34,8 +34,8 @@ if (login_check($mysqli) == true) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="" href="/Projektgruppe/index.php">
-            <div href="/Projektgruppe/index.php" class="logo navbar-brand">
+        <a class="" href="/index.php">
+            <div href="/index.php" class="logo navbar-brand">
                 <i class="icon_house_alt"></i> Medausbild
                 <span class="lite">Siegen</span>
             </div>
@@ -49,7 +49,7 @@ if (login_check($mysqli) == true) {
         {
             echo"
                     <li class='menuItem'>
-                        <a href='/Projektgruppe/php/Quiz_uebersicht.php'>
+                        <a href='/php/Quiz_uebersicht.php'>
                             Quiz
                             <i class='icon_table'></i>";
             if($pendingChallenges > 0)
@@ -61,7 +61,7 @@ if (login_check($mysqli) == true) {
                     </li>
 
                     <li class='menuItem'>
-                        <a href='/Projektgruppe/php/forum.php'>
+                        <a href='/php/forum.php'>
                             Forum
                             <i class='icon_genius'></i>
                         </a>
@@ -75,10 +75,10 @@ if (login_check($mysqli) == true) {
                         </a>
                         <ul class='dropdown-menu'>
                             <li>
-                                <a href='/Projektgruppe/php/checker_symptom.php'>Symptom Checker</a>
+                                <a href='/php/checker_symptom.php'>Symptom Checker</a>
                             </li>
                             <li>
-                                <a href='/Projektgruppe/php/checker_text.php'>Fall Checker</a>
+                                <a href='/php/checker_text.php'>Fall Checker</a>
                             </li>
                         </ul>
                     </li>
@@ -92,22 +92,22 @@ if (login_check($mysqli) == true) {
                         </a>
                         <ul class='dropdown-menu'>
                             <li>
-                                <a href='/Projektgruppe/php/artikel.php'>Artikel</a>
+                                <a href='/php/artikel.php'>Artikel</a>
                             </li>
                             <li>
-                                <a href='/Projektgruppe/php/scripts.php'>Scripts</a>
+                                <a href='/php/scripts.php'>Scripts</a>
                             </li>
                         </ul>
                     </li>
                     <li class='menuItem'>
-                        <a href='/Projektgruppe/php/statistik.php'>
+                        <a href='/php/statistik.php'>
                             Statistik
                             <i class='icon_piechart'></i>
                         </a>
                     </li>
 
                     <li class='menuItem'>
-                        <a href='/Projektgruppe/php/contact_medausbild.php'>
+                        <a href='/php/contact_medausbild.php'>
                             Kontakt
                             <i class='icon_documents_alt'></i>
                         </a>
@@ -122,7 +122,7 @@ if (login_check($mysqli) == true) {
 
             if($logged == 'out')
             {
-                echo "<li class='top-menu'><a href = '/Projektgruppe/php/login.php'>Login</a></li>";
+                echo "<li class='top-menu'><a href = '/php/login.php'>Login</a></li>";
             }
             else{
                 echo "<li class='dropdown'>
@@ -130,7 +130,7 @@ if (login_check($mysqli) == true) {
 
                 if(strlen($_SESSION['profilbild']) > 5)
                 {
-                    echo "<img src='/Projektgruppe".$_SESSION['profilbild']."' style='max-width: 22px;max-height: 22px;' />";
+                    echo "<img src='".$_SESSION['profilbild']."' style='max-width: 22px;max-height: 22px;' />";
                     /*
                     echo "<div style='width: 40px;
                     height: 40px;
@@ -147,12 +147,12 @@ if (login_check($mysqli) == true) {
                                     </a>
                                     <ul class='dropdown-menu logout'>
                                         <li>
-                                            <a href='/Projektgruppe/php/profil.php'>
+                                            <a href='/php/profil.php'>
                                                 <i class='icon_profile'></i> My Profile
                                             </a>
                                         </li>
                                         <li>
-                                            <a href='/Projektgruppe/php/include/logout.php'>
+                                            <a href='/php/include/logout.php'>
                                                 <i class='icon_key_alt'></i> Log Out
                                             </a>
                                         </li>";
@@ -160,7 +160,7 @@ if (login_check($mysqli) == true) {
                 {
                     if($_SESSION['admin'] == 1)
                     {
-                        echo "<li><a href='/Projektgruppe/php/admin_config.php'><i class='icon_key_alt'></i>Adminseite</a></li>";
+                        echo "<li><a href='/php/admin_config.php'><i class='icon_key_alt'></i>Adminseite</a></li>";
                     }
                 }
                 echo "
@@ -172,7 +172,7 @@ if (login_check($mysqli) == true) {
         </ul>
     </div><!--/.nav-collapse -->
 </nav>
-<script src="/Projektgruppe/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 
 <?php
 

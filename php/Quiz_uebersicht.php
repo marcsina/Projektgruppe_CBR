@@ -10,7 +10,7 @@ if (login_check($mysqli) == true) {
     $logged = 'in';
 } else {
     $logged = 'out';
-	header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');
+	header('Location: http://141.99.248.104/php/login.php?logged=0');
 	exit;
 }
 ?>
@@ -144,7 +144,7 @@ include ("include/navbar.php");
 										<td scope='row'>".++$count."</td>
 										<td>
 
-											<label><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$user['username']."'>".$user['username']."</a></label>
+											<label><a href='http://141.99.248.104/php/profil.php?username=".$user['username']."'>".$user['username']."</a></label>
 
 										</td>
 										<td>
@@ -201,7 +201,7 @@ include ("include/navbar.php");
                                     <tr>
                                     <td scope='row'>".++$count."</td>
                                     <td>
-                                        <label><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$user['username']."'>".$user['username']."</a></label>
+                                        <label><a href='http://141.99.248.104/php/profil.php?username=".$user['username']."'>".$user['username']."</a></label>
                                     </td>
                                     <td>
 										    <form class='form-inline' action='include/functions_quiz.php' method='post'>
@@ -308,7 +308,7 @@ include ("include/navbar.php");
 														".++$count."
 													</td>
 													<td>
-                                                        <a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$user['username']."'>"
+                                                        <a href='http://141.99.248.104/php/profil.php?username=".$user['username']."'>"
 														.$user['username']."
                                                            </a>
 													</td>
@@ -369,7 +369,7 @@ include ("include/navbar.php");
 											".++$count."
 										</td>
 										<td>
-                                            <a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$user['username']."'>"
+                                            <a href='http://141.99.248.104/php/profil.php?username=".$user['username']."'>"
                                             .$user['username']."
                                             </a>
 										</td>
@@ -435,7 +435,7 @@ include ("include/navbar.php");
 									if(user.id == alreadyChallengedUser.userID2) {
 										if(check == 0) {
 											count++;
-											$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'>Warte auf Annahme</td></tr>");
+											$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.104/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'>Warte auf Annahme</td></tr>");
 											check = 1;
 										}
 									}
@@ -459,7 +459,7 @@ include ("include/navbar.php");
 
 								if(check == 0) {
 									count++;
-									$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'><form class='form-inline' action='include/functions_quiz.php' method='post'><input type='hidden' name='challengeUser' value='true'><input type='hidden' name='challengerUserID' value='"+sessionID+"'><input type='hidden' name='challengedUserID' value='"+user.id+"'><input  class='btn-uebersicht btn-uebersicht-green' type='submit' value='Fordere ihn heraus!'></form></td></tr>");
+									$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.104/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'><form class='form-inline' action='include/functions_quiz.php' method='post'><input type='hidden' name='challengeUser' value='true'><input type='hidden' name='challengerUserID' value='"+sessionID+"'><input type='hidden' name='challengedUserID' value='"+user.id+"'><input  class='btn-uebersicht btn-uebersicht-green' type='submit' value='Fordere ihn heraus!'></form></td></tr>");
 								}
 								else {
 									check = 0;
@@ -487,7 +487,7 @@ include ("include/navbar.php");
 								if(user.id == alreadyChallengedUser.userID2) {
 									if(check == 0) {
 										count++;
-										$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'>Warte auf Annahme</td></tr>");
+										$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.104/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'>Warte auf Annahme</td></tr>");
 										check = 1;
 									}
 								}
@@ -511,7 +511,7 @@ include ("include/navbar.php");
 
 							if(check == 0) {
 								count++;
-								$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.92/Projektgruppe/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'><form class='form-inline' action='include/functions_quiz.php' method='post'><input type='hidden' name='challengeUser' value='true'><input type='hidden' name='challengerUserID' value='"+sessionID+"'><input type='hidden' name='challengedUserID' value='"+user.id+"'><input  class='btn-uebersicht btn-uebersicht-green' type='submit' value='Fordere ihn heraus!'></form></td></tr>");
+								$("#table_user").find('tbody').append("<tr><td>"+count+"</td><td><a href='http://141.99.248.104/php/profil.php?username="+ user.username+"'>"+ user.username+"</a></td><td class='table_style_uebersicht'><form class='form-inline' action='include/functions_quiz.php' method='post'><input type='hidden' name='challengeUser' value='true'><input type='hidden' name='challengerUserID' value='"+sessionID+"'><input type='hidden' name='challengedUserID' value='"+user.id+"'><input  class='btn-uebersicht btn-uebersicht-green' type='submit' value='Fordere ihn heraus!'></form></td></tr>");
 							}
 							else {
 								check = 0;

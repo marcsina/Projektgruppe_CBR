@@ -2,7 +2,7 @@
 /**
  * Das sind die Login-Angaben für die Datenbank
  */  
-define("HOST", "localhost");     // Der Host mit dem du dich verbinden willst.
+define("HOST", "141.99.248.92");     // Der Host mit dem du dich verbinden willst.
 define("USER", "medausbild");    // Der Datenbank-Benutzername. 
 define("PASSWORD", "dpDtTC2AwzzUbFXu");    // Das Datenbank-Passwort.
 //define("DATABASE", "CBR");

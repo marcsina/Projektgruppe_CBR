@@ -17,7 +17,7 @@ if (login_check($mysqli) == true) {
     $logged = 'in';
     $message = "Du bist bereits eingeloggt!";
     echo "<script type='text/javascript'>alert('$message');</script>";
-    header('Location: http://141.99.248.92/Projektgruppe');
+    header('Location: http://141.99.248.104');
 	exit;
 } else {
     $logged = 'out';

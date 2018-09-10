@@ -18,7 +18,7 @@ if (login_check($mysqli) == true) {
 <html>
 
 <head>
-    <link rel="stylesheet" href="/Projektgruppe/css/style_chat.css" type="text/css" />
+    <link rel="stylesheet" href="/css/style_chat.css" type="text/css" />
 </head>
 
 <!--chat.start()-->
@@ -88,7 +88,7 @@ if (login_check($mysqli) == true) {
 
 </script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script type="text/javascript" src="/Projektgruppe/js/chat.js"></script>
+<script type="text/javascript" src="/js/chat.js"></script>
 
 <script type="text/javascript">
 

@@ -112,7 +112,7 @@ function getCategoriesFromDatabase( database, array, array_Name )
                 autocomplete( document.getElementById( "edit_Category_Name" ), Categories_Name_Array );
             }
         };
-        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getCategories.php", false );
+        xmlhttp.open( "GET", "http://141.99.248.104/php/include/getCategories.php", false );
         xmlhttp.send();
     }
 }
@@ -158,7 +158,7 @@ function getKeywordsFromDatabase2( database, givenArray, givenArray2 )
                 }
             }
         };
-        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getKeywords.php", false );
+        xmlhttp.open( "GET", "http://141.99.248.104/php/include/getKeywords.php", false );
         xmlhttp.send();
     }
 }
@@ -206,7 +206,7 @@ function getCasesFromDatabase( database, givenArray, givenArray2 )
                 autocomplete(document.getElementById("edit_Case_Name"), Cases_Name_Array);
             }
         };
-        xmlhttp.open( "GET", "http://141.99.248.92/Projektgruppe/php/include/getCases.php", false );
+        xmlhttp.open( "GET", "http://141.99.248.104/php/include/getCases.php", false );
         xmlhttp.send();
     }
 }
