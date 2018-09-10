@@ -10,7 +10,7 @@ if (login_check($mysqli) == true) {
     //insert_Activity_Checker($mysqli, $_SESSION['user_id'], "Symptom Checker");
 } else {
     $logged = 'out';
-    header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');
+    header('Location: http://141.99.248.104/php/login.php?logged=0');
     exit;
 }
 ?>

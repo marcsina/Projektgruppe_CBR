@@ -251,7 +251,7 @@ function getCaseValuesFromDatabase(database, arrayCases) {
 			}
 		};
 		
-		xmlhttp.open("GET", "http://141.99.248.92/Projektgruppe/php/include/getCaseValues.php", false);
+		xmlhttp.open("GET", "http://141.99.248.104/php/include/getCaseValues.php", false);
 		xmlhttp.send();
 		
 	}
@@ -286,7 +286,7 @@ function getCasesFromDatabase(database, arrayCases) {
 				}
 			}
 		};
-		xmlhttp.open("GET", "http://141.99.248.92/Projektgruppe/php/include/getCases.php", false);
+		xmlhttp.open("GET", "http://141.99.248.104/php/include/getCases.php", false);
 		xmlhttp.send();
 	}
 }
@@ -317,7 +317,7 @@ function getCategoriesFromDatabase(database, array_symptoms) {
 				}
 			}
 		};
-		xmlhttp.open("GET", "http://141.99.248.92/Projektgruppe/php/include/getCategories.php", false);
+		xmlhttp.open("GET", "http://141.99.248.104/php/include/getCategories.php", false);
 		xmlhttp.send();
 	}
 }

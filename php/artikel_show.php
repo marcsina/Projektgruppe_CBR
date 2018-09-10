@@ -10,7 +10,7 @@ if (login_check($mysqli) == true) {
     $userid = $_SESSION['user_id'];
 } else {
     $logged = 'out';
-    header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');
+    header('Location: http://141.99.248.104/php/login.php?logged=0');
     exit;
     $username = 'anonymous';
 }

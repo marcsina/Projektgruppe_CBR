@@ -17,7 +17,7 @@ if (login_check($mysqli) == true) {
 <html>
 
 <head>
-    <link rel="stylesheet" href="/Projektgruppe/css/style_help.css" type="text/css" />
+    <link rel="stylesheet" href="/css/style_help.css" type="text/css" />
 </head>
 
 <!--chat.start()-->

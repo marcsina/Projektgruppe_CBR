@@ -20,7 +20,7 @@ function getStateOfChat()
         instanse = true;
         $.ajax( {
             type: "POST",
-            url: "/Projektgruppe/php/include/functions_chat.php",
+            url: "/php/include/functions_chat.php",
             data: {
                 'function': 'getState',
                 'file': file
@@ -47,7 +47,7 @@ function updateChat()
         instanse = true;
         $.ajax( {
             type: "POST",
-            url: "/Projektgruppe/php/include/functions_chat.php",
+            url: "/php/include/functions_chat.php",
             data: {
                 'function': 'update',
                 'state': state,
@@ -93,7 +93,7 @@ function sendChat( message, nickname )
     updateChat();
     $.ajax( {
         type: "POST",
-        url: "/Projektgruppe/php/include/functions_chat.php",
+        url: "/php/include/functions_chat.php",
         data: {
             'function': 'send',
             'message': message,
@@ -112,7 +112,7 @@ function deleteChat()
 {
     $.ajax( {
         type: "POST",
-        url: "/Projektgruppe/php/include/functions_chat.php",
+        url: "/php/include/functions_chat.php",
         data: {
             'function': 'getAll',
             'state': state,

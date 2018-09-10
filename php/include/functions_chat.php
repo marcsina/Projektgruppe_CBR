@@ -99,7 +99,7 @@ switch($function) {
             //replace break with space
             $message = str_replace("\n", " ", $message);
 
-            fwrite(fopen('chat.txt', 'a'), "<span> <a href='http://141.99.248.92/Projektgruppe/php/profil.php?username=".$nickname."'>". $nickname . "</a>  um ".$date."<br></span>" . $message . "\n");
+            fwrite(fopen('chat.txt', 'a'), "<span> <a href='http://141.99.248.104/php/profil.php?username=".$nickname."'>". $nickname . "</a>  um ".$date."<br></span>" . $message . "\n");
         }
         break;
 

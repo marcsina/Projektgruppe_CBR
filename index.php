@@ -20,7 +20,7 @@ if (login_check($mysqli) == true) {
 
     <!-- include Header -->
     <?php
-    include(ROOT_PATH.'Projektgruppe/php/include/header.php');
+    include(ROOT_PATH.'php/include/header.php');
     ?>
 
     <!-- css -->
@@ -133,7 +133,7 @@ include ('php/include/navbar.php');
 
                     echo"
                                         <li class='cbp-item forum'>
-                                            <a href='http://141.99.248.92/Projektgruppe/php/forum_demenz.php?topic=".$item['topic_id']."' class='cbp-caption cbp-singlePageI'>
+                                            <a href='http://141.99.248.104/php/forum_demenz.php?topic=".$item['topic_id']."' class='cbp-caption cbp-singlePageI'>
                                                 <div class='cbp-caption-defaultWrap'>
                                                     <img src='img/team/1.jpg' alt='' width='100%' />
                                                 </div>
@@ -154,7 +154,7 @@ include ('php/include/navbar.php');
 
                     echo"
                                         <li class='cbp-item article'>
-                                            <a href='http://141.99.248.92/Projektgruppe/php/artikel_show.php?id=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
+                                            <a href='http://141.99.248.104/php/artikel_show.php?id=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
                                                 <div class='cbp-caption-defaultWrap'>
                                                     <img src='img/index_book.jpg' alt='' width='100%' />
                                                 </div>

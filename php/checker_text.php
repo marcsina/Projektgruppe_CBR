@@ -11,7 +11,7 @@ if (login_check($mysqli) == true) {
     //insert_Activity_Checker($mysqli, $_SESSION['user_id'], "Text Checker");
 } else {
     $logged = 'out';
-    header('Location: http://141.99.248.92/Projektgruppe/php/login.php?logged=0');
+    header('Location: http://141.99.248.104/php/login.php?logged=0');
     exit;
 }
 ?>
@@ -330,7 +330,7 @@ if (login_check($mysqli) == true) {
 			
 			if(symptomArray.length > 0) {
 				window.localStorage.setItem("ICSymptoms", JSON.stringify(symptomArray));
-				window.location.href = "http://141.99.248.92/Projektgruppe/php/checker_symptom.php";
+				window.location.href = "http://141.99.248.104/php/checker_symptom.php";
 			}
 			else {
 				alert("Mindestens ein Symptom muss gefunden werden");
