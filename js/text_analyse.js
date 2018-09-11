@@ -93,7 +93,7 @@ function getKeywordsFromDatabase( database )
                 string_keywordsTEXTFROMDB = this.responseText;
             }
         };
-        xmlhttp.open( "GET", "http://141.99.248.104/php/include/getKeywords.php", false );
+        xmlhttp.open( "GET", "http://medausbild.de/php/include/getKeywords.php", false );
         xmlhttp.send();
     }
 }
@@ -124,7 +124,7 @@ function getKeywordsFromDatabase_Past( database )
                 string_keywordsFROMDB = this.responseText;
             }
         };
-        xmlhttp.open( "GET", "http://141.99.248.104/php/include/getKeywordsPast.php", true );
+        xmlhttp.open( "GET", "http://medausbild.de/php/include/getKeywordsPast.php", true );
         xmlhttp.send();
     }
 }

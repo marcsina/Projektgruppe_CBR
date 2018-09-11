@@ -1,7 +1,8 @@
 <?php
 //config file with all includes and variables we need
-include_once 'config.php';
 include_once 'php/include/functions_history.php';
+//ini_set ("display_errors", "1");
+//error_reporting(E_ALL);
 
 sec_session_start();
 
@@ -20,12 +21,11 @@ if (login_check($mysqli) == true) {
 
     <!-- include Header -->
     <?php
-    include(ROOT_PATH.'php/include/header.php');
+    include_once('php/include/header.php');
     ?>
 
     <!-- css -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="plugins/cubeportfolio/css/cubeportfolio.min.css" />
     <link href="css/nivo-lightbox.css" rel="stylesheet" />
     <link href="css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
@@ -48,7 +48,7 @@ if (login_check($mysqli) == true) {
 
 <!-- include Navbar -->
 <?php
-include ('php/include/navbar.php');
+include_once ('php/include/navbar.php');
 ?>
 
 <body>
@@ -133,7 +133,7 @@ include ('php/include/navbar.php');
 
                     echo"
                                         <li class='cbp-item forum'>
-                                            <a href='http://141.99.248.104/php/forum_demenz.php?topic=".$item['topic_id']."' class='cbp-caption cbp-singlePageI'>
+                                            <a href='http://medausbild.de/php/forum_demenz.php?topic=".$item['topic_id']."' class='cbp-caption cbp-singlePageI'>
                                                 <div class='cbp-caption-defaultWrap'>
                                                     <img src='img/team/1.jpg' alt='' width='100%' />
                                                 </div>
@@ -154,7 +154,7 @@ include ('php/include/navbar.php');
 
                     echo"
                                         <li class='cbp-item article'>
-                                            <a href='http://141.99.248.104/php/artikel_show.php?id=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
+                                            <a href='http://medausbild.de/php/artikel_show.php?id=".$item['article_id']."' class='cbp-caption cbp-singlePageI'>
                                                 <div class='cbp-caption-defaultWrap'>
                                                     <img src='img/index_book.jpg' alt='' width='100%' />
                                                 </div>

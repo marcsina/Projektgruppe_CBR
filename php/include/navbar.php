@@ -1,8 +1,8 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'];
-include_once ($path . '/Projektgruppe/php/include/conn.php');
-include_once ($path . '/Projektgruppe/php/include/functions_login.php');
-include_once ($path . '/Projektgruppe/php/include/quiz_countPendingChallenges.php');
+include_once ($path . '/php/include/conn.php');
+include_once ($path . '/php/include/functions_login.php');
+include_once ($path . '/php/include/quiz_countPendingChallenges.php');
 //ini_set ("display_errors", "1");
 //error_reporting(E_ALL);
 sec_session_start();

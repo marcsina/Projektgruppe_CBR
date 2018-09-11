@@ -12,14 +12,14 @@ if (login_check($mysqli) == true)
 	if($_SESSION['admin'] == 0)
 	{
 		//Wenn kein Admin dann zurück auf die index		
-		header('Location: http://141.99.248.104');	
+		header('Location: http://medausbild.de');	
 		exit;		
 	}
 } else 
 {
     $logged = 'out';
 	//Wenn kein Admin dann zurück auf die index
-	header('Location: http://141.99.248.104');	
+	header('Location: http://medausbild.de');	
 	exit;	
 }
 ?>
