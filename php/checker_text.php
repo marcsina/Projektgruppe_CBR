@@ -311,8 +311,10 @@ if (login_check($mysqli) == true) {
         	// Berechnung und Ausgabe des Ergebnisses
         	cbr.calculateSimilarityComplex();
         	$('#div_ausgabe').append(buildOutput());
-			// Neuen Incoming Case erstellen für nächsten Durchlauf
-			cbr.loadIncomingCase("no name", "no text");
+			// Incoming Case Werte zurücksetzen
+			for(i=0; i < cbr.incomingCase.Symptoms.length; i++) {
+				cbr.incomingCase.Symptoms[i].wert = 0;
+			}
         });
 
 

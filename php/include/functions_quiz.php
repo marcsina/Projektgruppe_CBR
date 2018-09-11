@@ -63,6 +63,7 @@ function shuffleAnswers($answer1, $answer2, $answer3, $answer4)
 }
 
 //Returns a random Question with random answers and correct Answer Position for High Value
+// DEPRECATED
 function loadRandomQuestionHigh($mysqli)
 {
 
@@ -93,7 +94,8 @@ function loadRandomQuestionHigh($mysqli)
 	}
 
 	//Gegebenfalls noch den Wert Anpassen nachdem neue Cases da sind
-	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value < 0.8 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
+	//if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value < 0.8 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
+	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND NOT Cases.id = ? ORDER BY RAND() LIMIT 3"))
 	{
 		$stmt->bind_param('i', $res['id']);
 		$stmt->execute();
@@ -198,6 +200,7 @@ function activeSingleplayerGame($mysqli, $userID)
 }
 
 //Returns a random Question with random answers and correct Answer Position for Low Value
+// DEPRECATED
 function loadRandomQuestionLow($mysqli)
 {
 	if($stmt = $mysqli->prepare("SELECT Cases.id, Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value < 0.25 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
@@ -226,7 +229,8 @@ function loadRandomQuestionLow($mysqli)
 	}
 
 	//Gegebenfalls noch den Wert Anpassen nachdem neue Cases da sind
-	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value > 0.7 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
+	//if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value > 0.7 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
+	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND NOT Cases.id = ? ORDER BY RAND() LIMIT 3"))
 	{
 		$stmt->bind_param('i', $res['id']);
 		$stmt->execute();
@@ -267,15 +271,96 @@ function loadRandomQuestionLow($mysqli)
         //DB Fehler
 		return false;
 	}
-
 }
+
+function loadRandomQuestion($mysqli) {
+	if($stmt = $mysqli->prepare("SELECT Cases.id, Cases.name, CBR_ICF_Kategorie.DE, Cases_Kategorie_Values.value FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
+	{
+		//$stmt->bind_param('i', 1);
+		$stmt->execute();
+		$stmt->store_result();
+
+		if ($stmt->num_rows == 1)
+		{
+			$stmt->bind_result($id, $casename, $kategoriename, $value);
+			$stmt->fetch();
+			$res = ["casename"=>$casename, "antwort1"=>$kategoriename, "id"=>$id, "value"=>$value];
+		}
+		else
+		{
+            //DB Fehler
+			return false;
+		}
+
+	}
+	else
+	{
+		//DB FEHLER
+		return false;
+	}
+
+	//Gegebenfalls noch den Wert Anpassen nachdem neue Cases da sind
+	//if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value > 0.7 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
+	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND NOT Cases.id = ? ORDER BY RAND() LIMIT 3"))
+	{
+		$stmt->bind_param('i', $res['id']);
+		$stmt->execute();
+		$stmt->store_result();
+
+		$stmt->bind_result($casename, $kategoriename);
+
+		$i = 0;
+		while ($stmt->fetch())
+		{
+			if($i == 0)
+			{
+				$antwort2 = $kategoriename;
+			}
+			else if($i == 1)
+			{
+				$antwort3 = $kategoriename;
+			}
+			else if($i == 2)
+			{
+				$antwort4 = $kategoriename;
+			}
+			else
+			{
+				return false;
+			}
+			$i = $i+1;
+		}
+
+		// Überprüfe ob Frage hoch oder niedrig
+		$type = 0;
+		if($res['value'] <= 0.5) {
+			$type = 1;
+		}
+		else {
+			$type = 0;
+		}
+
+
+		$result = ["casename"=>$res['casename'], "antwort1"=>$res['antwort1'], "antwort2"=>$antwort2,"antwort3"=>$antwort3, "antwort4"=>$antwort4, "antwort4"=>$antwort4, "type"=>$type];
+
+		return $result;
+		//Shuffle the answers before return
+		//return shuffleAnswers($result);
+	}
+	else
+	{
+        //DB Fehler
+		return false;
+	}
+}
+
 
 function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
 {
 	for($questionCounter = 0; $questionCounter < 4; $questionCounter++)
 	{
         //Load random Question Type High with 50% probability and Low with 50% probability
-		if(rand(0,1) == 0)
+		/*if(rand(0,1) == 0)
 		{
 			$question = loadRandomQuestionHigh($mysqli);
             while($question == false)
@@ -292,11 +377,13 @@ function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
                 $question = loadRandomQuestionLow($mysqli);
             }
 			$type = 1;
-		}
+		}*/
+
+		$question = loadRandomQuestion($mysqli);
 
 		if ($insert_stmt = $mysqli->prepare("INSERT INTO `MP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`, MP_QUIZ_ID) VALUES (?,?,?,?,?,?,?)"))
         {
-            $insert_stmt->bind_param('isssssi', $type, $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $mp_quiz_ID );
+            $insert_stmt->bind_param('isssssi', $question['type'], $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $mp_quiz_ID );
             // Führe die vorbereitete Anfrage aus.
             $insert_stmt->execute();
         }
@@ -310,7 +397,7 @@ function genereateFourQuestionsSingleplayer($mysqli, $sp_quiz_ID)
 	{
         debug_to_console("SP-QUESTIONS: ".$questionCounter);
         //Load random Question Type High with 50% probability and Low with 50% probability
-		if(rand(0,1) == 0)
+		/*if(rand(0,1) == 0)
 		{
 			$question = loadRandomQuestionHigh($mysqli);
             while($question == false)
@@ -327,11 +414,13 @@ function genereateFourQuestionsSingleplayer($mysqli, $sp_quiz_ID)
                 $question = loadRandomQuestionLow($mysqli);
             }
 			$type = 1;
-		}
+		}*/
+
+		$question = loadRandomQuestion($mysqli);
 
 		if ($insert_stmt = $mysqli->prepare("INSERT INTO `SP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`, SP_QUIZ_ID) VALUES (?,?,?,?,?,?,?)"))
         {
-            $insert_stmt->bind_param('isssssi', $type, $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $sp_quiz_ID);
+            $insert_stmt->bind_param('isssssi', $question['type'], $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $sp_quiz_ID);
             // Führe die vorbereitete Anfrage aus.
             $insert_stmt->execute();
         }
