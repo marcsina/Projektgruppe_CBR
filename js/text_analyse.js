@@ -328,6 +328,9 @@ function createKeywordsArray_Past()
 
 function extractKeywords( inputText )
 {
+    absolute_final_array = new Array();
+    final_Weight = new Array();
+
     var i = 0;
     var j = 0;
     var k = 0;

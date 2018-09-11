@@ -570,11 +570,11 @@ $( "#btn_add_Category_to_DataBase" ).click( function ( event )
     getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
 
     getKeywordsFromDatabase2( "dementia", Keywords_From_DB, Keywords_Name_Array );
-    if ( $( "#add_new_Category_Category_Name" ).val() !== "" )
+    if ( $( "#add_new_Category_Category_Name" ).val().trim() !== "" )
     {
         //update keywords
         getCategoriesFromDatabase( "dementia", Categories_From_DB, Categories_Name_Array );
-        if ( checkIFCategoryalreadyExists( $( "#add_new_Category_Category_Name" ).val() ) )
+        if ( checkIFCategoryalreadyExists( $( "#add_new_Category_Category_Name" ).val().trim() ) )
         {
             //TODO update einbinden
             alert( "Kategorie exisitiert bereits!" );
@@ -587,7 +587,7 @@ $( "#btn_add_Category_to_DataBase" ).click( function ( event )
                 array_of_keywords.push( stemm2( $( "#list_of_Keywords_admin>li>p.Keyword_Name" ).get( i ).innerText ) );
             }
             $.post( 'include/AddNewKategorie.php', {
-                katName: $( "#add_new_Category_Category_Name" ).val(),
+                katName: $( "#add_new_Category_Category_Name" ).val().trim(),
                 keywords: JSON.stringify( array_of_keywords )
             } );
 
