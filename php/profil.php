@@ -32,7 +32,7 @@ if (login_check($mysqli) == true)
         if($userDataArray == false)
         {
             //Weitergeleitet auf eigenes Profil, wenn gew�nschter Nutzer nicht vorhanden
-            header('Location: http://141.99.248.104/php/profil.php');
+            header('Location: http://medausbild.de/php/profil.php');
             exit;
         }
         // wenn er existiert
@@ -53,7 +53,7 @@ if (login_check($mysqli) == true)
         if($userDataArray == false)
         {
             //Weitergeleitet auf Startseite wenn Nutzer nicht vorhanden
-            header('Location: http://141.99.248.104');
+            header('Location: http://medausbild.de');
             exit;
         }
         // wenn er existiert
@@ -64,7 +64,7 @@ if (login_check($mysqli) == true)
     }
     else
     {
-        header('Location: http://141.99.248.104/php/login.php?logged=0');
+        header('Location: http://medausbild.de/php/login.php?logged=0');
         exit;
     }
 }
