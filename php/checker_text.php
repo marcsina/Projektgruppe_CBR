@@ -142,7 +142,8 @@ if (login_check($mysqli) == true) {
 		}
         
         function buildOutput() {
-        	var ausgabe = "";
+        	/*var ausgabe = $("#div_ausgabe").text();*/
+            var ausgabe ="<p>";
         	var ausgabe = ausgabe + "Ergebnisse des Vergleichs mit der Datenbank:<br><br>";
         	var i;
         	var t1 = "";
@@ -155,7 +156,24 @@ if (login_check($mysqli) == true) {
         	var p3 = 0; 
         	var p4 = 0; 
         	var p5 = 0; 
-        	
+
+			/////////////////////////// BUG FIX ECKE
+			/*var check1 = "";
+			var check2 = "";
+
+			for(i = 0; i < cbr.Cases.length; i++) {
+				check2 = check2 + "Caseid: " + cbr.Cases[i].id + " ||| Arraylength: " + cbr.Cases[i].Symptoms.length + "\n";
+			}
+			alert(check2);
+
+			for(i = 0; i < cbr.incomingCase.Symptoms.length; i++)
+			{
+				if(cbr.incomingCase.Symptoms[i].wert > 0) {
+					check1 = check1 + "ID: " + cbr.incomingCase.Symptoms[i].id + " ||| Name: " + cbr.incomingCase.Symptoms[i].name + " ||| Wert: " + cbr.incomingCase.Symptoms[i].wert + "\n";
+				}
+			}
+			//alert(check1);*/
+        	///////////////////////////
         	for (i = 0; i < cbr.Similarities.length; i++) {
         		ausgabe = ausgabe + "Case " + cbr.Similarities[i].id + " - " + cbr.Similarities[i].name + ": " + cbr.Similarities[i].similarity + "%<br>";
         		if(i == 0)
@@ -222,11 +240,14 @@ if (login_check($mysqli) == true) {
                 }
             });
         	
+            ausgabe =ausgabe+"</p>";
         	return ausgabe;
         }
 
         $('#btn_submit').click(function () {
         	// Filtern der Symptome und �bergabe an CBR
+
+
 			$('#section_symptoms').html("");
         	var text = $('#textarea_eingabe').val();
         	var kategorieAusTextArray = new Array();
@@ -289,7 +310,9 @@ if (login_check($mysqli) == true) {
 				
         	// Berechnung und Ausgabe des Ergebnisses
         	cbr.calculateSimilarityComplex();
-        	$('#div_ausgabe').html(buildOutput());
+        	$('#div_ausgabe').append(buildOutput());
+			// Neuen Incoming Case erstellen für nächsten Durchlauf
+			cbr.loadIncomingCase("no name", "no text");
         });
 
 

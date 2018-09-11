@@ -328,6 +328,9 @@ function createKeywordsArray_Past()
 
 function extractKeywords( inputText )
 {
+    absolute_final_array = new Array();
+    final_Weight = new Array();
+
     var i = 0;
     var j = 0;
     var k = 0;
@@ -339,8 +342,7 @@ function extractKeywords( inputText )
 
     var negateWords = new Array( "nicht", "kein", "keine", "keinem", "keinen", "keiner", "keines", "nichts", "nie" );
     var reinforing_words = new Array( "absolut", "äußerst", "ausgesprochen", "besonders", "extrem", "heftig", "höchst", "sehr", "total", "überaus", "ungemein", "ungewöhnlich", "ohne probleme" );
-
-    console.time( "test2" );
+    
 
     //remove unnecessary whitespace and write everything in lower case
     inputText = inputText.trim();
@@ -399,11 +401,19 @@ function extractKeywords( inputText )
                             {
                                 //Todo Weight past negate reinforced
                                 final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_past_negate_reinforced, keyWords[k].katName ) );
+
+                                ///TESTING TRACKING
+                                var msg = "<p><br>Gefundes Keyword: " + keyWords[k].word + "<br>Zugehörige KatID: " + keyWords[k].katID + "<br>Gewicht: " + weight_base * weight_past_negate_reinforced + "</p>";
+                                tracking( msg );
                             }
                             else
                             {
                                 //Todo Weight past negate NOT reinforced
                                 final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_past_negate, keyWords[k].katName ) );
+
+                                ///TESTING TRACKING
+                                var msg = "<p>Gefundes Keyword: " + keyWords[k].word + "<br>Zugehörige KatID: " + keyWords[k].katID +"<br>Gewicht: " + weight_base * weight_past_negate + "</p>";
+                                tracking( msg );
                             }
                         }
                         else
@@ -413,11 +423,19 @@ function extractKeywords( inputText )
                             {
                                 //Todo Weight past NOT negate reinforced
                                 final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_past_reinforced, keyWords[k].katName ) );
+
+                                ///TESTING TRACKING
+                                var msg = "<p>Gefundes Keyword: " + keyWords[k].word + "<br>Zugehörige KatID: " + keyWords[k].katID +"<br>Gewicht: " + weight_base * weight_past_reinforced + "</p>";
+                                tracking( msg );
                             }
                             else
                             {
                                 //Todo Weight past NOT negate NOT reinforced
                                 final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_past, keyWords[k].katName ) );
+
+                                ///TESTING TRACKING
+                                var msg = "<p>Gefundes Keyword: " + keyWords[k].word + "<br>Zugehörige KatID: " + keyWords[k].katID +"<br>Gewicht: " + weight_base * weight_past + "</p>";
+                                tracking( msg );
                             }
                         }
                     }
@@ -432,11 +450,19 @@ function extractKeywords( inputText )
                             {
                                 //Todo Weight present negate reinforced
                                 final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_present_negate_reinforced, keyWords[k].katName ) );
+
+                                ///TESTING TRACKING
+                                var msg = "<p>Gefundes Keyword: " + keyWords[k].word + "<br>Zugehörige KatID: " + keyWords[k].katID +"<br>Gewicht: " + weight_base * weight_present_negate_reinforced + "</p>";
+                                tracking( msg );
                             }
                             else
                             {
                                 //Todo Weight present negate NOT reinforced
                                 final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_present_negate, keyWords[k].katName ) );
+
+                                ///TESTING TRACKING
+                                var msg = "<p>Gefundes Keyword: " + keyWords[k].word + "<br>Zugehörige KatID: " + keyWords[k].katID +"<br>Gewicht: " + weight_base * weight_present_negate + "</p>";
+                                tracking( msg );
                             }
                         }
                         else
@@ -445,11 +471,19 @@ function extractKeywords( inputText )
                             {
                                 //Todo Weight present NOT negate reinforced
                                 final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_present_reinforced, keyWords[k].katName ) );
+
+                                ///TESTING TRACKING
+                                var msg = "<p>Gefundes Keyword: " + keyWords[k].word + "<br>Zugehörige KatID: " + keyWords[k].katID +"<br>Gewicht: " + weight_base * weight_present_reinforced + "</p>";
+                                tracking( msg );
                             }
                             else
                             {
                                 //Todo Weight present NOT negate NOT reinforced
                                 final_Weight.push( new Final_Weight( keyWords[k].katID, weight_base * weight_present, keyWords[k].katName ) );
+
+                                ///TESTING TRACKING
+                                var msg = "<p>Gefundes Keyword: " + keyWords[k].word + "<br>Zugehörige KatID: " + keyWords[k].katID +"<br>Gewicht: " + weight_base * weight_present + "</p>";
+                                tracking( msg );
                             }
                         }
                     }
@@ -477,13 +511,16 @@ function extractKeywords( inputText )
             absolute_final_array.push( new Final_Weight( final_Weight[i].katID, final_Weight[i].weight, final_Weight[i].katName ) );
             absolute_final_array[absolute_final_array.length - 1].count++;
         }
+
     }
 
     for ( i = 0; i < absolute_final_array.length; i++ )
     {
+        absolute_final_array[i].weight = absolute_final_array[i].weight / ( absolute_final_array[i].count );
+        /*
         //MAGIC FORMULA                     Sum of category weight       /              highest possible value for this category
         absolute_final_array[i].weight = absolute_final_array[i].weight / ( absolute_final_array[i].count * weight_highest * weight_base );
-
+        */
         //////calculate a factor based on the assumed text length
         //So that a shorter text has higher rated values
         factor = basic_text_length / text_length;
@@ -501,11 +538,21 @@ function extractKeywords( inputText )
         {
             absolute_final_array[i].weight = 0;
         }
-    }
 
-    console.timeEnd( 'test2' );
+
+        ///TESTING TRACKING
+        var msg = "<p><br><br>Kategoriename: " + absolute_final_array[i].katName + "<br>Gewicht: " + absolute_final_array[i].weight + "<br>Anzahl gefunder Keywords: " + absolute_final_array[i].count+"</p>";
+        tracking( msg );
+    }
+    
     return absolute_final_array;
 }
+
+function tracking(stringToPrint)
+{
+    $( "#div_ausgabe" ).append( stringToPrint );
+}
+
 
 $( "#02_btn" ).click( function ( event )
 {

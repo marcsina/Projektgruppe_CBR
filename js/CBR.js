@@ -235,11 +235,17 @@ function getCaseValuesFromDatabase(database, arrayCases) {
 				for (i = 0; i < split_end.length; i++) {
 
 					var split_mid = split_end[i].split(',');
+					try {
+						const index = cbr.Cases.map(e => e.id).indexOf(split_mid[0]);
+						if (index != -1) {
+							cbr.GiveCaseSymptom(index, new Symptom(split_mid[1], "name", split_mid[2]));
+						}
+					}
+					catch (err) {
+						alert(err.message); 
+					}
+					
 
-					const index = cbr.Cases.map(e => e.id).indexOf(split_mid[0]);
-					if (index != -1) {
-						cbr.GiveCaseSymptom(index, new Symptom(split_mid[1], "name", split_mid[2]));
-					} 
 				}
 				
 			}
