@@ -62,83 +62,7 @@ function shuffleAnswers($answer1, $answer2, $answer3, $answer4)
     return $res;
 }
 
-//Returns a random Question with random answers and correct Answer Position for High Value
-// DEPRECATED
-function loadRandomQuestionHigh($mysqli)
-{
 
-
-	if($stmt = $mysqli->prepare("SELECT Cases.id, Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value = 1 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
-	{
-		//$stmt->bind_param('i', 1);
-		$stmt->execute();
-		$stmt->store_result();
-
-		if ($stmt->num_rows == 1)
-		{
-			$stmt->bind_result($id, $casename, $kategoriename);
-			$stmt->fetch();
-			$res = ["casename"=>$casename, "antwort1"=>$kategoriename, "id"=>$id ];
-		}
-		else
-		{
-            //DB Fehler
-			return false;
-		}
-
-	}
-	else
-	{
-		//DB FEHLER
-		return false;
-	}
-
-	//Gegebenfalls noch den Wert Anpassen nachdem neue Cases da sind
-	//if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value < 0.8 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
-	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND NOT Cases.id = ? ORDER BY RAND() LIMIT 3"))
-	{
-		$stmt->bind_param('i', $res['id']);
-		$stmt->execute();
-		$stmt->store_result();
-
-		$stmt->bind_result($casename, $kategoriename);
-
-		$i = 0;
-		while ($stmt->fetch())
-		{
-			if($i == 0)
-			{
-				$antwort2 = $kategoriename;
-			}
-			else if($i == 1)
-			{
-				$antwort3 = $kategoriename;
-			}
-			else if($i == 2)
-			{
-				$antwort4 = $kategoriename;
-			}
-			else
-			{
-				return false;
-			}
-			$i = $i+1;
-		}
-
-		$result = ["casename"=>$res['casename'], "antwort1"=>$res['antwort1'], "antwort2"=>$antwort2,"antwort3"=>$antwort3, "antwort4"=>$antwort4];
-
-		return $result;
-		//Shuffle the answers before return
-		//return shuffleAnswers($result);
-
-	}
-	else
-	{
-        //DB Fehler
-		return false;
-	}
-
-}
 //Challenge someone to a Quiz
 function challengeSomeone($userID1, $userID2, $mysqli)
 {
@@ -199,80 +123,6 @@ function activeSingleplayerGame($mysqli, $userID)
 	}
 }
 
-//Returns a random Question with random answers and correct Answer Position for Low Value
-// DEPRECATED
-function loadRandomQuestionLow($mysqli)
-{
-	if($stmt = $mysqli->prepare("SELECT Cases.id, Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value < 0.25 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
-	{
-		//$stmt->bind_param('i', 1);
-		$stmt->execute();
-		$stmt->store_result();
-
-		if ($stmt->num_rows == 1)
-		{
-			$stmt->bind_result($id, $casename, $kategoriename);
-			$stmt->fetch();
-			$res = ["casename"=>$casename, "antwort1"=>$kategoriename, "id"=>$id];
-		}
-		else
-		{
-            //DB Fehler
-			return false;
-		}
-
-	}
-	else
-	{
-		//DB FEHLER
-		return false;
-	}
-
-	//Gegebenfalls noch den Wert Anpassen nachdem neue Cases da sind
-	//if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value > 0.7 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
-	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND NOT Cases.id = ? ORDER BY RAND() LIMIT 3"))
-	{
-		$stmt->bind_param('i', $res['id']);
-		$stmt->execute();
-		$stmt->store_result();
-
-		$stmt->bind_result($casename, $kategoriename);
-
-		$i = 0;
-		while ($stmt->fetch())
-		{
-			if($i == 0)
-			{
-				$antwort2 = $kategoriename;
-			}
-			else if($i == 1)
-			{
-				$antwort3 = $kategoriename;
-			}
-			else if($i == 2)
-			{
-				$antwort4 = $kategoriename;
-			}
-			else
-			{
-				return false;
-			}
-			$i = $i+1;
-		}
-
-		$result = ["casename"=>$res['casename'], "antwort1"=>$res['antwort1'], "antwort2"=>$antwort2,"antwort3"=>$antwort3, "antwort4"=>$antwort4];
-
-		return $result;
-		//Shuffle the answers before return
-		//return shuffleAnswers($result);
-	}
-	else
-	{
-        //DB Fehler
-		return false;
-	}
-}
-
 function loadRandomQuestion($mysqli) {
 	if($stmt = $mysqli->prepare("SELECT Cases.id, Cases.name, CBR_ICF_Kategorie.DE, Cases_Kategorie_Values.value FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid ORDER BY RAND() LIMIT 1"))
 	{
@@ -301,7 +151,7 @@ function loadRandomQuestion($mysqli) {
 
 	//Gegebenfalls noch den Wert Anpassen nachdem neue Cases da sind
 	//if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE Cases_Kategorie_Values.value > 0.7 AND CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases.id = ? ORDER BY RAND() LIMIT 3"))
-	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND NOT Cases.id = ? ORDER BY RAND() LIMIT 3"))
+	if($stmt = $mysqli->prepare("SELECT Cases.name, CBR_ICF_Kategorie.DE FROM Cases, CBR_ICF_Kategorie, Cases_Kategorie_Values WHERE CBR_ICF_Kategorie.id = Cases_Kategorie_Values.kategorieid AND Cases.id = Cases_Kategorie_Values.caseid AND Cases_Kategorie_Values.kategorieid NOT IN (SELECT Cases_Kategorie_Values.kategorieid FROM Cases_Kategorie_Values WHERE caseid = ?) GROUP BY CBR_ICF_Kategorie.id ORDER BY RAND() LIMIT 3"))
 	{
 		$stmt->bind_param('i', $res['id']);
 		$stmt->execute();
@@ -341,7 +191,7 @@ function loadRandomQuestion($mysqli) {
 		}
 
 
-		$result = ["casename"=>$res['casename'], "antwort1"=>$res['antwort1'], "antwort2"=>$antwort2,"antwort3"=>$antwort3, "antwort4"=>$antwort4, "antwort4"=>$antwort4, "type"=>$type];
+		$result = ["casename"=>$res['casename'], "antwort1"=>$res['antwort1'], "antwort2"=>$antwort2,"antwort3"=>$antwort3, "antwort4"=>$antwort4, "type"=>$type];
 
 		return $result;
 		//Shuffle the answers before return
