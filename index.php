@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //config file with all includes and variables we need
 include_once 'php/include/functions_history.php';
 //ini_set ("display_errors", "1");

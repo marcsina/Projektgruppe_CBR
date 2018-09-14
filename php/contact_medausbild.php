@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 
@@ -11,11 +11,10 @@ if (login_check($mysqli) == true) {
     $logged = 'in';
 } else {
     $logged = 'out';
-	header('Location: http://medausbild.de/php/login.php?logged=0');
-	exit;
 }
 
-?><!doctype html>
+?>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -76,13 +75,22 @@ if (login_check($mysqli) == true) {
                     <h3>Contact</h3>
                 </div>
                 <div class="">
-                    <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum.</p>
-                    <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum.</p>
+                    <p>Habt Ihr Fragen oder Anregungen zu Medausbild.de, so könnt ihr uns über folgende Daten erreichen:</p>
 
-                    <h4>Address:</h4>Hörderlin, siegen<br>
-                    <h4>Telephone:</h4>+49 123 456 789
-                    <h4>Fax:</h4>123 456 789
-                    <h4></h4>
+                    <h4>Address:</h4>
+                    Universität Siegen
+                    <br>
+                    Institut für Wissensbasierte Systeme und Wissensmanagement 
+                    <br>
+                    Fakultät IV, Department für Elektrotechnik und Informatik 
+                    <br>
+                    Hölderlinstrasse 3 
+                    <br>
+                    D-57076 Siegen
+                    <h4>Telefon:</h4>
+                    (+49) 271 740-2642
+                    <h4>Email:</h4>
+                    <a href="mailto:sara.nasiri@uni-siegen.de">sara.nasiri@uni-siegen.de</a>
                 </div>
             </div>
         </div>

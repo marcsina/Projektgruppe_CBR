@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $path = $_SERVER['DOCUMENT_ROOT'];
 include_once ($path . '/php/include/conn.php');
 include_once ($path . '/php/include/functions_login.php');
@@ -104,19 +104,17 @@ if (login_check($mysqli) == true) {
                             Statistik
                             <i class='icon_piechart'></i>
                         </a>
-                    </li>
-
-                    <li class='menuItem'>
-                        <a href='/php/contact_medausbild.php'>
-                            Kontakt
-                            <i class='icon_documents_alt'></i>
-                        </a>
-                    </li></ul>";
+                    </li>";
 
         }
 
         ?>
-       
+                <li class='menuItem'>
+                                <a href='/php/contact_medausbild.php'>
+                                    Kontakt
+                                    <i class='icon_documents_alt'></i>
+                                </a>
+                            </li></ul>
         <ul class="nav navbar-nav navbar-right login">
             <?php
 
