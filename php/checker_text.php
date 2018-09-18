@@ -174,6 +174,11 @@ if (login_check($mysqli) == true) {
 			}
 			//alert(check1);*/
         	///////////////////////////
+//          	for (i = 0; i < cbr.Similarities.length; i++) {
+//          		ausgabe = ausgabe +cbr.Similarities[i].vergleichausgabe+"<br>";
+//          	}
+         	ausgabe = ausgabe +cbr.Similarities[0].vergleichausgabe+"<br>";
+        	
         	for (i = 0; i < cbr.Similarities.length; i++) {
         		ausgabe = ausgabe + "Case " + cbr.Similarities[i].id + " - " + cbr.Similarities[i].name + ": " + cbr.Similarities[i].similarity + "%<br>";
         		if(i == 0)

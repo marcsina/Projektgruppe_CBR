@@ -60,6 +60,9 @@
 						zwischen = 0;
 						numberSymptoms += 1;
 						percentageValue += zwischen * 1;
+						this.Cases[i].vergleichausgabe = 
+							this.Cases[i].vergleichausgabe+
+							"<br>"+copyArrayIncomingCaseSymptoms[k].name+"<br>incoming:"+copyArrayIncomingCaseSymptoms[k].wert+" DB:0 ergebnis:"+zwischen+"<br>";
 					}
 				}
 				//Symptom in eingehendem Fall und in Fall aus Case Base vorhanden
@@ -71,16 +74,28 @@
 						}
 						numberSymptoms += 1;
 						percentageValue += zwischen * 1;
+						this.Cases[i].vergleichausgabe = 
+							this.Cases[i].vergleichausgabe+
+							"<br>"+copyArrayIncomingCaseSymptoms[k].name+"<br>incoming:"+copyArrayIncomingCaseSymptoms[k].wert+
+							" DB:"+copyArrayCaseSymptoms[index].wert+" ergebnis:"+zwischen+"<br>";
 					}
 					else if (copyArrayIncomingCaseSymptoms[k].wert > 0 && copyArrayCaseSymptoms[index].wert == 0) {
 						zwischen = 0;
 						numberSymptoms += 1;
 						percentageValue += zwischen * 1;
+						this.Cases[i].vergleichausgabe = 
+							this.Cases[i].vergleichausgabe+
+							"<br>"+copyArrayIncomingCaseSymptoms[k].name+"<br>incoming:"+copyArrayIncomingCaseSymptoms[k].wert+
+							" DB:"+copyArrayCaseSymptoms[index].wert+" ergebnis:"+zwischen+"<br>";
 					}
 					else if (copyArrayIncomingCaseSymptoms[k].wert == 0 && copyArrayCaseSymptoms[index].wert > 0) {
 						zwischen = 0;
 						numberSymptoms += 1;
 						percentageValue += zwischen * 1;
+						this.Cases[i].vergleichausgabe = 
+							this.Cases[i].vergleichausgabe+
+							"<br>"+copyArrayIncomingCaseSymptoms[k].name+"<br>incoming:"+copyArrayIncomingCaseSymptoms[k].wert+
+							" DB:"+copyArrayCaseSymptoms[index].wert+" ergebnis:"+zwischen+"<br>";
 					}
 					copyArrayCaseSymptoms.splice(index, 1);
 				}
@@ -95,7 +110,6 @@
 				percentageValue += zwischen * 1;
 
 				copyArrayCaseSymptoms.splice(k, 1);
-
 			}
 			var factor = Math.pow(10, 2);
 			this.Cases[i].similarity = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
@@ -186,6 +200,7 @@ class Case {
 		this.similarity = 0;
 		this.Symptoms = [];
 		this.Referenzen = [];
+		this.vergleichausgabe = "";
 	}
 }
 
