@@ -252,7 +252,7 @@ if (login_check($mysqli) == true) {
         $('#btn_submit').click(function () {
         	// Filtern der Symptome und �bergabe an CBR
 
-
+			$('#div_ausgabe').html("");
 			$('#section_symptoms').html("");
         	var text = $('#textarea_eingabe').val();
         	var kategorieAusTextArray = new Array();

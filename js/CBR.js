@@ -46,6 +46,7 @@
 			var zwischen = 0;
 			var result = 0;
 			var k;
+			var similarities = [];
 
 			const copyArrayCaseSymptoms = this.Cases[i].Symptoms.slice();
 			const copyArrayIncomingCaseSymptoms = this.incomingCase.Symptoms.slice();
@@ -62,7 +63,8 @@
 						percentageValue += zwischen * 1;
 						this.Cases[i].vergleichausgabe = 
 							this.Cases[i].vergleichausgabe+
-							"<br>"+copyArrayIncomingCaseSymptoms[k].name+"<br>incoming:"+copyArrayIncomingCaseSymptoms[k].wert+" DB:0 ergebnis:"+zwischen+"<br>";
+							"<br>" + copyArrayIncomingCaseSymptoms[k].name + "<br>incoming:" + copyArrayIncomingCaseSymptoms[k].wert + " DB:0 ergebnis:" + zwischen + "<br>";
+						similarities.push(zwischen);
 					}
 				}
 				//Symptom in eingehendem Fall und in Fall aus Case Base vorhanden
@@ -77,7 +79,8 @@
 						this.Cases[i].vergleichausgabe = 
 							this.Cases[i].vergleichausgabe+
 							"<br>"+copyArrayIncomingCaseSymptoms[k].name+"<br>incoming:"+copyArrayIncomingCaseSymptoms[k].wert+
-							" DB:"+copyArrayCaseSymptoms[index].wert+" ergebnis:"+zwischen+"<br>";
+							" DB:" + copyArrayCaseSymptoms[index].wert + " ergebnis:" + zwischen + "<br>";
+						similarities.push(zwischen);
 					}
 					else if (copyArrayIncomingCaseSymptoms[k].wert > 0 && copyArrayCaseSymptoms[index].wert == 0) {
 						zwischen = 0;
@@ -86,7 +89,8 @@
 						this.Cases[i].vergleichausgabe = 
 							this.Cases[i].vergleichausgabe+
 							"<br>"+copyArrayIncomingCaseSymptoms[k].name+"<br>incoming:"+copyArrayIncomingCaseSymptoms[k].wert+
-							" DB:"+copyArrayCaseSymptoms[index].wert+" ergebnis:"+zwischen+"<br>";
+							" DB:" + copyArrayCaseSymptoms[index].wert + " ergebnis:" + zwischen + "<br>";
+						similarities.push(zwischen);
 					}
 					else if (copyArrayIncomingCaseSymptoms[k].wert == 0 && copyArrayCaseSymptoms[index].wert > 0) {
 						zwischen = 0;
@@ -95,11 +99,13 @@
 						this.Cases[i].vergleichausgabe = 
 							this.Cases[i].vergleichausgabe+
 							"<br>"+copyArrayIncomingCaseSymptoms[k].name+"<br>incoming:"+copyArrayIncomingCaseSymptoms[k].wert+
-							" DB:"+copyArrayCaseSymptoms[index].wert+" ergebnis:"+zwischen+"<br>";
+							" DB:" + copyArrayCaseSymptoms[index].wert + " ergebnis:" + zwischen + "<br>";
+						similarities.push(zwischen);
 					}
 					copyArrayCaseSymptoms.splice(index, 1);
 				}
 				copyArrayIncomingCaseSymptoms.splice(k, 1);
+				
 			}
 
 			//Symptome des Falles aus der Case base überprüfen
@@ -113,6 +119,20 @@
 			}
 			var factor = Math.pow(10, 2);
 			this.Cases[i].similarity = Math.round(((percentageValue * 100) / numberSymptoms) * factor) / factor;
+			this.Cases[i].vergleichausgabe = this.Cases[i].vergleichausgabe + "<br>Zusammenfassung der " + numberSymptoms + " Teilergebnisse zu einem Gesamtergebnis:<br>";
+			this.Cases[i].vergleichausgabe = this.Cases[i].vergleichausgabe + "Prozentwert: <br>";
+			for (k = 0; k < similarities.length; k++) {				
+				if (k + 1 == similarities.length) {
+					this.Cases[i].vergleichausgabe = this.Cases[i].vergleichausgabe + similarities[k] + " = " + percentageValue + "<br>";
+				}
+				else {
+					this.Cases[i].vergleichausgabe = this.Cases[i].vergleichausgabe + similarities[k] + " + ";
+				}
+			}
+			this.Cases[i].vergleichausgabe = this.Cases[i].vergleichausgabe + "Anzahl Vergleiche: " + numberSymptoms + "<br>";
+			this.Cases[i].vergleichausgabe = this.Cases[i].vergleichausgabe + "Berechnung Endergebnis: <br>";
+			this.Cases[i].vergleichausgabe = this.Cases[i].vergleichausgabe + percentageValue + " * 100 / " + numberSymptoms + " = " + this.Cases[i].similarity + "%<br>";
+			//this.Cases[i].vergleichausgabe = this.Cases[i].vergleichausgabe + "Percentagevalue: " + percentageValue;
 			this.Similarities.push(this.Cases[i]);
 		}
 		this.Similarities.sort((a, b) => parseFloat(b.similarity) - parseFloat(a.similarity));		
