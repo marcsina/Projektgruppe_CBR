@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $path = $_SERVER['DOCUMENT_ROOT'];
 include_once ($path . '/php/include/conn.php');
 include_once ($path . '/php/include/functions_login.php');
@@ -42,9 +42,8 @@ if (login_check($mysqli) == true) {
         </a>
     </div>
     <div id="navbar" class=" collapse navbar-collapse navbar-right ">
-
+        <ul class='nav navbar-nav'>
         <?php
-        echo "<ul class='nav navbar-nav '>";
         if($logged == "in")
         {
             echo"
@@ -110,11 +109,12 @@ if (login_check($mysqli) == true) {
 
         ?>
                 <li class='menuItem'>
-                                <a href='/php/contact_medausbild.php'>
-                                    Kontakt
-                                    <i class='icon_documents_alt'></i>
-                                </a>
-                            </li></ul>
+                    <a href='/php/contact_medausbild.php'>
+                        Kontakt
+                        <i class='icon_documents_alt'></i>
+                    </a>
+                </li>
+        </ul>
         <ul class="nav navbar-nav navbar-right login">
             <?php
 

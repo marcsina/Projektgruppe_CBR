@@ -139,7 +139,7 @@ if (login_check($mysqli) == true) {
                     var length = text.length;
 
                     // send
-                    if (length <= maxLength + 1) {
+                    if (length <= (maxLength + 1)) {
 
                         chat.send(text, name);
                         $(this).val("");

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include_once 'include/functions_profile.php';

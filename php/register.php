@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once 'include/register_process.php';
 include_once 'include/functions_login.php';
 ?>
