@@ -191,7 +191,7 @@ function loadRandomQuestion($mysqli) {
 		}
 
 
-		$result = ["casename"=>$res['casename'], "antwort1"=>$res['antwort1'], "antwort2"=>$antwort2,"antwort3"=>$antwort3, "antwort4"=>$antwort4, "type"=>$type];
+		$result = ["casename"=>$res['casename'], "antwort1"=>$res['antwort1'], "antwort2"=>$antwort2,"antwort3"=>$antwort3, "antwort4"=>$antwort4, "type"=>$type, "caseid"=>$res['id']];
 
 		return $result;
 		//Shuffle the answers before return
@@ -207,6 +207,8 @@ function loadRandomQuestion($mysqli) {
 
 function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
 {
+	$UsedCaseIds = array();
+	$doublequestion = 0;
 	for($questionCounter = 0; $questionCounter < 4; $questionCounter++)
 	{
         //Load random Question Type High with 50% probability and Low with 50% probability
@@ -231,21 +233,34 @@ function genereateFourQuestionsMultiplayer($mysqli, $mp_quiz_ID)
 
 		$question = loadRandomQuestion($mysqli);
 
-		if ($insert_stmt = $mysqli->prepare("INSERT INTO `MP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`, MP_QUIZ_ID) VALUES (?,?,?,?,?,?,?)"))
-        {
-            $insert_stmt->bind_param('isssssi', $question['type'], $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $mp_quiz_ID );
-            // Führe die vorbereitete Anfrage aus.
-            $insert_stmt->execute();
-        }
+		foreach($UsedCaseIds as $questionid) {
+			if($questionid == $question['caseid']) {
+				$doublequestion = 1;
+			}
+		}
+
+		if($doublequestion == 1) {
+			$questionCounter--;
+			$doublequestion = 0;
+		}
+		else {
+			if ($insert_stmt = $mysqli->prepare("INSERT INTO `MP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`, MP_QUIZ_ID) VALUES (?,?,?,?,?,?,?)"))
+			{
+				$insert_stmt->bind_param('isssssi', $question['type'], $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $mp_quiz_ID );
+				// Führe die vorbereitete Anfrage aus.
+				$insert_stmt->execute();
+			}
+		}
     }
 }
 
 function genereateFourQuestionsSingleplayer($mysqli, $sp_quiz_ID)
 {
-
+	$UsedCaseIds = array();
+	$doublequestion = 0;
 	for($questionCounter = 0; $questionCounter < 4; $questionCounter++)
 	{
-        debug_to_console("SP-QUESTIONS: ".$questionCounter);
+        //debug_to_console("SP-QUESTIONS: ".$questionCounter);
         //Load random Question Type High with 50% probability and Low with 50% probability
 		/*if(rand(0,1) == 0)
 		{
@@ -268,12 +283,25 @@ function genereateFourQuestionsSingleplayer($mysqli, $sp_quiz_ID)
 
 		$question = loadRandomQuestion($mysqli);
 
-		if ($insert_stmt = $mysqli->prepare("INSERT INTO `SP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`, SP_QUIZ_ID) VALUES (?,?,?,?,?,?,?)"))
-        {
-            $insert_stmt->bind_param('isssssi', $question['type'], $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $sp_quiz_ID);
-            // Führe die vorbereitete Anfrage aus.
-            $insert_stmt->execute();
-        }
+		foreach($UsedCaseIds as $questionid) {
+			if($questionid == $question['caseid']) {
+				$doublequestion = 1;
+			}
+		}
+
+		if($doublequestion == 1) {
+			$questionCounter--;
+			$doublequestion = 0;
+		}
+		else {
+			array_push($UsedCaseIds, $question['caseid']);
+			if ($insert_stmt = $mysqli->prepare("INSERT INTO `SP_FRAGE`(`Type`, `Casename`, `Correct_A1`, `A2`, `A3`, `A4`, SP_QUIZ_ID) VALUES (?,?,?,?,?,?,?)"))
+			{
+				$insert_stmt->bind_param('isssssi', $question['type'], $question['casename'], $question['antwort1'], $question['antwort2'], $question['antwort3'], $question['antwort4'], $sp_quiz_ID);
+				// Führe die vorbereitete Anfrage aus.
+				$insert_stmt->execute();
+			}
+		}		
     }
 }
 
