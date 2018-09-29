@@ -52,6 +52,19 @@ icon_house_alt:before {
             color: #ffffff;
         }
 
+#navbar .dropdown-menu {
+    background: rgb(26, 39, 50);
+}
+
+#navbar .dropdown-menu > li > a {
+    background: rgb(26, 39, 50);
+    color: #1babee;
+}
+    #navbar .dropdown-menu > li > a:hover {
+        background: rgb(26, 39, 50);
+        color: white;
+    }
+
 .navbar-collapse .navbar-nav.navbar-right:last-child{
     margin-right: 15px;
 }

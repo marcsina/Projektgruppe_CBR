@@ -336,6 +336,8 @@ function extractKeywords( inputText )
     var k = 0;
     var z = 0;
 
+    $( "#div_ausgabe" ).text = "";
+
     //get Keywords and Past words
     var keyWords = createKeywords();
     var pastWords = createKeywordsArray_Past();
@@ -541,7 +543,7 @@ function extractKeywords( inputText )
 
 
         ///TESTING TRACKING
-        var msg = "<p><br><br>Kategoriename: " + absolute_final_array[i].katName + "<br>Gewicht: " + absolute_final_array[i].weight + "<br>Anzahl gefunder Keywords: " + absolute_final_array[i].count+"</p>";
+        var msg = "<p><br><br>Kategoriename: " + absolute_final_array[i].katName + "<br>KatID: " + absolute_final_array[i].katID + "<br>Gewicht: " + absolute_final_array[i].weight + "<br>Anzahl gefunder Keywords: " + absolute_final_array[i].count + "</p>";
         tracking( msg );
     }
     
