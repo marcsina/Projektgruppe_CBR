@@ -1,4 +1,4 @@
-﻿ <?php
+ <?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 
@@ -79,6 +79,7 @@ if (login_check($mysqli) == true)
                         <h4>Text zur automatischen Erfassung eingeben</h4>
                         <!--<textarea id="text_admin"></textarea>-->
                         <div contenteditable="true" id="text_admin"></div>
+                        <div id='divAdminConfigHighlightLegende' style="visibility: hidden;"><b><font color='#52f2f2'>Symptom</font></b> / <b><font color='#ed5d1b'>Negierung</font></b> / <b><font color='green'>Verstärkung</font></b></div>
                         <form>
                             <button class="btn btn-primary" type="button" id="btn_search_Text">Text nach Keywords durchsuchen</button>
                         </form>

@@ -361,6 +361,7 @@ $( "#btn_search_Text" ).click( function ( event )
 
 });
 
+//Highlight all Keywords in the input Box
 function showWordsinHTML() {
     //-------------------------Show detected Words in HTML------------------------------------------
     //split the Text
@@ -393,7 +394,7 @@ function showWordsinHTML() {
             if (stemm2(everyWordArray[i].toLowerCase()) === keyWords[j].word && checked === 0)
             {
                 //make it bold and blue
-                showEveryWord = showEveryWord + " " + "<b><font color='blue'>" + everyWordArray[i] + "</font></b>";
+                showEveryWord = showEveryWord + " " + "<b><font color='#52f2f2'>" + everyWordArray[i] + "</font></b>";
                 checked = 1;
                 break;
 
@@ -411,7 +412,7 @@ function showWordsinHTML() {
                 {
 
                     //make it bold and red
-                    showEveryWord = showEveryWord + " " + "<b><font color='red'>" + everyWordArray[i] + "</font></b>";
+                    showEveryWord = showEveryWord + " " + "<b><font color='#ed5d1b'>" + everyWordArray[i] + "</font></b>";
                     checked = 1;
                     break;
 
@@ -442,6 +443,9 @@ function showWordsinHTML() {
 
     }
 
+    //Show text and legende
+    document.getElementById("divAdminConfigHighlightLegende").style.visibility = "visible";
+    //$("#divAdminConfigHighlightLegende").style.visibility = "visible";
     $("#text_admin").html(showEveryWord);
     //----------------------------------------------------------------------------------
 }
