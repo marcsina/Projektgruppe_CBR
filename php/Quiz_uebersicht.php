@@ -25,7 +25,7 @@ if (login_check($mysqli) == true) {
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
 	<link href="../css/style_autocomplete.css" rel="stylesheet">
-    <link href="../css/style3.css" rel="stylesheet" />
+    <!--<link href="../css/style3.css" rel="stylesheet" />-->
     <link href="../css/Quiz_uebersicht.css" rel="stylesheet" />
 
     <!-- animate.CSS -->

@@ -20,10 +20,10 @@ input {
         width: 100%;
     }
 
-    input[type=submit] {
+    /*input[type=submit] {
         background-color: DodgerBlue;
         color: #fff;
-    }
+    }*/
 
 .autocomplete-items {
     position: absolute;
