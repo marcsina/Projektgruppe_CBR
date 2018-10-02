@@ -114,21 +114,15 @@ if (login_check($mysqli) == true) {
                         <i class='icon_documents_alt'></i>
                     </a>
                 </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right login">
-            <?php
-
-            if($logged == 'out')
-            {
-                echo "<li class='top-menu'><a href = '/php/login.php'>Login</a></li>";
-            }
-            else{
-                echo "<li class='dropdown'>
+        <?php
+        if($logged == "in")
+        {
+            echo "<li class='dropdown'>
                             <a href='' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><div class='row profile-ava'>";
 
                 if(strlen($_SESSION['profilbild']) > 5)
                 {
-                    echo "<img src='".$_SESSION['profilbild']."' style='max-width: 22px;max-height: 22px;' />";
+                    echo "<img src='".$_SESSION['profilbild']."' style='max-width: 30px;max-height: 30px; margin-right: 4px;' />";
                     /*
                     echo "<div style='width: 40px;
                     height: 40px;
@@ -164,10 +158,21 @@ if (login_check($mysqli) == true) {
                 echo "
                                     </ul>
                                 </div>";
+        }
+        ?>
+        </ul>
+        <?php
+
+            if($logged == 'out')
+            
+            
+            {
+                echo "<ul class='nav navbar-nav navbar-right login'>
+                    <li class='top-menu'><a href = '/php/login.php'>Login</a></li>
+                    </ul>";
             }
 
             ?>
-        </ul>
     </div><!--/.nav-collapse -->
 </nav>
 <script src="/js/bootstrap.min.js"></script>

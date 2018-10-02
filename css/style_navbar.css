@@ -68,3 +68,8 @@ icon_house_alt:before {
 .navbar-collapse .navbar-nav.navbar-right:last-child{
     margin-right: 15px;
 }
+
+/*No padding at bottom of Navbar*/
+.navbar-nav > li > a {
+    padding-bottom: 0px;
+}
