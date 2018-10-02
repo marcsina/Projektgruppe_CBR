@@ -24,7 +24,9 @@ body {
     bottom: 0;
     padding-left: 10px;
     z-index: 99;
-    color: #0039ff;
+    color: #1babee;
+    background: rgb(26, 39, 50);
+    border-radius: 0px 10px 0px 0px;
 }
 
 .sidenavHelp a {
