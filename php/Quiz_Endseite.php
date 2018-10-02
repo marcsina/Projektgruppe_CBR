@@ -71,7 +71,8 @@ if (login_check($mysqli) == true) {
                     {
                         $questionString = "schwach";
                     }
-                    $Question = "Was ist ein ".$questionString." ausgeprägtes Symptom in dem Fall ".$data['casename']."?";
+                    $Question = "Welche Funktion ist im Fall ".$data['casename'].", ".$questionString." beeinträchtigt?";
+                    //$Question = "Was ist ein ".$questionString." ausgeprägtes Symptom in dem Fall ".$data['casename']."?";        //Alte frage
 
                     //debug_to_console("GIVEN A //  ".$data['givenA']);
                     switch($data['givenA'])
@@ -163,7 +164,8 @@ if (login_check($mysqli) == true) {
                     {
                         $questionString = "schwach";
                     }
-                    $Question = "Was ist ein ".$questionString." ausgeprägtes Symptom in dem Fall ".$data['casename']."?";
+                    $Question = "Welche Funktion ist im Fall ".$data['casename'].", ".$questionString." beeinträchtigt?";
+                    //$Question = "Was ist ein ".$questionString." ausgeprägtes Symptom in dem Fall ".$data['casename']."?";        //alte frage
 
                     debug_to_console("GIVEN A //  ".$data['givenA']);
                     switch($data['givenA'])
