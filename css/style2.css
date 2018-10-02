@@ -67,9 +67,6 @@ h2 {
     font-size: 18px;
     margin-top: 5px;
 }
-form {
-    margin-top: 60px;
-}
 input.form-control , input[type="submit"] , .btn {
     border-radius: 0px;
 }
