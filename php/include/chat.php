@@ -63,6 +63,7 @@ if (login_check($mysqli) == true) {
     //If the Chat was opened before than this method will be called
     function showChatStart() {
         document.getElementById("mySidenav").style.height = "55%";
+        document.getElementById("mySidenav").style.minHeight = "510px";
         //store the status in a local variable
         opened = 1;
     }
@@ -71,6 +72,7 @@ if (login_check($mysqli) == true) {
     function openNav() {
         if (opened == 0) {
             document.getElementById("mySidenav").style.height = "55%";
+            document.getElementById("mySidenav").style.minHeight = "510px";
             opened = 1;
             sessionStorage.setItem('ChatShow', '1');
         }
@@ -82,6 +84,7 @@ if (login_check($mysqli) == true) {
     //Close the chat and store it in session and local
     function closeNav() {
         document.getElementById("mySidenav").style.height = "0%";
+        document.getElementById("mySidenav").style.minHeight = "0px";
         opened = 0;
         sessionStorage.setItem('ChatShow', '0');
     }
