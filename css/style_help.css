@@ -21,8 +21,10 @@ body {
     cursor: pointer;
     position: fixed;
     left: 0;
-    bottom:0;
+    bottom: 0;
     padding-left: 10px;
+    z-index: 99;
+    color: #0039ff;
 }
 
 .sidenavHelp a {
