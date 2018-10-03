@@ -73,3 +73,7 @@ icon_house_alt:before {
 .navbar-nav > li > a {
     padding-bottom: 0px;
 }
+
+#navbar{
+    padding-right: 25px;
+}

@@ -96,7 +96,7 @@ include ("include/navbar.php");
 										<u>Aktuelle Spiele</u>
 									</b>
 								</h3>
-								<table class='table table-striped'>
+								<table id='continueQuiz' class='table table-striped'>
 									<thead>
 										<tr>
 											<th scope='col'>#</th>
@@ -144,7 +144,7 @@ include ("include/navbar.php");
 										<td scope='row'>".++$count."</td>
 										<td>
 
-											<label><a href='http://medausbild.de/php/profil.php?username=".$user['username']."'>".$user['username']."</a></label>
+											<a href='http://medausbild.de/php/profil.php?username=".$user['username']."'>".$user['username']."</a>
 
 										</td>
 										<td>
@@ -185,7 +185,7 @@ include ("include/navbar.php");
                                             <u>Leute die dich herausgefordert haben</u>
                                         </b>
                                     </h3>
-                                    <table class='table table-striped'>
+                                    <table id='challengedTable' class='table table-striped'>
                                         <thead>
                                             <tr>
                                                 <th scope='col'>#</th>
@@ -201,7 +201,7 @@ include ("include/navbar.php");
                                     <tr>
                                     <td scope='row'>".++$count."</td>
                                     <td>
-                                        <label><a href='http://medausbild.de/php/profil.php?username=".$user['username']."'>".$user['username']."</a></label>
+                                        <a href='http://medausbild.de/php/profil.php?username=".$user['username']."'>".$user['username']."</a>
                                     </td>
                                     <td>
 										    <form class='form-inline' action='include/functions_quiz.php' method='post'>

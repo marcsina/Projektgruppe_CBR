@@ -37,11 +37,50 @@
     color: white;
 }
 
-#table_user > tbody > tr:nth-child(even) > td > a {
-    
+table > tbody > tr:nth-child(even) > td > a {
+    color: rgb(26, 39, 50);
+}
+
+table > tbody > tr:nth-child(odd) > td > a {
     color: lightgrey;
 }
 
-#table_user > tbody > tr:nth-child(odd) > td > a {
+table > tbody > tr:nth-child(even) > td {
+    color: rgb(26, 39, 50);
+}
+
+table > tbody > tr:nth-child(odd) > td {
+    color: lightgrey;
+}
+
+#challengedTable > tbody > tr:nth-child(even) > td > a {
+    color: lightgrey;
+}
+
+#challengedTable > tbody > tr:nth-child(odd) > td > a {
+    color: rgb(26, 39, 50);
+}
+
+#challengedTable > tbody > tr:nth-child(even) > td {
+    color: lightgrey;
+}
+
+#challengedTable > tbody > tr:nth-child(odd) > td {
+    color: rgb(26, 39, 50);
+}
+
+#continueQuiz > tbody > tr:nth-child(even) > td > a {
+    color: lightgrey;
+}
+
+#continueQuiz > tbody > tr:nth-child(odd) > td > a {
+    color: rgb(26, 39, 50);
+}
+
+#continueQuiz > tbody > tr:nth-child(even) > td {
+    color: lightgrey;
+}
+
+#continueQuiz > tbody > tr:nth-child(odd) > td {
     color: rgb(26, 39, 50);
 }
