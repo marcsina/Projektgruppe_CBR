@@ -75,13 +75,13 @@ include_once ('php/include/navbar.php');
                 <?php
                 if($logged == "out")
                 {
-                    echo "<div class='col-sm-6 col-md-6'>
+                    echo "<div class='col-sm-6 col-md-6 index_button'>
                     <p>Sind Sie schon Mitglied? Dann loggen Sie sich hier ein!</p>
-                    <a role ='button' class='btn btn-sm' href='php/login.php'>Login</a>
+                    <a role ='button' href='php/login.php'>Login</a>
                 </div>
-                <div class='col-sm-6 col-md-6'>
+                <div class='col-sm-6 col-md-6 index_button'>
                     <p>Werden Sie Mitglied! Registrieren Sie sich hier</p>
-                    <a role ='button' class='btn btn-sm' href='php/register.php'>Registrieren</a>
+                    <a role ='button' href='php/register.php'>Registrieren</a>
                 </div>";
                 }
                 ?>

@@ -80,7 +80,7 @@ if (login_check($mysqli) == true) {
                 $hilfeTextKontakt ="Wenn du mit uns Kontakt aufnhemen willst, bist du heir genau richtig. Wähle eine der kommunikationsanäle aus und melde ich bei uns, wenn du Fragen oder Anregungen hast.";
                 $hilfeTextProfilOwn ="Auf der Profilseite kannst du eine Beschreibung über Dich hinterlassen, sehen welchen Leuten du folgst und wer Dir folgt. Zusätzlich kannst du deine Aktivitäten und Statistik abrufen.";
                 $hilfeTextProfilOther = "Auf der Profilseite kannst du die Aktiväten der Person sehen und ihr folgen um gegen sie spannende Quizduelle auszutragen u";
-                $hilfeTextAdmin = "Als Admin kannst du iher neue Cases für die Datenbank anlegen, Neue Kategorien und Symptome hinzufügen und ebenso wieder löschen.";
+                $hilfeTextAdmin = "Als Admin kannst du hier neue Cases für die Datenbank anlegen, Neue Kategorien und Symptome hinzufügen und ebenso wieder löschen.";
                 $hilfeTextLogin = "Auf dieser Seite kannst du dich auf der Medausbild Seite einloggen.";
                 $hilfeTextRegister = "Hier kannst du ein neues Konto erstellen um Teil der Medausbild Community zu werden.";
 

@@ -1,143 +1,147 @@
 /*------------------------------------------/
 /------------Platz für Navbar---------------/
 /------------------------------------------*/
-#aboutme, #skills, #lebenslauf, #contact, #works{
+#aboutme, #skills, #lebenslauf, #contact, #works {
     padding-top: 40px;
     padding-bottom: 40px;
     border-top-style: solid;
     border-top-color: #EAE6FC;
 }
 
+.index_button {
+    text-align: center;
+}
+
 /*------------------------------------------/
 /------------------Game---------------------/
 /------------------------------------------*/
-.template-wrap { 
-    z-index: 9; 
-    display: block;
-}
-.template-wrap canvas{ 
-    margin: auto;
-    z-index: 9; 
-    box-shadow: 0 10px 30px #000333;
+.template-wrap {
+    z-index: 9;
     display: block;
 }
 
-.fullscreen { 
+    .template-wrap canvas {
+        margin: auto;
+        z-index: 9;
+        box-shadow: 0 10px 30px #000333;
+        display: block;
+    }
+
+.fullscreen {
     float: right;
-    z-index: 10; 
+    z-index: 10;
 }
 
 /*------------------------------------------/
 /----------------Schrift--------------------/
 /------------------------------------------*/
-h1,h2,h3,h4,h5,h6{
+h1, h2, h3, h4, h5, h6 {
     font-family: 'PT Sans Caption', "arial", sans-serif;
     font-weight: 600;
     color: #543B67;
 }
 
-h2{
+h2 {
     font-size: 50px; /*Sektionentitel*/
 }
 
-#aboutme h3, #lebenslauf h3{
-    font-weight: 300;   
+#aboutme h3, #lebenslauf h3 {
+    font-weight: 300;
     font-size: 30px;
 }
 
-#aboutme .listItem, #lebenslauf a, #lebenslauf p{
+#aboutme .listItem, #lebenslauf a, #lebenslauf p {
     font-size: 25px;
     font-family: 'Play',"arial", sans-serif;
 }
 
-#lebenslauf a.lead{
-    font-size: 30px;
-}
+    #lebenslauf a.lead {
+        font-size: 30px;
+    }
 
-#lebenslauf p.lead3{
-    font-size: 20px;
-    font-style: italic;
-}
+    #lebenslauf p.lead3 {
+        font-size: 20px;
+        font-style: italic;
+    }
 
-.progresstitle h5
-{
+.progresstitle h5 {
     font-weight: 500;
-	font-family: 'Play',"arial", sans-serif;
+    font-family: 'Play',"arial", sans-serif;
 }
 
 /*------------------------------------------/
 /-----------------Farbgebung----------------/
 /------------------------------------------*/
 
-#aboutme, #skills, #contact{
+#aboutme, #skills, #contact {
     background-color: #EAE6FC;
 }
-#lebenslauf, #works, #impressum{
-    background-color: #D1CCD5;  
+
+#lebenslauf, #works, #impressum {
+    background-color: #D1CCD5;
 }
 
-.progress-style
-{
-    background-color: #D1CCD5 ; /* farbe für verbleibenden barteil*/
-    box-shadow: 0 10px 30px #000333; /*horizontale Verschiebeung, 
+.progress-style {
+    background-color: #D1CCD5; /* farbe für verbleibenden barteil*/
+    box-shadow: 0 10px 30px #000333; /*horizontale Verschiebeung,
                                         vertikale Verschiebeung,                                      Ausdehnung,
                                         Farbe*/
 }
-.progress-bar
-{
-	background-color: #615A7F ; /* farbe für bar*/
-}
 
+.progress-bar {
+    background-color: #615A7F; /* farbe für bar*/
+}
 
 /*ELEMENTE NICHT AKTIV!!!
 ---------------------------------------------------------------------------------------*/
-.btn-submit{
-    background-color: #615A7F; 
+.btn-submit {
+    background-color: #615A7F;
     color: #EAE6FC;
 }
-.btn-submit:hover{
-    box-shadow: 0 10px 30px #000333;
-    color: #D1CCD5;
-}
 
-.form-group input, .form-group textarea{  
+    .btn-submit:hover {
+        box-shadow: 0 10px 30px #000333;
+        color: #D1CCD5;
+    }
+
+.form-group input, .form-group textarea {
     background-color: #D1CCD5;
 }
 /*farbe für placeholder texte
 */
-#name::-webkit-input-placeholder,#email::-webkit-input-placeholder,#message::-webkit-input-placeholder{
+#name::-webkit-input-placeholder, #email::-webkit-input-placeholder, #message::-webkit-input-placeholder {
     color: #543B67; /*chrome*/
 }
 
-#name:-moz-placeholder,#email:-moz-placeholder,#message:-moz-placeholder{
+#name:-moz-placeholder, #email:-moz-placeholder, #message:-moz-placeholder {
     color: #543B67; /*alte firefox*/
     opacity: 1;
 }
 
-#name::-moz-placeholder,#email::-moz-placeholder,#message::-moz-placeholder{
+#name::-moz-placeholder, #email::-moz-placeholder, #message::-moz-placeholder {
     color: #543B67; /*neue firefox*/
     opacity: 1;
 }
-#name:-ms-input-placeholder,#email:-ms-input-placeholder,#message:-ms-input-placeholder{
+
+#name:-ms-input-placeholder, #email:-ms-input-placeholder, #message:-ms-input-placeholder {
     color: #543B67; /*IE*/
 }
 
-#name:placeholder-shown,#email:placeholder-shown,#message:placeholder-shown{
-     color: #543B67; /*rest*/
+#name:placeholder-shown, #email:placeholder-shown, #message:placeholder-shown {
+    color: #543B67; /*rest*/
 }
 /*--------------------------------------------------------------------------------------*/
-
-
 
 /*------------------------------------------/
 /---------------Abstände--------------------/
 /------------------------------------------*/
-#lebenslauf .container{
+#lebenslauf .container {
     margin-top: 20px; /*abstand zwischen bildern*/
 }
 
 .RightBig {
-    float: right; !important /* bilder/Text rechts einordnen*/
+    float: right;
+    !important /* bilder/Text rechts einordnen*/
 }
 
 /*------------------------------------------/
@@ -146,36 +150,30 @@ h2{
 
 /* rotieren bei maushover*
 360° in 1s*/
-.rotate{
+.rotate {
     -webkit-transition-duration: 1s;
     -moz-transition-duration: 1s;
     -o-transition-duration: 1s;
-    transition-duration:1s;
-     
+    transition-duration: 1s;
     -webkit-transition-property: -webkit-transform;
     -moz-transition-property: -moz-transform;
     -o-transition-property: -o-transform;
     transition-property: transform;
-     
-    overflow:hidden; /*schneidet inhalt ab, wenn es das übergeordnete element verlässt*/
- 
-    }  
- 
-.rotate:hover 
-{
-    -webkit-transform:rotate(360deg);
-    -moz-transform:rotate(360deg);
-    -o-transform:rotate(360deg);
-    transform:rotate(360deg);
+    overflow: hidden; /*schneidet inhalt ab, wenn es das übergeordnete element verlässt*/
 }
 
+    .rotate:hover {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 
-.img-lebenslauf{
+.img-lebenslauf {
     -webkit-transition-duration: 1.5s;
     -moz-transition-duration: 1.5s;
     -o-transition-duration: 1.5s;
-    transition-duration:1.5s;
-     
+    transition-duration: 1.5s;
     -webkit-transition-property: -webkit-transform;
     -moz-transition-property: -moz-transform;
     -o-transition-property: -o-transform;
@@ -184,79 +182,61 @@ h2{
     position: inherit; /*ansonsten kein z-index möglich*/
 }
 
-.img-lebenslauf:hover{
-    z-index: 100;
-    box-shadow: 0 10px 30px #000333;
-    -webkit-transform:scale(1.25,1.25);
-    -moz-transform:scale(1.25,1.25);
-    -o-transform:scale(1.25,1.25);
-    transform:scale(1.25,1.25);
-}
- 
-.rotate2{
+    .img-lebenslauf:hover {
+        z-index: 100;
+        box-shadow: 0 10px 30px #000333;
+        -webkit-transform: scale(1.25,1.25);
+        -moz-transform: scale(1.25,1.25);
+        -o-transform: scale(1.25,1.25);
+        transform: scale(1.25,1.25);
+    }
+
+.rotate2 {
     -webkit-transition-duration: 2s;
     -moz-transition-duration: 2s;
     -o-transition-duration: 2s;
-    transition-duration:2s;
-     
+    transition-duration: 2s;
     -webkit-transition-property: -webkit-transform;
     -moz-transition-property: -moz-transform;
     -o-transition-property: -o-transform;
     transition-property: transform;
-     
-    overflow:hidden; /*schneidet inhalt ab, wenn es das übergeordnete element verlässt*/
- 
-    } 
-
-.rotate2:hover 
-{
-    -webkit-transform:rotate(45deg);
-    -moz-transform:rotate(45deg);
-    -o-transform:rotate(45deg);
-    transform:rotate(45deg);
+    overflow: hidden; /*schneidet inhalt ab, wenn es das übergeordnete element verlässt*/
 }
+
+    .rotate2:hover {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
 
 /*------------------------------------------/
 /-------------Mobilanpassung----------------/
 /------------------------------------------*/
 
-@media screen and (min-width: 601px){
-      .not_unity{
+@media screen and (min-width: 601px) {
+    .not_unity {
         visibility: hidden;
         display: none;
     }
-    .unity{
+
+    .unity {
         visibility: visible;
         display: inherit;
     }
 }
-@media screen and (max-width: 600px){
-    .not_unity{
-        visibility: visible; 
+
+@media screen and (max-width: 600px) {
+    .not_unity {
+        visibility: visible;
         display: inherit;
     }
-    .unity{
+
+    .unity {
         visibility: hidden;
         display: none;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* webkit für safari
     ms für IE
@@ -265,87 +245,73 @@ h2{
 ELEMENT NICHT AKTIV!!!
 
 */
-@-webkit-keyframes animation_submit {               /*Safari*/
-  0% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
+@-webkit-keyframes animation_submit { /*Safari*/
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
 
-  10%, 20% {
-    -webkit-transform: scale(0.9) rotate(-3deg);
-    transform: scale(0.9) rotate(-3deg);
-  }
+    10%, 20% {
+        -webkit-transform: scale(0.9) rotate(-3deg);
+        transform: scale(0.9) rotate(-3deg);
+    }
 
-  30%, 50%, 70%, 90% {
-    -webkit-transform: scale(1.1) rotate(3deg);
-    transform: scale(1.1) rotate(3deg);
-  }
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale(1.1) rotate(3deg);
+        transform: scale(1.1) rotate(3deg);
+    }
 
-  40%, 60%, 80% {
-    -webkit-transform: scale(1.1) rotate(-3deg);
-    transform: scale(1.1) rotate(-3deg);
-  }
+    40%, 60%, 80% {
+        -webkit-transform: scale(1.1) rotate(-3deg);
+        transform: scale(1.1) rotate(-3deg);
+    }
 
-  100% {
-    -webkit-transform: scale(1) rotate(0);
-    transform: scale(1) rotate(0);
-  }
+    100% {
+        -webkit-transform: scale(1) rotate(0);
+        transform: scale(1) rotate(0);
+    }
 }
 
-@keyframes animation_submit {           /*rest*/
-  0% {
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-  }
+@keyframes animation_submit { /*rest*/
+    0% {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
 
-  10%, 20% {
-    -webkit-transform: scale(0.9) rotate(-3deg);
-    -ms-transform: scale(0.9) rotate(-3deg);
-    transform: scale(0.9) rotate(-3deg);
-  }
+    10%, 20% {
+        -webkit-transform: scale(0.9) rotate(-3deg);
+        -ms-transform: scale(0.9) rotate(-3deg);
+        transform: scale(0.9) rotate(-3deg);
+    }
 
-  30%, 50%, 70%, 90% {
-    -webkit-transform: scale(1.1) rotate(3deg);
-    -ms-transform: scale(1.1) rotate(3deg);
-    transform: scale(1.1) rotate(3deg);
-  }
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale(1.1) rotate(3deg);
+        -ms-transform: scale(1.1) rotate(3deg);
+        transform: scale(1.1) rotate(3deg);
+    }
 
-  40%, 60%, 80% {
-    -webkit-transform: scale(1.1) rotate(-3deg);
-    -ms-transform: scale(1.1) rotate(-3deg);
-    transform: scale(1.1) rotate(-3deg);
-  }
+    40%, 60%, 80% {
+        -webkit-transform: scale(1.1) rotate(-3deg);
+        -ms-transform: scale(1.1) rotate(-3deg);
+        transform: scale(1.1) rotate(-3deg);
+    }
 
-  100% {
-    -webkit-transform: scale(1) rotate(0);
-    -ms-transform: scale(1) rotate(0);
-    transform: scale(1) rotate(0);
-  }
+    100% {
+        -webkit-transform: scale(1) rotate(0);
+        -ms-transform: scale(1) rotate(0);
+        transform: scale(1) rotate(0);
+    }
 }
 
 .animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
 
 .animation_submit:hover {
-  -webkit-animation-name: animation_submit;
-  animation-name: animation_submit;
+    -webkit-animation-name: animation_submit;
+    animation-name: animation_submit;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

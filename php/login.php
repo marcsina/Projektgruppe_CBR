@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <?php
 include_once 'include/conn.php';
@@ -35,8 +35,6 @@ if (login_check($mysqli) == true) {
 
     <!-- Bootstrap CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <!-- bootstrap theme -->
-    <link href="../css/bootstrap-theme.css" rel="stylesheet">
     <!--external css-->
     <!-- font icon -->
     <link href="../css/elegant-icons-style.css" rel="stylesheet" />
