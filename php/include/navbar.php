@@ -85,7 +85,7 @@ if (login_check($mysqli) == true) {
                     <li class='dropdown'>
                         <a href='' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
 
-                            Classroom
+                            Bibliothek
                             <i class='icon_desktop'></i>
                             <span class='caret'></span>
                         </a>
