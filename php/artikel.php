@@ -159,12 +159,10 @@ if(isset($_POST["rate"]))
                 <h4><small style=" color: white">ALLE ARTIKEL</small></h4>
                 <hr>
             	<form class=" form-inline  " class=" form-control" action="artikel_search.php" method="get">
-                    <div class="panel-group" id="accordion">
-                        <div class="panel panel-default">                                                        
-                            <a>
-                                <button title="Demenz" type="submit" name="searchtitel" value="Demenz" style="width:100%;text-align:left;color: black">Demenz</button>
-                            </a>                                                         
-                        </div>
+                    <div class="panel-group" id="accordion">                                                                          
+                        <a>
+                            <button title="Demenz" type="submit" name="searchtitel" value="Demenz" style="width:100%;text-align:left;color: white;background-color:rgb(0, 122, 255);border-color: rgb(0, 122, 255);border-radius: 8px;margin: 5px">Demenz</button>
+                        </a>                                                           
                     </div>
                 </form>
             </aside>

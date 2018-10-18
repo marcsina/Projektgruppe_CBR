@@ -84,7 +84,7 @@ if (login_check($mysqli) == true) {
             
             <tr class="title">
                 <td>Meist gefundene Ergebnisse im Checker</td>
-                <td>-</td>
+                <td>Meist gelesene Artikel</td>
             </tr>
             
             <tr class="content">
@@ -95,7 +95,7 @@ if (login_check($mysqli) == true) {
     			</td>
                 <td>
     				<div class="charty">
-    					
+    					<canvas id="Chart8" width="400" height="400"></canvas>
     				</div>
     			</td>
             </tr>
@@ -156,7 +156,7 @@ $result14 = $value14->fetch_assoc();
 $value15 = $mysqli->query("SELECT count(DISTINCT SP_QUIZ_ID) as n FROM `SP_FRAGE` ");
 $result15 = $value15->fetch_assoc();
 
-//5meist
+//5meist checker
 $value16 = $mysqli->query("select Case_ID,Cases.name as n, count(History_Checker.ID) as c from `History_Checker`, `Cases` WHERE History_Checker.Case_ID = Cases.id group by `Case_ID` order by c desc ");
 $result16 = $value16->fetch_assoc();
 $result162 = $value16->fetch_assoc();
@@ -183,6 +183,12 @@ $result20 = $value20->fetch_assoc();
 //0richtige
 $value21 = $mysqli->query("SELECT count(DISTINCT MP_QUIZ_ID) as n FROM `MP_FRAGE` ");
 $result21 = $value21->fetch_assoc();
+
+//5meist Artikel
+$value22 = $mysqli->query("select History_Article.ID,Artikel.Titel as n, count(History_Article.ID) as c from `History_Article`, `Artikel` WHERE History_Article.Article_ID = Artikel.id group by `Article_ID` order by c desc ");
+$result22 = $value22->fetch_assoc();
+$result222 = $value22->fetch_assoc();
+$result223 = $value22->fetch_assoc();
 
 ?>
 
@@ -391,6 +397,35 @@ var myChart6 = new Chart(ctx6, {
         datasets: [{
             label: '# of Votes',
             data: [<?php echo $result16['c'] ?>, <?php echo $result162['c'] ?>, <?php echo $result163['c'] ?>, <?php echo $result164['c'] ?>, <?php echo $result165['c'] ?>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    }
+});
+
+var ctx8 = document.getElementById("Chart8").getContext('2d');
+var myChart8 = new Chart(ctx8, {
+    type: 'pie',
+    data: {
+        labels: ["<?php echo $result22['n'] ?>","<?php echo $result222['n'] ?>","<?php echo $result223['n'] ?>"],
+        datasets: [{
+            label: '# of Votes',
+            data: [<?php echo $result22['c'] ?>, <?php echo $result222['c'] ?>, <?php echo $result223['c'] ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.6)',
                 'rgba(54, 162, 235, 0.6)',

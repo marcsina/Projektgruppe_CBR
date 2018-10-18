@@ -146,8 +146,7 @@ if(isset($_POST["createbeitrag"]))
         ?>
         <table style = "width: 100%;">
         <tr bgcolor = "#1a2732">
-            <th style = "min-width: 50px">Nr</th>
-            <th style = "min-width: 200px">Topic</th>
+            <th style = "min-width: 250px">Topic</th>
             <th style = "min-width: 100px">Beiträge</th>
             <th style = "min-width: 200px">Letzter Beitrag</th>
         </tr>
@@ -165,7 +164,7 @@ if(isset($_POST["createbeitrag"]))
                 <form action="forum_demenz.php" method="get">
                	<tr bgcolor = "#2d4457">
                	
-                <td><?php echo $row['id']?></td>
+            
                 
                 <?php
                 $value = $mysqli->query("SELECT text as tt FROM Cases WHERE id = '".$row['id']."';");
@@ -224,7 +223,7 @@ if(isset($_POST["createbeitrag"]))
             <input name="topic" style="display:none" value=<?php echo $_GET["topic"]?>></input>
             <br>
             <br>
-            <input type="submit" name="createbeitrag" value="Verschicken" style=" color: black"/>
+            <input type="submit" name="createbeitrag" value="Verschicken" style="color: white;background-color:rgb(0, 122, 255);border-color: rgb(0, 122, 255);border-radius: 8px;margin: 5px"/>
             </form>
             <?php
         }

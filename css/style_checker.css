@@ -311,7 +311,7 @@
 .hochUnchecked {
     background-color: transparent;
     background-image: none;
-    border-bottom-color: rgb(205, 42, 25);
+    border-bottom-color: rgb(255, 42, 25);
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 3px;
     border-bottom-style: solid;
@@ -322,20 +322,20 @@
     border-image-slice: 100%;
     border-image-source: none;
     border-image-width: 1;
-    border-left-color: rgb(205, 42, 25);
+    border-left-color: rgb(255, 42, 25);
     border-left-style: solid;
     border-left-width: 1px;
-    border-right-color: rgb(205, 42, 25);
+    border-right-color: rgb(255, 42, 25);
     border-right-style: solid;
     border-right-width: 1px;
     border-spacing: 0px 0px;
-    border-top-color: rgb(205, 42, 25);
+    border-top-color: rgb(255, 42, 25);
     border-top-left-radius: 0px;
     border-top-right-radius: 3px;
     border-top-style: solid;
     border-top-width: 1px;
     box-sizing: border-box;
-    color: rgb(223, 46, 27);
+    color: rgb(255, 46, 27);
     cursor: pointer;
     display: block;
     float: left;
@@ -386,9 +386,9 @@
 }
 
 .hochChecked {
-    background-color: rgb(223, 46, 27);
+    background-color: rgb(255, 46, 27);
     background-image: none;
-    border-bottom-color: rgb(205, 42, 25);
+    border-bottom-color: rgb(255, 42, 25);
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 3px;
     border-bottom-style: solid;
@@ -399,14 +399,14 @@
     border-image-slice: 100%;
     border-image-source: none;
     border-image-width: 1;
-    border-left-color: rgb(205, 42, 25);
+    border-left-color: rgb(255, 42, 25);
     border-left-style: solid;
     border-left-width: 1px;
-    border-right-color: rgb(205, 42, 25);
+    border-right-color: rgb(255, 42, 25);
     border-right-style: solid;
     border-right-width: 1px;
     border-spacing: 0px 0px;
-    border-top-color: rgb(205, 42, 25);
+    border-top-color: rgb(255, 42, 25);
     border-top-left-radius: 0px;
     border-top-right-radius: 3px;
     border-top-style: solid;

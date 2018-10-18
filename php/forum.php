@@ -30,11 +30,9 @@ if (login_check($mysqli) == true) {
        
     <table style = "width: 100%;">
         <tr bgcolor = "#1a2732">
-            <th style = "width: 50px">Nr</th>
             <th>Kategorie</th>
         </tr>
         <tr bgcolor = "#2d4457">
-            <td>1</td>
             <td><a href="forum_demenz.php" style="color: white;text-decoration: none;"><div class="nicehover" style="height:100%;width:100%">Demenz</div></a></td>
         </tr>
     </table>           
