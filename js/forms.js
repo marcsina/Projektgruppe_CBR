@@ -49,6 +49,13 @@ function regformhash( form, uid, email, password, conf )
         return false;
     }
 
+    //Überprüfen ob Eamil von Uni Siegen
+    var reg = /@.{0,}uni-siegen/gm;
+    if ( !reg.exec(email.value) )
+    {
+        alert( 'Emails need to be from Uni Siegen' );
+        return false;
+    }
     // Mindestens eine Ziffer, ein Kleinbuchstabe und ein Großbuchstabe
     // Mindestens sechs Zeichen 
 
