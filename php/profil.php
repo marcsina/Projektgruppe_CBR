@@ -811,9 +811,9 @@ include ("include/navbar.php");
 
                                     <div class='row' >";
 
-                                    $red = 80;
-                                    $gold = 60;
-                                    $grey = 30;
+                                    $red = 60;
+                                    $gold = 20;
+                                    $grey = 10;
                                     //--------------------------------------Checker--------------------------------------------------------
                                     //Gold Checker
 
@@ -956,7 +956,7 @@ include ("include/navbar.php");
 
                                     //--------------------------------------Artikel--------------------------------------------------------
                                     //Artikel
-                                    if($count_all_artikel > $red)
+                                    if($count_all_artikel >= $red)
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
                                         echo "<img src='../img/achievements/bookmark_red.png' class='Achievement_Img' >";
@@ -965,7 +965,7 @@ include ("include/navbar.php");
                                         echo "</div>";
                                     }
                                     //Artikel
-                                    else if($count_all_artikel > $gold)
+                                    else if($count_all_artikel >= $gold)
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
                                         echo "<img src='../img/achievements/bookmark_gold.png' class='Achievement_Img' >";
@@ -974,7 +974,7 @@ include ("include/navbar.php");
                                         echo "</div>";
                                     }
                                     //Artikel
-                                    else if($count_all_artikel > $grey)
+                                    else if($count_all_artikel >= $grey)
                                     {
                                         echo "<div class='col-md-6 col-xs-6 Achievement_div'>";
                                         echo "<img src='../img/achievements/bookmark_grey.png' class='Achievement_Img' >";
