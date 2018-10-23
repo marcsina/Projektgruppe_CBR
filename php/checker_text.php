@@ -250,8 +250,12 @@ if (login_check($mysqli) == true) {
         }
 
         $('#btn_submit').click(function () {
-        	// Filtern der Symptome und �bergabe an CBR
+			// Incoming Case Werte zurücksetzen
+			for(i=0; i < cbr.incomingCase.Symptoms.length; i++) {
+				cbr.incomingCase.Symptoms[i].wert = 0;
+			}
 
+        	// Filtern der Symptome und �bergabe an CBR
 			$('#div_ausgabe').html("");
 			$('#section_symptoms').html("");
         	var text = $('#textarea_eingabe').val();
@@ -315,11 +319,7 @@ if (login_check($mysqli) == true) {
 				
         	// Berechnung und Ausgabe des Ergebnisses
         	cbr.calculateSimilarityComplex();
-        	$('#div_ausgabe').append(buildOutput());
-			// Incoming Case Werte zurücksetzen
-			for(i=0; i < cbr.incomingCase.Symptoms.length; i++) {
-				cbr.incomingCase.Symptoms[i].wert = 0;
-			}
+        	$('#div_ausgabe').append(buildOutput());			
         });
 
 
@@ -329,10 +329,9 @@ if (login_check($mysqli) == true) {
 			for(i = 0; i < cbr.incomingCase.Symptoms.length; i++) {
 				if(cbr.incomingCase.Symptoms[i].wert > 0) {
 					symptomArray.push(cbr.incomingCase.Symptoms[i]);
-					
 				}
 			}
-			
+
 			if(symptomArray.length > 0) {
 				window.localStorage.setItem("ICSymptoms", JSON.stringify(symptomArray));
 				window.location.href = "http://medausbild.de/php/checker_symptom.php";
