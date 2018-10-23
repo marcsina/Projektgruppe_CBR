@@ -1,4 +1,4 @@
- <?php
+﻿ <?php
 include_once 'include/conn.php';
 include_once 'include/functions_login.php';
 include     'include/functions_history.php';
@@ -81,11 +81,11 @@ if (login_check($mysqli) == true) {
     		</table>  
 
 			<!-- 2nd Header Row -->
-			<div class="row newRow">
+			<div class="row newRow" style='display: none'>
 				<h4 class="col-md-offset-3 col-md-1 col-sm-1">Resultat</h4>		
 			</div>
 			<!-- Result row -->
-			<div class="row">
+			<div class="row" style='display: none'>
 				<section class="col-md-offset-3 col-md-6 col-sm-12 col-xs-offset-right-3 tableau2">
 					<div class="result" id='div_ausgabe'></div>
 				</section>			

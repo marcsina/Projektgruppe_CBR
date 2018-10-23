@@ -212,7 +212,7 @@ if (login_check($mysqli) == true) {
         
 
         <a href="Quiz_uebersicht.php">
-            <button class="btn">Zurück zur Quizübersicht</button>
+            <button id="btnBack"class="btn">Zurück zur Quizübersicht</button>
         </a>
     </div>
 

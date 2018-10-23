@@ -35,3 +35,15 @@
         .QuizEndTable > tbody > tr > td:first-child {
             border-left: none;
         }
+
+#btnBack {
+    background-color: rgb(0, 122, 255);
+    border-color: rgb(0, 122, 255);
+    color: white;
+    border-radius: 8px;
+    height: 40px;
+    text-align: center;
+    font-size: 14px;
+    margin: 5px;
+    transition: all 0.4s;
+}
