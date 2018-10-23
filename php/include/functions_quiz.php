@@ -807,7 +807,7 @@ function getQuizData($mysqli, $type, $quiz_ID, $player)
 					$questionString = "schwach";
 				}
 
-				$finalQuestion = "Welche Funktion ist im Fall ".$casename." ".$questionString." beeinträchtigt?";
+				$finalQuestion = "Welche Funktion ist im Fall ".$casename.", ".$questionString." beeinträchtigt?";
 				array_push($data,array("casename"=>$casename, "questiontype"=>$questionType, "answer1"=>$correctA, "answer2"=>$answer2, "answer3"=>$answer3, "answer4"=>$answer4, "questionString"=>$finalQuestion));
                 return $data;
 			}
